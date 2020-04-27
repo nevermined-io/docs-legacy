@@ -233,8 +233,7 @@
                         },
                         {
                             "index": 2,
-                            "contentType": "text/csv",
-
+                            "contentType": "text/csv"
                         }
                     ],
                     "checksum":"0x6d78a905bd54d373f71940f8b441bb2ef10758a47dab5b94a94becd688a9e58c",
