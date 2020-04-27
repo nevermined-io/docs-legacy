@@ -1,2 +1,2 @@
-# nevermind-docs
+# Nevermind-docs
 Nevermind documentation
