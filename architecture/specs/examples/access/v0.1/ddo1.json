@@ -87,13 +87,11 @@
           "links": [
             {
               "name": "Sample of Asset Data",
-              "type": "sample",
-              "url": "https://foo.com/sample.csv"
+              "type": "sample"
             },
             {
               "name": "Data Format Definition",
-              "type": "format",
-              "url": "https://foo.com/sampl2.csv"
+              "type": "format"
             }
           ],
           "inLanguage": "en",
