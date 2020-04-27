@@ -1,0 +1,113 @@
+{
+   "@context":"https://w3id.org/did/v1",
+   "created":"2016-02-08T16:02:20Z",
+   "id":"did:nv:0c184915b07b44c888d468be85a9b28253e80070e5294b1aaed81c2f0264e431",
+   "publicKey":[
+      {
+         "id":"did:nv:0c184915b07b44c888d468be85a9b28253e80070e5294b1aaed81c2f0264e431",
+         "type":"RsaVerificationKey2018",
+         "owner":"did:nv:0c184915b07b44c888d468be85a9b28253e80070e5294b1aaed81c2f0264e431",
+         "publicKeyPem":"-----BEGIN PUBLIC KEY...END PUBLIC KEY-----\r\n"
+      },
+      {
+         "id":"did:nv:0c184915b07b44c888d468be85a9b28253e80070e5294b1aaed81c2f0264e431",
+         "type":"Ed25519VerificationKey2018",
+         "owner":"did:nv:0c184915b07b44c888d468be85a9b28253e80070e5294b1aaed81c2f0264e431",
+         "publicKeyBase58":"H3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"
+      }
+   ],
+   "authentication":[
+      {
+         "type":"RsaSignatureAuthentication2018",
+         "publicKey":"did:nv:123456789abcdefghi#keys-1"
+      }
+   ],
+   "proof":{
+      "type":"UUIDSignature",
+      "created":"2016-02-08T16:02:20Z",
+      "creator":"did:nv:0c184915b07b44c888d468be85a9b28253e80070e5294b1aaed81c2f0264e431",
+      "signatureValue":"QNB13Y7Q9...1tzjn4w=="
+   },
+   "service":[
+      {
+         "type":"Access",
+         "index":0,
+         "serviceEndpoint":"http://mygateway.org/api/v1/gateway/services/consume?pubKey=${pubKey}&serviceId={serviceId}&url={url}"
+      },
+      {
+         "type":"Compute",
+         "index":1,
+         "serviceEndpoint":"http://mygateway.org/api/v1/gateway/services/compute?pubKey=${pubKey}&serviceId={serviceId}&algo={algo}&container={container}"
+      },
+      {
+         "type":"metadata",
+         "index":2,
+         "serviceEndpoint":"http://mymetadata.org/api/v1/provider/assets/metadata/{did}",
+         "attributes":{
+            "main":{
+               "name":"UK Weather information 2012",
+               "type":"dataset",
+               "description":"Weather information of UK including temperature and humidity and white",
+               "dateCreated":"2012-02-01T10:55:11Z",
+               "datePublished":"2012-02-01T10:55:11Z",
+               "author":"Met Office",
+               "license":"CC-BY",
+               "copyrightHolder":"Met Office",
+               "workExample":"stationId,latitude,longitude,datetime,temperature,humidity /n 423432fsd,51.509865,-0.118092,2011-01-01T10:55:11+00:00,7.2,68",
+               "files":[
+                  {
+                     "index":0,
+                     "contentLength":"4535431",
+                     "contentType":"text/csv",
+                     "encoding":"UTF-8",
+                     "compression":"zip",
+                     "resourceId":"access-log2018-02-13-15-17-29-18386C502CAEA932"
+                  }
+               ],
+               "encryptedFiles":"0xkasdhfkljhasdfkjasdhf",
+               "links":[
+                  {
+                     "name":"Sample of Asset Data",
+                     "type":"sample",
+                     "url":"https://foo.com/sample.csv"
+                  },
+                  {
+                     "name":"Data Format Definition",
+                     "type":"format",
+                     "url":"https://foo.com/sample2.csv"
+                  }
+               ],
+               "inLanguage":"en",
+               "tags":[
+                  "weather",
+                  "uk",
+                  "2011",
+                  "temperature",
+                  "humidity"
+               ],
+               "price":"15",
+               "checksum":"0x38803b9e6f04fce3fba4b124524672592264d31847182c689095a081c9e85264"
+            },
+            "curation":{
+               "rating":8.0,
+               "numVotes":1,
+               "schema":"Binary Votting",
+               "isListed":true
+            },
+            "additionalInformation":{
+               "updateFrecuency":"yearly",
+               "structuredMarkup":[
+                  {
+                     "uri":"http://skos.um.es/unescothes/C01194/jsonld",
+                     "mediaType":"application/ld+json"
+                  },
+                  {
+                     "uri":"http://skos.um.es/unescothes/C01194/turtle",
+                     "mediaType":"text/turtle"
+                  }
+               ]
+            }
+         }
+      }
+   ]
+}
