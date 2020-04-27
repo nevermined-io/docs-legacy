@@ -255,14 +255,10 @@
                     "tags": ["data exchange", "sharing", "curation", "bonding curve"],
                     "links": [
                         {
-                            "url": "http://data.ceda.ac.uk/badc/ukcp09/data/gridded-land-obs"
-                                   "/gridded-land-obs"
-                                   "-daily/"
+                            "url": "http://data.ceda.ac.uk/badc/ukcp09/data/gridded-land-obs/gridded-land-obs-daily/"
                         },
                         {
-                            "url": "http://data.ceda.ac.uk/badc/ukcp09/data/gridded-land-obs"
-                                   "/gridded-land-obs"
-                                   "-averages-25km/"
+                            "url": "http://data.ceda.ac.uk/badc/ukcp09/data/gridded-land-obs/gridded-land-obs-averages-25km/"
                         },
                         {
                             "url": "http://data.ceda.ac.uk/badc/ukcp09/"
