@@ -265,6 +265,10 @@
       "type":"DDOIntegritySignature",
       "created":"2019-05-22T08:44:27Z",
       "creator":"0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
-      "signatureValue":"0xbd7b46b3ac664167bc70ac211b1a1da0baed9ead91613a5f02dfc25c1bb6e3ff40861b455017e8a587fd4e37b703436072598c3a81ec88be28bfe33b61554a471b"
+      "signatureValue":"0xbd7b46b3ac664167bc70ac211b1a1da0baed9ead91613a5f02dfc25c1bb6e3ff40861b455017e8a587fd4e37b703436072598c3a81ec88be28bfe33b61554a471b",
+      "checksum": {
+         "0": "0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377",
+         "1": "0x999999952b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3"
+      }      
    }
 }
