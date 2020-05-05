@@ -106,6 +106,15 @@
                ]
             }
          }
+      },
+      {
+         "index": 3,
+         "type": "authorization",
+         "service": "SecretStore",
+         "config": {
+            "threshold": 0
+         },
+         "serviceEndpoint": "http://localhost:12001/"
       }
    ]
 }

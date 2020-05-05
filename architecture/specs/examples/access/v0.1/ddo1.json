@@ -278,6 +278,15 @@
           ]
         }
       }
+    },
+    {
+      "index": 2,
+      "type": "authorization",
+      "service": "PSK-ECDSA",
+      "config": {
+        "publicKey": "0xd793eb43ef7d191bf64f127c9f1a2c9037406d72706d3be7dc564fb9a9f08f21156b32d1ee3afbe64cc9f676f6facffac1377f7804daf932d3b8aa04fdeb0630"
+      },
+      "serviceEndpoint": "http://localhost:8030/"
     }
   ]
 }
