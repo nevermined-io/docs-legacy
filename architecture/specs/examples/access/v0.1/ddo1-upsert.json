@@ -19,7 +19,13 @@
       {
          "type":"authorization",
          "serviceEndpoint":"http://localhost:12001",
-         "service":"SecretStore",
+         "attributes": {
+            "main": {
+               "service": "SecretStore",
+               "publicKey": "0xd793eb43ef7d191bf64f127c9f1a2c9037406d72706d3be7dc564fb9a9f08f21156b32d1ee3afbe64cc9f676f6facffac1377f7804daf932d3b8aa04fdeb0630"
+               "threshold": "1"
+            }
+         },
          "index":0
       },
       {
