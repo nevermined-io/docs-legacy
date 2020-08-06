@@ -9,7 +9,7 @@ Short Name              | Title                                             | Ve
 [META](architecture/specs/metadata/README.md)  | Metadata                                          | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
 [ACCESS](architecture/specs/access/README.md)  | Decentralized Access Control                      | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
 [COMPUTE](architecture/specs/compute/README.md)| Decentralized Compute to the Data                 | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
-[FL](architecture/specs/fl/README.md)| Decentralized Federated Learning                 | 0.1          | Raw        | [@aaitor](https://github.com/r-marques)
+[FL](architecture/specs/fl/README.md)| Decentralized Federated Learning                 | 0.1          | Raw        | [@r-marques](https://github.com/r-marques)
 [PROV](architecture/specs/provenance/README.md)| Decentralized Data Provenance                     | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
 
 

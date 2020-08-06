@@ -131,7 +131,7 @@ aggregation of the trained models. Both the coordinator and aggregator are
 ephemeral nodes created by demand, so after the job is executed they will be
 stopped till a new execution request is triggered.
 
-![Federated Learning backend](architecture/images/compute-federated-learning.png)
+![Federated Learning backend](architecture/images/compute-fl-backend.png)
 
 
 ## Data Marketplace and Cataloging
