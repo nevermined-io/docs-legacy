@@ -13,7 +13,6 @@ contributors:   Aitor Argomaniz <aitor@keyko.io>,
 
 
 * [COMPUTE FL: Decentralized Federated Learning Orchestration](#compute-fl-decentralized-federated-learning-orchestration)
-* [Table of Contents](#table-of-contents)
    * [Federated Learning integration in the Nevermined Compute to Data](#federated-learning-integration-in-the-nevermined-compute-to-data)
    * [Terminology](#terminology)
    * [Motivation](#motivation)
@@ -24,6 +23,11 @@ contributors:   Aitor Argomaniz <aitor@keyko.io>,
       * [Running the Participants](#running-the-participants)
       * [Flow](#flow-1)
    * [Federated Learning Session Flow](#federated-learning-session-flow)
+   * [Federated Learning DDOs](#federated-learning-ddos)
+      * [Coordinator Consumer DDO](#coordinator-consumer-ddo)
+      * [Coordinator Provider DDO](#coordinator-provider-ddo)
+      * [Participant Consumer DDO](#participant-consumer-ddo)
+      * [Participant Provider DDO](#participant-provider-ddo)
 
 
 ---
@@ -190,3 +194,456 @@ The flow is:
 1. The Participants work together with the coordinator over the course of multiple rounds as defined in point 1.
 1. Once all rounds are finished the Coordinator publishes the final trained model
 1. The Data Scientist fetches the trained model.
+
+
+## Federated Learning DDOs
+
+This section details the both the consumer and provider DDOs for coordinator
+and participant.
+
+
+### Coordinator Consumer DDO
+
+```json
+{
+  "serviceAgreementId": "bb23s87856d59867503f80a690357406857698570b964ac8dcc9d86da4ada010",
+  "workflow": {
+    "@context": "https://w3id.org/future-method/v1",
+    "authentication": [],
+    "created": "2019-04-09T19:02:11Z",
+    "id": "did:nv:8d1b4d73e7af4634958f071ab8dfe7ab0df14019755e444090fd392c8ec9c3f4",
+    "proof": {
+      "created": "2019-04-09T19:02:11Z",
+      "creator": "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
+      "signatureValue": "1cd57300733bcbcda0beb59b3e076de6419c0d7674e7befb77820b53c79e3aa8f1776effc64cf088bad8cb694cc4d71ebd74a13b2f75893df5a53f3f318f6cf828",
+      "type": "DDOIntegritySignature"
+    },
+    "publicKey": [
+      {
+        "id": "did:nv:8d1b4d73e7af4634958f071ab8dfe7ab0df14019755e444090fd392c8ec9c3f4",
+        "owner": "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
+        "type": "EthereumECDSAKey"
+      }
+    ],
+    "service": [
+      {
+        "index": 0,
+        "serviceEndpoint": "http://172.15.0.15:5000/api/v1/aquarius/assets/ddo/did:nv:8d1b4d73e7af4634958f071ab8dfe7ab0df14019755e444090fd392c8ec9c3f4",
+        "type": "metadata",
+        "attributes": {
+          "main": {
+            "dateCreated": "2012-10-10T17:00:00Z",
+            "type": "fl-coordinator",
+            "datePublished": "2019-04-09T19:02:11Z",
+            "parameters": {
+              "minParticipants": 1,
+              "participantsRatio": 1,
+              "rounds": 10,
+            }
+            "workflow": {
+              "stages": [
+                {
+                  "index": 0,
+                  "requirements": {
+                    "serverInstances": 1,
+                    "container": {
+                      "image": "keykoio/xain-fl",
+                      "tag": "latest",
+                      "checksum": "sha256:cb57ecfa6ebbefd8ffc7f75c0f00e57a7fa739578a429b6f72a0df19315deadc"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+The main information that needs to be provided is:
+- `tag`: The version of the `xain-fl` image to use
+- `minParticipants`: The minimum number of participants required by the
+  coordinator
+- `participantsRation`: The ratio of participants that will be selected in
+  every round
+- `rounds`: The number of rounds the coordinator should do
+
+> Note that `service.main.type` is set to `fl-coordinator` to indicate this is
+> not a normal workflow
+
+### Coordinator Provider DDO
+
+```json
+{
+  "@context": "https://w3id.org/future-method/v1",
+  "authentication": [],
+  "created": "2019-04-09T19:02:11Z",
+  "id": "did:op:8d1b4d73e7af4634958f071ab8dfe7ab0df14019755e444090fd392c8ec9c3f4",
+  "proof": {
+    "created": "2019-04-09T19:02:11Z",
+    "creator": "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
+    "signatureValue": "1cd57300733bcbcda0beb59b3e076de6419c0d7674e7befb77820b53c79e3aa8f1776effc64cf088bad8cb694cc4d71ebd74a13b2f75893df5a53f3f318f6cf828",
+    "type": "DDOIntegritySignature"
+  },
+  "publicKey": [
+    {
+      "id": "did:op:8d1b4d73e7af4634958f071ab8dfe7ab0df14019755e444090fd392c8ec9c3f4",
+      "owner": "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
+      "type": "EthereumECDSAKey"
+    }
+  ],
+  "service": [
+    {
+      "type": "metadata",
+      "index": 0,
+      "serviceEndpoint": "http://myaquarius.org/api/v1/provider/assets/metadata/{did}",
+      "attributes": {
+        "main": {},
+        "additionalInformation": {}
+      }
+    },
+    {
+      "type": "fl-coordinator",
+      "index": 2,
+      "serviceEndpoint": "http://mybrizo.org/api/v1/gateway/services/exec",
+      "templateId": "804932804923850985093485039850349850439583409583404534231321131a",
+      "attributes": {
+        "main": {
+          "creator": "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
+          "datePublished": "2019-04-09T19:02:11Z",
+          "price": "10",
+          "timeout": 86400,
+          "provider": {
+            "type": "Azure",
+            "description": "",
+            "environment": {
+              "cluster": {
+                "type": "Kubernetes",
+                "url": "http://10.0.0.17/xxx"
+              },
+              "supportedContainers": [
+                {
+                  "image": "keykoio/xain-fl",
+                  "tag": "latest",
+                  "checksum": "sha256:cb57ecfa6ebbefd8ffc7f75c0f00e57a7fa739578a429b6f72a0df19315deadc"
+                },
+                {
+                  "image": "keykoio/xain-fl",
+                  "tag": "v1",
+                  "checksum": "sha256:cb57ecfa6ebbefd8ffc7f75c0f00e57a7fa739578a429b6f72a0df19315deadc"
+                }
+              ],
+              "supportedServers": [
+                {
+                  "serverId": "1",
+                  "serverType": "xlsize",
+                  "price": "50",
+                  "cpu": "16",
+                  "gpu": "0",
+                  "memory": "128gb",
+                  "disk": "160gb",
+                  "maxExecutionTime": 86400
+                },
+                {
+                  "serverId": "2",
+                  "serverType": "medium",
+                  "price": "10",
+                  "cpu": "2",
+                  "gpu": "0",
+                  "memory": "8gb",
+                  "disk": "80gb",
+                  "maxExecutionTime": 86400
+                }
+              ]
+            }
+          }
+        },
+        "additionalInformation": {}
+      },
+      "serviceAgreementTemplate": {
+        "contractName": "ServiceExecutionTemplate",
+        "events": [
+          {
+            "name": "AgreementCreated",
+            "actorType": "consumer",
+            "handler": {
+              "moduleName": "serviceExecutionTemplate",
+              "functionName": "fulfillLockRewardCondition",
+              "version": "0.1"
+            }
+          }
+        ],
+        "fulfillmentOrder": [
+          "lockReward.fulfill",
+          "serviceExecution.fulfill",
+          "escrowReward.fulfill"
+        ],
+        "conditionDependency": {
+          "lockReward": [],
+          "serviceExecution": [],
+          "releaseReward": [
+            "lockReward",
+            "serviceExecution"
+          ]
+        },
+        "conditions": [
+          {
+            "name": "lockReward",
+            "timelock": 0,
+            "timeout": 0,
+            "contractName": "LockRewardCondition",
+            "functionName": "fulfill",
+            "parameters": [
+              {
+                "name": "_rewardAddress",
+                "type": "address",
+                "value": ""
+              },
+              {
+                "name": "_amount",
+                "type": "uint256",
+                "value": ""
+              }
+            ],
+            "events": [
+              {
+                "name": "Fulfilled",
+                "actorType": "publisher",
+                "handler": {
+                  "moduleName": "lockRewardCondition",
+                  "functionName": "fulfillServiceExecutionCondition",
+                  "version": "0.1"
+                }
+              }
+            ]
+          },
+          {
+            "name": "execCompute",
+            "timelock": 0,
+            "timeout": 0,
+            "contractName": "ComputeExecutionCondition",
+            "functionName": "fulfill",
+            "parameters": [
+              {
+                "name": "_documentId",
+                "type": "bytes32",
+                "value": ""
+              },
+              {
+                "name": "_grantee",
+                "type": "address",
+                "value": ""
+              }
+            ],
+            "events": [
+              {
+                "name": "Fulfilled",
+                "actorType": "publisher",
+                "handler": {
+                  "moduleName": "execCompute",
+                  "functionName": "fulfillServiceExecutionCondition",
+                  "version": "0.1"
+                }
+              },
+              {
+                "name": "TimedOut",
+                "actorType": "consumer",
+                "handler": {
+                  "moduleName": "execCompute",
+                  "functionName": "fulfillServiceExecutionCondition",
+                  "version": "0.1"
+                }
+              }
+            ]
+          },
+          {
+            "name": "escrowReward",
+            "timelock": 0,
+            "timeout": 0,
+            "contractName": "EscrowReward",
+            "functionName": "fulfill",
+            "parameters": [
+              {
+                "name": "_amount",
+                "type": "uint256",
+                "value": ""
+              },
+              {
+                "name": "_receiver",
+                "type": "address",
+                "value": ""
+              },
+              {
+                "name": "_sender",
+                "type": "address",
+                "value": ""
+              },
+              {
+                "name": "_lockCondition",
+                "type": "bytes32",
+                "value": ""
+              },
+              {
+                "name": "_releaseCondition",
+                "type": "bytes32",
+                "value": ""
+              }
+            ],
+            "events": [
+              {
+                "name": "Fulfilled",
+                "actorType": "publisher",
+                "handler": {
+                  "moduleName": "escrowRewardCondition",
+                  "functionName": "verifyRewardTokens",
+                  "version": "0.1"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+### Participant Consumer DDO
+
+```json
+{
+  "serviceAgreementId": "bb23s87856d59867503f80a690357406857698570b964ac8dcc9d86da4ada010",
+  "workflow": {
+    "@context": "https://w3id.org/did/v1",
+    "authentication": [
+      {
+        "type": "RsaSignatureAuthentication2018",
+        "publicKey": "did:nv:0ebed8226ada17fde24b6bf2b95d27f8f05fcce09139ff5cec31f6d81a7cd2ea"
+      }
+    ],
+    "created": "2019-02-08T08:13:49Z",
+    "updated": "2019-06-30T14:53:09Z",
+    "id": "did:nv:0bc278fee025464f8012b811d1bce8e22094d0984e4e49139df5d5ff7a028bdf",
+    "proof": {
+      "created": "2019-02-08T08:13:41Z",
+      "creator": "0x37BB53e3d293494DE59fBe1FF78500423dcFd43B",
+      "signatureValue": "did:nv:0bc278fee025464f8012b811d1bce8e22094d0984e4e49139df5d5ff7a028bdf",
+      "type": "DDOIntegritySignature",
+      "checksum": {
+        "0": "0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377",
+        "1": "0x999999952b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3"
+      }
+    },
+    "publicKey": [
+      {
+        "id": "did:nv:b6e2eb5eff1a093ced9826315d5a4ef6c5b5c8bd3c49890ee284231d7e1d0aaa#keys-1",
+        "type": "RsaVerificationKey2018",
+        "owner": "did:nv:6027c1e7cbae06a91fce0557ee53195284825f56a7100be0c53cbf4391aa26cc",
+        "publicKeyPem": "-----BEGIN PUBLIC KEY...END PUBLIC KEY-----\r\n"
+      },
+      {
+        "id": "did:nv:b6e2eb5eff1a093ced9826315d5a4ef6c5b5c8bd3c49890ee284231d7e1d0aaa#keys-2",
+        "type": "Ed25519VerificationKey2018",
+        "owner": "did:nv:4c27a254e607cdf91a1206480e7eb8c74856102316c1a462277d4f21c02373b6",
+        "publicKeyBase58": "H3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"
+      },
+      {
+        "id": "did:nv:b6e2eb5eff1a093ced9826315d5a4ef6c5b5c8bd3c49890ee284231d7e1d0aaa#keys-3",
+        "type": "RsaPublicKeyExchangeKey2018",
+        "owner": "did:nv:5f6b885202ffb9643874be529302eb00d55e226959f1fbacaeda592c5b5c9484",
+        "publicKeyPem": "-----BEGIN PUBLIC KEY...END PUBLIC KEY-----\r\n"
+      }
+    ],
+    "verifiableCredential": [
+      {
+        "@context": [
+          "https://www.w3.org/2018/credentials/v1",
+          "https://www.w3.org/2018/credentials/examples/v1"
+        ],
+        "id": "1872",
+        "type": [
+          "read",
+          "update",
+          "deactivate"
+        ],
+        "issuer": "0x610D9314EDF2ced7681BA1633C33fdb8cF365a12",
+        "issuanceDate": "2019-01-01T19:73:24Z",
+        "credentialSubject": {
+          "id": "0x89328493849328493284932"
+        },
+        "proof": {
+          "type": "RsaSignature2018",
+          "created": "2019-01-01T19:73:24Z",
+          "proofPurpose": "assertionMethod",
+          "signatureValue": "ABCJSDAO23...1tzjn4w=="
+        }
+      }
+    ],
+    "service": [
+      {
+        "index": 0,
+        "serviceEndpoint": "http://localhost:5000/api/v1/aquarius/assets/ddo/{did}",
+        "type": "metadata",
+        "attributes": {
+          "main": {
+            "author": "John Doe",
+            "checksum": "0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377",
+            "dateCreated": "2019-02-08T08:13:49Z",
+            "datePublished": "2019-05-08T08:13:49Z",
+            "license": "CC-BY",
+            "name": "My workflow",
+            "price": "1",
+            "type": "workflow",
+            "workflow": {
+              "stages": [
+                {
+                  "index": 0,
+                  "stageType": "Participant",
+                  "requirements": {
+                    "container": {
+                      "image": "keykoio/xain-participant",
+                      "tag": "latest",
+                      "checksum": "sha256:cb57ecfa6ebbefd8ffc7f75c0f00e57a7fa739578a429b6f72a0df19315deadc"
+                    }
+                  },
+                  "input": [
+                    {
+                      "index": 0,
+                      "id": "did:nv:12345"
+                    }
+                  ],
+                  "transformation": {
+                    "id": "did:nv:abcde"
+                  },
+                  "output": {
+                  }
+                }
+              ]
+            }
+          },
+          "additionalInformation": {
+            "description": "Workflow to aggregate weather information",
+            "tags": [
+              "weather",
+              "uk",
+              "2011",
+              "workflow",
+              "aggregation"
+            ],
+            "copyrightHolder": "John Doe"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
+This is a normal compute to the data workflow with one stage, a set of inputs,
+one transformation and no output since the participant shouldn't need to
+generate any data.
+
+### Participant Provider DDO
