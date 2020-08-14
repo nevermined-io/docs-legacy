@@ -1,8 +1,8 @@
-# COMPUTE FL: Decentralized Federated Learning Orchestration
+# COMPUTE FL: Nevermined Federated Learning Orchestration
 
 ```
 shortname:      FL
-name:           Decentralized Federated Learning Orchestration
+name:           Nevermined Federated Learning Orchestration
 type:           Draft
 status:         Valid
 version:        0.1
@@ -12,7 +12,7 @@ contributors:   Aitor Argomaniz <aitor@keyko.io>,
 ```
 
 
-* [COMPUTE FL: Decentralized Federated Learning Orchestration](#compute-fl-decentralized-federated-learning-orchestration)
+* [COMPUTE FL: Nevermined Federated Learning Orchestration](#compute-fl-nevermined-federated-learning-orchestration)
    * [Federated Learning integration in the Nevermined Compute to Data](#federated-learning-integration-in-the-nevermined-compute-to-data)
    * [Terminology](#terminology)
    * [Motivation](#motivation)
