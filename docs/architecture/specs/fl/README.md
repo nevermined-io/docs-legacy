@@ -228,7 +228,7 @@ and participant.
     "service": [
       {
         "index": 0,
-        "serviceEndpoint": "http://172.15.0.15:5000/api/v1/aquarius/assets/ddo/did:nv:8d1b4d73e7af4634958f071ab8dfe7ab0df14019755e444090fd392c8ec9c3f4",
+        "serviceEndpoint": "http://172.15.0.15:5000/api/v1/metadata/assets/ddo/did:nv:8d1b4d73e7af4634958f071ab8dfe7ab0df14019755e444090fd392c8ec9c3f4",
         "type": "metadata",
         "attributes": {
           "main": {
@@ -299,7 +299,7 @@ The main information that needs to be provided is:
     {
       "type": "metadata",
       "index": 0,
-      "serviceEndpoint": "http://myaquarius.org/api/v1/provider/assets/metadata/{did}",
+      "serviceEndpoint": "http://mymetadata-api.org/api/v1/metadata/assets/ddo/{did}",
       "attributes": {
         "main": {},
         "additionalInformation": {}
@@ -308,7 +308,7 @@ The main information that needs to be provided is:
     {
       "type": "fl-coordinator",
       "index": 2,
-      "serviceEndpoint": "http://mybrizo.org/api/v1/gateway/services/exec",
+      "serviceEndpoint": "http://mygateway.org/api/v1/gateway/services/execute",
       "templateId": "804932804923850985093485039850349850439583409583404534231321131a",
       "attributes": {
         "main": {
@@ -585,7 +585,7 @@ The main information that needs to be provided is:
     "service": [
       {
         "index": 0,
-        "serviceEndpoint": "http://localhost:5000/api/v1/aquarius/assets/ddo/{did}",
+        "serviceEndpoint": "http://localhost:5000/api/v1/metadata/assets/ddo/{did}",
         "type": "metadata",
         "attributes": {
           "main": {
