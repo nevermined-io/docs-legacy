@@ -222,7 +222,7 @@ Note that `url` is removed from all objects in the `files` array, and `encrypted
   "service": [
     {  
       "index": 0,
-      "serviceEndpoint": "http://metadata-api:5000/api/v1/metadata/assets/ddo/{did}",
+      "serviceEndpoint": "http://metadata:5000/api/v1/metadata/assets/ddo/{did}",
       "type": "metadata",
       "attributes": {  
         "main": {  

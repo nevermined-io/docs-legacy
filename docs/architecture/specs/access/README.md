@@ -196,7 +196,7 @@ The parameters to pass are:
   * **bytes32 _did** - The hash part of the DID, the part just after `did:nv:`
   * **bytes32 _checksum** - The checksum generated after [compute the DID](architecture/specs/did/README.md#how-to-compute-a-did)
   * **address[] _providers** - The list of providers which PUBLISHER delegates URL decryption capabilities and SEA management
-  * **string _value** - The Metadata service endpoint. In the above DDO its: http://metadata-api.org/api/v1/provider/assets/metadata/{did}
+  * **string _value** - The Metadata service endpoint. In the above DDO its: http://metadata.org/api/v1/metadata/assets/ddo/{did}
 
 ![Publishing Flow](images/publishing-flow.png)
 

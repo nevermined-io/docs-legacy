@@ -55,7 +55,7 @@
   "service": [
     {
       "index": 0,
-      "serviceEndpoint": "http://localhost:5000/api/v1/aquarius/assets/ddo/{did}",
+      "serviceEndpoint": "http://localhost:5000/api/v1/metadata/assets/ddo/{did}",
       "type": "metadata",
       "attributes": {
         "main": {
@@ -89,9 +89,9 @@
                 "id": "did:nv:abcde"
               },
               "output": {
-                "metadataUrl": "https://localhost:5000/api/v1/aquarius/assets/ddo/",
+                "metadataUrl": "https://localhost:5000/api/v1/metadata/assets/ddo/",
                 "secretStoreUrl": "http://localhost:12001",
-                "accessProxyUrl": "https://localhost:8030/api/v1/brizo/",
+                "accessProxyUrl": "https://localhost:8030/api/v1/gateway/",
                 "metadata": {}
               }
             }, {
@@ -112,9 +112,9 @@
                 "id": "did:nv:999999"
               },
               "output": {
-                "metadataUrl": "https://aquarius.net:5000/api/v1/aquarius/assets/ddo/",
+                "metadataUrl": "https://metadata.net:5000/api/v1/metadata/assets/ddo/",
                 "secretStoreUrl": "http://secretstore.org:12001",
-                "accessProxyUrl": "https://brizo.net:8030/api/v1/brizo/",
+                "accessProxyUrl": "https://gateway.net:8030/api/v1/gateway/",
                 "metadata": {}
               }
             }]

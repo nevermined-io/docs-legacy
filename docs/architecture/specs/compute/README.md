@@ -302,7 +302,7 @@ Below you can find a small fraction of this:
   "service": [{
 		"type": "compute",
 		"serviceDefinitionId": "2",
-		"serviceEndpoint": "http://mygateway.org/api/v1/gateway/services/exec",
+		"serviceEndpoint": "http://mygateway.org/api/v1/gateway/services/execute",
 		"templateId": "804932804923850985093485039850349850439583409583404534231321131a",
 
 		"attributes": {
