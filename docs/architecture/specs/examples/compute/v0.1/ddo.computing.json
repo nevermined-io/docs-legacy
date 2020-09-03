@@ -20,7 +20,9 @@
 		"index": 0,
 		"serviceEndpoint": "http://mymetadata-api.org/api/v1/provider/assets/metadata/{did}",
 		"attributes" : {
-			"main": {},
+			"main": {
+				file: []
+			},
 			"additionalInformation" : {}
 		}
 	}, {
