@@ -25,7 +25,7 @@
 		}
 	}, {
 		"type": "compute",
-		"index": 2,
+		"index": 4,
 		"serviceEndpoint": "http://mygateway.org/api/v1/gateway/services/execute",
 		"templateId": "804932804923850985093485039850349850439583409583404534231321131a",
 		"attributes" : {
