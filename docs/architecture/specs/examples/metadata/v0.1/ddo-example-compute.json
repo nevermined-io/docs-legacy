@@ -1,21 +1,21 @@
 {
 	"@context": "https://w3id.org/did/v1",
 	"authentication": [{
-		"publicKey": "did:nv:3b5607872397a527cd69e41743b07ddbeeb8aa865f3decd1fab4be679e6c6eef",
+		"publicKey": "did:nv:d4c7a013002adfe2cedda8ff771c41f571dfe8a6d1a8d28d30933d5a81ad7794",
 		"type": "RsaSignatureAuthentication2018"
 	}],
-	"created": "2020-09-03T13:31:02",
-	"id": "did:nv:3b5607872397a527cd69e41743b07ddbeeb8aa865f3decd1fab4be679e6c6eef",
+	"created": "2020-09-03T13:35:42",
+	"id": "did:nv:d4c7a013002adfe2cedda8ff771c41f571dfe8a6d1a8d28d30933d5a81ad7794",
 	"proof": {
 		"checksum": {
-			"0": "e8cf331dc623f4c470698fea8eec786f5e77850e9b5119bbe1eef3f1fc3fa8a5",
+			"0": "ca56bda3bb55eeae32ff918b32143333930ca71a0bb3f1c4973a7da4e71abe6e",
 			"1": "e4ac07c241b4a113e1ad6ef046b8fdf61c5e2c6e6a1745d352f8f30ffa84d704",
 			"2": "f6c642676664b242efb5417d49728fb05a8ca998494156409c66dafcdbbb2a2a",
-			"3": "9f2faa3d43dc5a1b093911125678a77b2d1dbd78746a2ba277f25b9695eb4ebd"
+			"4": "55ddd337fc6625b83c57955200e2ad9cc15f8a14676b0b27965acc7a8c420cf5"
 		},
-		"created": "2020-09-03T13:31:02Z",
+		"created": "2020-09-03T13:35:42Z",
 		"creator": "0xA99D43d86A0758d5632313b8fA3972B6088A21BB",
-		"signatureValue": "0xe9e3bf87a7659c7eaa1b1ee0c140abd9faeba3543f9943c836fbbbc4088609c74b89e9db74e164797361e708090e85e351809539f528451b5b672e3ab8b40f0b1b",
+		"signatureValue": "0x9e16ce1055ea63249112ae61eec03ae653541f037d15fb491f938a0fcbd0a5ed686332a9a32dd020088750b01d6ec1a3969e6cccde6c0ceeeb338f44ea0238351b",
 		"type": "DDOIntegritySignature"
 	},
 	"publicKey": [{
@@ -54,10 +54,9 @@
 					"numVotes": 0,
 					"isListed": true
 				},
-				"encryptedFiles": "0x754c42427249666b6774504a6f4a317a314a4a5576394956472b572b6e4e5346785632416545597a4d52797937376e4b633065416255512f4f6c43307465654d617a795731326f486f7761475836335730736170716e656b6f557453373939452f784352306e376652566c4853726339384e42596e52455462726561586379734f3571764a4661786d364a42596944645269794b4b51717865374f3978554c77346753675475504e73345269377a6a657968354d50666e4f39725554527a57582f4370644e454233534a415a737a35366a72735869704f597a594476765855645536386a6457746d576c52684e654f4a486b664978545767324b6d774b535242775a746a4f355371354e75486848614c666c4b394c6555644d53587743435154665032435466314a5171783956506e78325646325152346c752b6a4368665533703231593875536370785a4c366536474152766d4562737a614f7a71386c6869726f6a3662797a714e753174726b322b76766e70494262695630416e2b615832|0x7c44d4bb6169f6eee3686135fbe2d00947b010dd1763ca963899c7f418713c7c8b003e3e38d07090a2f551dab568a08121754d32a751c0b6bf7bc8c0e561589353ab728a670271cb4a6d1912beb876044a6e343bc65af4ddc30af9f71eb236990299634b6680b84d3b90efe962825ae72b809c02464bb23799b8cd12ad90d235",
 				"main": {
 					"author": "Met Office",
-					"dateCreated": "2020-09-03T13:31:01",
+					"dateCreated": "2020-09-03T13:35:42",
 					"datePublished": "2019-02-08T08:13:49Z",
 					"files": [{
 						"checksum": "efb2c764274b745f5fc37f97c6b0e761",
@@ -74,7 +73,7 @@
 				}
 			},
 			"index": 0,
-			"serviceEndpoint": "http://172.15.0.15:5000/api/v1/metadata/assets/ddo/did:nv:3b5607872397a527cd69e41743b07ddbeeb8aa865f3decd1fab4be679e6c6eef",
+			"serviceEndpoint": "http://172.15.0.15:5000/api/v1/metadata/assets/ddo/did:nv:d4c7a013002adfe2cedda8ff771c41f571dfe8a6d1a8d28d30933d5a81ad7794",
 			"type": "metadata"
 		},
 		{
@@ -88,7 +87,7 @@
 				}
 			},
 			"index": 1,
-			"serviceEndpoint": "http://172.15.0.15:5000/api/v1/metadata/assets/ddo/did:nv:3b5607872397a527cd69e41743b07ddbeeb8aa865f3decd1fab4be679e6c6eef",
+			"serviceEndpoint": "http://172.15.0.15:5000/api/v1/metadata/assets/ddo/did:nv:d4c7a013002adfe2cedda8ff771c41f571dfe8a6d1a8d28d30933d5a81ad7794",
 			"type": "provenance"
 		},
 		{
@@ -98,7 +97,6 @@
 				},
 				"main": {
 					"files": [],
-					"publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2qIisJyMd6YXJNzs23zKLajtPC7w6aO9mXq+Ukr6d3cVmPCx8XJRTT3IV7PmHb3o4XFc8ZGX5/SSg7tp5/cfAIg9XF13yjssJttaDTa4srhLJvxyjR8cHEJ39GevFTgrtbYzXTZ723ROJP4NEDxtp8a0f5l7W3NTH8v39k3G50QIDAQAB",
 					"service": "PSK-RSA"
 				}
 			},
@@ -113,17 +111,59 @@
 				},
 				"main": {
 					"creator": "0xA99D43d86A0758d5632313b8fA3972B6088A21BB",
-					"datePublished": "2020-09-03T13:31:02Z",
+					"datePublished": "2020-09-03T13:35:42Z",
 					"files": [],
-					"name": "dataAssetAccessServiceAgreement",
-					"price": "1"
+					"name": "dataAssetComputeServiceAgreement",
+					"price": "1",
+					"provider": {
+						"description": "",
+						"environment": {
+							"cluster": {
+								"type": "Kubernetes",
+								"url": "http://10.0.0.17/xxx"
+							},
+							"supportedContainers": [{
+									"checksum": "sha256:cb57ecfa6ebbefd8ffc7f75c0f00e57a7fa739578a429b6f72a0df19315deadc",
+									"image": "tensorflow/tensorflow",
+									"tag": "latest"
+								},
+								{
+									"checksum": "sha256:cb57ecfa6ebbefd8ffc7f75c0f00e57a7fa739578a429b6f72a0df19315deadc",
+									"image": "tensorflow/tensorflow",
+									"tag": "latest"
+								}
+							],
+							"supportedServers": [{
+									"cpu": "16",
+									"disk": "160gb",
+									"gpu": "0",
+									"maxExecutionTime": 86400,
+									"memory": "128gb",
+									"price": "50",
+									"serverId": "1",
+									"serverType": "xlsize"
+								},
+								{
+									"cpu": "2",
+									"disk": "80gb",
+									"gpu": "0",
+									"maxExecutionTime": 86400,
+									"memory": "8gb",
+									"price": "10",
+									"serverId": "2",
+									"serverType": "medium"
+								}
+							]
+						},
+						"type": "Azure"
+					}
 				},
 				"serviceAgreementTemplate": {
 					"conditionDependency": {
 						"accessSecretStore": [],
 						"escrowReward": [
 							"lockReward",
-							"accessSecretStore"
+							"execCompute"
 						],
 						"execCompute": [],
 						"lockReward": []
@@ -133,7 +173,7 @@
 							"events": [{
 								"actorType": "publisher",
 								"handler": {
-									"functionName": "fulfillAccessSecretStoreCondition",
+									"functionName": "fulfillExecComputeCondition",
 									"moduleName": "lockRewardCondition",
 									"version": "0.1"
 								},
@@ -156,7 +196,7 @@
 							"timeout": 0
 						},
 						{
-							"contractName": "AccessSecretStoreCondition",
+							"contractName": "ComputeExecutionCondition",
 							"events": [{
 									"actorType": "publisher",
 									"handler": {
@@ -170,18 +210,18 @@
 									"actorType": "consumer",
 									"handler": {
 										"functionName": "fulfillEscrowRewardCondition",
-										"moduleName": "accessSecretStore",
+										"moduleName": "execCompute",
 										"version": "0.1"
 									},
 									"name": "TimedOut"
 								}
 							],
 							"functionName": "fulfill",
-							"name": "accessSecretStore",
+							"name": "execCompute",
 							"parameters": [{
 									"name": "_documentId",
 									"type": "bytes32",
-									"value": "3b5607872397a527cd69e41743b07ddbeeb8aa865f3decd1fab4be679e6c6eef"
+									"value": "d4c7a013002adfe2cedda8ff771c41f571dfe8a6d1a8d28d30933d5a81ad7794"
 								},
 								{
 									"name": "_grantee",
@@ -228,35 +268,35 @@
 								{
 									"name": "_releaseCondition",
 									"type": "bytes32",
-									"value": "0xFF3a12191A703939b1466eC1Fc7679AbbFf88545"
+									"value": "0xF673Cd200CEa6FAB788979BD475cC595d5894767"
 								}
 							],
 							"timelock": 0,
 							"timeout": 0
 						}
 					],
-					"contractName": "EscrowAccessSecretStoreTemplate",
+					"contractName": "EscrowComputeExecutionTemplate",
 					"events": [{
 						"actorType": "consumer",
 						"handler": {
 							"functionName": "fulfillLockRewardCondition",
-							"moduleName": "escrowAccessSecretStoreTemplate",
+							"moduleName": "EscrowComputeExecutionTemplate",
 							"version": "0.1"
 						},
 						"name": "AgreementCreated"
 					}],
 					"fulfillmentOrder": [
 						"lockReward.fulfill",
-						"accessSecretStore.fulfill",
+						"execCompute.fulfill",
 						"escrowReward.fulfill"
 					]
 				}
 			},
-			"index": 3,
-			"serviceEndpoint": "http://localhost:8030/api/v1/gateway/services/access",
-			"templateId": "0xB4d05b7D929dD241b79e06FF1AeA033159693931",
-			"type": "access"
+			"index": 4,
+			"serviceEndpoint": "http://localhost:8030/api/v1/gateway/services/execute",
+			"templateId": "0xcD6318Df0dB24E994783bFF2AB73d81F1533c499",
+			"type": "compute"
 		}
 	],
-	"updated": "2020-09-03T13:31:02Z"
+	"updated": "2020-09-03T13:35:42Z"
 }

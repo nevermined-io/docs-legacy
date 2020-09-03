@@ -14,6 +14,8 @@
     "checksum": {
       "0": "0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377",
       "1": "0x999999952b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3"
+      "2": "f6c642676664b242efb5417d49728fb05a8ca998494156409c66dafcdbbb2a2a",
+			"3": "9f2faa3d43dc5a1b093911125678a77b2d1dbd78746a2ba277f25b9695eb4ebd"
     }
   },
   "publicKey": [{
@@ -95,6 +97,190 @@
           "copyrightHolder": "John Doe"
         }
       }
+    },
+    {
+      "attributes": {
+        "additionalInformation": {
+          "links": []
+        },
+        "main": {
+          "files": [],
+          "service": "provenance"
+        }
+      },
+      "index": 1,
+      "serviceEndpoint": "http://172.15.0.15:5000/api/v1/metadata/assets/ddo/did:nv:3b5607872397a527cd69e41743b07ddbeeb8aa865f3decd1fab4be679e6c6eef",
+      "type": "provenance"
+    },
+    {
+      "attributes": {
+        "additionalInformation": {
+          "links": []
+        },
+        "main": {
+          "files": [],
+          "publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2qIisJyMd6YXJNzs23zKLajtPC7w6aO9mXq+Ukr6d3cVmPCx8XJRTT3IV7PmHb3o4XFc8ZGX5/SSg7tp5/cfAIg9XF13yjssJttaDTa4srhLJvxyjR8cHEJ39GevFTgrtbYzXTZ723ROJP4NEDxtp8a0f5l7W3NTH8v39k3G50QIDAQAB",
+          "service": "PSK-RSA"
+        }
+      },
+      "index": 2,
+      "serviceEndpoint": "http://localhost:8030",
+      "type": "authorization"
+    },
+    {
+      "attributes": {
+        "additionalInformation": {
+          "links": []
+        },
+        "main": {
+          "creator": "0xA99D43d86A0758d5632313b8fA3972B6088A21BB",
+          "datePublished": "2020-09-03T13:31:02Z",
+          "files": [],
+          "name": "dataAssetAccessServiceAgreement",
+          "price": "1"
+        },
+        "serviceAgreementTemplate": {
+          "conditionDependency": {
+            "accessSecretStore": [],
+            "escrowReward": [
+              "lockReward",
+              "accessSecretStore"
+            ],
+            "execCompute": [],
+            "lockReward": []
+          },
+          "conditions": [{
+              "contractName": "LockRewardCondition",
+              "events": [{
+                "actorType": "publisher",
+                "handler": {
+                  "functionName": "fulfillAccessSecretStoreCondition",
+                  "moduleName": "lockRewardCondition",
+                  "version": "0.1"
+                },
+                "name": "Fulfilled"
+              }],
+              "functionName": "fulfill",
+              "name": "lockReward",
+              "parameters": [{
+                  "name": "_rewardAddress",
+                  "type": "address",
+                  "value": "0x886dE2b3F8F27eEd43bA2FD4bC2AabDc14E0d9dD"
+                },
+                {
+                  "name": "_amount",
+                  "type": "uint256",
+                  "value": "1"
+                }
+              ],
+              "timelock": 0,
+              "timeout": 0
+            },
+            {
+              "contractName": "AccessSecretStoreCondition",
+              "events": [{
+                  "actorType": "publisher",
+                  "handler": {
+                    "functionName": "fulfillEscrowRewardCondition",
+                    "moduleName": "accessSecretStore",
+                    "version": "0.1"
+                  },
+                  "name": "Fulfilled"
+                },
+                {
+                  "actorType": "consumer",
+                  "handler": {
+                    "functionName": "fulfillEscrowRewardCondition",
+                    "moduleName": "accessSecretStore",
+                    "version": "0.1"
+                  },
+                  "name": "TimedOut"
+                }
+              ],
+              "functionName": "fulfill",
+              "name": "accessSecretStore",
+              "parameters": [{
+                  "name": "_documentId",
+                  "type": "bytes32",
+                  "value": "3b5607872397a527cd69e41743b07ddbeeb8aa865f3decd1fab4be679e6c6eef"
+                },
+                {
+                  "name": "_grantee",
+                  "type": "address",
+                  "value": ""
+                }
+              ],
+              "timelock": 0,
+              "timeout": 0
+            },
+            {
+              "contractName": "EscrowReward",
+              "events": [{
+                "actorType": "publisher",
+                "handler": {
+                  "functionName": "verifyRewardTokens",
+                  "moduleName": "escrowRewardCondition",
+                  "version": "0.1"
+                },
+                "name": "Fulfilled"
+              }],
+              "functionName": "fulfill",
+              "name": "escrowReward",
+              "parameters": [{
+                  "name": "_amount",
+                  "type": "uint256",
+                  "value": "1"
+                },
+                {
+                  "name": "_receiver",
+                  "type": "address",
+                  "value": ""
+                },
+                {
+                  "name": "_sender",
+                  "type": "address",
+                  "value": ""
+                },
+                {
+                  "name": "_lockCondition",
+                  "type": "bytes32",
+                  "value": "0xBDB91cF0a8449a2848Ba6194eE45579E81B1A0F9"
+                },
+                {
+                  "name": "_releaseCondition",
+                  "type": "bytes32",
+                  "value": "0xFF3a12191A703939b1466eC1Fc7679AbbFf88545"
+                }
+              ],
+              "timelock": 0,
+              "timeout": 0
+            }
+          ],
+          "contractName": "EscrowAccessSecretStoreTemplate",
+          "events": [{
+            "actorType": "consumer",
+            "handler": {
+              "functionName": "fulfillLockRewardCondition",
+              "moduleName": "escrowAccessSecretStoreTemplate",
+              "version": "0.1"
+            },
+            "name": "AgreementCreated"
+          }],
+          "fulfillmentOrder": [
+            "lockReward.fulfill",
+            "accessSecretStore.fulfill",
+            "escrowReward.fulfill"
+          ]
+        }
+      },
+      "index": 3,
+      "serviceEndpoint": "http://localhost:8030/api/v1/gateway/services/access",
+      "templateId": "0xB4d05b7D929dD241b79e06FF1AeA033159693931",
+      "type": "access"
     }
+
+
+
+
   ]
 }
