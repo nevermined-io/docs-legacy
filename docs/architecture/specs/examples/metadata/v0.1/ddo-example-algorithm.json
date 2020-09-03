@@ -13,7 +13,7 @@
     "type": "DDOIntegritySignature",
     "checksum": {
       "0": "0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377",
-      "1": "0x999999952b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3"
+      "1": "0x999999952b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3",
       "2": "f6c642676664b242efb5417d49728fb05a8ca998494156409c66dafcdbbb2a2a",
 			"3": "9f2faa3d43dc5a1b093911125678a77b2d1dbd78746a2ba277f25b9695eb4ebd"
     }
