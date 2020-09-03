@@ -21,7 +21,7 @@
 		"serviceEndpoint": "http://mymetadata-api.org/api/v1/provider/assets/metadata/{did}",
 		"attributes" : {
 			"main": {
-				file: []
+				"files": []
 			},
 			"additionalInformation" : {}
 		}
