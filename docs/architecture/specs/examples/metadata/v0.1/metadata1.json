@@ -8,13 +8,13 @@
       "files":[
          {
             "index":0,
-            "contentType":"application/zip",
+            "contentType":"text/txt",
             "encoding":"UTF-8",
             "compression":"zip",
             "checksum":"2bf9d229d110d1976cdf85e9f3256c7f",
             "checksumType":"MD5",
             "contentLength":"12057507",
-            "url":"https://s3.amazonaws.com/assets/training.zip"
+            "url":"https://raw.githubusercontent.com/keyko-io/nevermined-gateway/master/README.md?token=AA2VW6BHAATQEM3OMMOZTRC7LM4TE"
          },
          {
             "index":1,
@@ -24,12 +24,7 @@
             "checksum":"354d19c0733c47ef3a6cce5b633116b0",
             "checksumType":"MD5",
             "contentLength":"928",
-            "url":"https://s3.amazonaws.com/datacommons/monkey_labels.txt"
-         },
-         {
-            "index":2,
-            "contentType":"application/zip",
-            "url":"https://s3.amazonaws.com/datacommons/validation.zip"
+            "url":"https://github.com/keyko-io/nevermined-sdk-js/blob/master/CHANGELOG.md"
          }
       ],
       "type":"dataset"
