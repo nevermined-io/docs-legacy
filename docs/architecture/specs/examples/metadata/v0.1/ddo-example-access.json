@@ -60,6 +60,7 @@
 					"dateCreated": "2020-09-03T13:31:01Z",
 					"datePublished": "2019-02-08T08:13:49Z",
 					"files": [{
+                        "url": "https://raw.githubusercontent.com/tbertinmahieux/MSongsDB/master/Tasks_Demos/CoverSongs/shs_dataset_test.txt",
 						"checksum": "efb2c764274b745f5fc37f97c6b0e761",
 						"compression": "zip",
 						"contentLength": "4535431",
