@@ -73,7 +73,7 @@
                   "checksum": "52b5c93b82dd9e7ecc3d9fdf4755f7f69a544",
                   "checksumType": "MD5",
                   "contentLength": "12057507",
-                  "url": "https://raw.githubusercontent.com/keyko-io/nevermined-sdk-py/e42fc15e70d1436fdf66513a3f94e1f31599c641/examples/word_count.py?token=AANVZIZWJP6ZGVGWHSXW6HC7OB4HG"
+                  "url": "https://raw.githubusercontent.com/keyko-io/nevermined-docs/a46795b19ba61b240ff9dd403d88b069c0b51592/resources/word_count.py"
               }
           ],
           "type": "algorithm",
