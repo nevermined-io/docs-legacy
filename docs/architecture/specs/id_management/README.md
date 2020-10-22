@@ -165,7 +165,7 @@ The main requirements used to designed the solution are:
   and never store PI. Ideally only ids and hashes
 * The decentralized ecosystem register assets and the conditions for who can
   interact and what is possible to do with these assets is kept on-chain
-* Public information about users like users public keys should be available
+* Public information about users like users public keys should be available.
   User information should be resolvable via decentralized identifiers  
 
 
@@ -279,7 +279,7 @@ type of the signature and/or encryption algorithm:
 In our case the header is gonna look like this:
 ```json
 {
-  "typ": "JWT"
+  "typ": "JWT",
   "alg": "ES256",
   "cty": "arbitrary"
 }
@@ -298,10 +298,17 @@ The payload contains the claims. Claims are statements about an entity
 * Private claims: These are the custom claims created to share information
   between parties that agree on using them.
 
-In our case the payload will looks like this:
+In our case the payload will have the following attributes:
+
+* `iss` - Issuer. address of the holder
+* `sub` - Subject, id of the service agreement
+* `aud` - Audience, address of the gateway
+
+Here an example of the payload:
+
 ```json
 {
-  "iss": "0x123456"
+  "iss": "0x123456",
   "sub": "did:nv:abcde",
   "aud": "0xffffff"
 }
@@ -451,7 +458,7 @@ validation for each request, this revocation won’t be necessary because the ne
 Having a standard JSON document or subtract, the common operations used to
 serialize fragments of DID Documents is as follows:
 
-* The object is sorted alphabetically independently of the existing nested levels
+* The object is sorted alphabetically by key, of the existing nested levels
 * In the JSON generated, all the characters between entries are removed
   (\n, \t, \r, whitespaces, etc.)
 * As a result must be generated a string of only one line
