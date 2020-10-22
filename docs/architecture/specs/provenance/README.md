@@ -43,8 +43,7 @@ contributors:
              * [Entities Registry](#entities-registry)
        * [Provenance metadata integrity](#provenance-metadata-integrity)
           * [How to compute the provenance checksum](#how-to-compute-the-provenance-checksum)
-    * [Links](#links)
-          * [Resource: Open Provenance Model (OPM)](#resource-open-provenance-model-opm)
+    * [Links](#links)          
 
 ---
 
@@ -461,10 +460,10 @@ actedOnBehalfOf(John, Pigeon, [prov:type="delivery" ])
 
 All the different actors (Agents in PROV terminology) have associated a digital identity allowing their identification and further authorization and authentication in the network. In Nevermined all the different entities can be registered as a DID. In our example:
 
-* Acme Corp. did:nv:acme
-* Armadillo Shipping. did:nv:armadillo
-* Pigeon Carriers. did:nv:pigeon
-* John Doe. did:nv:john
+* Acme Corp - `did:nv:acme`
+* Armadillo Shipping - `did:nv:armadillo`
+* Pigeon Carriers - `did:nv:pigeon`
+* John Doe - `did:nv:john`
 
 The different agents DIDs can be resolved to DDOs including the user metadata:
 
