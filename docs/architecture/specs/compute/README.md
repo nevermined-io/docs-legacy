@@ -73,18 +73,18 @@ The following technical components are involved in an end-to-end publishing and 
   these assets. It also facilitates the discovery of assets.
 * **SDK** - Software library encapsulating the Nevermined business logic. It's used to interact with all the
   components & APIs of the system. It's currently implemented in the following packages:
-  - [nevermined-sdk-js](https://github.com/keyko-io/nevermined-sdk-js) - JavaScript version of the Nevermined SDK to be
+  - [nevermined-sdk-js](https://github.com/nevermined-io/sdk-js) - JavaScript version of the Nevermined SDK to be
     integrated with front-end applications.
-  - [nevermined-sdk-py](https://github.com/keyko-io/nevermined-sdk-py) - Python version of the Nevermined SDK to be
+  - [nevermined-sdk-py](https://github.com/nevermined-io/sdk-py) - Python version of the Nevermined SDK to be
     integrated with back-end applications. The primary users are data scientists.
-  - [nevermined-sdk-java](https://github.com/keyko-io/nevermined-sdk-java) - Java version of the Nevermined SDK to be
+  - [nevermined-sdk-java](https://github.com/nevermined-io/sdk-java) - Java version of the Nevermined SDK to be
     integrated with [JVM](https://en.wikipedia.org/wiki/Java_virtual_machine) applications. The primary users are
     data engineers.
-* [SMART CONTRACTS](https://github.com/keyko-io/nevermined-contracts) - Solidity Smart Contracts providing the Service
+* [SMART CONTRACTS](https://github.com/nevermined-io/contracts) - Solidity Smart Contracts providing the Service
   Agreements business logic.
-* [GATEWAY](https://github.com/keyko-io/nevermined-gateway) - Microservice to be executed by PUBLISHERS. It exposes an
+* [GATEWAY](https://github.com/nevermined-io/gateway) - Microservice to be executed by PUBLISHERS. It exposes an
   HTTP REST API permitting access to PUBLISHER assets or additional services such as computation.
-* [METADATA-API](https://github.com/keyko-io/nevermined-metadata) - Microservice to be executed by MARKETPLACES.
+* [METADATA-API](https://github.com/nevermined-io/metadata-api) - Microservice to be executed by MARKETPLACES.
   Facilitates   creating, updating, deleting and searching the asset metadata registered by the PUBLISHERS.
   This metadata is included as part of a DDO (see [DID SPEC](../did/README.md) and
   [METADATA SPEC](../metadata/README.md)) and also includes the services associated with the asset (consumption,
@@ -290,7 +290,7 @@ The complete flow of publishing an asset with a compute service attached is:
     An example of a complete DDO can be found [here](/tree/master/docs/architecture/specs/compute/examples/ddo.workflow.json). Please do note that the condition's
     order in the DID document should reflect the same order in on-chain service agreement.
 
-1. PUBLISHER publishes the DDO in the [METADATA-API](https://github.com/keyko-io/nevermined-metadata).
+1. PUBLISHER publishes the DDO in the [METADATA-API](https://github.com/nevermined-io/metadata).
    This DDO must include at least one service of type "compute".
 
 [here](/tree/master/docs/architecture/specs/compute/examples/ddo.computing.json) you have an example of the DDO including a Compute service.
@@ -658,7 +658,7 @@ The steps included in this scenario are:
 1. The OPERATOR SERVICE communicates with the K8s cluster to register the Workflow in Kubernetes
 
 1. The OPERATOR ENGINE is registered to the new Workflow Events. When this happens The OPERATOR via K8s starts a
-   generic [Configuration Pod](https://github.com/keyko-io/nevermined-pod-configuration).
+   generic [Configuration Pod](https://github.com/nevermined-io/pod-configuration).
    The responsibilities of the configuration pod are:
    - Parses the Workflow document
    - Resolves the DID resources necessary to run the Workflow
@@ -669,7 +669,7 @@ The steps included in this scenario are:
 1. After all the above steps the `Configuration Pod` must be stopped
 
 1. If the `Configuration Pod` ends successfully the OPERATOR via K8s starts the
-   [Compute Pod](https://github.com/keyko-io/nevermined-pod-compute) using the flavour specified by the user in the
+   [Compute Pod](https://github.com/nevermined-io/pod-compute) using the flavour specified by the user in the
    Workflow definition
 
 1. The `Compute Pod` starts and runs the `compute-entrypoint.sh` part of the algorithm downloaded by the
@@ -679,7 +679,7 @@ The steps included in this scenario are:
    the Compute Pod
 
 1.  If the `Compute Pod ends, the OPERATOR start a new instance of the
-   [Publishing Pod](https://github.com/keyko-io/nevermined-pod-publish). The responsibilities of the Publishing Pod are:
+   [Publishing Pod](https://github.com/nevermined-io/pod-publish). The responsibilities of the Publishing Pod are:
    - List of the Log files generated in the Log volume and copy to the output
    - List of the Output data generated in the Output volume
    - Generate a new Asset Metadata using the information provided by the CONSUMER

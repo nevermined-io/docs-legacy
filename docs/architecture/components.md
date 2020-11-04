@@ -16,7 +16,7 @@ The complete technical solution includes the following components:
 
 ### Smart Contracts
 
-[Nevermined Smart Contracts](https://github.com/keyko-io/nevermined-contracts/)
+[Nevermined Smart Contracts](https://github.com/nevermined-io/contracts/)
 provide the core of the Data Ecosystem. Using an Ethereum network and
 implemented in Solidity, the Smart Contracts provide the following
 functionality:
@@ -72,7 +72,7 @@ The team responsible for the definition, deployment and maintenance of the whole
 
 ### Metadata API
 
-The [Nevermined Metadata API](https://github.com/keyko-io/nevermined-metadata)
+The [Nevermined Metadata API](https://github.com/nevermined-io/metadata)
 is an Open Source micro-service that allows to store Assets metadata in an
 off-chain repository. It provides a plugins system allowing to persist the
 Metadata in ElasticSearch or MongoDB. The Metadata API exposes the functionality
@@ -89,7 +89,7 @@ easy integration and deployment in cloud providers and Kubernetes clusters.
 
 ### Gateway
 
-The [Nevermined Gateway](https://github.com/keyko-io/nevermined-gateway) is an
+The [Nevermined Gateway](https://github.com/nevermined-io/gateway) is an
 Open Source micro-service in the Nevermined ecosystem. The Gateway is the
 technical component executed by Data/Compute Providers allowing them to provide
 extended data services (e.g. storage and compute). The Nevermined Gateway, as
@@ -108,7 +108,7 @@ easy integration and deployment in cloud providers and Kubernetes clusters.
 
 ### Compute API
 
-The [Nevermined Compute API](https://github.com/keyko-io/nevermined-compute-api)
+The [Nevermined Compute API](https://github.com/nevermined-io/compute-api)
  is an Open Source micro-service in the Nevermined ecosystem. It’s a component
  in charge of orchestrating the execution of compute jobs in the premises of
  the Data/Compute Providers.
@@ -141,17 +141,17 @@ components & APIs of the system.
 Nevermined provides 3 different Open Source implementation of SDK's allowing the integration and implementation of
 complex use cases on top of the Nevermined Data Ecosystems.
 
-- [Nevermined SDK JS](https://github.com/keyko-io/nevermined-sdk-js) - JavaScript version of the Nevermined SDK to be
+- [Nevermined SDK JS](https://github.com/nevermined-io/sdk-js) - JavaScript version of the Nevermined SDK to be
   integrated with front-end applications.
-- [Nevermined SDK PY](https://github.com/keyko-io/nevermined-sdk-py) - Python version of the Nevermined SDK to be
+- [Nevermined SDK PY](https://github.com/nevermined-io/sdk-py) - Python version of the Nevermined SDK to be
   integrated with back-end applications. The primary users are data scientists.
-- [Nevermined SDK JAVA](https://github.com/keyko-io/nevermined-sdk-java) - Java version of the Nevermined SDK to be
+- [Nevermined SDK JAVA](https://github.com/nevermined-io/sdk-java) - Java version of the Nevermined SDK to be
   integrated with [JVM](https://en.wikipedia.org/wiki/Java_virtual_machine) applications. The primary users are
   data engineers.
 
 The libraries are packaged and delivered in the typical formats for each language allowing easy integration:
 
-- [NPM Nevermined SDK JS](https://www.npmjs.com/package/@keyko-io/nevermined-sdk-js)
+- [NPM Nevermined SDK JS](https://www.npmjs.com/package/@nevermined-io/sdk-js)
 - [NPM Nevermined SDK PY](https://pypi.org/project/nevermined-sdk-py/)
 - [NPM Nevermined SDK JAVA](https://search.maven.org/artifact/io.keyko.nevermind/api)
 
@@ -181,7 +181,7 @@ supporting the encryption and decryption.
 
 ### Command Line Interface (CLI) tool
 
-The [Nevermined CLI](https://github.com/keyko-io/nevermined-cli) tool enables to connect to the Nevermined Data Ecosystem
+The [Nevermined CLI](https://github.com/nevermined-io/cli) tool enables to connect to the Nevermined Data Ecosystem
 and interact with it using the command line interface. It orchestrates all the underlaying components allowing to:
 
 - Publish assets
@@ -201,7 +201,7 @@ operate the rest of the components of the stack. The main tools available are:
 
 ### Contract Tools
 
-[Nevermined Contract Tools](https://github.com/keyko-io/nevermined-contract-tools).
+[Nevermined Contract Tools](https://github.com/nevermined-io/contract-tools).
 The Nevermined Zeppelin OS contract management framework. Deploying and
 upgrading Smart Contracts in multiple environments is not an easy thing.
 
@@ -213,7 +213,7 @@ The Nevermined Contract Tools allow to deploy and upgrade smart contracts across
 
 ### Development and Integration
 
-The [Nevermined Tools](https://github.com/keyko-io/nevermined-tools) allows to
+The [Nevermined Tools](https://github.com/nevermined-io/tools) allows to
 execute all the components included in the stack in a local environment.
 Nevermined Tools make use of all the containers of the components and
 orchestrate the execution of them having a fully functional solution using the
@@ -230,7 +230,7 @@ This approach allows to:
 
 #### Multisig Wallet
 
-[Nevermined Multisig Wallet](https://github.com/keyko-io/nevermined-multisigwallet)
+[Nevermined Multisig Wallet](https://github.com/nevermined-io/multisigwallet)
 helps during the token governance process. The purpose of multisig wallets is to
  increase security by requiring multiple parties to agree on transactions before
   execution. Transactions can be executed only when confirmed by a predefined

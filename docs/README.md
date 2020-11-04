@@ -1,3 +1,5 @@
+[![banner](https://raw.githubusercontent.com/nevermined-io/assets/main/images/logo/banner_logo.png)](https://nevermined.io)
+
 # Nevermined Documentation
 
 Nevermined is a data ecosystem solution that provides the capabilities of

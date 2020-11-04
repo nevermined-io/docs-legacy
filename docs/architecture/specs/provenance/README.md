@@ -71,7 +71,7 @@ The main objectives of this SPEC are:
 ### Specifications
 
 Nevermined Data Provenance solution is designed based on the [W3C Provenance specifications](https://www.w3.org/TR/2013/NOTE-prov-overview-20130430/).
-In addition to this, Nevermined uses [Decentralized Identifiers](https://keyko-io.github.io/nevermined-docs/#/architecture/specs/did/README)
+In addition to this, Nevermined uses [Decentralized Identifiers](https://nevermined-io.github.io/docs/#/architecture/specs/did/README)
 following the [W3C DID specification](https://w3c.github.io/did-core/#overall-architecture).
 
 The design of Nevermined using both specifications is critical because it enables the
