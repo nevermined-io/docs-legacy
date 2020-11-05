@@ -2,7 +2,7 @@
 
 ```
 shortname:      COMPUTE
-name:           Decentralized Compute to the Data
+name:           Data In Situ Computation
 type:           Standard
 status:         Valid
 version:        0.1
@@ -10,29 +10,30 @@ editor:         Aitor Argomaniz <aitor@nevermined.io>
 contributors:   
 ```
 
-   * [COMPUTE SPEC: Decentralized Compute to the Data](#compute-spec-decentralized-access-control)
-      * [Execution of Compute Services using Service Agreements](#execution-of-compute-services-using-service-agreements)
-      * [Motivation](#motivation)
-      * [Actors](#actors)
-      * [Technical components](#technical-components)
-      * [Flow](#flow)
-         * [Terminology](#terminology)
-         * [Requirements](#requirements)
-         * [Workflows](#workflows)
-         * [Publishing an Asset including Compute Services](#publishing-an-asset-including-compute-services)
-         * [Setting up the Service Execution Agreement](#setting-up-the-service-execution-agreement)
-            * [Registering Asset](#registering-asset)
-            * [Consuming Asset](#consuming-asset)
-         * [Execution phase](#execution-phase)
-      * [Infrastructure Orchestration](#infrastructure-orchestration)
-         * [Services Provided by the Operator](#services-provided-by-the-operator)
-         * [Orchestration Steps](#orchestration-steps)
-         * [Infrastructure Operator](#infrastructure-operator)
-            * [Volumes](#volumes)
-         * [Network isolation](#network-isolation)
+* [COMPUTE SPEC: Decentralized Compute to the Data](#compute-spec-decentralized-compute-to-the-data)
+   * [Execution of Remote Compute Services using Service Agreements](#execution-of-remote-compute-services-using-service-agreements)
+   * [Motivation](#motivation)
+   * [Actors](#actors)
+   * [Technical components](#technical-components)
+   * [Flow](#flow)
+      * [Terminology](#terminology)
+      * [Requirements](#requirements)
+      * [Workflows](#workflows)
+      * [Publishing an Asset including Compute Services](#publishing-an-asset-including-compute-services)
+      * [Setting up the Service Execution Agreement](#setting-up-the-service-execution-agreement)
+         * [Registering Asset](#registering-asset)
+         * [Consuming Asset](#consuming-asset)
+      * [Execution phase](#execution-phase)
+   * [Infrastructure Orchestration](#infrastructure-orchestration)
+      * [Services Provided by the Operator](#services-provided-by-the-operator)
+      * [Orchestration Steps](#orchestration-steps)
+      * [Infrastructure Operator](#infrastructure-operator)
+         * [Volumes](#volumes)
+      * [Network isolation](#network-isolation)
 
 
-## Execution of Compute Services using Service Agreements
+
+## Execution of Remote Compute Services using Service Agreements
 
 This SPEC introduces the integration pattern for the usage of **Service Execution Agreements (SEA)**
 (also called Service Agreements or Agreements) as contracts between parties interacting in the execution of a
@@ -678,7 +679,7 @@ The steps included in this scenario are:
 1. When the `Compute Pod` ends or the duration is too long (timeout), the OPERATOR via K8s stop and delete
    the Compute Pod
 
-1.  If the `Compute Pod ends, the OPERATOR start a new instance of the
+1.  If the `Compute Pod` ends, the OPERATOR start a new instance of the
    [Publishing Pod](https://github.com/nevermined-io/pod-publish). The responsibilities of the Publishing Pod are:
    - List of the Log files generated in the Log volume and copy to the output
    - List of the Output data generated in the Output volume

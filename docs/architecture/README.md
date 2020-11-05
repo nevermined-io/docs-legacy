@@ -10,7 +10,7 @@ Table of Contents
    * [Use Cases](#use-cases)
    * [Capabilities](#capabilities)
       * [Data Sharing](#data-sharing)
-      * [Compute to the Data](#compute-to-the-data)
+      * [Data In Situ Computation](#compute-to-the-data)
          * [Compute backends](#compute-backends)
             * [Kubernetes backend](#kubernetes-backend)
             * [Federated Learning backend](#federated-learning-backend)
@@ -30,10 +30,10 @@ data and make an efficient and secure usage of it even with untrusted parties.
 
 With the explosion of the data and AI market, entities have the necessity of
 organizing, understanding, using and sharing their data internally and
-externally. Nevermined provides Data Sharing & Compute to the Data solutions
+externally. Nevermined provides Data Sharing & Data In Situ Computation solutions
 allowing to unlock data for AI.
 
-Nevermined enables a __“Compute to the Data”__ solution, meaning the data never
+Nevermined enables a __“Data In Situ Computation”__ solution, meaning the data never
 moves, is the algorithm the one moving where the data is. It allows data owners
 or providers to define the conditions in which they allow others to make use of
 their data without giving direct access to it.
@@ -43,7 +43,7 @@ monetizing the data without migration. It’s also designed for GDPR compliance,
 it never stores any personal information on-chain (encrypted or in plain text).
 
 Nevermined is the product powered by [Keyko](https://keyko.io) providing Data
-Sharing & Compute to the Data solutions allowing to unlock data for AI.
+Sharing & Data In Situ Computation solutions allowing to unlock data for AI.
 
 
 ## Data Ecosystem Principles
@@ -128,14 +128,14 @@ You can find more details about the technical implementation of the Data Sharing
  use case in the [ACCESS SPEC](specs/access/README.md).
 
 
-### Compute to the Data
+### Data In Situ Computation (DISC)
 
 It facilitates the use cases where data owners allow third parties to execute
 some algorithms where the data is.
 
 For the use cases with more privacy restrictions in which the Data Owner never
 wants to lose control of their data, and this source data can't be accessed
-directly, Nevermined provides a Compute to the Data solution.
+directly, Nevermined provides a Data In Situ Computation solution.
 
 This scenario is based on the premise that data doesn't want to be moved.
 Moving data of their existing premises is a liability. The data can be leaked in
@@ -149,12 +149,12 @@ Moving data of their existing premises is a liability. The data can be leaked in
 The Data Consumer receives the result of the execution of the algorithm on top
 of the data.
 
-![Compute to the Data](specs/compute/images/compute-to-the-data.png)
+![Data In Situ Computation](specs/compute/images/data-in-situ-computation.png)
 
-You can find more details about the technical implementation of the Compute to the Data use case in the
+You can find more details about the technical implementation of the Data In Situ Computation use case in the
 [COMPUTE SPEC](specs/compute/README.md).
 
-The main capabilities of the Compute to the Data building block are:
+The main capabilities of the Data In Situ Computation building block are:
 
 * Solution designed to support different computation or backend paradigms
 * Implemented 2 different backends, one of them orchestrating Kubernetes
@@ -277,9 +277,12 @@ Short Name              | Title                                             | Ve
 [DID](specs/did)        | Decentralized Identifiers                         | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
 [META](specs/metadata)  | Metadata                                          | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
 [ACCESS](specs/access)  | Decentralized Access Control                      | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
-[COMPUTE](specs/compute)| Decentralized Compute to the Data                 | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
+[COMPUTE](specs/compute)| Data In Situ Computation                          | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
+[FL](specs/fl)          | Federated Learning Orchestration                  | 0.1          | Raw        | [@rodolphe](https://github.com/r-marques)
 [PROV](specs/provenance)| Decentralized Data Provenance                     | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
+[IDM](specs/id_management)| Identity management with on-chain access control  | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
 
 
-The DID, META, SLA, EXEC & PROV specs are an evolution of
+
+The DID, META, ACCESS & COMPUTE specs are an evolution of
 [Ocean Protocol Enhancement Proposals - OEPs](https://github.com/oceanprotocol/OEPs/).
