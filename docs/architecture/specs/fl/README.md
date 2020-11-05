@@ -13,7 +13,7 @@ contributors:   Aitor Argomaniz <aitor@keyko.io>,
 
 
 * [COMPUTE FL: Nevermined Federated Learning Orchestration](#compute-fl-nevermined-federated-learning-orchestration)
-   * [Federated Learning integration in the Nevermined Compute to Data](#federated-learning-integration-in-the-nevermined-compute-to-data)
+   * [Federated Learning integration in the Nevermined Data in Situ Computation](#federated-learning-integration-in-the-nevermined-data-in-situ-computation)
    * [Terminology](#terminology)
    * [Motivation](#motivation)
    * [Actors](#actors)
@@ -30,15 +30,16 @@ contributors:   Aitor Argomaniz <aitor@keyko.io>,
       * [Participant Provider DDO](#participant-provider-ddo)
 
 
+
 ---
 
 
-## Federated Learning integration in the Nevermined Compute to Data
+## Federated Learning integration in the Nevermined Data in Situ Computation
 
 This SPEC introduces the integration pattern for the usage a Federated Learning
-backend in the [Nevermined Compute to the Data architecture](architecture/specs/compute/README.md).
+backend in the [Nevermined DISC architecture](architecture/specs/compute/README.md).
 
-The Nevermined Compute to the Data solution introduces a solution where
+The Nevermined Data in Situ Computation solution introduces a solution where
 different compute backends can be plugged in order to support different remote
 computation use cases.   
 
@@ -81,7 +82,7 @@ The different actors interacting in this flow are:
 * INFRASTRUCTURE: Infrastructure required to run the Nevermined compute stack
 
 Here we may have two types of providers. A normal provider like the one
-specified in Compute to the data spec. And another type of provider that only
+specified in Data in Situ Computation spec. And another type of provider that only
 provides compute but now access to the data (to run the coordinator).
 
 ## Architecture
