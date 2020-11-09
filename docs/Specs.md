@@ -8,7 +8,7 @@ Short Name              | Title                                             | Ve
 [DID](architecture/specs/did/README.md)        | Decentralized Identifiers                         | 0.1          | Valid        | [@aaitor](https://github.com/aaitor)
 [META](architecture/specs/metadata/README.md)  | Metadata                                          | 0.1          | Valid        | [@aaitor](https://github.com/aaitor)
 [ACCESS](architecture/specs/access/README.md)  | Decentralized Access Control                      | 0.1          | Valid        | [@aaitor](https://github.com/aaitor)
-[COMPUTE](architecture/specs/compute/README.md)| Decentralized Compute to the Data                 | 0.1          | Valid        | [@aaitor](https://github.com/aaitor)
+[COMPUTE](architecture/specs/compute/README.md)| Decentralized Data in situ Computation                 | 0.1          | Valid        | [@aaitor](https://github.com/aaitor)
 [FL](architecture/specs/fl/README.md)| Federated Learning integration                | 0.1          | Draft        | [@r-marques](https://github.com/r-marques)
 [PROV](architecture/specs/provenance/README.md)| Decentralized Data Provenance                     | 0.2          | Valid        | [@aaitor](https://github.com/aaitor)
 [IDM](architecture/specs/id_management/README.md)| Identity management with on-chain access control                     | 0.1          | Draft        | [@aaitor](https://github.com/aaitor)

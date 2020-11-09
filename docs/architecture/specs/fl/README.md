@@ -131,8 +131,8 @@ to execute
 This section details how a Client/Data Scientist can setup and run a set of
 Participants using Nevermined Compute.
 
-This should be simpler to integrate because it’s very similar to the compute to
-the data use case. The main difference being that the algorithm is actually
+This should be simpler to integrate because it’s very similar to the data in
+situ computation use case. The main difference being that the algorithm is actually
 wrapped around the xain python sdk and it needs to be able to perform outgoing
 network connection to connect to the coordinator.
 
@@ -188,7 +188,7 @@ job and the data that it requires (possibly using the marketplace).
 The flow is:
 
 1. The Data Scientist starts by setting the execution parameters for the coordinator and publishes it as a workflow/ddo
-1. The Data Scientist purchases compute to the data for both Data Provider X and Y and defines the workflow/ddo with the code that will run the participants
+1. The Data Scientist purchases data in situ computation for both Data Provider X and Y and defines the workflow/ddo with the code that will run the participants
 1. The Data Scientist purchases the Coordinator compute service
 1. The Data Scientist starts the Coordinator
 1. The Data Scientist starts the participants
@@ -643,7 +643,7 @@ The main information that needs to be provided is:
 }
 ```
 
-This is a normal compute to the data workflow with one stage, a set of inputs,
+This is a normal data in situ computation workflow with one stage, a set of inputs,
 one transformation and no output since the participant shouldn't need to
 generate any data.
 

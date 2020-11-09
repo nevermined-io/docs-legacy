@@ -230,7 +230,7 @@ the data ecosystem. The main capabilities are:
 * Improved User Experience
 * Integration with the Data Governance and Data Catalog tools
 * Easy search and discovery
-* Native integration with the data sharing and compute to the data building blocks
+* Native integration with the data sharing and data in situ computation building blocks
 * Internal data catalog and APIs
 * Tokenization and incentives
 

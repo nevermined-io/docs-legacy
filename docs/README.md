@@ -8,10 +8,10 @@ data and make an efficient and secure usage of it even with untrusted parties.
 
 With the explosion of the data and AI market, entities have the necessity of
 organizing, understanding, using and sharing their data internally and
-externally. Nevermined provides Data Sharing & Compute to the Data solutions
+externally. Nevermined provides Data Sharing & Data in situ Computation solutions
 allowing to unlock data for AI.
 
-Nevermined enables a __“Compute to the Data”__ solution, meaning the data never
+Nevermined enables a __“Data in situ Computation”__ solution, meaning the data never
 moves, is the algorithm the one moving where the data is. It allows data owners
 or providers to define the conditions in which they allow others to make use of
 their data without giving direct access to it.
@@ -20,8 +20,7 @@ Nevermined is designed to be integrated in Big Data environments. It enables
 monetizing the data without migration. It’s also designed for GDPR compliance,
 it never stores any personal information on-chain (encrypted or in plain text).
 
-Nevermined is the product powered by [Keyko](https://keyko.io) providing Data
-Sharing & Compute to the Data solutions allowing to unlock data for AI.
+Nevermined is the product powered by [Keyko](https://keyko.io).
 
 ## Data Ecosystem Principles
 

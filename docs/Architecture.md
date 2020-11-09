@@ -40,14 +40,14 @@ You can find more details about the technical implementation of the Data Sharing
  use case in the [ACCESS SPEC](architecture/specs/access/README.md).
 
 
-## Compute to the Data
+## Data in situ Computation (DISC)
 
 It facilitates the use cases where data owners allow third parties to execute
 some algorithms where the data is.
 
 For the use cases with more privacy restrictions in which the Data Owner never
 wants to lose control of their data, and this source data can't be accessed
-directly, Nevermined provides a Compute to the Data solution.
+directly, Nevermined provides a Data in situ Computation (DISC) solution.
 
 This scenario is based on the premise that data doesn't want to be moved.
 Moving data of their existing premises is a liability. The data can be leaked in
@@ -61,12 +61,12 @@ Moving data of their existing premises is a liability. The data can be leaked in
 The Data Consumer receives the result of the execution of the algorithm on top
 of the data.
 
-![Compute to the Data](architecture/specs/compute/images/compute-to-the-data.png)
+![Data in situ Computation](architecture/specs/compute/images/data-in-situ-computation.png)
 
-You can find more details about the technical implementation of the Compute to the Data use case in the
+You can find more details about the technical implementation of the Data in situ Computation use case in the
 [COMPUTE SPEC](architecture/specs/compute/README.md).
 
-The main capabilities of the Compute to the Data building block are:
+The main capabilities of the Data in situ Computation building block are:
 
 * Solution designed to support different computation or backend paradigms
 * Implemented 2 different backends, one of them orchestrating Kubernetes
@@ -142,6 +142,6 @@ the data ecosystem. The main capabilities are:
 * Improved User Experience
 * Integration with the Data Governance and Data Catalog tools
 * Easy search and discovery
-* Native integration with the data sharing and compute to the data building blocks
+* Native integration with the data sharing and data in situ computation building blocks
 * Internal data catalog and APIs
 * Tokenization and incentives
