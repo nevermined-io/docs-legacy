@@ -1,4 +1,4 @@
-# COMPUTE SPEC: Decentralized Compute to the Data
+# COMPUTE SPEC: Data in situ Computation
 
 ```
 shortname:      COMPUTE
@@ -10,7 +10,7 @@ editor:         Aitor Argomaniz <aitor@nevermined.io>
 contributors:   
 ```
 
-* [COMPUTE SPEC: Decentralized Compute to the Data](#compute-spec-decentralized-compute-to-the-data)
+* [COMPUTE SPEC: Data in situ Computation](#compute-spec-data-in-situ-computation)
    * [Execution of Remote Compute Services using Service Agreements](#execution-of-remote-compute-services-using-service-agreements)
    * [Motivation](#motivation)
    * [Actors](#actors)
@@ -129,7 +129,7 @@ There are some parameters used in this flow:
 * The previous two points could support to buy once a compute service and execute for example the service every night
   at 3 am
 
-![Compute to the Data](images/compute-to-the-data.png)
+![Data in situ Computation](images/data-in-situ-computation.png)
 
 ### Workflows
 
