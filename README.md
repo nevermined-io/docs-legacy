@@ -1,5 +1,9 @@
 [![banner](https://raw.githubusercontent.com/nevermined-io/assets/main/images/logo/banner_logo.png)](https://nevermined.io)
 
+![Twitter Follow](https://img.shields.io/twitter/follow/nevermined_io?style=social)
+[![Discord](https://img.shields.io/discord/775670012446507028.svg?label=Discord&logo=Discord&colorB=7289da&style=for-the-badge)](https://discord.gg/vpEv3HJ)
+
+
 # Nevermind Documentation
 
 Nevermined is a data ecosystem solution that provides the capabilities of
@@ -21,3 +25,11 @@ monetizing the data without migration. It’s also designed for GDPR compliance,
 it never stores any personal information on-chain (encrypted or in plain text).
 
 Nevermined is the product powered by [Keyko](https://keyko.io).
+
+
+## Social
+
+Discord: https://discord.gg/GZju2qScKq
+Twitter: https://twitter.com/Nevermined_io
+Medium: https://medium.com/nevermined-io
+LinkedIn: https://www.linkedin.com/company/nevermined
