@@ -8,7 +8,7 @@
 > http://docs.nevermined.io/
 
 
-![Twitter Follow](https://img.shields.io/twitter/follow/nevermined_io?style=social)
+[![Twitter](https://img.shields.io/twitter/follow/nevermined_io?style=social)](https://twitter.com/nevermined_io)
 [![Discord](https://img.shields.io/discord/775670012446507028.svg?color=7289da&label=Discord&logo=discord&style=flat-square)](https://discord.gg/GZju2qScKq)
 
 
