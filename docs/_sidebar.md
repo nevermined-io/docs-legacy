@@ -13,3 +13,9 @@
   * [Data Provenance](architecture/specs/provenance/README.md)
   * [Identity management with on-chain access control](architecture/specs/id_management/README.md)  
 * [Software Licenses](Licensing.md)
+
+
+<p>
+![Twitter Follow](https://img.shields.io/twitter/follow/nevermined_io?style=social)
+[![Discord](https://img.shields.io/discord/775670012446507028.svg?label=Discord&logo=Discord&colorB=7289da&style=for-the-badge)](https://discord.gg/vpEv3HJ)
+</p>

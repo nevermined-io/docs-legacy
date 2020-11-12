@@ -1,10 +1,16 @@
 [![banner](https://raw.githubusercontent.com/nevermined-io/assets/main/images/logo/banner_logo.png)](https://nevermined.io)
 
-![Twitter Follow](https://img.shields.io/twitter/follow/nevermined_io?style=social)
-[![Discord](https://img.shields.io/discord/775670012446507028.svg?label=Discord&logo=Discord&colorB=7289da&style=for-the-badge)](https://discord.gg/vpEv3HJ)
+
 
 
 # Nevermind Documentation
+
+> http://docs.nevermined.io/
+
+
+![Twitter Follow](https://img.shields.io/twitter/follow/nevermined_io?style=social)
+[![Discord](https://img.shields.io/discord/775670012446507028.svg?label=Discord&logo=Discord&colorB=7289da&style=for-the-badge)](https://discord.gg/vpEv3HJ)
+
 
 Nevermined is a data ecosystem solution that provides the capabilities of
 building bespoke networks where different entities can share and monetize their
