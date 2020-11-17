@@ -3,7 +3,7 @@
 
 
 
-# Nevermind Documentation
+# Nevermined Documentation
 
 > http://docs.nevermined.io/
 
