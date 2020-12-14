@@ -7,29 +7,31 @@ type:           Draft
 status:         Valid
 version:        0.1
 editor:         Aitor Argomaniz <aitor@nevermined.io>
-contributors:   
+contributors:
 ```
-
-
-   * [Identity management with on-chain access control](#identity-management-with-on-chain-access-control)
-      * [Introduction](#introduction)
-         * [Motivation](#motivation)
-         * [Actors](#actors)
-         * [Preconditions](#preconditions)
-         * [Requirements](#requirements)
-      * [Architecture](#architecture)
-         * [Identity Management](#identity-management)
-         * [Decentralized Domain Controller Identifier (DC-DID)](#decentralized-domain-controller-identifier-dc-did)
-         * [Json Web Tokens (JWT)](#json-web-tokens-jwt)
-            * [JWT Structure](#jwt-structure)
-            * [JWT Payload](#jwt-payload)
-         * [Identity Gateways](#identity-gateways)
-         * [Interactions between the actors](#interactions-between-the-actors)
-         * [Adding and Revoking Permissions](#adding-and-revoking-permissions)
-      * [Annex](#annex)
-         * [Serializing DID Documents](#serializing-did-documents)
-
-
+- [Identity management with on-chain access control](#identity-management-with-on-chain-access-control)
+  - [Introduction](#introduction)
+    - [Motivation](#motivation)
+  - [Concepts](#concepts)
+    - [Specifications](#specifications)
+    - [Actors](#actors)
+  - [Use Case](#use-case)
+    - [Preconditions](#preconditions)
+    - [Requirements](#requirements)
+  - [Architecture](#architecture)
+    - [Identity Management](#identity-management)
+      - [Verifiable Credentials associated with Nevermined assets](#verifiable-credentials-associated-with-nevermined-assets)
+    - [Json Web Tokens (JWT)](#json-web-tokens-jwt)
+      - [JWT Structure](#jwt-structure)
+      - [JWT Payload](#jwt-payload)
+    - [Identity Gateways](#identity-gateways)
+    - [Interactions between the actors](#interactions-between-the-actors)
+    - [Gateway JWT implementation](#gateway-jwt-implementation)
+      - [JWT Authorization Grants](#jwt-authorization-grants)
+    - [Adding and Revoking Permissions](#adding-and-revoking-permissions)
+  - [Annex](#annex)
+    - [Serializing DID Documents](#serializing-did-documents)
+    - [Examples of JWT Grant Tokens](#examples-of-jwt-grant-tokens)
 
 ---
 
@@ -166,7 +168,7 @@ The main requirements used to designed the solution are:
 * The decentralized ecosystem register assets and the conditions for who can
   interact and what is possible to do with these assets is kept on-chain
 * Public information about users like users public keys should be available.
-  User information should be resolvable via decentralized identifiers  
+  User information should be resolvable via decentralized identifiers
 
 
 ## Architecture
@@ -345,7 +347,7 @@ The different steps are:
 
 1. The Holder presents a credentials request related to a subject
   ```http
-   HTTP GET /api/v1/gateway/services/domain/credentials
+   HTTP GET /api/v1/gateway/services/oauth2/token
 
    Authorization: Bearer eyJhbGciOiJIUzI1NiIXVCJ9TJV...r7E20RMHrHDcEfxjoYZgeFONFh7HgQ
   ```
@@ -373,11 +375,11 @@ The different steps are:
 4. If the Domain Controller validates the Holder has access permissions, the
    Identity Gateway will generate and sign a credential
 5. The credential is issued to the Holder in the JWT format included in the
-   `id_token` response parameter:
+   `access_token` response parameter:
 
   ```json
    {
-    "id_token": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIweDEyMzQ1NiIsInN1YiI6ImRpZDpudjphYmNkZSIsImF1ZCI6IjB4ZmZmZmZmIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1MTYyNTAwMjJ9.fiOSfeQwSiDi0ECFuDrHmhx8BHTHMl6MiyiJgJ6BIntjHvcFDFjPwtSYJrhYpeTcBPQ1FO5-fT-n4fQXBF92Vw"
+    "access_token": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIweDEyMzQ1NiIsInN1YiI6ImRpZDpudjphYmNkZSIsImF1ZCI6IjB4ZmZmZmZmIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1MTYyNTAwMjJ9.fiOSfeQwSiDi0ECFuDrHmhx8BHTHMl6MiyiJgJ6BIntjHvcFDFjPwtSYJrhYpeTcBPQ1FO5-fT-n4fQXBF92Vw"
    }
   ```
 
@@ -400,6 +402,59 @@ The different steps are:
    of the Holder.
 
 
+### Gateway JWT implementation
+
+The gateway implements the [RFC6749: The OAuth 2.0 Authorization Framework](https://tools.ietf.org/html/rfc6749) framework using [JWTs as Authorization Grants](https://tools.ietf.org/html/rfc7523) and [JWTs as Access Tokens](https://tools.ietf.org/html/draft-ietf-oauth-access-token-jwt-10)
+
+#### JWT Authorization Grants
+
+The claims that should be contained in a JWT Authorization Grant depend on the action that we want to perform on the gateway. The claims validation follow [RFC7523](https://tools.ietf.org/html/rfc7523#section-3). Overall the claim options look like this:
+
+**Registered name claims**
+
+```json
+{
+  "iss": {"essential": true},
+  "sub": {"essential": false},
+  "aud": {
+    "essential": true,
+      "values": [
+        "/api/v1/gateway/services/access",
+        "/api/v1/gateway/services/compute",
+        "/api/v1/gateway/services/download",
+        "/api/v1/gateway/services/execute"
+      ],
+    },
+    "exp": {"essential": true},
+}
+```
+
+- `iss`: Is the ethereum address of the consumer
+- `sub`: (optional): Is the Service Agreement Id if applicable
+- `aud`: Is the path of the endpoint being called
+- `exp`: Is the expiration time
+
+**Private name claims**
+
+These claims are specific to Nevermined
+
+```json
+{
+  "did": {"essential": false},
+  "execution_id": {"essential": false}
+}
+```
+
+- `did` (optional): Is the DID of the related asset
+- `execution_id` (optional): Is the execution id of the related compute job
+
+
+To request a JWT access token a client needs to make a request to the token endpoint (`/api/v1/services/oauth2/token`) by sendinf the following parameters using `application/x-www-form-urlencoded` format as per [RFC6749](https://tools.ietf.org/html/rfc6749#section-4.1.3) with:
+
+- `grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer`: The grant type as per [RFC7523](https://tools.ietf.org/html/rfc7523#section-2.1)
+- `assertion=<jwt grant token>`: The assertion with a single JWT grant token as per [RFC7523](https://tools.ietf.org/html/rfc7523#section-2.1)
+
+For examples JWT Grant tokens check [Examples of JWT Grant Tokens](#examples-of-jwt-grant-tokens) in the [Annex](#annex).
 
 ### Adding and Revoking Permissions
 
@@ -467,3 +522,83 @@ serialize fragments of DID Documents is as follows:
    adding it on-chain. The common method used to do that is using the SHA3-256
    (Keccak-256) algorithm (you might have to convert the string to bytes first.)
    , making sure that final hash generated is prefixed by `0x`.
+
+
+### Examples of JWT Grant Tokens
+
+**`/api/v1/gateway/services/access`**
+
+```json
+// header
+{
+  "alg": "ES256K",
+  "typ": "JWT"
+}
+
+// assertion
+{
+  "iss": "0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0",
+  "aud": "/api/v1/gateway/services/access",
+  "sub": "0xf527a6bbc35547f782dda34d64bb9070e743531107994899b1f97d4451aacbe1",
+  "iat": 1607967375,
+  "exp": 1607970975,
+  "did": "did:nv:5c19aaf5f7c12ef0a9d898d5a89ca5428f3d0315b0f0a36f5b5d097166e53788"
+}
+```
+
+**`/api/v1/gateway/services/compute`**
+
+```json
+// header
+{
+  "alg": "ES256K",
+  "typ": "JWT"
+}
+
+// assertion
+{
+  "iss": "0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0",
+  "aud": "/api/v1/gateway/services/compute",
+  "sub": "0x3228c55d6e444cdc87bd5425896d5cdfa1e42e0734d04866a6c4386ef4f20144",
+  "iat": 1607968935,
+  "exp": 1607972535,
+  "execution_id": "nevermined-compute-82v5j"
+}
+```
+
+**`/api/v1/gateway/services/download`**
+```json
+// header
+{
+  "alg": "ES256K",
+  "typ": "JWT"
+}
+
+// assertion
+{
+  "iss": "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
+  "aud": "/api/v1/gateway/services/download",
+  "iat": 1607969122,
+  "exp": 1607972722,
+  "did": "did:nv:2379d3e2d03f25b8e5fb2fae6e6adeb45cd7674d20905fc172d84915ff68cc73"
+}
+```
+
+**`/api/v1/gateway/services/execute`**
+```json
+// header
+{
+  "alg": "ES256K",
+  "typ": "JWT"
+}
+
+// assertion
+{
+  "iss": "0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0",
+  "aud": "/api/v1/gateway/services/execute",
+  "sub": "0x715954fd8a9b48968983ae9b9813e169b4be0d861ccb4bbd8489298cda59c6a9",
+  "iat": 1607969247,
+  "exp": 1607972847,
+  "did": "did:nv:e689ed382b15e190a5937f5c070843cce249a692ff09931d570e288bd91e5b81"
+}
+```
