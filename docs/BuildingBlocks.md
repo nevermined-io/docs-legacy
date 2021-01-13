@@ -1,4 +1,4 @@
-# Nevermined Architecture
+# Building Blocks
 
 Nevermined is based in three core building blocks:
 

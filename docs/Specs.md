@@ -1,6 +1,6 @@
-# Nevermined Specifications (Specs)
+# Nevermined Specifications
 
-The core of the platform is documented in detail in Specification documents (aka SPECs).
+The core of the platform is documented in detail in Specification documents (aka **SPECs**).
 Here you can find a list of the most relevant SPECs:
 
 Short Name              | Title                                             | Version      | Status     | Editor
@@ -16,5 +16,5 @@ Short Name              | Title                                             | Ve
 
 ## Attribution
 
-The DID, META, SLA, EXEC & PROV specs are an evolution of
+Some of the Specs are an evolution of
 [Ocean Protocol Enhancement Proposals - OEPs](https://github.com/oceanprotocol/OEPs/).

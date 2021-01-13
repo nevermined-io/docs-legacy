@@ -1,0 +1,140 @@
+# General Information
+# site_title: "Documentation | Nevermined"
+site_name: "Nevermined Documentation"
+site_description: "Nevermined, The world's first enterprise-grade unstoppable data sharing ecosystem"
+site_author: Nevermined
+site_url: http://docs.nevermined.io/
+
+# Repository
+repo_name: nevermined-io/docs
+repo_url: https://github.com/nevermined-io/docs
+
+# Copyright
+copyright: "Copyright &copy; 2021 Keyko"
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.expand
+    - navigation.tabs
+    - toc.integrate
+
+  # feature:
+  #   tabs: false
+  font:
+    text: Roboto
+    code: Roboto Mono
+  palette:
+    scheme: default
+    primary: black
+    accent: indigo
+
+  # Necessary for search to work properly
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: en
+
+  favicon: assets/nevermined/favicon-nvm.ico
+  logo: assets/nevermined/favicon-32.png
+  icon:
+    repo: fontawesome/brands/git-alt
+
+# Plugins
+plugins:
+  - search
+
+
+# Extensions
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.attr_list
+  - markdown.extensions.toc:
+      permalink: true
+  - pymdownx.highlight:
+      linenums: false
+  - pymdownx.superfences
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: textileio
+      repo: docs
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - markdown_captions
+
+
+# Customization
+extra:
+  social:
+    - type: globe
+      link: https://nevermined.io
+    - type: linkedin
+      link: https://linkedin.com/company/nevermined
+    - type: medium
+      link: https://medium.com/nevermined-io
+    - type: github
+      link: https://github.com/nevermined-io
+    - type: twitter
+      link: https://twitter.com/nevermined_io
+    - type: comments
+      link: https://discord.gg/GZju2qScKq
+    - type: paper-plane
+      link: mailto:info@nevermined.io
+
+
+nav:
+  - Home: index.md
+  - Architecture:
+      - Overview: architecture/README.md
+      - Building Blocks: BuildingBlocks.md
+      - Components: architecture/components.md
+      - Repositories: architecture/repos.md
+  - Specifications:
+      - Overview: Specs.md
+      - Access Control: architecture/specs/access/README.md
+      - Data In Situ Computation: architecture/specs/compute/README.md
+      - Federated Learning: architecture/specs/fl/README.md
+      - Provenance: architecture/specs/provenance/README.md
+      - Identity Management: architecture/specs/id_management/README.md
+      - Decentralized Identifiers: architecture/specs/did/README.md
+      - Metadata: architecture/specs/metadata/README.md
+  - Integration:
+      - Software Development Kits (SDKs):
+        - Python SDK: api/sdk/python.md
+        - JavaScript SDK: api/sdk/javascript.md
+        - Java SDK: api/sdk/java.md
+      - Gateway API: api/gateway.md
+      - Metadata API: api/metadata.md
+      - Command Line Interface: api/cli.md
+  - Blog posts: Blog.md
+  - Software Licenses: Licensing.md
+  - Social:
+    - Discord: https://discord.gg/GZju2qScKq
+    - Twitter: https://twitter.com/nevermined_io
+    - Linkedin: https://linkedin.com/company/nevermined
+
+# google_analytics:
+#   - UA-30695368-1
+#   - auto
+#

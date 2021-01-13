@@ -11,7 +11,6 @@ contributors:
 ```
 
    * [META SPEC: Metadata Ontology](#meta-spec-metadata-ontology)
-   * [Table of Contents](#table-of-contents)
       * [Motivation](#motivation)
       * [Life Cycle of Metadata](#life-cycle-of-metadata)
          * [Local Metadata](#local-metadata)
@@ -34,7 +33,7 @@ contributors:
 Every asset (dataset, algorithm) in Nevermined has an associated Decentralized Identifier (DID) and DID document / DID
 Descriptor Object (DDO). Because assets without proper descriptive metadata have poor visibility and discoverability.
 
-See [DID SPEC](architecture/specs/did/README.md) for information about the overall structure of Nevermined DDOs and DIDs.This OEP is about one
+See [DID SPEC](../did/README.md) for information about the overall structure of Nevermined DDOs and DIDs.This OEP is about one
 particular part of Nevermined DDOs: the asset metadata, a JSON object with information about the asset.
 
 This SPEC defines the assets metadata ontology, i.e. the schema for the asset metadata. It's based on the public
@@ -65,7 +64,7 @@ remotely. When they do, the local metadata is passed to the SDK, which makes som
 The Metadata API may also make some changes and additions to the metadata, such as the `datePublished` or parts of the
 `curation` object. The metadata that finally gets stored by the Metadata API is the _remote metadata_.
 
-> A marketplace can and might also act as a publisher. [SPEC ACCESS](architecture/specs/access/README.md) describes the publishing flow in
+> A marketplace can and might also act as a publisher. [SPEC ACCESS](../access/README.md) describes the publishing flow in
 more detail.
 
 ## Metadata Attributes

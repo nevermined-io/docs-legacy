@@ -11,7 +11,6 @@ contributors:
 ```
 
    * [DID SPEC: Decentralized Identifiers](#did-spec-decentralized-identifiers)
-   * [Table of Contents](#table-of-contents)
       * [Motivation](#motivation)
       * [Specification](#specification)
       * [Proposed Solution](#proposed-solution)
@@ -186,7 +185,7 @@ Example:
 ```
 
 - You can find a [complete example of a DDO](https://github.com/nevermined-docs/tree/master/architecture/specs/did/examples/ddo-example.json).
-- You can find a complete reference of the asset metadata in [METADATA SPEC](architecture/specs/metadata/README.md).
+- You can find a complete reference of the asset metadata in [METADATA SPEC](../metadata/README.md).
 - You can find a complete [real world example of a DDO](https://w3c-ccg.github.io/did-spec/#real-world-example)
 with extended services added, as part of the W3C DID spec.
 
