@@ -96,7 +96,7 @@ The following technical components are involved in an end-to-end publishing and 
 This section describes the Asset Compute Service flow in detail.
 There are some parameters used in this flow:
 
-* **DID** - See [DID SPEC](architecture/specs/did/README.md).
+* **DID** - See [DID SPEC](../did/README.md).
 * **serviceAgreementId** - Is the unique ID referring to a Service Execution Agreement established between a PUBLISHER
   and a CONSUMER. The CONSUMER (via SDK) is the one creating this random unique serviceAgreementId.
 * **serviceDefinitionId** - Identifies one service in the array of services included in the DDO. It is created by the
@@ -249,17 +249,17 @@ specific asset.
 
 The complete flow of publishing an asset with a compute service attached is:
 
-1. PUBLISHER generates a DID. See [How to compute a DID](architecture/specs/did/README.md#how-to-compute-a-did).
+1. PUBLISHER generates a DID. See [How to compute a DID](../did/README.md#how-to-compute-a-did).
 1. PUBLISHER creates a DDO including the following information:
    - DID
    - Metadata. It contains the asset name, description, etc. For more details see
-     [METADATA SPEC](architecture/specs/metadata/README.md).
+     [METADATA SPEC](../metadata/README.md).
    - Public key of the PUBLISHER
-   - A list of services (Access, etc). For more details see [ACCESS SPEC](architecture/specs/access/README.md).
+   - A list of services (Access, etc). For more details see [ACCESS SPEC](../access/README.md).
 
    Each service in the list contains certain information depending on its type.
    Here we document the **Compute** service. The **Access** and **Metadata** services where discussed in the scope of
-   the [ACCESS SPEC](architecture/specs/access/README.md).
+   the [ACCESS SPEC](../access/README.md).
 
    A service of type "compute" contains:
 

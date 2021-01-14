@@ -37,7 +37,7 @@ contributors:   Aitor Argomaniz <aitor@keyko.io>,
 ## Federated Learning integration in the Nevermined Data in Situ Computation
 
 This SPEC introduces the integration pattern for the usage a Federated Learning
-backend in the [Nevermined DISC architecture](architecture/specs/compute/README.md).
+backend in the [Nevermined DISC architecture](../compute/README.md).
 
 The Nevermined Data in Situ Computation solution introduces a solution where
 different compute backends can be plugged in order to support different remote

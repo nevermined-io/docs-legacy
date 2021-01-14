@@ -11,7 +11,6 @@ contributors:
 ```
 
    * [ACCESS SPEC: Decentralized Access Control](#access-spec-decentralized-access-control)
-   * [Table of Contents](#table-of-contents)
       * [Motivation](#motivation)
       * [Actors and Technical Components](#actors-and-technical-components)
       * [Flows](#flows)
@@ -101,7 +100,7 @@ In the below image you can see a high level view of the Nevermined Data Sharing 
 
 The following parameters are used:
 
-* **did** - Decentralized Identifier (DID). See [DID SPEC](architecture/specs/did/README.md).
+* **did** - Decentralized Identifier (DID). See [DID SPEC](../did/README.md).
 * **agreementId** or **serviceAgreementId** - The unique ID referring to a Service Agreement established between a
   PUBLISHER and a CONSUMER. The CONSUMER (via SDK) is the one creating this unique ID.
 * **serviceDefinitionId** - Identifies one service in the array of services included in the DDO. It is created by the
@@ -124,7 +123,7 @@ Those steps are explained in more detail below.
 
 The PUBLISHER is able to publish (register) an asset by making a single SDK call.
 
-where `metadata` is a dict containing the [METADATA SPEC](architecture/specs/metadata/README.md) metadata about the asset.
+where `metadata` is a dict containing the [METADATA SPEC](../metadata/README.md) metadata about the asset.
 
 We now expand on the publishing (registration) steps in more detail.
 
@@ -133,9 +132,9 @@ We now expand on the publishing (registration) steps in more detail.
 An asset DDO is a [DID Document](https://w3c-ccg.github.io/did-spec/#did-documents) conforming with
 [the Decentralized Identifiers (DIDs) spec](https://w3c-ccg.github.io/did-spec/).
 
-1. Validate the metadata to ensure that it conforms with [METADATA SPEC](architecture/specs/metadata/README.md).
+1. Validate the metadata to ensure that it conforms with [METADATA SPEC](../metadata/README.md).
    (It should be in "local metadata" form at this point.)
-1. Compute a DID following [DID SPEC](architecture/specs/did/README.md).
+1. Compute a DID following [DID SPEC](../did/README.md).
 1. Create an empty DDO and add the following things to it:
    * DID
    * Public key of the PUBLISHER
@@ -194,7 +193,7 @@ function registerAttribute (
 The parameters to pass are:
 
   * **bytes32 _did** - The hash part of the DID, the part just after `did:nv:`
-  * **bytes32 _checksum** - The checksum generated after [compute the DID](architecture/specs/did/README.md#how-to-compute-a-did)
+  * **bytes32 _checksum** - The checksum generated after [compute the DID](../did/README.md#how-to-compute-a-did)
   * **address[] _providers** - The list of providers which PUBLISHER delegates URL decryption capabilities and SEA management
   * **string _value** - The Metadata service endpoint. In the above DDO its: http://metadata.org/api/v1/metadata/assets/ddo/{did}
 

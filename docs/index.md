@@ -1,4 +1,5 @@
-[![banner](https://raw.githubusercontent.com/nevermined-io/assets/main/images/logo/banner_logo.png)](https://nevermined.io)
+![](https://raw.githubusercontent.com/nevermined-io/assets/main/images/logo/banner_logo.png)
+
 
 # Nevermined Documentation
 

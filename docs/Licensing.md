@@ -1,4 +1,4 @@
-# Nevermined Software Licenses
+# Software Licenses
 
 Nevermined is a solution that includes Open & Private source components.
 The core of the functionality is Open Source Software using the very open

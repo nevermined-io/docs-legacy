@@ -1,6 +1,6 @@
 # Repositories
 
-The complete description of the [architecture components](architecture/components.md) & licenses can be found [here](architecture/components.md).
+The complete description of the [architecture components](components.md) & licenses can be found [here](components.md).
 
 A brief summary of some of them:
 

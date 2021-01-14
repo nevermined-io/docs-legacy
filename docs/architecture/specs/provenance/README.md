@@ -419,6 +419,59 @@ This makes it possible to track end to end the complete cargo flow involving ind
 
 ### Registry
 
+#### Smart Contract
+
+```
+struct DIDRegisterList {
+    mapping(bytes32 => DIDRegister) didRegisters;
+    bytes32[] didRegisterIds;
+}
+
+struct DIDRegister {
+        address owner;
+        bytes32 lastChecksum;
+        string  url;
+        address lastUpdatedBy;
+        uint256 blockNumberUpdated;
+        address[] providers;
+        address[] delegates;
+    }
+
+struct ProvenanceRegistryList {
+    mapping(bytes32 => ProvenanceRegistry) provenanceRegistry;
+}
+struct ProvenanceRegistry {
+        bytes32 did;
+        bytes32 relatedDid;
+        bytes32 activityId;
+        address agentId;
+        address agentInvolvedId;
+        uint8   method;
+        address lastUpdatedBy;
+        uint256 blockNumberUpdated;
+}
+```
+
+```
+# DIDRegister
+
+owner  | lastChecksum | URL                   | lastUpdatedBy   | blockNumber   | providers     | delegates
+-------|--------------|-----------------------|-----------------|---------------|---------------|-------------------
+0x1234 | 00001        | http://nevermined.io  | 2010            | 100           | [0x10]        | []
+0xabab | 12213        | http://nevermined.io  | 2011            | 100           | []            | [0xaa]
+
+
+# ProvenanceRegistry
+
+did    | relatedDid   | activityId        | agentId           | agentInvolvedId    | method    | lastUpdatedBy     | blockNumber   
+-------|--------------|-------------------|-------------------|--------------------|-----------|-------------------|-----------------
+0x1234 | 0x5678       | 0xaabb            | 0xccdd            | 0xccbb             | 0         | 2010              | 100
+0xdddd |              | 0xaabb            | 0xccdd            |                    | 1         | 2011              | 190
+
+
+```
+
+
 #### Provenance Registry
 
 The Provenance Registry provides a unique source truth of the provenance information registered in the Nevermined network. It is a generic record where the entities (digital or physical assets) represent their complete life-cycle. When it’s necessary to represent the interaction between independent agents (Acme Corp. hands over a good to Armadillo Shipping), it’s necessary to provide the digital signature of the agents participating in the transaction.
