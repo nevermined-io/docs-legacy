@@ -83,8 +83,8 @@ Each kind of asset require a different subset of metadata attributes. The distin
 A `metadata` object has the following attributes, all of which are objects.
 
 Attribute                   | Required | Description
-----------------------------|----------|----------|
-**`main`**                  | Yes      | Main attributes used to calculate the service checksum |
+----------------------------|----------|----------
+**`main`**                  | Yes      | Main attributes used to calculate the service checksum 
 **`curation`**              | (remote) | Curation attributes
 **`additionalInformation`** | No       | Optional attributes
 **`encryptedFiles`**        | (remote) | Encrypted string of the `attributes.main.files` object.

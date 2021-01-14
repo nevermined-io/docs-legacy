@@ -1,5 +1,3 @@
-# General Information
-# site_title: "Documentation | Nevermined"
 site_name: "Nevermined Documentation"
 site_description: "Nevermined, The world's first enterprise-grade unstoppable data sharing ecosystem"
 site_author: Nevermined
@@ -10,18 +8,15 @@ repo_name: nevermined-io/docs
 repo_url: https://github.com/nevermined-io/docs
 
 # Copyright
-copyright: "Copyright &copy; 2021 Keyko"
+copyright: "Copyright &copy; 2021 Nevermined"
 
 theme:
   name: material
   language: en
   features:
     - navigation.expand
-    - navigation.tabs
+    # - navigation.tabs
     - toc.integrate
-
-  # feature:
-  #   tabs: false
   font:
     text: Roboto
     code: Roboto Mono
@@ -45,7 +40,6 @@ theme:
 # Plugins
 plugins:
   - search
-
 
 # Extensions
 markdown_extensions:
@@ -87,19 +81,21 @@ markdown_extensions:
 # Customization
 extra:
   social:
-    - type: globe
+    - icon: fontawesome/solid/globe
       link: https://nevermined.io
-    - type: linkedin
+    - icon: fontawesome/brands/linkedin
       link: https://linkedin.com/company/nevermined
-    - type: medium
+    - icon: fontawesome/brands/medium
       link: https://medium.com/nevermined-io
-    - type: github
+    - icon: fontawesome/brands/github
       link: https://github.com/nevermined-io
-    - type: twitter
+    - icon: fontawesome/brands/twitter
       link: https://twitter.com/nevermined_io
-    - type: comments
+    - icon: fontawesome/brands/discord
       link: https://discord.gg/GZju2qScKq
-    - type: paper-plane
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ
+    - icon: fontawesome/regular/paper-plane
       link: mailto:info@nevermined.io
 
 
@@ -119,22 +115,22 @@ nav:
       - Identity Management: architecture/specs/id_management/README.md
       - Decentralized Identifiers: architecture/specs/did/README.md
       - Metadata: architecture/specs/metadata/README.md
-  - Integration:
-      - Software Development Kits (SDKs):
-        - Python SDK: api/sdk/python.md
-        - JavaScript SDK: api/sdk/javascript.md
-        - Java SDK: api/sdk/java.md
-      - Gateway API: api/gateway.md
-      - Metadata API: api/metadata.md
-      - Command Line Interface: api/cli.md
+  # - Integration:
+  #     - Software Development Kits (SDKs):
+  #       - Python SDK: api/sdk/python.md
+  #       - JavaScript SDK: api/sdk/javascript.md
+  #       - Java SDK: api/sdk/java.md
+  #     - Gateway API: api/gateway.md
+  #     - Metadata API: api/metadata.md
+  #     - Command Line Interface: api/cli.md
   - Blog posts: Blog.md
   - Software Licenses: Licensing.md
   - Social:
     - Discord: https://discord.gg/GZju2qScKq
     - Twitter: https://twitter.com/nevermined_io
     - Linkedin: https://linkedin.com/company/nevermined
+    - Demos: https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ
 
-# google_analytics:
-#   - UA-30695368-1
-#   - auto
-#
+google_analytics:
+  - G-H5FH0N6N2E
+  - auto
