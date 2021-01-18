@@ -14,9 +14,9 @@ theme:
   name: material
   language: en
   features:
-    - navigation.expand
-    # - navigation.tabs
     - toc.integrate
+    # - navigation.expand
+    # - navigation.tabs
   font:
     text: Roboto
     code: Roboto Mono
@@ -115,8 +115,19 @@ nav:
       - Identity Management: architecture/specs/id_management/README.md
       - Decentralized Identifiers: architecture/specs/did/README.md
       - Metadata: architecture/specs/metadata/README.md
-  # - Integration:
-  #     - Software Development Kits (SDKs):
+  - Integration:
+      - Overview: api/README.md
+      - API Reference:
+        - API Overview: api/reference/api-reference-latest.md
+        - Assets: api/reference/Assets.md
+        - Accounts: api/reference/Accounts.md
+        - Agreements: api/reference/Agreements.md
+        - Conditions: api/reference/Conditions.md
+        - Provenance: api/reference/Provenance.md
+        - Tokens: api/reference/Tokens.md
+        - Providers: api/reference/Providers.md
+        - Secret Store: api/reference/Secret-Store.md
+      - Software Development Kits (SDKs): api/SDK.md
   #       - Python SDK: api/sdk/python.md
   #       - JavaScript SDK: api/sdk/javascript.md
   #       - Java SDK: api/sdk/java.md
