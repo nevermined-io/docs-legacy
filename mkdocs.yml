@@ -131,9 +131,9 @@ nav:
   #       - Python SDK: api/sdk/python.md
   #       - JavaScript SDK: api/sdk/javascript.md
   #       - Java SDK: api/sdk/java.md
-  #     - Gateway API: api/gateway.md
+      - Gateway API: api/gateway/README.md
       - Metadata API: api/metadata/README.md
-  #     - Command Line Interface: api/cli.md
+      - Command Line Interface: api/cli/README.md
   - Blog posts: Blog.md
   - Software Licenses: Licensing.md
   - Social:
