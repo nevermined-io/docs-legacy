@@ -22,19 +22,3 @@ The SDKs are organized using the following modules:
 * [Tokens](Tokens.md) - Request and transfer Nevermined tokens
 * [Providers](Providers.md) - Manage of asset providers
 * [Secret Store](Secret-Store.md) - Encryption and Decryption secrets
-
-### Assets
-
-Exposes the API related with assets interaction (create, resolve, search, order, download, execute, etc.)
-
-### Accounts
-
-It allows to fetch information about Ethereum accounts and tokens balance
-
-### Agreements
-
-It allows to manage Service Execution Agreements and check their status
-
-### Conditions
-
-It allows to interact with the Smart Contracts related with Agreement Conditions

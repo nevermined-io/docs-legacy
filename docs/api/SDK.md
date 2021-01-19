@@ -36,13 +36,13 @@ All the SDKs implement the same Nevermined reference API. This can be found in t
 
 The SDK implement different the following modules:
 
-Modules       | Topic             | API reference         | SDK Implementation
---------------|-------------------|-----------------------|---------------------------
-[Assets](../api/reference/Assets.md)        | Managing of data assets on Nevermined networks | [Assets API reference](../api/reference/api-reference-latest.md#) | [Javascript]() | [Python]() | [Java]()
-[Accounts](../api/reference/Accounts.md)        | Managing accounts | [Accounts API reference](../api/reference/api-reference-latest.md#) | [Javascript]() | [Python]() | [Java]()
-[Agreements](../api/reference/Agreements.md)        | Interacting with Service Exection Agreements | [Agreements API reference](../api/reference/api-reference-latest.md#) | [Javascript]() | [Python]() | [Java]()
-[Conditions](../api/reference/Conditions.md)        | Interacting with agreement conditions | [Conditions API reference](../api/reference/api-reference-latest.md#) | [Javascript]() | [Python]() | [Java]()
-[Provenance](../api/reference/Provenance.md)        | Tracking & retrieving data provenance | [Provenance API reference](../api/reference/api-reference-latest.md#) | [Javascript]() | [Python]() | [Java]()
-[Tokens](../api/reference/Tokens.md)        |Request and transfer Nevermined tokens | [Tokens API reference](../api/reference/api-reference-latest.md#) | [Javascript]() | [Python]() | [Java]()
-[Providers](../api/reference/Providers.md)        | Manage of asset providers | [Providers API reference](../api/reference/api-reference-latest.md#) | [Javascript]() | [Python]() | [Java]()
-[Secret Store](../api/reference/Secret-Store.md)        | Encryption and Decryption secrets | [Secret Store API reference](../api/reference/api-reference-latest.md#) | [Javascript]() | [Python]() | [Java]()
+Module       | Topic             
+--------------|-------------------
+[Assets](../api/reference/Assets.md)        | Managing of data assets on Nevermined networks
+[Accounts](../api/reference/Accounts.md)        | Managing accounts
+[Agreements](../api/reference/Agreements.md)        | Interacting with Service Execution Agreements (aka SEAs)
+[Conditions](../api/reference/Conditions.md)        | Interacting with agreement conditions
+[Provenance](../api/reference/Provenance.md)        | Tracking & retrieving data provenance
+[Tokens](../api/reference/Tokens.md)        |Request and transfer Nevermined tokens
+[Providers](../api/reference/Providers.md)        | Manage of asset providers
+[Secret Store](../api/reference/Secret-Store.md)        | Encryption and Decryption secrets
