@@ -132,7 +132,7 @@ nav:
   #       - JavaScript SDK: api/sdk/javascript.md
   #       - Java SDK: api/sdk/java.md
   #     - Gateway API: api/gateway.md
-  #     - Metadata API: api/metadata.md
+      - Metadata API: api/metadata/README.md
   #     - Command Line Interface: api/cli.md
   - Blog posts: Blog.md
   - Software Licenses: Licensing.md
