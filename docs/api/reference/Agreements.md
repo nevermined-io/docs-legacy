@@ -8,7 +8,7 @@ The most classical scenarios in Nevermined are Service Agreements allowing Data 
 - A publisher defining a service that is offered and what a the conditions to obtaining that service
 - A consumer or user that needs to fulfill the publisher conditions to getting access to that service
 
-You can find more information about the implementation of the SEAs in the [access Spec](../architecture/specs/access/README.md) and the [compute Spec](../architecture/specs/compute/README.md).
+You can find more information about the implementation of the SEAs in the [access Spec](../../architecture/specs/access/README.md) and the [compute Spec](../../architecture/specs/compute/README.md).
 
 Every execution by an user of a service agreement can be referenced by the `agreementId`. That is a unique identifier of the agreement execution and it is used across this api reference document.
 

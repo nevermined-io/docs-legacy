@@ -6,7 +6,7 @@ Every entity object in Nevermined is encapsulated in an **asset**. Typically the
 - Metadata. A DID Document describing the asset and the services (access, compute, etc.) associated to that asset. This is recorded off-chain.
 
 An on-chain DID can be used to resolve the metadata associated to it.
-You can find more information about the implementation of the SEAs and the services associated to Nevermined assets in the [access Spec](../architecture/specs/access/README.md) and the [compute Spec](../architecture/specs/compute/README.md).
+You can find more information about the implementation of the SEAs and the services associated to Nevermined assets in the [access Spec](../../architecture/specs/access/README.md) and the [compute Spec](../../architecture/specs/compute/README.md).
 
 ## Assets Management
 
@@ -15,7 +15,7 @@ You can find more information about the implementation of the SEAs and the servi
 It registers a new asset on Nevermined. It Creates a new DID, registering it on-chain through `DIDRegistry` contract and off-chain in Metadata.
 Parameters:
 
-* `metadata` the metadata describing the asset (full [metadata specification](../architecture/spec/metadata/README.md))
+* `metadata` the metadata describing the asset (full [metadata specification](../../architecture/specs/metadata/README.md))
 * `publisherAccount` Public address of the account publishing the asset
 * `providers` List of public addresses that can act on behalf of the asset publisher, typically for providing some services like access associated to it
 * `authorization` Type of encryption used to validate authorization (`PSK_RSA`, `PSK_ECDSA`, `SecretStore`)
@@ -31,10 +31,10 @@ create("{ddo metadata}", 0xaabb, [0xccdd], "PSK_RSA", "creation", "+ attributes"
 
 ### Create a compute service
 
-It registers a new asset on Nevermined with a [compute service](../architecture/spec/compute/README.md) associated to it. This function creates a new DID, registering it on-chain through `DIDRegistry` contract and off-chain in Metadata.
+It registers a new asset on Nevermined with a [compute service](../../architecture/specs/compute/README.md) associated to it. This function creates a new DID, registering it on-chain through `DIDRegistry` contract and off-chain in Metadata.
 Parameters:
 
-* `metadata` the metadata describing the asset (full [metadata specification](../architecture/spec/metadata/README.md))
+* `metadata` the metadata describing the asset (full [metadata specification](../../architecture/specs/metadata/README.md))
 * `publisherAccount` Public address of the account publishing the asset
 * `providers` List of public addresses that can act on behalf of the asset publisher, typically for providing some services like access associated to it
 * `authorization` Type of encryption used to validate authorization (`PSK_RSA`, `PSK_ECDSA`, `SecretStore`)
@@ -51,7 +51,7 @@ createCompute("{ddo metadata}", 0xaabb, [0xccdd], "PSK_RSA", "creation", "+ attr
 ### Order an asset
 
 This function orders an Asset represented by a DID. It implies to initialize a Service Agreement on-chain between publisher and consumer.
-For lower level details you can take a look at [access Specs](../architecture/spec/access/README.md).
+For lower level details you can take a look at [access Specs](../../architecture/specs/access/README.md).
 
 As a result of an `order` the function will return an `agreementId`. This unique identifier about the Service Agreement just created can be used for further consumption of the access or compute service associated to it.
 
@@ -129,7 +129,7 @@ This functions allow retrieve information related with assets. Assets informatio
 
 A Nevermined network is composed by only one source of truth, the decentralized logic and storage provided by the blockchain and the Smart Contracts. A part of that, the network can be composed by many different marketplaces or metada repositories. This function resolves a `did` existing in the unique source of truth (blockchain) into the `ddo` (metadata) that can be stored in any of the multiple metadata servers existing in a Nevermined network deployment.
 
-This function will return the metadata of an asset in DDO format. More information about the contents of this document can be found in the [metadata specification](../architecture/spec/metadata/README.md) page.
+This function will return the metadata of an asset in DDO format. More information about the contents of this document can be found in the [metadata specification](../../architecture/specs/metadata/README.md) page.
 
 Parameters:
 

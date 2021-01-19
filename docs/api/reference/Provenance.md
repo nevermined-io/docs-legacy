@@ -2,7 +2,7 @@
 
 Nevermined Smart Contracts implement the [W3C Provenance](https://www.w3.org/TR/prov-overview/) specification allowing to register on-chain all the provenance information, digital signatures and fingerprints allowing to make use of an open, transparent and unique source of truth for any data ecosystem where multiple parties need to collaborate in a common goal.
 
-The complete Nevermined Provenance architecture can be found in the [Provenance Spec](architecture/specs/provenance/README.md#usage-used).
+The complete Nevermined Provenance architecture can be found in the [Provenance Spec](../../architecture/specs/provenance/README.md#usage-used).
 
 This module allows to register Provenance events associated to assets. Also allows to retrieve all the assets provenance track previously registered.
 
