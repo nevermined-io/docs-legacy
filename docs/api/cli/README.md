@@ -8,3 +8,9 @@ and interact with it using the command line interface. It orchestrates all the c
 - Search and discovery
 - Running remote compute jobs
 - Checking the state of Service Agreements
+- Tracking provenance
+- Manage NFTs and Nevermined tokens
+
+You can find all the CLI documentation and the commands available in the [CLI docs website](https://nevermined-io.github.io/cli/):
+
+https://nevermined-io.github.io/cli/

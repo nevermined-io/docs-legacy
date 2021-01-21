@@ -17,3 +17,4 @@ Title | Topic | Author
 [What decentralized building blocks exist to build your digital ecosystem?](https://medium.com/nevermined-io/what-decentralized-building-blocks-exist-to-build-your-digital-ecosystem-a2173550cc57) | Technical | [@aitor_argomaniz](https://medium.com/@aitor_argomaniz)
 [Nevermined & Credit Card Fraud Detection](https://medium.com/nevermined-io/nevermined-credit-card-fraud-detection-91aef362d98) | Use Case | [@rodmar](https://medium.com/@rodmar)
 [Why use Nevermined?](https://medium.com/nevermined-io/why-use-nevermined-c47b44b04df7) | Use Case | [@aitor_argomaniz](https://medium.com/@aitor_argomaniz)
+[Why do we use blockchain?](https://medium.com/nevermined-io/why-do-we-use-blockchain-9f3d10cdbc09) | Technical | [@aitor_argomaniz](https://medium.com/@aitor_argomaniz)
