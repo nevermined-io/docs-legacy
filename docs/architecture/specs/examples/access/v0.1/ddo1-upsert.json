@@ -139,14 +139,14 @@
                      }
                   }],
                   "parameters": [{
-                     "name": "_amount",
-                     "type": "uint256",
-                     "value": "888000000000000000000000000000000"
+                     "name": "_amounts",
+                     "type": "uint256[]",
+                     "value": ["888000000000000000000000000000000"]
                   },
                      {
-                        "name": "_receiver",
-                        "type": "address",
-                        "value": ""
+                        "name": "_receivers",
+                        "type": "address[]",
+                        "value": []
                      },
                      {
                         "name": "_sender",

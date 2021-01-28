@@ -218,14 +218,14 @@
 							"contractName": "EscrowReward",
 							"functionName": "fulfill",
 							"parameters": [{
-									"name": "_amount",
+									"name": "_amounts",
 									"type": "uint256",
-									"value": "1"
+									"value": ["1"]
 								},
 								{
-									"name": "_receiver",
+									"name": "_receivers",
 									"type": "address",
-									"value": ""
+									"value": []
 								},
 								{
 									"name": "_sender",

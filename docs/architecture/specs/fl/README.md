@@ -466,17 +466,16 @@ The main information that needs to be provided is:
             "timeout": 0,
             "contractName": "EscrowReward",
             "functionName": "fulfill",
-            "parameters": [
-              {
-                "name": "_amount",
-                "type": "uint256",
-                "value": ""
-              },
-              {
-                "name": "_receiver",
-                "type": "address",
-                "value": ""
-              },
+            "parameters": [{
+								"name": "_amounts",
+								"type": "uint256[]",
+								"value": []
+							},
+							{
+								"name": "_receivers",
+								"type": "address[]",
+								"value": []
+							},
               {
                 "name": "_sender",
                 "type": "address",
