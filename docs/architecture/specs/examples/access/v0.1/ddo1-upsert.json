@@ -82,7 +82,7 @@
                   {
                      "name": "_amount",
                      "type": "uint256",
-                     "value": "888000000000000000000000000000000"
+                     "value": "12"
                   }
                ]
             },
@@ -139,15 +139,15 @@
                      }
                   }],
                   "parameters": [{
-                     "name": "_amounts",
-                     "type": "uint256[]",
-                     "value": ["888000000000000000000000000000000"]
-                  },
-                     {
-                        "name": "_receivers",
-                        "type": "address[]",
-                        "value": []
-                     },
+    									"name": "_amounts",
+    									"type": "uint256[]",
+    									"value": [10, 2]
+    								},
+    								{
+    									"name": "_receivers",
+    									"type": "address[]",
+    									"value": ["0xa99d43d86a0758d5632313b8fa3972b6088a21bb", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
+    								},
                      {
                         "name": "_sender",
                         "type": "address",
