@@ -225,7 +225,7 @@
 								{
 									"name": "_receivers",
 									"type": "address[]",
-									"value": ["0xa99d43d86a0758d5632313b8fa3972b6088a21bb", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
+									"value": ["0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
 								},
 								{
 									"name": "_sender",
