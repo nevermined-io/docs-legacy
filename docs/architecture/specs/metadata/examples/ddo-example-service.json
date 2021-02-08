@@ -212,7 +212,7 @@
               "parameters": [{
 									"name": "_amounts",
 									"type": "uint256[]",
-									"value": [10, 2]
+									"value": ["10", "2"]
 								},
 								{
 									"name": "_receivers",
