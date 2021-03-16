@@ -112,6 +112,7 @@ nav:
       - Data In Situ Computation: architecture/specs/compute/README.md
       - Federated Learning: architecture/specs/fl/README.md
       - Provenance: architecture/specs/provenance/README.md
+      - NFTs Engine : architecture/specs/nft/README.md
       - Identity Management: architecture/specs/id_management/README.md
       - Decentralized Identifiers: architecture/specs/did/README.md
       - Metadata: architecture/specs/metadata/README.md
