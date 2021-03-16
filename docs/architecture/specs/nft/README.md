@@ -65,7 +65,7 @@ The main objectives of this SPEC are:
 ## Use Case
 
 The following use case helps to understand the scope of the problem driving the technical implementation to put in place.
-For this use case we have take into account the following target users:
+For this use case we have to take into account the following target users:
 
 * Publishers (an artists for example)
 * Consumers (a collector)
@@ -117,14 +117,14 @@ Nevermined is based in the following building blocks:
 
 * [Decentralized Identifiers (DID)](../did/README.md) - To identify items across on-chain and off-chain networks
 * [Access Control](../access/README.md) - To control who can do what and under what conditions
-* [Provenance](../provenance/README.md) - To track control of all the actions associated with every registered asset
+* [Provenance](../provenance/README.md) - To track all the actions associated with every registered asset
 * [Tokenized Payment Gateway](../access/README.md#lock-payment-condition) - To allow direct payment
 * [Integrity](../did/README.md#integrity) - To provide proof that everything is correct
 * [Identity Management](../id_management/README.md) - To allow to define fine access control policies
 
-On top of all of that, this Specification augment Nevermined with the support of Non Fungible Tokens (NFTs). The main intention of this is to allow the tokenization, transfer, mint and burn of any existing asset published in a Nevermined ecosystem.
+On top of all of that, this Specification augments Nevermined with the support of Non Fungible Tokens (NFTs). The main intention of this is to allow the tokenization, transfer, mint and burn of any existing asset published in a Nevermined ecosystem.
 
-In Nevermined, any registered asset is a DID registered via the `DIDRegistry` Smart Contract. This contract provides a generic way to make represent the creation of a digital asset in a Nevermined ecosystem. This digital asset can be the representation of anything in the real world, a data set in a big data lake, a vaccine shipment in a supply chain process, an artwork in a virtual gallery or anything else. The `DIDRegistry` tracks that registration in an immutable way, associating this digital asset with the creator of that representation in a Nevermined ecosystem.
+In Nevermined, any registered asset is a DID registered via the `DIDRegistry` Smart Contract. This contract provides a generic way to represent the creation of a digital asset in a Nevermined ecosystem. This digital asset can be the representation of anything in the real world, a data set in a big data lake, a vaccine shipment in a supply chain process, an artwork in a virtual (or physical) gallery or anything else. The `DIDRegistry` tracks that registration in an immutable way, associating this digital asset with the creator of that representation in a Nevermined ecosystem.
 
 This Specification assocites directly the standard NFT capabilities to any existing asset registered via the `DIDRegistry`. It allows without friction the possibility of tokenize via NFTs any existing DID.
 
@@ -133,9 +133,9 @@ This Specification assocites directly the standard NFT capabilities to any exist
 
 Nowadays the main standard for providing NFTs functionality in Ethereum networks is ERC-721. ERC-721 require a separate contract to be deployed for each token type or collection. This places a lot of redundant bytecode on the Ethereum blockchain and limits certain functionality by the nature of separating each token contract into its own permissioned address. This means high cost, complexity, etc.
 
-Additionaly to ERC-721, ERC-1155 implements a multi-token factory allowing to register and tokenize multiple and independent assets in a same contract instance without multiple deployments. ERC-1155 design permits transferring multiple token types at once, saving on transaction costs.It is also easy to describe and mix multiple fungible or non-fungible token types in a single contract.
+Additionaly to ERC-721, ERC-1155 implements a multi-token factory allowing to register and tokenize multiple and independent assets in the same contract instance without multiple deployments. ERC-1155 design permits transferring multiple token types at once, saving on transaction costs.It is also easy to describe and mix multiple fungible or non-fungible token types in a single contract.
 
-Because this advantages the following NFT integration will be based in the ERC-1155 foundations.
+Because of these advantages the following NFT integration will be based in the ERC-1155 foundations.
 
 ## Architecture
 
@@ -144,16 +144,16 @@ Because this advantages the following NFT integration will be based in the ERC-1
 The NFTs engine is based in the following principles:
 
 * Every asset has a Decentralized Identifier (aka DID) attached, and every DID as a identifier representing a digital entity can have associated multiple NFTs, allowing the tokenization of any kind of digital asset independently of the physical asset behind of it
-* The user registering a DID can decide if wants to enable or not the tokenization of the asset via NFTs
+* The user registering a DID can decide if he wants to enable or not the tokenization of the asset via NFTs
 * When the tokenization is enabled for a specific asset, the user registering the asset can define a minting cap. This minting cap can not be changed afterward, because modifying the number of existing items of an asset will affect the further value of them for the NFTs holders. If the minting cap is set to zero, it means the DID minting is uncapped.
-* The user registering an asset can specify the royalties that are rewarding the original creator in the secondary market. This royalties must be between 0 and 100 percent. The royalties can not be changed after they are initialized. This protects to the buyers of a NFT to have to pay for a different commission to the one agreed during the purchase of a NFT.
+* The user registering an asset can specify the royalties that are rewarding the original creator in the secondary market. This royalties must be between 0 and 100 percent. The royalties can not be changed after they are initialized. This protects the buyers of a NFT to have to pay for a different commission to the one agreed during the purchase of a NFT.
 * The payment and transfer of NFTs must always respect the original creators attribution and rewards
 * Users giving or selling NFTs can have a mechanism to facilitate exclusive services to NFT holders
 
 
 ### Implementation
 
-From a Smart Contracts point of view, the `DIDRegistry` now extends a the new `NFTUpgradeable` smart contract. This new contract implements the `ERC-1155` standard and it's based in OpenZeppelin implementation.
+From a Smart Contracts point of view, the `DIDRegistry` now extends a new `NFTUpgradeable` smart contract. This new contract implements the `ERC-1155` standard and it's based in OpenZeppelin implementation.
 
 With this change, when a new Asset is registered via the DIDRegistry, it can automatically `mint`, `burn` and `transfer` NFTs attached to the Asset. Example:
 
@@ -168,7 +168,7 @@ await didRegistry.balanceOf(someone, did)
 
 The `registerMintableDID` is a new method that facilitates a couple new things for users registering assets who want to attach a NFT to them:
 
-* They enable the NFT functionality for the asset registered. By default, the assets registered via the `registerDID` method are not having the NFTs functionality enabled.
+* They enable the NFT functionality for the asset registered. By default, the assets registered via the `registerDID` method do not have the NFTs functionality enabled.
 * It setups a minting cap for the asset
 * It specify the percentage of royalties (between 0 and 100) that the original creator of the Asset wants in the secondary market for a further sale.
 
@@ -214,7 +214,7 @@ The purchase of a NFT associated to an asset involves:
 
 Using the existing `NFTHolder` condition it will be possible to the new NFT owner to get access to Nevermined services
 
-![Publishing Flow](images/nft_publishing_flow.png)
+![Publishing Flow](images/nft_purchase_flow.png)
 
 
 ### Templates
@@ -228,7 +228,7 @@ To complement those, this Spec detail 3 additional templates to support the foll
 
 #### Template for selling a tokenized asset via NFTs
 
-The NFT Sales template supports an scenario where an Asset owner wants to tokenized and asset and sell pieces of it via NFTs. Owners buying a new NFT can sell them later to others in a secondary market.
+The NFT Sales template supports an scenario where an Asset owner wants to tokenize an asset and sell pieces of it via NFTs. Owners buying a new NFT can sell them later to others in a secondary market.
 
 Anyone (consumer/provider/publisher) can use this template in order to setup an agreement allowing a NFT owner to transfer the asset ownership after some payment.
 
@@ -245,23 +245,23 @@ The DID Sales template is provided by the `NFTSalesTemplate` Smart Contract.
 
 #### Access to contents holding a NFT
 
-The NFT Access template is use case specific template that allows a NFT owner to get access to exclusive contents provided by the original asset creator associated to the NFT.
+The NFT Access template is a use case specific template that allows a NFT owner to get access to exclusive contents provided by the original asset creator associated to the NFT.
 Anyone (consumer/provider/publisher) can use this template in order to setup an agreement allowing NFT holders to get access to Nevermined services. The template is a composite of 2 basic conditions:
 - NFT Holding Condition
 - Access Condition
 
-Once the agreement is created, the consumer can demonstrate is holding a NFT for a specific DID. If that's the case the Access condition can be fulfilled by the asset owner or provider and all the agreement is fulfilled.
-This can be used in scenarios where a data or services owner, can allow  users to get access to exclusive services only when they demonstrate the are holding a specific number of NFTs of a DID.
+Once the agreement is created, the consumer can demonstrate he is holding a NFT for a specific DID. If that's the case the Access condition can be fulfilled by the asset owner or provider and all the agreement is fulfilled.
+This can be used in scenarios where a data or services owner, can allow  users to get access to exclusive services only when they demonstrate they are holding a specific number of NFTs of a DID.
 
 The DID Sales template is provided by the `NFTAccessTemplate` Smart Contract.
 
 
 #### Template for selling an Asset
 
-It supports an scenario where an Asset owner can sell that asset to a new Owner.
+It supports a scenario where an Asset owner can sell that asset to a new Owner.
 It is important to say the ownership of the asset is transfered to a new owner but there is always a reference on-chain about the original creator of the asset. This **original creator can't be changed** and is used to reward later to this user in the secondary market.
 
-Anyone (consumer/provider/publisher) can use this template in order to setup an agreement allowing an Asset owner to get transfer the asset ownership after some payment.
+Anyone (consumer/provider/publisher) can use this template in order to setup an agreement allowing an Asset owner to transfer the asset ownership after some payment.
 The template is a composite of 3 basic conditions:
 - Lock Payment Condition
 - Transfer DID Condition
