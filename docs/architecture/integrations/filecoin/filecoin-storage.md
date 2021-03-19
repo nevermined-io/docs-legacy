@@ -46,7 +46,6 @@ The integration of Filecoin as a fully supported storage provider require the mo
 * The Nevermined SDKs. To facilitate user adoption, Nevermined support SDKs in 3 different programming languages:
   - [Javascript SDK](https://github.com/nevermined-io/sdk-js), to facilitate the integration of Nevermined in web interfaces
   - [Python SDK](https://github.com/nevermined-io/sdk-py), to facilitate the integration of Nevermined in data science tools
-  - [Java SDK](https://github.com/nevermined-io/sdk-java), to facilitate the integration of Nevermined in data engineering pipelines
   It will deliver a modification of the 3 SDKs allowing to the users to publish in Nevermined Filecoin contents (CIDs)  
 * [Marketplace](https://github.com/nevermined-io/marketplace). It's a frontend application where users can publish and share files. The intention is to modify this application to support data sharing of assets stored in the Filecoin network.
 
@@ -65,17 +64,38 @@ After this publishing flow, it's intended to provide the downloading functionali
 
 The Nevermined architecture is evolved with the following modifications:
 
+#### SDKs
+
+- The publishing flow of Nevermined assets allows to include CIDs as files
+- The consumption flow of Nevermined assets integrates the gateway and work with assets including Filecoin files
+
+The SDK will include in the Metadata files attribute a URL using the `cid` prefix. Example:
+
+```json
+"files": [
+  {
+    "url": "cid://QmW68jbcqSRtqSQb6xkukQ6tfonZGhu1VrZv9zAicNmovs",
+    "index": 0,
+    "checksum": "efb2c764274b745f5fc37f97c6b0e761",
+    "contentLength": "4535431",
+    "contentType": "text/csv",
+    "encoding": "UTF-8",
+    "compression": "zip"
+  }
+]
+```
+
+As in the regular [Nevermined Access flow](https://docs.nevermined.io/architecture/specs/access/) the URL will be encrypted for the client and decrypted during the consumption phase by the gateway.
+
+See more about the [File Attributes](https://docs.nevermined.io/architecture/specs/metadata/#file-attributes) in the [Metadata Specs](https://docs.nevermined.io/architecture/specs/metadata/).
+
+
 #### Gateway integration
 
 - The Gateway supports the connectivity with the Filecoin network via Powergate or a Lotus node. This behavior can be enabled/disabled from the Gateway via configuration.
 - The Gateway support the usage of an existing Filecoin wallet.
 - When a Nevermined asset is resolved and includes a CID, the gateway is able of resolving that file and return to the final user
 
-
-#### SDKs
-
-- The publishing flow of Nevermined assets allows to include CIDs as files
-- The consumption flow of Nevermined assets integrates the gateway and work with assets including Filecoin files
 
 
 #### Marketplace
