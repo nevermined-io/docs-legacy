@@ -135,6 +135,8 @@ nav:
       - Gateway API: api/gateway/README.md
       - Metadata API: api/metadata/README.md
       - Command Line Interface: api/cli/README.md
+      - Integrations:
+        - Filecoin Storage: architecture/integrations/filecoin/filecoin-storage.md
   - Blog posts: Blog.md
   - Software Licenses: Licensing.md
   - Social:
