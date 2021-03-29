@@ -362,7 +362,7 @@ Below you can find a small fraction of this:
 					"actorType": "consumer",
 					"handler": {
 						"moduleName": "serviceExecutionTemplate",
-						"functionName": "fulfillLockRewardCondition",
+						"functionName": "fulfillLockPaymentCondition",
 						"version": "0.1"
 					}
 				}],
@@ -383,18 +383,23 @@ Below you can find a small fraction of this:
 						"name": "lockReward",
 						"timelock": 0,
 						"timeout": 0,
-						"contractName": "LockRewardCondition",
+						"contractName": "LockPaymentCondition",
 						"functionName": "fulfill",
 						"parameters": [{
 								"name": "_rewardAddress",
 								"type": "address",
 								"value": ""
 							},
-							{
-								"name": "_amount",
-								"type": "uint256",
-								"value": ""
-							}
+                            {
+                                "name": "_amounts",
+                                "type": "uint256[]",
+                                "value": []
+                            },
+                            {
+                                "name": "_receivers",
+                                "type": "address[]",
+                              "value": []
+                            }
 						],
 						"events": [{
 							"name": "Fulfilled",
@@ -447,7 +452,7 @@ Below you can find a small fraction of this:
 						"name": "escrowReward",
 						"timelock": 0,
 						"timeout": 0,
-						"contractName": "EscrowReward",
+						"contractName": "EscrowPaymentCondition",
 						"functionName": "fulfill",
 						"parameters": [{
 								"name": "_amounts",
@@ -537,7 +542,7 @@ The complete flow for setting up the SEA is:
 1. The CONSUMER initializes the SEA on-chain `(did, serviceAgreementId, serviceDefinitionId, signature,
    consumerAddress, workflowId`).
 
-1. The CONSUMER locks the payment on-chain through the `LockRewardCondition` Smart Contract
+1. The CONSUMER locks the payment on-chain through the `LockPaymentCondition` Smart Contract
 
 1. The PROVIDER via GATEWAY, receives the `LockReward.Fulfilled` event where he/she is the provider for this agreement
 

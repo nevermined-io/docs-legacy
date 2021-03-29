@@ -372,7 +372,7 @@ The main information that needs to be provided is:
             "actorType": "consumer",
             "handler": {
               "moduleName": "serviceExecutionTemplate",
-              "functionName": "fulfillLockRewardCondition",
+              "functionName": "fulfillLockPaymentCondition",
               "version": "0.1"
             }
           }
@@ -395,7 +395,7 @@ The main information that needs to be provided is:
             "name": "lockReward",
             "timelock": 0,
             "timeout": 0,
-            "contractName": "LockRewardCondition",
+            "contractName": "LockPaymentCondition",
             "functionName": "fulfill",
             "parameters": [
               {
@@ -404,9 +404,14 @@ The main information that needs to be provided is:
                 "value": ""
               },
               {
-                "name": "_amount",
-                "type": "uint256",
-                "value": ""
+                "name": "_amounts",
+                "type": "uint256[]",
+                "value": []
+              },
+              {
+                "name": "_receivers",
+                "type": "address[]",
+                "value": []
               }
             ],
             "events": [
@@ -464,7 +469,7 @@ The main information that needs to be provided is:
             "name": "escrowReward",
             "timelock": 0,
             "timeout": 0,
-            "contractName": "EscrowReward",
+            "contractName": "EscrowPaymentCondition",
             "functionName": "fulfill",
             "parameters": [{
 								"name": "_amounts",
