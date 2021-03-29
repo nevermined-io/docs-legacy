@@ -367,20 +367,20 @@ Below you can find a small fraction of this:
 					}
 				}],
 				"fulfillmentOrder": [
-					"lockReward.fulfill",
+					"lockPayment.fulfill",
 					"serviceExecution.fulfill",
-					"escrowReward.fulfill"
+					"escrowPayment.fulfill"
 				],
 				"conditionDependency": {
-					"lockReward": [],
+					"lockPayment": [],
 					"serviceExecution": [],
 					"releaseReward": [
-						"lockReward",
+						"lockPayment",
 						"serviceExecution"
 					]
 				},
 				"conditions": [{
-						"name": "lockReward",
+						"name": "lockPayment",
 						"timelock": 0,
 						"timeout": 0,
 						"contractName": "LockPaymentCondition",
@@ -449,7 +449,7 @@ Below you can find a small fraction of this:
 						]
 					},
 					{
-						"name": "escrowReward",
+						"name": "escrowPayment",
 						"timelock": 0,
 						"timeout": 0,
 						"contractName": "EscrowPaymentCondition",
@@ -544,7 +544,7 @@ The complete flow for setting up the SEA is:
 
 1. The CONSUMER locks the payment on-chain through the `LockPaymentCondition` Smart Contract
 
-1. The PROVIDER via GATEWAY, receives the `LockReward.Fulfilled` event where he/she is the provider for this agreement
+1. The PROVIDER via GATEWAY, receives the `LockPayment.Fulfilled` event where he/she is the provider for this agreement
 
 1. The PROVIDER grants the execution permissions for the computation on-chain calling the
    `executeComputeCondition.Fullfill` method  

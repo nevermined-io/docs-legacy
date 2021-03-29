@@ -121,21 +121,21 @@
             }
           ],
           "fulfillmentOrder": [
-            "lockReward.fulfill",
-            "accessSecretStore.fulfill",
-            "escrowReward.fulfill"
+            "lockPayment.fulfill",
+            "access.fulfill",
+            "escrowPayment.fulfill"
           ],
           "conditionDependency": {
-            "lockReward": [],
+            "lockPayment": [],
             "grantSecretStoreAccess": [],
             "releaseReward": [
-              "lockReward",
-              "accessSecretStore"
+              "lockPayment",
+              "access"
             ]
           },
           "conditions": [
             {
-              "name": "lockReward",
+              "name": "lockPayment",
               "timelock": 0,
               "timeout": 0,
               "contractName": "LockPaymentCondition",
@@ -170,7 +170,7 @@
               ]
             },
             {
-              "name": "accessSecretStore",
+              "name": "access",
               "timelock": 0,
               "timeout": 0,
               "contractName": "AccessCondition",
@@ -192,7 +192,7 @@
                   "name": "Fulfilled",
                   "actorType": "publisher",
                   "handler": {
-                    "moduleName": "accessSecretStore",
+                    "moduleName": "access",
                     "functionName": "fulfillEscrowPaymentCondition",
                     "version": "0.1"
                   }
@@ -201,7 +201,7 @@
                   "name": "TimedOut",
                   "actorType": "consumer",
                   "handler": {
-                    "moduleName": "accessSecretStore",
+                    "moduleName": "access",
                     "functionName": "fulfillEscrowPaymentCondition",
                     "version": "0.1"
                   }
@@ -209,7 +209,7 @@
               ]
             },
             {
-              "name": "escrowReward",
+              "name": "escrowPayment",
               "timelock": 0,
               "timeout": 0,
               "contractName": "EscrowPaymentCondition",

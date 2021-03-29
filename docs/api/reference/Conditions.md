@@ -43,7 +43,7 @@ Lock the amount of token that are going to be paid for the asset. Parameters:
 Example:
 
 ```java
-lockReward("8181818", 10)
+lockPayment("8181818", 10)
 ```
 
 

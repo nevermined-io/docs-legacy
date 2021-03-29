@@ -241,9 +241,9 @@ const agreement = {
    This requires to generate the hash including the **agreementId** and all the values of the specific condition:
 
 ```javascript
-const conditionIdAccess = await accessSecretStoreCondition.generateId(agreementId, await accessSecretStoreCondition.hashValues(did, receiver))
-const conditionIdLock = await lockPaymentConditon.generateId(agreementId, await lockPaymentConditon.hashValues(escrowReward.address, escrowAmount))
-const conditionIdEscrow = await escrowReward.generateId(agreementId, await escrowReward.hashValues(escrowAmount, receiver, sender, conditionIdLock, conditionIdAccess))
+const conditionIdAccess = await accessCondition.generateId(agreementId, await accessCondition.hashValues(did, receiver))
+const conditionIdLock = await lockPaymentConditon.generateId(agreementId, await lockPaymentConditon.hashValues(escrowPayment.address, escrowAmount))
+const conditionIdEscrow = await escrowPayment.generateId(agreementId, await escrowPayment.hashValues(escrowAmount, receiver, sender, conditionIdLock, conditionIdAccess))
 ```
 
 1. PUBLISHER publishes the DDO in the METADATA API.
@@ -337,7 +337,7 @@ When the CONSUMER receives this event it means the agreement is in place and can
 
 ```
 await token.approve(lockPaymentConditon.address, escrowAmount, { from: sender })
-await lockPaymentConditon.fulfill(agreementId, escrowReward.address, escrowAmount)
+await lockPaymentConditon.fulfill(agreementId, escrowPayment.address, escrowAmount)
 ```
 
 If everything goes right, it will emit `LockPaymentCondition.Fulfilled` and thus will trigger the next condition.
@@ -363,7 +363,7 @@ PUBLISHER (via GATEWAY) listens for `LockPaymentCondition.Fulfilled` event filte
 In this case the PUBLISHER can grant access to the CONSUMER for a specific `agreementId` and `documentId` using in this case the `AccessCondition.fulfill`:
 
 ```
-await accessSecretStoreCondition.fulfill(agreementId, agreement.did, receiver)
+await accessCondition.fulfill(agreementId, agreement.did, receiver)
 ```
 
 If everything goes right, the Smart Contract will emit the `AccessCondition.Fulfilled` event.
@@ -378,7 +378,7 @@ PUBLISHER (via GATEWAY) listens for `AccessCondition.Fulfilled` event to transfe
         "name": "Fulfilled",
         "actorType": "publisher",
         "handler": {
-            "moduleName": "accessSecretStore",
+            "moduleName": "access",
             "functionName": "fulfillEscrowPaymentCondition",
             "version": "0.1"
         }
@@ -386,10 +386,10 @@ PUBLISHER (via GATEWAY) listens for `AccessCondition.Fulfilled` event to transfe
 }]
 ```
 
-So when the PUBLISHER receives the `AccessCondition.Fulfilled` he can call the `EscrowReward.fulfill` method to receive the reward:
+So when the PUBLISHER receives the `AccessCondition.Fulfilled` he can call the `EscrowPayment.fulfill` method to receive the reward:
 
 ```
-await escrowReward.fulfill(agreementId, escrowAmount, receiver, sender, agreement.conditionIds[1], agreement.conditionIds[0])
+await escrowPayment.fulfill(agreementId, escrowAmount, receiver, sender, agreement.conditionIds[1], agreement.conditionIds[0])
 ```
 
 ## Consuming the Data
@@ -402,7 +402,7 @@ CONSUMER (via SDK) listens for `AccessCondition.Fulfilled` event to access the d
         "name": "TimedOut",
         "actorType": "consumer",
         "handler": {
-            "moduleName": "accessSecretStore",
+            "moduleName": "access",
             "functionName": "fulfillEscrowPaymentCondition",
             "version": "0.1"
         }

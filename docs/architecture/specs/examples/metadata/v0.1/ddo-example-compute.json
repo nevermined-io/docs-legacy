@@ -160,13 +160,13 @@
 				},
 				"serviceAgreementTemplate": {
 					"conditionDependency": {
-						"accessSecretStore": [],
-						"escrowReward": [
-							"lockReward",
+						"access": [],
+						"escrowPayment": [
+							"lockPayment",
 							"execCompute"
 						],
 						"execCompute": [],
-						"lockReward": []
+						"lockPayment": []
 					},
 					"conditions": [{
 							"contractName": "LockPaymentCondition",
@@ -180,7 +180,7 @@
 								"name": "Fulfilled"
 							}],
 							"functionName": "fulfill",
-							"name": "lockReward",
+							"name": "lockPayment",
 							"parameters": [{
 									"name": "_rewardAddress",
 									"type": "address",
@@ -206,7 +206,7 @@
 									"actorType": "publisher",
 									"handler": {
 										"functionName": "fulfillEscrowPaymentCondition",
-										"moduleName": "accessSecretStore",
+										"moduleName": "access",
 										"version": "0.1"
 									},
 									"name": "Fulfilled"
@@ -249,7 +249,7 @@
 								"name": "Fulfilled"
 							}],
 							"functionName": "fulfill",
-							"name": "escrowReward",
+							"name": "escrowPayment",
 							"parameters": [{
 									"name": "_amounts",
 									"type": "uint256[]",
@@ -291,9 +291,9 @@
 						"name": "AgreementCreated"
 					}],
 					"fulfillmentOrder": [
-						"lockReward.fulfill",
+						"lockPayment.fulfill",
 						"execCompute.fulfill",
-						"escrowReward.fulfill"
+						"escrowPayment.fulfill"
 					]
 				}
 			},

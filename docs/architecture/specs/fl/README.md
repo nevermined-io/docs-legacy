@@ -378,21 +378,21 @@ The main information that needs to be provided is:
           }
         ],
         "fulfillmentOrder": [
-          "lockReward.fulfill",
+          "lockPayment.fulfill",
           "serviceExecution.fulfill",
-          "escrowReward.fulfill"
+          "escrowPayment.fulfill"
         ],
         "conditionDependency": {
-          "lockReward": [],
+          "lockPayment": [],
           "serviceExecution": [],
           "releaseReward": [
-            "lockReward",
+            "lockPayment",
             "serviceExecution"
           ]
         },
         "conditions": [
           {
-            "name": "lockReward",
+            "name": "lockPayment",
             "timelock": 0,
             "timeout": 0,
             "contractName": "LockPaymentCondition",
@@ -466,7 +466,7 @@ The main information that needs to be provided is:
             ]
           },
           {
-            "name": "escrowReward",
+            "name": "escrowPayment",
             "timelock": 0,
             "timeout": 0,
             "contractName": "EscrowPaymentCondition",

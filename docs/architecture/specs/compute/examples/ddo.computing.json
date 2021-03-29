@@ -92,20 +92,20 @@
 				}
 			}],
 			"fulfillmentOrder": [
-				"lockReward.fulfill",
+				"lockPayment.fulfill",
 				"serviceExecution.fulfill",
-				"escrowReward.fulfill"
+				"escrowPayment.fulfill"
 			],
 			"conditionDependency": {
-				"lockReward": [],
+				"lockPayment": [],
 				"serviceExecution": [],
 				"releaseReward": [
-					"lockReward",
+					"lockPayment",
 					"serviceExecution"
 				]
 			},
 			"conditions": [{
-					"name": "lockReward",
+					"name": "lockPayment",
 					"timelock": 0,
 					"timeout": 0,
 					"contractName": "LockPaymentCondition",
@@ -174,7 +174,7 @@
 					]
 				},
 				{
-					"name": "escrowReward",
+					"name": "escrowPayment",
 					"timelock": 0,
 					"timeout": 0,
 					"contractName": "EscrowPaymentCondition",
