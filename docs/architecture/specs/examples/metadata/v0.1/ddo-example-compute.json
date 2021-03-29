@@ -174,7 +174,7 @@
 								"actorType": "publisher",
 								"handler": {
 									"functionName": "fulfillExecComputeCondition",
-									"moduleName": "lockRewardCondition",
+									"moduleName": "lockPaymentConditon",
 									"version": "0.1"
 								},
 								"name": "Fulfilled"
@@ -243,7 +243,7 @@
 								"actorType": "publisher",
 								"handler": {
 									"functionName": "verifyRewardTokens",
-									"moduleName": "escrowRewardCondition",
+									"moduleName": "escrowPaymentConditon",
 									"version": "0.1"
 								},
 								"name": "Fulfilled"

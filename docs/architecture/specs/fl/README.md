@@ -419,7 +419,7 @@ The main information that needs to be provided is:
                 "name": "Fulfilled",
                 "actorType": "publisher",
                 "handler": {
-                  "moduleName": "lockRewardCondition",
+                  "moduleName": "lockPaymentConditon",
                   "functionName": "fulfillServiceExecutionCondition",
                   "version": "0.1"
                 }
@@ -502,7 +502,7 @@ The main information that needs to be provided is:
                 "name": "Fulfilled",
                 "actorType": "publisher",
                 "handler": {
-                  "moduleName": "escrowRewardCondition",
+                  "moduleName": "escrowPaymentConditon",
                   "functionName": "verifyRewardTokens",
                   "version": "0.1"
                 }
