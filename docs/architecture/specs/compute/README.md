@@ -405,7 +405,7 @@ Below you can find a small fraction of this:
 							"name": "Fulfilled",
 							"actorType": "publisher",
 							"handler": {
-								"moduleName": "lockRewardCondition",
+								"moduleName": "lockPaymentConditon",
 								"functionName": "fulfillServiceExecutionCondition",
 								"version": "0.1"
 							}
@@ -484,7 +484,7 @@ Below you can find a small fraction of this:
 							"name": "Fulfilled",
 							"actorType": "publisher",
 							"handler": {
-								"moduleName": "escrowRewardCondition",
+								"moduleName": "escrowPaymentConditon",
 								"functionName": "verifyRewardTokens",
 								"version": "0.1"
 							}

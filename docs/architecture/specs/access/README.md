@@ -242,7 +242,7 @@ const agreement = {
 
 ```javascript
 const conditionIdAccess = await accessSecretStoreCondition.generateId(agreementId, await accessSecretStoreCondition.hashValues(did, receiver))
-const conditionIdLock = await lockRewardCondition.generateId(agreementId, await lockRewardCondition.hashValues(escrowReward.address, escrowAmount))
+const conditionIdLock = await lockPaymentConditon.generateId(agreementId, await lockPaymentConditon.hashValues(escrowReward.address, escrowAmount))
 const conditionIdEscrow = await escrowReward.generateId(agreementId, await escrowReward.hashValues(escrowAmount, receiver, sender, conditionIdLock, conditionIdAccess))
 ```
 
@@ -336,8 +336,8 @@ utility that subscribes the specified callbacks to the events from both lists.
 When the CONSUMER receives this event it means the agreement is in place and can perform the lock reward:
 
 ```
-await token.approve(lockRewardCondition.address, escrowAmount, { from: sender })
-await lockRewardCondition.fulfill(agreementId, escrowReward.address, escrowAmount)
+await token.approve(lockPaymentConditon.address, escrowAmount, { from: sender })
+await lockPaymentConditon.fulfill(agreementId, escrowReward.address, escrowAmount)
 ```
 
 If everything goes right, it will emit `LockPaymentCondition.Fulfilled` and thus will trigger the next condition.
@@ -352,7 +352,7 @@ PUBLISHER (via GATEWAY) listens for `LockPaymentCondition.Fulfilled` event filte
         "name": "Fulfilled",
         "actorType": "publisher",
         "handler": {
-            "moduleName": "lockRewardCondition",
+            "moduleName": "lockPaymentConditon",
             "functionName": "fulfillAccessCondition",
             "version": "0.1"
         }
