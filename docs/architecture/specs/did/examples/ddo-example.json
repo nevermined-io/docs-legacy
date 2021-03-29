@@ -145,7 +145,7 @@
               "actorType": "consumer",
               "handler": {
                 "moduleName": "escrowAccessSecretStoreTemplate",
-                "functionName": "fulfillLockRewardCondition",
+                "functionName": "fulfillLockPaymentCondition",
                 "version": "0.1"
               }
             }
@@ -168,7 +168,7 @@
               "name": "lockReward",
               "timelock": 0,
               "timeout": 0,
-              "contractName": "LockRewardCondition",
+              "contractName": "LockPaymentCondition",
               "functionName": "fulfill",
               "parameters": [
                 {
@@ -177,9 +177,14 @@
                   "value": ""
                 },
                 {
-                  "name": "_amount",
-                  "type": "uint256",
-                  "value": "12"
+                  "name": "_amounts",
+                  "type": "uint256[]",
+                  "value": ["10", "2"]
+                },
+                {
+                  "name": "_receivers",
+                  "type": "address[]",
+                  "value": ["0xa99d43d86a0758d5632313b8fa3972b6088a21bb", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
                 }
               ],
               "events": [
@@ -188,7 +193,7 @@
                   "actorType": "publisher",
                   "handler": {
                     "moduleName": "lockRewardCondition",
-                    "functionName": "fulfillAccessSecretStoreCondition",
+                    "functionName": "fulfillAccessCondition",
                     "version": "0.1"
                   }
                 }
@@ -198,7 +203,7 @@
               "name": "accessSecretStore",
               "timelock": 0,
               "timeout": 0,
-              "contractName": "AccessSecretStoreCondition",
+              "contractName": "AccessCondition",
               "functionName": "fulfill",
               "parameters": [
                 {
@@ -218,7 +223,7 @@
                   "actorType": "publisher",
                   "handler": {
                     "moduleName": "accessSecretStore",
-                    "functionName": "fulfillEscrowRewardCondition",
+                    "functionName": "fulfillEscrowPaymentCondition",
                     "version": "0.1"
                   }
                 },
@@ -227,7 +232,7 @@
                   "actorType": "consumer",
                   "handler": {
                     "moduleName": "accessSecretStore",
-                    "functionName": "fulfillEscrowRewardCondition",
+                    "functionName": "fulfillEscrowPaymentCondition",
                     "version": "0.1"
                   }
                 }
@@ -237,7 +242,7 @@
               "name": "escrowReward",
               "timelock": 0,
               "timeout": 0,
-              "contractName": "EscrowReward",
+              "contractName": "EscrowPaymentCondition",
               "functionName": "fulfill",
               "parameters": [{
 									"name": "_amounts",

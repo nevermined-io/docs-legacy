@@ -89,7 +89,7 @@
 				"actorType": "consumer",
 				"handler": {
 					"moduleName": "serviceExecutionTemplate",
-					"functionName": "fulfillLockRewardCondition",
+					"functionName": "fulfillLockPaymentCondition",
 					"version": "0.1"
 				}
 			}],
@@ -110,7 +110,7 @@
 					"name": "lockReward",
 					"timelock": 0,
 					"timeout": 0,
-					"contractName": "LockRewardCondition",
+					"contractName": "LockPaymentCondition",
 					"functionName": "fulfill",
 					"parameters": [{
 							"name": "_rewardAddress",
@@ -118,9 +118,14 @@
 							"value": ""
 						},
 						{
-							"name": "_amount",
-							"type": "uint256",
-							"value": ""
+							"name": "_amounts",
+							"type": "uint256[]",
+							"value": []
+						},
+						{
+							"name": "_receivers",
+							"type": "address[]",
+							"value": []
 						}
 					],
 					"events": [{
@@ -174,7 +179,7 @@
 					"name": "escrowReward",
 					"timelock": 0,
 					"timeout": 0,
-					"contractName": "EscrowReward",
+					"contractName": "EscrowPaymentCondition",
 					"functionName": "fulfill",
 					"parameters": [{
 							"name": "_amounts",

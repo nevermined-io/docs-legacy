@@ -320,7 +320,7 @@ Consider a sample of a service definition.
 			"actorType": "consumer",
 			"handler": {
 				"moduleName": "escrowAccessSecretStoreTemplate",
-				"functionName": "fulfillLockRewardCondition",
+				"functionName": "fulfillLockPaymentCondition",
 				"version": "0.1"
 			}
 		}]
@@ -340,11 +340,11 @@ await token.approve(lockRewardCondition.address, escrowAmount, { from: sender })
 await lockRewardCondition.fulfill(agreementId, escrowReward.address, escrowAmount)
 ```
 
-If everything goes right, it will emit `LockRewardCondition.Fulfilled` and thus will trigger the next condition.
+If everything goes right, it will emit `LockPaymentCondition.Fulfilled` and thus will trigger the next condition.
 
 #### Grant Access Condition
 
-PUBLISHER (via GATEWAY) listens for `LockRewardCondition.Fulfilled` event filtered by `agreementId` to confirm the reward was locked by the CONSUMER.
+PUBLISHER (via GATEWAY) listens for `LockPaymentCondition.Fulfilled` event filtered by `agreementId` to confirm the reward was locked by the CONSUMER.
 
 ```
 "conditions": [{
@@ -353,24 +353,24 @@ PUBLISHER (via GATEWAY) listens for `LockRewardCondition.Fulfilled` event filter
         "actorType": "publisher",
         "handler": {
             "moduleName": "lockRewardCondition",
-            "functionName": "fulfillAccessSecretStoreCondition",
+            "functionName": "fulfillAccessCondition",
             "version": "0.1"
         }
     }]
 }]
 ```
 
-In this case the PUBLISHER can grant access to the CONSUMER for a specific `agreementId` and `documentId` using in this case the `AccessSecretStoreCondition.fulfill`:
+In this case the PUBLISHER can grant access to the CONSUMER for a specific `agreementId` and `documentId` using in this case the `AccessCondition.fulfill`:
 
 ```
 await accessSecretStoreCondition.fulfill(agreementId, agreement.did, receiver)
 ```
 
-If everything goes right, the Smart Contract will emit the `AccessSecretStoreCondition.Fulfilled` event.
+If everything goes right, the Smart Contract will emit the `AccessCondition.Fulfilled` event.
 
 #### Release Payment Condition
 
-PUBLISHER (via GATEWAY) listens for `AccessSecretStoreCondition.Fulfilled` event to transfer tokens to PUBLISHER's account.
+PUBLISHER (via GATEWAY) listens for `AccessCondition.Fulfilled` event to transfer tokens to PUBLISHER's account.
 
 ```
 "conditions": [{
@@ -379,14 +379,14 @@ PUBLISHER (via GATEWAY) listens for `AccessSecretStoreCondition.Fulfilled` event
         "actorType": "publisher",
         "handler": {
             "moduleName": "accessSecretStore",
-            "functionName": "fulfillEscrowRewardCondition",
+            "functionName": "fulfillEscrowPaymentCondition",
             "version": "0.1"
         }
     }]
 }]
 ```
 
-So when the PUBLISHER receives the `AccessSecretStoreCondition.Fulfilled` he can call the `EscrowReward.fulfill` method to receive the reward:
+So when the PUBLISHER receives the `AccessCondition.Fulfilled` he can call the `EscrowReward.fulfill` method to receive the reward:
 
 ```
 await escrowReward.fulfill(agreementId, escrowAmount, receiver, sender, agreement.conditionIds[1], agreement.conditionIds[0])
@@ -394,7 +394,7 @@ await escrowReward.fulfill(agreementId, escrowAmount, receiver, sender, agreemen
 
 ## Consuming the Data
 
-CONSUMER (via SDK) listens for `AccessSecretStoreCondition.Fulfilled` event to access the document.
+CONSUMER (via SDK) listens for `AccessCondition.Fulfilled` event to access the document.
 
 ```
 "conditions": [{
@@ -403,7 +403,7 @@ CONSUMER (via SDK) listens for `AccessSecretStoreCondition.Fulfilled` event to a
         "actorType": "consumer",
         "handler": {
             "moduleName": "accessSecretStore",
-            "functionName": "fulfillEscrowRewardCondition",
+            "functionName": "fulfillEscrowPaymentCondition",
             "version": "0.1"
         }
     }]

@@ -169,7 +169,7 @@
 						"lockReward": []
 					},
 					"conditions": [{
-							"contractName": "LockRewardCondition",
+							"contractName": "LockPaymentCondition",
 							"events": [{
 								"actorType": "publisher",
 								"handler": {
@@ -187,9 +187,14 @@
 									"value": "0x886dE2b3F8F27eEd43bA2FD4bC2AabDc14E0d9dD"
 								},
 								{
-									"name": "_amount",
-									"type": "uint256",
-									"value": "12"
+									"name": "_amounts",
+									"type": "uint256[]",
+									"value": ["10", "2"]
+								},
+								{
+									"name": "_receivers",
+									"type": "address[]",
+									"value": ["0xa99d43d86a0758d5632313b8fa3972b6088a21bb", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
 								}
 							],
 							"timelock": 0,
@@ -200,7 +205,7 @@
 							"events": [{
 									"actorType": "publisher",
 									"handler": {
-										"functionName": "fulfillEscrowRewardCondition",
+										"functionName": "fulfillEscrowPaymentCondition",
 										"moduleName": "accessSecretStore",
 										"version": "0.1"
 									},
@@ -209,7 +214,7 @@
 								{
 									"actorType": "consumer",
 									"handler": {
-										"functionName": "fulfillEscrowRewardCondition",
+										"functionName": "fulfillEscrowPaymentCondition",
 										"moduleName": "execCompute",
 										"version": "0.1"
 									},
@@ -233,7 +238,7 @@
 							"timeout": 0
 						},
 						{
-							"contractName": "EscrowReward",
+							"contractName": "EscrowPaymentCondition",
 							"events": [{
 								"actorType": "publisher",
 								"handler": {
@@ -279,7 +284,7 @@
 					"events": [{
 						"actorType": "consumer",
 						"handler": {
-							"functionName": "fulfillLockRewardCondition",
+							"functionName": "fulfillLockPaymentCondition",
 							"moduleName": "EscrowComputeExecutionTemplate",
 							"version": "0.1"
 						},
