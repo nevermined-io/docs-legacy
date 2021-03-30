@@ -162,7 +162,13 @@
               }],
               "functionName": "fulfill",
               "name": "lockPayment",
-              "parameters": [{
+              "parameters": [
+                {
+                  "name": "_did",
+                  "type": "bytes32",
+                  "value": ""
+                },
+                {
                   "name": "_rewardAddress",
                   "type": "address",
                   "value": "0x886dE2b3F8F27eEd43bA2FD4bC2AabDc14E0d9dD"
@@ -205,7 +211,7 @@
               "functionName": "fulfill",
               "name": "access",
               "parameters": [{
-                  "name": "_documentId",
+                  "name": "_did",
                   "type": "bytes32",
                   "value": "3b5607872397a527cd69e41743b07ddbeeb8aa865f3decd1fab4be679e6c6eef"
                 },
@@ -231,16 +237,22 @@
               }],
               "functionName": "fulfill",
               "name": "escrowPayment",
-              "parameters": [{
-									"name": "_amounts",
-									"type": "uint256[]",
-									"value": ["10", "2"]
-								},
-								{
-									"name": "_receivers",
-									"type": "address[]",
-									"value": ["0xa99d43d86a0758d5632313b8fa3972b6088a21bb", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
-								},
+              "parameters": [
+                {
+                  "name": "_did",
+                  "type": "bytes32",
+                  "value": ""
+                },
+                {
+                    "name": "_amounts",
+                    "type": "uint256[]",
+                    "value": ["10", "2"]
+                },
+                {
+                    "name": "_receivers",
+                    "type": "address[]",
+                    "value": ["0xa99d43d86a0758d5632313b8fa3972b6088a21bb", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
+                },
                 {
                   "name": "_sender",
                   "type": "address",

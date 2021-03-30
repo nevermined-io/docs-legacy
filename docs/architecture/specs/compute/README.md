@@ -385,7 +385,12 @@ Below you can find a small fraction of this:
 						"timeout": 0,
 						"contractName": "LockPaymentCondition",
 						"functionName": "fulfill",
-						"parameters": [{
+						"parameters": [
+                            {
+                                "name": "_did",
+                                "type": "bytes32",
+                                "value": ""
+                            },{
 								"name": "_rewardAddress",
 								"type": "address",
 								"value": ""
@@ -418,7 +423,7 @@ Below you can find a small fraction of this:
 						"contractName": "ComputeExecutionCondition",
 						"functionName": "fulfill",
 						"parameters": [{
-								"name": "_documentId",
+								"name": "_did",
 								"type": "bytes32",
 								"value": ""
 							},
@@ -454,7 +459,13 @@ Below you can find a small fraction of this:
 						"timeout": 0,
 						"contractName": "EscrowPaymentCondition",
 						"functionName": "fulfill",
-						"parameters": [{
+						"parameters": [
+                            {
+                            "name": "_did",
+                            "type": "bytes32",
+                            "value": ""
+                            },
+                            {
 								"name": "_amounts",
 								"type": "uint256[]",
 								"value": []

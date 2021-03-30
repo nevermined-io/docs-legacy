@@ -399,6 +399,11 @@ The main information that needs to be provided is:
             "functionName": "fulfill",
             "parameters": [
               {
+                "name": "_did",
+                "type": "bytes32",
+                "value": ""
+              },              
+              {
                 "name": "_rewardAddress",
                 "type": "address",
                 "value": ""
@@ -434,7 +439,7 @@ The main information that needs to be provided is:
             "functionName": "fulfill",
             "parameters": [
               {
-                "name": "_documentId",
+                "name": "_did",
                 "type": "bytes32",
                 "value": ""
               },
@@ -471,16 +476,22 @@ The main information that needs to be provided is:
             "timeout": 0,
             "contractName": "EscrowPaymentCondition",
             "functionName": "fulfill",
-            "parameters": [{
-								"name": "_amounts",
-								"type": "uint256[]",
-								"value": []
-							},
-							{
-								"name": "_receivers",
-								"type": "address[]",
-								"value": []
-							},
+            "parameters": [
+              {
+                "name": "_did",
+                "type": "bytes32",
+                "value": ""
+              },              
+              {
+                    "name": "_amounts",
+                    "type": "uint256[]",
+                    "value": []
+                },
+                {
+                    "name": "_receivers",
+                    "type": "address[]",
+                    "value": []
+                },
               {
                 "name": "_sender",
                 "type": "address",

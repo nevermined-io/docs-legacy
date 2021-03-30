@@ -142,7 +142,13 @@
 							}],
 							"functionName": "fulfill",
 							"name": "lockPayment",
-							"parameters": [{
+							"parameters": [
+								{
+									"name": "_did",
+									"type": "bytes32",
+									"value": ""
+								},
+								{
 									"name": "_rewardAddress",
 									"type": "address",
 									"value": "0x886dE2b3F8F27eEd43bA2FD4bC2AabDc14E0d9dD"
@@ -185,7 +191,7 @@
 							"functionName": "fulfill",
 							"name": "access",
 							"parameters": [{
-									"name": "_documentId",
+									"name": "_did",
 									"type": "bytes32",
 									"value": "3b5607872397a527cd69e41743b07ddbeeb8aa865f3decd1fab4be679e6c6eef"
 								},
@@ -211,7 +217,13 @@
 							}],
 							"functionName": "fulfill",
 							"name": "escrowPayment",
-							"parameters": [{
+							"parameters": [
+								{
+									"name": "_did",
+									"type": "bytes32",
+									"value": ""
+								},
+								{
 									"name": "_amounts",
 									"type": "uint256[]",
 									"value": ["10", "2"]
