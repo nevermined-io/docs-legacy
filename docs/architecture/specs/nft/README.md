@@ -48,7 +48,7 @@ With that objective in mind, Nevermined must facilitate the execution of use cas
 * Tokenization of digital and physical assets (real estate, etc.)
 * etc
 
-The intention of this document is to discuss how a fully functional NFT engine can be established in a decentralized system, to allow to support complex use cases related with assets tokenization.
+The intention of this document is to discuss how a fully functional NFT engine can be established in a decentralized system, to allow the support of complex use cases related with assets tokenization.
 
 The main objectives of this SPEC are:
 
