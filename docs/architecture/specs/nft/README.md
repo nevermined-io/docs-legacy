@@ -39,7 +39,7 @@ This SPEC introduces Non Fungible Tokens (NFTs) as part of Nevermined architectu
 
 ## Motivation
 
-With this Specification we want to add to Nevermined the technical capabilities allowing the users to have a platform where digital and physical assets can be represented and traded between people openly, but keeping security, integrity, provenance and content creators attribution.
+With this Specification we want to add to Nevermined the technical capabilities allowing the users to have a platform where digital and physical assets can be represented and traded between people openly, but keeping security, integrity, provenance and content creator's attribution.
 
 With that objective in mind, Nevermined must facilitate the execution of use cases like the following:
 
@@ -48,7 +48,7 @@ With that objective in mind, Nevermined must facilitate the execution of use cas
 * Tokenization of digital and physical assets (real estate, etc.)
 * etc
 
-The intention of this document is to discuss how a fully functional NFT engine can be established in a decentralized system, to allow to support complex use cases related with assets tokenization.
+The intention of this document is to discuss how a fully functional NFT engine can be established in a decentralized system, to allow the support of complex use cases related with assets tokenization.
 
 The main objectives of this SPEC are:
 
