@@ -206,6 +206,21 @@
 									"value": "1"
 								},
 								{
+									"name": "_rewardAddress",
+									"type": "address",
+									"value": ""
+								},
+								{
+									"name": "_amounts",
+									"type": "uint256[]",
+									"value": ["9", "1"]
+								},
+								{
+									"name": "_receivers",
+									"type": "address[]",
+									"value": ["0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
+								},								
+								{
 									"name": "_conditionId",
 									"type": "bytes32",
 									"value": ""
