@@ -166,12 +166,12 @@
 								{
 									"name": "_amounts",
 									"type": "uint256[]",
-									"value": ["9", "1"]
+									"value": ["9"]
 								},
 								{
 									"name": "_receivers",
 									"type": "address[]",
-									"value": ["0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
+									"value": ["0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e"]
 								}
 							],
 							"events": [{
@@ -213,13 +213,13 @@
 								{
 									"name": "_amounts",
 									"type": "uint256[]",
-									"value": ["9", "1"]
+									"value": ["9"]
 								},
 								{
 									"name": "_receivers",
 									"type": "address[]",
-									"value": ["0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
-								},								
+									"value": ["0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e"]
+								},
 								{
 									"name": "_conditionId",
 									"type": "bytes32",
@@ -260,12 +260,12 @@
 								{
 									"name": "_amounts",
 									"type": "uint256[]",
-									"value": ["9", "1"]
+									"value": ["9"]
 								},
 								{
 									"name": "_receivers",
 									"type": "address[]",
-									"value": ["0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
+									"value": ["0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e"]
 								},
 								{
 									"name": "_sender",
