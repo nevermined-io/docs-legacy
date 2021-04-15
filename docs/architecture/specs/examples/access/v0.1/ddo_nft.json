@@ -311,11 +311,11 @@
 					}],
 					"fulfillmentOrder": [
 						"nftHolder.fulfill",
-						"access.fulfill"
+						"nftAccess.fulfill"
 					],
 					"conditionDependency": {
 						"nftHolder": [],
-						"access": []
+						"nftAccess": []
 					},
 					"conditions": [{
 							"name": "nftHolder",
@@ -350,10 +350,10 @@
 							}]
 						},
 						{
-							"name": "access",
+							"name": "nftAccess",
 							"timelock": 0,
 							"timeout": 0,
-							"contractName": "AccessCondition",
+							"contractName": "NFTAccessCondition",
 							"functionName": "fulfill",
 							"parameters": [{
 									"name": "_documentId",
@@ -370,8 +370,8 @@
 									"name": "Fulfilled",
 									"actorType": "publisher",
 									"handler": {
-										"moduleName": "access",
-										"functionName": "fulfillAccessCondition",
+										"moduleName": "nftAccess",
+										"functionName": "fulfillNFTAccessCondition",
 										"version": "0.1"
 									}
 								},
@@ -379,8 +379,8 @@
 									"name": "TimedOut",
 									"actorType": "consumer",
 									"handler": {
-										"moduleName": "access",
-										"functionName": "fulfillAccessCondition",
+										"moduleName": "nftAccess",
+										"functionName": "fulfillNFTAccessCondition",
 										"version": "0.1"
 									}
 								}
