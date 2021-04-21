@@ -124,6 +124,11 @@
 							"value": ""
 						},
 						{
+							"name": "_tokenAddress",
+							"type": "address",
+							"value": ""
+						},
+						{
 							"name": "_amounts",
 							"type": "uint256[]",
 							"value": []
@@ -205,6 +210,11 @@
 						},
 						{
 							"name": "_sender",
+							"type": "address",
+							"value": ""
+						},
+						{
+							"name": "_tokenAddress",
 							"type": "address",
 							"value": ""
 						},

@@ -409,6 +409,11 @@ The main information that needs to be provided is:
                 "value": ""
               },
               {
+                "name": "_tokenAddress",
+                "type": "address",
+                "value": ""
+              },
+              {
                 "name": "_amounts",
                 "type": "uint256[]",
                 "value": []
@@ -494,6 +499,11 @@ The main information that needs to be provided is:
                 },
               {
                 "name": "_sender",
+                "type": "address",
+                "value": ""
+              },
+              {
+                "name": "_tokenAddress",
                 "type": "address",
                 "value": ""
               },

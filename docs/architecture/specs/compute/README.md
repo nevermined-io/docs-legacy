@@ -390,11 +390,17 @@ Below you can find a small fraction of this:
                                 "name": "_did",
                                 "type": "bytes32",
                                 "value": ""
-                            },{
+                            },
+                            {
 								"name": "_rewardAddress",
 								"type": "address",
 								"value": ""
 							},
+                            {
+                                "name": "_tokenAddress",
+                                "type": "address",
+                                "value": ""
+                            },
                             {
                                 "name": "_amounts",
                                 "type": "uint256[]",
@@ -461,9 +467,9 @@ Below you can find a small fraction of this:
 						"functionName": "fulfill",
 						"parameters": [
                             {
-                            "name": "_did",
-                            "type": "bytes32",
-                            "value": ""
+                                "name": "_did",
+                                "type": "bytes32",
+                                "value": ""
                             },
                             {
 								"name": "_amounts",
@@ -480,6 +486,11 @@ Below you can find a small fraction of this:
 								"type": "address",
 								"value": ""
 							},
+                            {
+                                "name": "_tokenAddress",
+                                "type": "address",
+                                "value": ""
+                            },
 							{
 								"name": "_lockCondition",
 								"type": "bytes32",
