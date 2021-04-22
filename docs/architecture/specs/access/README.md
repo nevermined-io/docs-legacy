@@ -10,28 +10,33 @@ editor:         Aitor Argomaniz <aitor@nevermined.io>
 contributors:   
 ```
 
-   * [ACCESS SPEC: Decentralized Access Control](#access-spec-decentralized-access-control)
-      * [Motivation](#motivation)
-      * [Actors and Technical Components](#actors-and-technical-components)
-      * [Flows](#flows)
-         * [Publishing Assets](#publishing-assets)
+* [ACCESS SPEC: Decentralized Access Control](#access-spec-decentralized-access-control)
+    * [Motivation](#motivation)
+    * [Actors and Technical Components](#actors-and-technical-components)
+    * [Payment](#payment)
+        * [Crypto Currencies](#crypto-currencies)
+        * [Rewards Distribution](#rewards-distribution)
+        * [Royalties in the secondary market](#royalties-in-the-secondary-market)
+    * [Flows](#flows)
+        * [Publishing Assets](#publishing-assets)
             * [Constructing an Asset DDO](#constructing-an-asset-ddo)
-         * [Service Agreement Templates](#service-agreement-templates)
-      * [Consuming](#consuming)
-         * [Execution of the SEA](#execution-of-the-sea)
+        * [Service Agreement Templates](#service-agreement-templates)
+    * [Access](#access)
+        * [Execution of the service agreement](#execution-of-the-service-agreement)
             * [Lock Payment Condition](#lock-payment-condition)
             * [Grant Access Condition](#grant-access-condition)
             * [Release Payment Condition](#release-payment-condition)
-      * [Consuming the Data](#consuming-the-data)
-         * [Consuming without direct integration of Secret Store](#consuming-without-direct-integration-of-secret-store)
-         * [Abort Conditions](#abort-conditions)
-      * [Encryption and Decryption](#encryption-and-decryption)
-         * [Encryption Process](#encryption-process)
-         * [Authorization Types](#authorization-types)
+    * [Consuming the Data](#consuming-the-data)
+        * [Consuming without direct integration of Secret Store](#consuming-without-direct-integration-of-secret-store)
+        * [Abort Conditions](#abort-conditions)
+    * [Encryption and Decryption](#encryption-and-decryption)
+        * [Encryption Process](#encryption-process)
+        * [Authorization Types](#authorization-types)
             * [Using Secret Store](#using-secret-store)
             * [Using the Data Gateway](#using-the-data-gateway)
-               * [PSK ECDSA](#psk-ecdsa)
-               * [PSK RSA](#psk-rsa)
+                * [PSK ECDSA](#psk-ecdsa)
+                * [PSK RSA](#psk-rsa)
+
 
 
 ---
@@ -84,6 +89,81 @@ The following technical components are involved with the publishing flow or the 
   computation, etc.).
 
 ![Actors running Components](images/software-run-by-actors.png)
+
+## Payment
+
+### Crypto Currencies
+
+Nevermined allows the asset publishers to define the crypto-currencies they accept. This gives the flexibility of decide
+different payments and prices depending on the currency and the service attached to the asset. In Nevermined is possible
+to define multiple services (access, compute, transfer ownership, nft sales, etc). Each service can have different 
+payment options depending on publisher interest.
+
+This provides a high level of flexibility allowing to get paid using the following options:
+
+* Payment of a service using the Nevermined ERC20 token
+* Payment using an external ERC20 token
+* Payment using ETH
+* The combination of the above for the same service. What means for the same service I can ask 1000 NVM Tokens, 10 xDAI 
+  or 1 ETH. This can be achieved specifying multiple times a service with prices in different currencies.
+
+All the prices are expressed in the DDOs with the crypto-currency lower level denominator. This is wei for ETH or drops
+for any other ERC20 token.
+
+
+This configuration is possible using the `_tokenAddress` parameter in the `LockPayment` and `EscrowPayment`
+conditions. The value options are:
+
+* If the value is `0x0` means the payment is in ETH
+* If the value is empty means the payment is in the Nevermined ERC20 Token
+* If the value is an address means the payment is using the ERC20 Token deployed on that address
+
+In the following example is using a ETH payment:
+
+```json
+{
+  "name": "_tokenAddress",
+  "type": "address",
+  "value": "0x0"
+}
+```
+
+### Rewards Distribution
+
+In combination with the above, Nevermined allows the definition of payment schemes where multiple users can be paid for 
+providing a service associated to an asset. For example, it's typical for a marketplace to get a commission for a sale
+because the infrastructure provided. This can be defined case by case, each marketplace could require different 
+commissions, and can include multiple reward addresses to receive the payment as part of the sales flow. 
+
+This configuration is possible using the `_amounts` and `_receivers` parameters in the `LockPayment` and `EscrowPayment`
+conditions. 
+
+In the following example, as part of the DDO we define that address starting by `0xa99` is going to receive a payment of 
+`10` drops or wei (depending on the token used), and the address starting by `0x068` a payment of 2. Example:
+
+```json
+{
+    "name": "_amounts",
+    "type": "uint256[]",
+    "value": ["10", "2"]
+},
+{
+    "name": "_receivers",
+    "type": "address[]",
+    "value": ["0xa99d43d86a0758d5632313b8fa3972b6088a21bb", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
+}
+```
+
+### Royalties in the secondary market
+
+Asset creators can define what are the royalties they want to receive in the secondary market. These royalties must be 
+between 0 and 100 percent. The royalties can not be changed after they are initialized. 
+This protects the buyers of an Asset or NFT to have to pay for a different commission to the one agreed during the 
+purchase of that Asset or NFT.
+
+In Nevermined the Assets or NFTs can be transferred, what means the owner can be different to the original creator, but
+the original creator can't be modified in the Smart Contracts once the asset is defined.
+
 
 ## Flows
 
@@ -248,7 +328,7 @@ const conditionIdEscrow = await escrowPayment.generateId(agreementId, await escr
 
 1. PUBLISHER publishes the DDO in the METADATA API.
 
-## Consuming
+## Access
 
 Using SDK calls, a CONSUMER can discover, purchase and get access to assets.
 
@@ -302,7 +382,7 @@ The execution of this endpoint should return a `HTTP 201` if everything goes oka
 
 1. After receiving the HTTP response confirmation from GATEWAY, the CONSUMER starts listening for the `AgreementCreated` events specified in the corresponding service definition, filtering them by `agreementId`.
 
-### Execution of the SEA
+### Execution of the service agreement
 
 Consider an asset purchase example. CONSUMER locks the payment. Then PUBLISHER grants access to the document. Then payment is released. Now CONSUMER may decrypt the document.
 
