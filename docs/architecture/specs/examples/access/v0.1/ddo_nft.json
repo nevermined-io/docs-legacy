@@ -294,7 +294,7 @@
 		},
 		{
 			"type": "nft-access",
-			"index": 1,
+			"index": 7,
 			"serviceEndpoint": "http://localhost:8030/api/v1/gateway/services/nft-access",
 			"templateId": "0xccdd",
 			"attributes": {
