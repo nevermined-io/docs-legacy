@@ -13,4 +13,7 @@ jobs:
         with:
           python-version: 3.x
       - run: pip install mkdocs-material markdown-captions mkdocs-markdownextradata-plugin
+      - run: mkdir -p docs/architecture/contracts
+      - run: git clone --branch master https://github.com/nevermined-io/contracts.git _contracts
+      - run: cp -rf _contracts/docs/* docs/architecture/contracts/
       - run: mkdocs gh-deploy --force

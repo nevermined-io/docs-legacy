@@ -118,6 +118,7 @@ nav:
       - Metadata: architecture/specs/metadata/README.md
   - Integration:
       - Overview: api/README.md
+      - Smart Contracts: architecture/contracts/index.md
       - API Reference:
         - API Overview: api/reference/api-reference-latest.md
         - Assets: api/reference/Assets.md
