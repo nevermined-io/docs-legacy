@@ -214,6 +214,11 @@
 									"name": "_conditionId",
 									"type": "bytes32",
 									"value": ""
+								},
+								{
+									"name": "_contractAddress",
+									"type": "address",
+									"value": "0xf0ff000512fC47ab52aC8e4f90E335a5Fe3dD024"
 								}
 							],
 							"events": [{
@@ -347,6 +352,11 @@
 									"name": "_numberNfts",
 									"type": "uint256",
 									"value": "1"
+								},
+								{
+									"name": "_contractAddress",
+									"type": "address",
+									"value": "0xf0ff000512fC47ab52aC8e4f90E335a5Fe3dD024"
 								}
 							],
 							"events": [{
