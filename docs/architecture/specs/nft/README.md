@@ -229,7 +229,7 @@ When a DID is registered via the traditional `registerDID` method, the same func
 `enableAndMintDidNft` method. Example:
 
 ```js
-await didRegistry.registerAttribute(didSeed, checksum, [], url)
+const did = await didRegistry.registerAttribute(didSeed, checksum, [], url)
 await didRegistry.enableAndMintDidNft(did, 5, 0, true)
 ```
 
