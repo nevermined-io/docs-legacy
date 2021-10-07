@@ -11,15 +11,16 @@ version:        0.1
 Table of Contents
 =================
 
-   * [NFTs collateralization via Nevermined and Aave integration](#nfts-collateralization-via-nevermined-and-aave-integration)
-      * [Price discovery](#price-discovery)
-      * [Value](#value)
-      * [Integration Details](#integration-details)
-      * [Architecture](#architecture)
-         * [User Flows](#user-flows)
-            * [Setting up the credit](#setting-up-the-credit)
-            * [What happens when credit is not repaid in time](#what-happens-when-credit-is-not-repaid-in-time)
-         * [Aave credit template](#aave-credit-template)
+* [NFTs collateralization via Nevermined and Aave integration](#nfts-collateralization-via-nevermined-and-aave-integration)
+* [Table of Contents](#table-of-contents)
+   * [Price discovery](#price-discovery)
+   * [Value](#value)
+   * [Integration Details](#integration-details)
+   * [Architecture](#architecture)
+      * [User Flows](#user-flows)
+         * [Setting up the credit](#setting-up-the-credit)
+         * [What happens when credit is not repaid in time](#what-happens-when-credit-is-not-repaid-in-time)
+      * [Aave credit template](#aave-credit-template)
 
 ---
 
@@ -101,10 +102,10 @@ In the case the credit is not repaid in time, the borrower will get the NFT in r
 Steps:
 
 1. The **Borrower** try to repay the credit when this is already expired
-1. The contracts check via the Aave `getUserAccountData` contract call if the credit already expired or the condition timeout is expired
+1. The contracts gets debt amount via the Aave `getUserAccountData` contract call and checks if the credit already expired or the condition timeout is expired
 1. If that is the case, the **AaveRepayCredit** condition will change the state to **aborted**
 1. If the **Lender** or the **Borrower** call the **DistributeNFTCollateral** condition and the  **AaveRepayCredit** condition is aborted, the NFT will be transfered to the **Lender** instead of the **Borrower**
-1. In addition to this the pending fees will be transfered to Aave
+1. In addition to this the pending fees will be transferred to Aave
 This scenario can happens also if the **Lender** inform about a credit expired via **AaveRepayCredit** condition
 
 
