@@ -21,7 +21,6 @@ Table of Contents
             * [What happens when credit is not repaid in time](#what-happens-when-credit-is-not-repaid-in-time)
          * [Aave credit template](#aave-credit-template)
 
-
 ---
 
 
@@ -38,7 +37,8 @@ In this document we introduce the architecture of Nevermined integrating Aave pr
 
 ## Price discovery
 
-Assets price discovery is a complex topic **out of the scope of this integration**. The focus of this specific integration is to allow NFT owners (ERC-721) to use them as collateral for their loans.
+Assets price discovery is a complex topic **out of the scope of this integration**. The focus of this specific integration is to allow NFT owners (ERC-721) to use them as collateral for their loans. The support of ERC-1155 will be evaluated in further phases.
+
 The process of negotiating between Lenders and Borrowers can be done via marketplace (see [nftfi](https://www.nftfi.com/)).
 One of the key factors in setting up a credit collateralized by an asset is how to establish that asset price. Depending on the use case there are different options:
 
@@ -53,7 +53,8 @@ On top of the price of an asset different credit conditions can be established (
 
 The integration of Aave into Nevermined brings is valuable because:
 
-- Facilitate for NFT owners to put their assets at work
+- Facilitate for NFT owners to put their assets at work. NFT owners can leverage their assets and get liquidity they can use any way they want.
+- Facilitate a new business where users can loan to others and get a fee for that (or the collateral if the borrower doesn't refund to the lender)
 - Bring more usage to Aave protocol
 - Bring more usage to Nevermined
 
@@ -79,13 +80,16 @@ The final goal is to have a fully functional end to end integration, allowing fo
 
 This is the happy path for a end-to-end flow. Steps:
 
-1. The **Borrower** or **NFT Owner** initialize a service agreement on-chain.
+1. The **Borrower** or the **Lender** agree on terms (off-chain via Marketplace for example) for a credit line.
+   When this happens any of them can initialize a service agreement on-chain with the credit conditions.   
    This service agreement will be based in a new template: `AaveCreditTemplate`.
-1. The **Borrower** lock the NFT in the Vault contract via NVM **NFTLock** condition
-1. The **Lender** lock the payment in NVM via the **AaveCollateralDeposit** condition
+   As part of this process a new instance of the `AaveVault` contract will be deployed on-chain. This contract will lock the borrower NFT and the lender ERC20 collateral.
+1. The **Borrower** and the **Lender** can review that contract properties are aligned with their initial agreement.   
+1. The **Borrower** locks the NFT in the Vault contract instance via NVM **NFTLock** condition
+1. The **Lender** locks the payment in the Vault contract instance via the **AaveCollateralDeposit** condition. When this happens NVM call the Aave `approveDelegation` method allowing to borrow from Aave
 1. The **Borrower** borrow from NVM via **AaveBorrowCredit** condition
-1. After some time the **Borrower** repays the credit through NVM fulfilling the **AaveRepayCredit** condition
-1. The **Borrower** request transfer back the NFT to NVM via **TransferNFT** condition
+1. After some time the **Borrower** repays the credit through NVM fulfilling the **AaveRepayCredit** condition.
+1. The **Borrower** request transfer back the NFT to NVM via **DistributeNFTCollateral** condition
 
 
 #### What happens when credit is not repaid in time
@@ -96,15 +100,18 @@ In the case the credit is not repaid in time, the borrower will get the NFT in r
 
 Steps:
 
-1. The **Borrower** try to repay the credit when this was expired
-1. The contracts check via the Aave `getUserAccountData` contract call if the credit already expired
-1. If that is the case, the contract will fulfill the condition and transfer the NFT to the Lender
+1. The **Borrower** try to repay the credit when this is already expired
+1. The contracts check via the Aave `getUserAccountData` contract call if the credit already expired or the condition timeout is expired
+1. If that is the case, the **AaveRepayCredit** condition will change the state to **aborted**
+1. If the **Lender** or the **Borrower** call the **DistributeNFTCollateral** condition and the  **AaveRepayCredit** condition is aborted, the NFT will be transfered to the **Lender** instead of the **Borrower**
 1. In addition to this the pending fees will be transfered to Aave
-
 This scenario can happens also if the **Lender** inform about a credit expired via **AaveRepayCredit** condition
 
 
 ### Aave credit template
+
+![Setting up the Credit Line](images/nvm-integration-aave-agreement-flow.png)
+
 
 NVM will provide a new template integrating the following conditions:
 
