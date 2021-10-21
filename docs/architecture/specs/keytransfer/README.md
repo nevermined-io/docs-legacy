@@ -51,3 +51,22 @@ The public parts that have to be added to `additionalInformation` are
 
 * `poseidonHash`: Poseidon hash of the key.
 * `providerKey.x` and `providerKey.y`: The Babyjubjub public key of the provider.
+
+### Service agreement
+
+For the service agreement, following data is needed:
+
+* Address of provider and consumer.
+* Asset ID.
+* Poseidon hash of the data.
+* Babyjubjub keys of the provider and consumer.
+* Payment information.
+
+Before entering into the agreement, the consumer should already have downloaded the publicly available encrypted data.
+
+Other parts of the flow are the same as normal access flow, but the final fulfilling of the transfer on-chain is different.
+
+Provider first has to compute a shared secret using ECDH from his private key and consumers public key. This secret is used to encrypt the key using MiMC. The encrypted key is then sent onchain with the SNARK proof of correctness.
+
+Similarly, consumer first has to compute a shared secret using ECDH from his private key and providers public key. The encrypted key is read from chain and then decrypted using MiMC. The hash of the result will be the same as was given beforehand.
+
