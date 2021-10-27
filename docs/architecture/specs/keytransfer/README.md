@@ -1,6 +1,6 @@
 # KETRANSFER SPEC: Data transfer proofs
 
-```
+```text
 shortname:      KEYTRANSFER
 name:           Data transfer proofs
 type:           Standard
@@ -45,7 +45,7 @@ To save resources, instead of showing that all the data is transferred, we assum
 To set up the asset metadata:
 
 For the files, the first file represents the key and `url` attribute contains the plain text key (probably have to change).
-These parts of metadata are encrypted so they won't show up publicly.
+These parts of metadata are encrypted so they won't show up publicly when querying the gateway.
 
 The public parts that have to be added to `additionalInformation` are
 
@@ -70,3 +70,7 @@ Provider first has to compute a shared secret using ECDH from his private key an
 
 Similarly, consumer first has to compute a shared secret using ECDH from his private key and providers public key. The encrypted key is read from chain and then decrypted using MiMC. The hash of the result will be the same as was given beforehand.
 
+### Accessing from gateway
+
+Accessing documents using the gateway mostly works the same way as normal flow, but the consumer has to send its Babyjubjub public key too. The data must be checked so that the gateway won't send invalid proofs to the net (it's possible to get the key from the calldata of the fulfill method if they have the corresponding key).
+Additionally we can check that the eth address correspods to the babyjub public key. This isn't absolutely necessary, but is needed if we want the gateway to return the data transfer key (or perhaps the data as plain text).
