@@ -70,6 +70,8 @@ Provider first has to compute a shared secret using ECDH from his private key an
 
 Similarly, consumer first has to compute a shared secret using ECDH from his private key and providers public key. The encrypted key is read from chain and then decrypted using MiMC. The hash of the result will be the same as was given beforehand.
 
+![Service Flow](images/flow.svg)
+
 ### Accessing from gateway
 
 Accessing documents using the gateway mostly works the same way as normal flow, but the consumer has to send its Babyjubjub public key too. The data must be checked so that the gateway won't send invalid proofs to the net (it's possible to get the key from the calldata of the fulfill method if they have the corresponding key).
