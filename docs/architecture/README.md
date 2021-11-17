@@ -274,6 +274,7 @@ Short Name              | Title                                             | Ve
 [META](specs/metadata)  | Metadata                                          | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
 [ACCESS](specs/access)  | Decentralized Access Control                      | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
 [COMPUTE](specs/compute)| Data In Situ Computation                          | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
+[KEYTRANSFER](specs/keytransfer)| Data transfer proofs                      | 0.1          | Raw        | [@mrsmkl](https://github.com/mrsmkl)
 [FL](specs/fl)          | Federated Learning Orchestration                  | 0.1          | Raw        | [@rodolphe](https://github.com/r-marques)
 [PROV](specs/provenance)| Decentralized Data Provenance                     | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
 [IDM](specs/id_management)| Identity management with on-chain access control  | 0.1          | Raw        | [@aaitor](https://github.com/aaitor)
