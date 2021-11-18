@@ -48,5 +48,5 @@ a body example would be:
 
 To use any other query, the DSL language from elastic search can be used.
 
-Some more examples can be found in the [documentation](https://github.com/nevermined-io/metadata-api/tree/master/docs/queries.md)
+Some more examples can be found in the [documentation](https://github.com/nevermined-io/metadata-api/blob/master/docs/querys.md)
 of the Metadata API repository.
