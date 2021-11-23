@@ -352,8 +352,7 @@ Steps for leveraging SDK:
 
 This signature is used to correlate events and to prevent the PUBLISHER from instantiating multiple Service Agreements from a single request.
 
-
-1. The CONSUMER sends `(did, serviceAgreementId, serviceDefinitionId, signature, consumerAddress`) to the service endpoint (GATEWAY).
+1. The CONSUMER sends `(did, serviceAgreementId, serviceDefinitionId, signature, consumerAddress)` to the service endpoint (GATEWAY).
 `serviceDefinitionId` tells the PUBLISHER where to find the preimage to verify the signature. The DID tells the PUBLISHER which asset to serve under these terms.
 
 ```
@@ -478,7 +477,7 @@ CONSUMER (via SDK) listens for `AccessCondition.Fulfilled` event to access the d
 
 ```
 "conditions": [{
-    "events": [{{
+    "events": [{
         "name": "TimedOut",
         "actorType": "consumer",
         "handler": {
