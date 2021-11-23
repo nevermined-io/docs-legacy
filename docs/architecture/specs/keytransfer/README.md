@@ -1,4 +1,4 @@
-# KETRANSFER SPEC: Data transfer proofs
+# KEYTRANSFER SPEC: Data transfer proofs
 
 ```text
 shortname:      KEYTRANSFER

@@ -113,9 +113,10 @@ nav:
       - Federated Learning: architecture/specs/fl/README.md
       - Provenance: architecture/specs/provenance/README.md
       - NFTs Engine : architecture/specs/nft/README.md
-      - Identity Management: architecture/specs/id_management/README.md
+      - Data Transfer Proofs: architecture/specs/keytransfer/README.md
       - Decentralized Identifiers: architecture/specs/did/README.md
       - Metadata: architecture/specs/metadata/README.md
+      - Identity Management: architecture/specs/id_management/README.md
   - Integration:
       - Overview: api/README.md
       - Smart Contracts: architecture/contracts/index.md

@@ -13,6 +13,7 @@ Short Name              | Title                                             | Ve
 [PROV](architecture/specs/provenance/README.md)| Decentralized Data Provenance                     | 0.2          | Valid        | [@aaitor](https://github.com/aaitor)
 [IDM](architecture/specs/id_management/README.md)| Identity management with on-chain access control                     | 0.1          | Valid        | [@aaitor](https://github.com/aaitor)
 [NFT](architecture/specs/nft/README.md)| NFTs Engine                     | 0.2          | Valid        | [@aaitor](https://github.com/aaitor)
+[KEYTRANSFER](architecture/specs/keytransfer/README.md)| Data Transfer Proofs | 0.1          | Valid        | [@mrsmkl](https://github.com/mrsmkl)
 
 ## Attribution
 
