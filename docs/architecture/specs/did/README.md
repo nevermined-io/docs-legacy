@@ -5,7 +5,7 @@ shortname:      DID
 name:           Decentralized Identifiers
 type:           Standard
 status:         Valid
-version:        0.1
+version:        0.2
 editor:         Aitor Argomaniz <aitor@nevermined.io>
 contributors:   
 ```
@@ -246,6 +246,7 @@ The DID Document (DDO) SHOULD include the following `proof` information:
 * `creator` - Address of the user providing the proof
 * `signatureValue` - Result of the signature given by the creator
 * `checksum` - Checksums of the individual services included in the DDO
+* `inmutableUrl` - Url to a copy of the DDO in an inmutable repository like IPFS, Arweave, etc.
 
 Here is an example `proof` section to add in the DDO:
 
@@ -255,6 +256,7 @@ Here is an example `proof` section to add in the DDO:
     "created": "2016-02-08T16:02:20Z",
     "creator": "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
     "signatureValue": "0xc9eeb2b8106e…6abfdc5d1192641b",
+    "inmutableUrl": "ipfs://QmPChd2hVbrJ6bfo3WBcTW4iZnpHm8TEzWkLHmLpXhF68A",
     "checksum": {
         "0": "0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377",
         "1": "0x999999952b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3"

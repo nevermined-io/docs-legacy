@@ -13,7 +13,25 @@ contributors:
 Table of Contents
 =================
 
-
+   * [MKT-API SPEC: Nevermined Marketplace API](#mkt-api-spec-nevermined-marketplace-api)
+   * [Table of Contents](#table-of-contents)
+      * [Motivation](#motivation)
+      * [Architecture](#architecture)
+      * [Modules](#modules)
+         * [Assets Management](#assets-management)
+         * [Assets Search](#assets-search)
+         * [Users Profiles](#users-profiles)
+         * [Secondary Market](#secondary-market)
+         * [NFTs Metadata](#nfts-metadata)
+         * [User Reviews](#user-reviews)
+         * [Bookmarks](#bookmarks)
+         * [Marketplace Management](#marketplace-management)
+         * [Multimedia](#multimedia)
+         * [API Access Control](#api-access-control)
+            * [Authentication](#authentication)
+            * [Authorization](#authorization)
+         * [Storage](#storage)
+      * [Links](#links)
 
 
 ---
@@ -25,7 +43,7 @@ This SPEC introduces a new API that helps to build Marketplace environments on t
 With this Specification we want to build the foundations of an API that can be used as reference to implement 
 APIs exposing typical Marketplace functionalities.
 
-Most of the Marketplaces (decentralized or not) expose some common functionalities around the assets the manage and 
+Most of the Marketplaces (decentralized or not) expose some common functionalities around the assets they manage and 
 their users. The intention of this API is to normalize a common set of this functionalities, allowing to build 
 implementations providing this common functionalities.
 
@@ -166,6 +184,9 @@ The API will define a TTL of a maximum of one hour duration.
 
 The client of the API will need to authenticate using `login` method. This method will require the client to provide to authenticate
 the user. When the user is authenticated, the API will release a JWT allowing the user to interact with the different API modules.
+
+![Marketplace API Access Control Flow](images/marketplace_api_access_control_flow.png)
+
 The flow is the following:
 
 1. The client sends a `HTTP GET /login` request providing the user address. Example:
@@ -173,25 +194,25 @@ The flow is the following:
 HTTP GET /api/v1/docs/auth/login/0xa99d43d86a0758d5632313b8fa3972b6088a21bb
 ```
 
-1. The server will return a unique challenge token to the user
+2. The server will return a unique challenge token to the user
 
-1. The client will sign locally this challenge token using the local key material
+3. The client will sign locally this challenge token using the local key material
 
-1. The client will send a `HTTP POST /login` request providing the user address and the challenge token signed
+4. The client will send a `HTTP POST /login` request providing the user address and the challenge token signed
 ```
 HTTP POST /api/v1/docs/auth/login
 address=0xa99d43d86a0758d5632313b8fa3972b6088a21bb
 signature=90f8bf6a479f320ead074411a4b0e7944ea8c9c15932c5d68a1b539da0b0f8431d8e50e1a5b2b3bd4cfdcfc387a5ff85d7ef5fac429c4e0e4c1bfc36d4a99770b58f42924e126ece
 ```
 
-1. If the server can authenticate the user, it will return a JWT token
+5. If the server can authenticate the user, it will return a JWT token
 ```
   {
       "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzUxMiJ9.eyJzdWIiOiIweDkwZjhiZjZhNDc5ZjMyMGVhZDA3NDQxMWE0YjBlNzk0NGVhOGM5YzEiLCJleHAiOjE0OTY1MDUwNzQsIm5iZiI6MTQ5NjUwMzI3NCwiaXNzIjoiTmV1ZnVuZCIsImF1ZCI6IndlYjMiLCJpYXQiOjE0OTY1MDMyNzR9.AaOPxTqBV4iy6GVlAu8XfbmOsIoezKfYjkqZ0SZ_RW6E7qwW-tUwSq8fq-avJrLtmCzLOD2xO9T5esEiIykP3Z9SAKWrTkdo9RwGcqGfvAySurbVAiFgW4MZ9pf9cHcB6zRks53pPcq6X2yqaVzjw28N6kBRQRc23GrUFnEDK6P_t3Tv"
   }
 ```
 
-1. The user should be able to renew the authentication token passing the `Authorization` header to the `/renew` method:
+6. The user should be able to renew the authentication token passing the `Authorization` header to the `/renew` method:
 ```
 HTTP POST /api/v1/docs/auth/renew
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzUxMiJ9.eyJzdWIiOiIweDkwZjhiZjZhNDc5ZjMyMGVhZDA3NDQxMWE0YjBlNzk0NGVhOGM5YzEiLCJleHAiOjE0OTY1MDUwNzQsIm5iZiI6MTQ5NjUwMzI3NCwiaXNzIjoiTmV1ZnVuZCIsImF1ZCI6IndlYjMiLCJpYXQiOjE0OTY1MDMyNzR9.AaOPxTqBV4iy6GVlAu8XfbmOsIoezKfYjkqZ0SZ_RW6E7qwW-tUwSq8fq-avJrLtmCzLOD2xO9T5esEiIykP3Z9SAKWrTkdo9RwGcqGfvAySurbVAiFgW4MZ9pf9cHcB6zRks53pPcq6X2yqaVzjw28N6kBRQRc23GrUFnEDK6P_t3Tv
@@ -203,19 +224,42 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzUxMiJ9.eyJzdWIiOiIweDkwZjhiZ
 Once the user is authenticated, the API will be able to authorize or not the user to perform different actions. Every document in the system has a 
 reference to the original public address owning the document. Depending on the module, actions like updating or deleting will require different permissions.
 
-In the Modules section we will detail what authorization policies will be in place depending of each module.
-
+All the documents stored into the database will have a `verifiableCredential` entry witht the `holder` attribute attached to the document. 
+This attribute will allow to validate the owner of the metadata object and perform any authorization action.
 
 ### Storage
 
-#### Database
+The storage of the data can use a standard database and/or an inmutable respository (IPFS, Filecoin, Arweave, ..) as a complement.
 
+Different storage backends provide a different set of functionalities to the final user. From one side, regular or standard databases provide 
+easy searching functionalities. In the other side, inmutable storage provide a level of trust on things like the assets metadata.
 
-#### Inmutable storage
+The usage of different storage backends or a combination of both will depend on the use case and/or the Marketplace API configuration.
+
+All the documents stored in a regular database or search engine (like Elastic Search) will record the metadata in their current models are they are.
+In the case this document has a mirror copy into a inmutable data store (like IPFS), the document will include a reference to 
+this inmutable content via a full URL. This typically will be stored into the `proof.inmutableUrl` attribute.
+
+For example if an Asset DDO has a copy into IPFS, it will include an attribute like this:
+
+```json
+"proof": {
+    "type": "DDOIntegritySignature",
+    "created": "2016-02-08T16:02:20Z",
+    "creator": "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
+    "signatureValue": "0xc9eeb2b8106e…6abfdc5d1192641b",
+    "inmutableUrl": "ipfs://QmPChd2hVbrJ6bfo3WBcTW4iZnpHm8TEzWkLHmLpXhF68A",
+    "checksum": {
+        "0": "0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377",
+        "1": "0x999999952b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3"
+    }    
+}
+```
 
 
 
 ## Links
 
+* [Decentralized Identifiers SPEC](../did/README.md)
 * [Metadata SPEC](../metadata/README.md)
 
