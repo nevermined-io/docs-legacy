@@ -10,22 +10,27 @@ editor:         Aitor Argomaniz <aitor@nevermined.io>
 contributors:   
 ```
 
-   * [DID SPEC: Decentralized Identifiers](#did-spec-decentralized-identifiers)
-      * [Motivation](#motivation)
-      * [Specification](#specification)
-      * [Proposed Solution](#proposed-solution)
-         * [Decentralized IDs (DIDs)](#decentralized-ids-dids)
-         * [Publishing and Consumption Flow](#publishing-and-consumption-flow)
-         * [DID Documents (DDOs)](#did-documents-ddos)
-            * [DDO Services](#ddo-services)
-         * [Integrity](#integrity)
-            * [How to compute the integrity checksum](#how-to-compute-the-integrity-checksum)
-            * [DID Document Proof](#did-document-proof)
-            * [Length of a DID](#length-of-a-did)
-            * [How to compute a DID](#how-to-compute-a-did)
-         * [Registry](#registry)
-         * [Resolver](#resolver)
-      * [References](#references)
+
+* [DID SPEC: Decentralized Identifiers](#did-spec-decentralized-identifiers)
+   * [Motivation](#motivation)
+   * [Specification](#specification)
+   * [Proposed Solution](#proposed-solution)
+      * [Decentralized IDs (DIDs)](#decentralized-ids-dids)
+      * [Publishing and Consumption Flow](#publishing-and-consumption-flow)
+      * [DID Documents (DDOs)](#did-documents-ddos)
+         * [DDO Services](#ddo-services)
+      * [DDO Meta information](#ddo-meta-information)
+         * [Versions](#versions)
+         * [Networks](#networks)
+         * [Example](#example)
+      * [Integrity](#integrity)
+         * [How to compute the integrity checksum](#how-to-compute-the-integrity-checksum)
+         * [DID Document Proof](#did-document-proof)
+         * [Length of a DID](#length-of-a-did)
+         * [How to compute a DID](#how-to-compute-a-did)
+      * [Registry](#registry)
+      * [Resolver](#resolver)
+   * [References](#references)
 
 
 ---
