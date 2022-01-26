@@ -5,7 +5,7 @@ shortname:      DID
 name:           Decentralized Identifiers
 type:           Standard
 status:         Valid
-version:        0.2
+version:        0.3
 editor:         Aitor Argomaniz <aitor@nevermined.io>
 contributors:   
 ```
@@ -188,6 +188,55 @@ Example:
 - You can find a complete reference of the asset metadata in [METADATA SPEC](../metadata/README.md).
 - You can find a complete [real world example of a DDO](https://w3c-ccg.github.io/did-spec/#real-world-example)
 with extended services added, as part of the W3C DID spec.
+
+### DDO Meta information
+
+This section (named `meta`) provides additional information about the DDO itself including versions, and networks where this DDO is valid.
+It will include 2 main blocks of information:
+
+#### Versions
+
+Allows to register the different linear versions of the DDO created. It is an array sorted by version creation including the following information:
+
+* Version Id (`_id`) - Unique identifier of the version, it could be a DID
+* Tag or Version number (`tag`)
+* Created date time - Datetime refereing when it was created without sub-second decimal precision
+* Change checksum (`checksum`) - Optional attribute with a checksum of the metadata change compared with the previous version  
+
+#### Networks
+
+Identify in which networks is the DDO valid. It is an unsorted array including the `chainId` of the network where this DID is available.
+
+#### Example
+
+Here an example of the `meta` section of a DDO:
+
+```json
+
+"meta": {
+  "versions": [
+    {
+      "_id": "dsadsa",
+      "tag": "v0.1",
+      "createdAt": "2016-02-08T16:02:20Z",
+      "checksum": "4329042309a02394032"
+    },
+    {
+      "_id": "ccacd",
+      "tag": "v0.2",
+      "createdAt": "2018-02-08T16:02:20Z",
+      "checksum": "0000010992349"
+    }    
+  ],
+  "networks": [
+    { "chainId": 1},
+    { "chainId": 23},
+    { "chainId": 8001}
+  ]
+}
+
+```
+
 
 ### Integrity
 

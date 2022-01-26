@@ -5,7 +5,7 @@ Here you can find a list of the most relevant SPECs:
 
 Short Name              | Title                                             | Version      | Status     | Editor
 ------------------------|---------------------------------------------------|--------------|------------|-------
-[DID](architecture/specs/did/README.md)        | Decentralized Identifiers                         | 0.1          | Valid        | [@aaitor](https://github.com/aaitor)
+[DID](architecture/specs/did/README.md)        | Decentralized Identifiers                         | 0.3          | Valid        | [@aaitor](https://github.com/aaitor)
 [META](architecture/specs/metadata/README.md)  | Metadata                                          | 0.1          | Valid        | [@aaitor](https://github.com/aaitor)
 [ACCESS](architecture/specs/access/README.md)  | Decentralized Access Control                      | 0.1          | Valid        | [@aaitor](https://github.com/aaitor)
 [COMPUTE](architecture/specs/compute/README.md)| Decentralized Data in situ Computation                 | 0.1          | Valid        | [@aaitor](https://github.com/aaitor)
