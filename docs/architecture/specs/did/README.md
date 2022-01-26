@@ -141,8 +141,13 @@ Asset metadata can be included as one of the objects inside the `"service"` arra
 
 Each type of asset (dataset, algorithm, workflow, etc, ..) typically will have associated different kind of services.
 There are 2 type of services that are commonly added to all the assets:
+
 * metadata - describing the asset
 * provenance - describing the asset provenance
+
+Each service include a `serviceEndpoint` attribute with a URL to the server or document completing that service.
+Optionally, the service can include a `immutableServiceEndpoint` attribute with a URL to a repository/service where 
+additional information is stored in an immutable way (i.e IPFS, Filecoin, Arweave, etc).
 
 Each service is distinguished by the `DDO.service.type` attribute.
 
@@ -162,6 +167,7 @@ Example:
     "index": 0,
     "type": "metadata",
     "serviceEndpoint": "https://service/api/v1/metadata/assets/ddo/did:nv:0ebed8226ada17fde24b6bf2b95d27f8f05fcce09139ff5cec31f6d81a7cd2ea",
+    "immutableServiceEndpoint": "cid://QmVT3wfySvZJqAvkBCyxoz3EvD3yeLqf3cvAssFDpFFXNm",
     "attributes": {  
       "main": {},
       "additionalInformation": {},

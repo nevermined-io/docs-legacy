@@ -1,11 +1,11 @@
 # META SPEC: Metadata Ontology
 
 ```
-shortname:      DID
+shortname:      META
 name:           Metadata Ontology
 type:           Standard
 status:         Valid
-version:        0.1
+version:        0.2
 editor:         Aitor Argomaniz <aitor@nevermined.io>
 contributors:   
 ```
@@ -222,6 +222,7 @@ Note that `url` is removed from all objects in the `files` array, and `encrypted
     {  
       "index": 0,
       "serviceEndpoint": "http://metadata:5000/api/v1/metadata/assets/ddo/{did}",
+      "immutableServiceEndpoint": "cid://QmVT3wfySvZJqAvkBCyxoz3EvD3yeLqf3cvAssFDpFFXNm",
       "type": "metadata",
       "attributes": {  
         "main": {  
@@ -290,6 +291,7 @@ The `container` object has the following attributes:
 {
       "index": 0,
       "serviceEndpoint": "http://localhost:5000/api/v1/metadata/assets/ddo/{did}",
+      "immutableServiceEndpoint": "cid://QmVT3wfySvZJqAvkBCyxoz3EvD3yeLqf3cvAssFDpFFXNm",
       "type": "metadata",
       "attributes": {
         "main": {
