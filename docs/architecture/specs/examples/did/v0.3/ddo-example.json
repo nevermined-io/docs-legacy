@@ -53,6 +53,31 @@
 			"signatureValue": "ABCJSDAO23...1tzjn4w=="
 		}
 	}],
+	"meta": {
+		"versions": [{
+				"_id": "dsadsa",
+				"tag": "v0.1",
+				"createdAt": "2016-02-08T16:02:20Z",
+				"checksum": "4329042309a02394032"
+			},
+			{
+				"_id": "ccacd",
+				"tag": "v0.2",
+				"createdAt": "2018-02-08T16:02:20Z",
+				"checksum": "0000010992349"
+			}
+		],
+		"networks": [{
+				"chainId": 1
+			},
+			{
+				"chainId": 23
+			},
+			{
+				"chainId": 8001
+			}
+		]
+	},
 	"service": [{
 			"index": 0,
 			"serviceEndpoint": "http://localhost:5000/api/v1/metadata/assets/ddo/{did}",

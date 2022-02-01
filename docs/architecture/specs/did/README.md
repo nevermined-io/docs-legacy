@@ -5,27 +5,32 @@ shortname:      DID
 name:           Decentralized Identifiers
 type:           Standard
 status:         Valid
-version:        0.1
+version:        0.3
 editor:         Aitor Argomaniz <aitor@nevermined.io>
 contributors:   
 ```
 
-   * [DID SPEC: Decentralized Identifiers](#did-spec-decentralized-identifiers)
-      * [Motivation](#motivation)
-      * [Specification](#specification)
-      * [Proposed Solution](#proposed-solution)
-         * [Decentralized IDs (DIDs)](#decentralized-ids-dids)
-         * [Publishing and Consumption Flow](#publishing-and-consumption-flow)
-         * [DID Documents (DDOs)](#did-documents-ddos)
-            * [DDO Services](#ddo-services)
-         * [Integrity](#integrity)
-            * [How to compute the integrity checksum](#how-to-compute-the-integrity-checksum)
-            * [DID Document Proof](#did-document-proof)
-            * [Length of a DID](#length-of-a-did)
-            * [How to compute a DID](#how-to-compute-a-did)
-         * [Registry](#registry)
-         * [Resolver](#resolver)
-      * [References](#references)
+
+* [DID SPEC: Decentralized Identifiers](#did-spec-decentralized-identifiers)
+   * [Motivation](#motivation)
+   * [Specification](#specification)
+   * [Proposed Solution](#proposed-solution)
+      * [Decentralized IDs (DIDs)](#decentralized-ids-dids)
+      * [Publishing and Consumption Flow](#publishing-and-consumption-flow)
+      * [DID Documents (DDOs)](#did-documents-ddos)
+         * [DDO Services](#ddo-services)
+      * [DDO Meta information](#ddo-meta-information)
+         * [Versions](#versions)
+         * [Networks](#networks)
+         * [Example](#example)
+      * [Integrity](#integrity)
+         * [How to compute the integrity checksum](#how-to-compute-the-integrity-checksum)
+         * [DID Document Proof](#did-document-proof)
+         * [Length of a DID](#length-of-a-did)
+         * [How to compute a DID](#how-to-compute-a-did)
+      * [Registry](#registry)
+      * [Resolver](#resolver)
+   * [References](#references)
 
 
 ---
@@ -136,8 +141,13 @@ Asset metadata can be included as one of the objects inside the `"service"` arra
 
 Each type of asset (dataset, algorithm, workflow, etc, ..) typically will have associated different kind of services.
 There are 2 type of services that are commonly added to all the assets:
+
 * metadata - describing the asset
 * provenance - describing the asset provenance
+
+Each service include a `serviceEndpoint` attribute with a URL to the server or document completing that service.
+Optionally, the service can include a `immutableServiceEndpoint` attribute with a URL to a repository/service where 
+additional information is stored in an immutable way (i.e IPFS, Filecoin, Arweave, etc).
 
 Each service is distinguished by the `DDO.service.type` attribute.
 
@@ -157,6 +167,7 @@ Example:
     "index": 0,
     "type": "metadata",
     "serviceEndpoint": "https://service/api/v1/metadata/assets/ddo/did:nv:0ebed8226ada17fde24b6bf2b95d27f8f05fcce09139ff5cec31f6d81a7cd2ea",
+    "immutableServiceEndpoint": "cid://QmVT3wfySvZJqAvkBCyxoz3EvD3yeLqf3cvAssFDpFFXNm",
     "attributes": {  
       "main": {},
       "additionalInformation": {},
@@ -188,6 +199,55 @@ Example:
 - You can find a complete reference of the asset metadata in [METADATA SPEC](../metadata/README.md).
 - You can find a complete [real world example of a DDO](https://w3c-ccg.github.io/did-spec/#real-world-example)
 with extended services added, as part of the W3C DID spec.
+
+### DDO Meta information
+
+This section (named `meta`) provides additional information about the DDO itself including versions, and networks where this DDO is valid.
+It will include 2 main blocks of information:
+
+#### Versions
+
+Allows to register the different linear versions of the DDO created. It is an array sorted by version creation including the following information:
+
+* Version Id (`_id`) - Unique identifier of the version, it could be a DID
+* Tag or Version number (`tag`)
+* Created date time - Datetime refereing when it was created without sub-second decimal precision
+* Change checksum (`checksum`) - Optional attribute with a checksum of the metadata change compared with the previous version  
+
+#### Networks
+
+Identify in which networks is the DDO valid. It is an unsorted array including the `chainId` of the network where this DID is available.
+
+#### Example
+
+Here an example of the `meta` section of a DDO:
+
+```json
+
+"meta": {
+  "versions": [
+    {
+      "_id": "dsadsa",
+      "tag": "v0.1",
+      "createdAt": "2016-02-08T16:02:20Z",
+      "checksum": "4329042309a02394032"
+    },
+    {
+      "_id": "ccacd",
+      "tag": "v0.2",
+      "createdAt": "2018-02-08T16:02:20Z",
+      "checksum": "0000010992349"
+    }    
+  ],
+  "networks": [
+    { "chainId": 1},
+    { "chainId": 23},
+    { "chainId": 8001}
+  ]
+}
+
+```
+
 
 ### Integrity
 
@@ -246,6 +306,7 @@ The DID Document (DDO) SHOULD include the following `proof` information:
 * `creator` - Address of the user providing the proof
 * `signatureValue` - Result of the signature given by the creator
 * `checksum` - Checksums of the individual services included in the DDO
+* `inmutableUrl` - Url to a copy of the DDO in an inmutable repository like IPFS, Arweave, etc.
 
 Here is an example `proof` section to add in the DDO:
 
@@ -255,6 +316,7 @@ Here is an example `proof` section to add in the DDO:
     "created": "2016-02-08T16:02:20Z",
     "creator": "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
     "signatureValue": "0xc9eeb2b8106e…6abfdc5d1192641b",
+    "inmutableUrl": "ipfs://QmPChd2hVbrJ6bfo3WBcTW4iZnpHm8TEzWkLHmLpXhF68A",
     "checksum": {
         "0": "0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377",
         "1": "0x999999952b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3"
