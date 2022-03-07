@@ -244,16 +244,16 @@ The model of this API is the following:
 This module of the API allows the management of User Generated Contents (UGC) like user reviews. The main functionalities provided are the following:
 
 * Create a user review - `POST /api/v1/ugc/reviews`
-* Get a user review - `GET /api/v1/ugc/reviews/{ugcId}`
+* Get a user review - `GET /api/v1/ugc/reviews/{id}`
 * Get all the reviews associated to an asset - `GET /api/v1/ugc/asset/{did}`
-* Update a review - `PUT /api/v1/ugc/reviews/{ugcId}`
-* Unpublish a review - `DELETE /api/v1/ugc/reviews/{ugcId}`
+* Update a review - `PUT /api/v1/ugc/reviews/{id}`
+* Unpublish a review - `DELETE /api/v1/ugc/reviews/{id}`
 
 The Creation, Update and Deletion of reviews is authorized and **only the review owner and/or the application admin** is allowed to do that action.
 
 The model of this API is the following:
 
-* `ugcId` - The identifier of the asset
+* `id` - The identifier of the ugc content
 * `did` - The identifier of the asset
 * `owner` - The userId who created the review/rating
 * `status` - Status of the UGC. Possible values: "publised", "unpublished", "deleted", "retired"
@@ -281,18 +281,28 @@ can identify which NFTs are gonna be minted and when. The main functionalities p
 The Creation, Update and Deletion of a NFT Drop is authorized and **only the asset owner and/or the application admin** is allowed to do that action.
 
 
-
 ### Bookmarks
 
 This module of the API allows users to bookmark marketplace contents. The main functionalities provided are the following:
 
 * Create a bookmark entry - `POST /api/v1/ugc/bookmarks`
-* Get a bookmark entry - `GET /api/v1/ugc/bookmarks/{bookmarkId}`
-* Get all the user bookmarks - `GET /api/v1/ugc/bookmarks/{userId}`
-* Update an existing bookmark - `PUT /api/v1/ugc/bookmarks/{bookmarkId}`
+* Get a bookmark entry - `GET /api/v1/ugc/bookmarks/{id}`
+* Get all the user bookmarks - `GET /api/v1/ugc/bookmarks/user/{userId}`
+* Update an existing bookmark - `PUT /api/v1/ugc/bookmarks/{id}`
 * Delete a bookmark - `DELETE /api/v1/ugc/bookmarks/{bookmarkId}`
 
 The Creation, Update and Deletion of bookmarks is authorized and **only the bookmark owner** is allowed to do that action.
+
+
+The model of this API is the following:
+
+* `id` - The identifier of the bookmark
+* `did` - The identifier of the asset
+* `userId` - The userId who created the bookmark
+* `description` - Description given by the user
+* `createdAt` - When the UGC was created
+
+
 
 ### Marketplace Management 
 
