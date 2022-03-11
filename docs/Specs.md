@@ -14,7 +14,7 @@ Short Name              | Title                                             | Ve
 [IDM](architecture/specs/id_management/README.md)| Identity management with on-chain access control                     | 0.1          | Valid        | [@aaitor](https://github.com/aaitor)
 [NFT](architecture/specs/nft/README.md)| NFTs Engine                     | 0.2          | Valid        | [@aaitor](https://github.com/aaitor)
 [KEYTRANSFER](architecture/specs/keytransfer/README.md)| Data Transfer Proofs | 0.1          | Valid        | [@mrsmkl](https://github.com/mrsmkl)
-[MKTAPI](architecture/specs/marketplace_api/README.md)| Marketplace API | 0.1          | Draft        | [@aaitor](https://github.com/aaitor)
+[MKTAPI](architecture/specs/marketplace_api/README.md)| Marketplace API | 0.2          | Draft        | [@aaitor](https://github.com/aaitor)
 
 ## Attribution
 
