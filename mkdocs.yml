@@ -116,7 +116,7 @@ nav:
       - Data Transfer Proofs: architecture/specs/keytransfer/README.md
       - Decentralized Identifiers: architecture/specs/did/README.md
       - Metadata: architecture/specs/metadata/README.md
-      - Metadata: architecture/specs/marketplace_api/README.md
+      - Marketplace API: architecture/specs/marketplace_api/README.md
       - Identity Management: architecture/specs/id_management/README.md
   - Integration:
       - Overview: api/README.md
