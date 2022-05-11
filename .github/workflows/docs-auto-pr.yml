@@ -16,7 +16,7 @@ jobs:
         with:
           source_branch: "${{ github.ref_name }}"                             # If blank, default: triggered branch
           destination_branch: "master"                                        # If blank, default: master
-          pr_title: 'Updating ${{ github.ref_name }} automatically'           # Title of pull request
+          pr_title: '[DOCS] Updating ${{ github.ref_name }} automatically'           # Title of pull request
           pr_body: "*An automated PR to update ${{ github.ref_name }}*"       # Full markdown support, requires pr_title to be set
           pr_allow_empty: false                                               # Creates pull request even if there are no changes
           github_token: ${{ secrets.API_TOKEN_GITHUB }}
