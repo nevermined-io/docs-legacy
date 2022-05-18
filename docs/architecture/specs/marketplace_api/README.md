@@ -58,6 +58,7 @@ With that objective in mind, the specification of this API should detail the fol
 * NFTs Metadata - Recording the metadata associated to a NFT
 * NFTs Drops - Management of NFT drops
 * User Reviews - Allowing users to comment and rate marketplace contents
+* Drops - Managing of NFT drops
 * Bookmarks - Allowing users to save bookmarks about different assets
 
 

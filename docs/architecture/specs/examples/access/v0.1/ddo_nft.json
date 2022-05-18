@@ -223,7 +223,7 @@
 								{
 									"name": "_contractAddress",
 									"type": "address",
-									"value": "0xf0ff000512fC47ab52aC8e4f90E335a5Fe3dD024"
+									"value": ""
 								}
 							],
 							"events": [{
@@ -361,7 +361,7 @@
 								{
 									"name": "_contractAddress",
 									"type": "address",
-									"value": "0xf0ff000512fC47ab52aC8e4f90E335a5Fe3dD024"
+									"value": ""
 								}
 							],
 							"events": [{

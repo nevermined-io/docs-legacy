@@ -360,7 +360,9 @@ For the NFT Sales and Access templates, there are different conditions that allo
 
 The `hashValues` and `fulfill` methods now require an additional `_contractAddress` parameter. This address is the
 address of the NFT Vault contract (the Nevermined DIDRegistry implementing ERC-1155, or an external ERC-721 or
-ERC-1155).
+ERC-1155). In addition to this, if instead of a regular transfer a minting is required, the `_nftTransfer` 
+parameter can be given. If `true` the service agreements will do regular transfers, if `false` they 
+will mint new NFTs.
 
 Nevermined contract provide interfaces for these contracts and 2 different implementations of each for ERC-1155 &
 ERC-721. Using these different implementations, the templates can be initialized with addresses using the different
@@ -394,7 +396,7 @@ Here you can find an example of the `transferNFT` DDO condition:
           }, {
             "name": "_contractAddress",
             "type": "address",
-            "value": "0xf0ff000512fC47ab52aC8e4f90E335a5Fe3dD024"
+            "value": ""
           }],
           "events": [{
             "name": "Fulfilled",
