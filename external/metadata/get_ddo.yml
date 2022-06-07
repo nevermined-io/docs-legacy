@@ -1,0 +1,15 @@
+Get DDO of a particular asset.
+---
+tags:
+  - ddo
+parameters:
+  - name: did
+    in: path
+    description: DID of the asset.
+    required: true
+    type: string
+responses:
+  200:
+    description: successful operation
+  404:
+    description: This asset DID is not in MetadataDB

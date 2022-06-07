@@ -1,0 +1,33 @@
+Get a list of Services that match with the executed query.
+---
+tags:
+  - service
+consumes:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    description: Service metadata.
+    schema:
+      type: object
+      properties:
+        query:
+          type: string
+          description: Query to realize
+          example: {"query": {"bool": { "must": [{"match": { "attributes.main.name": "nftSalesAgreement" }}]}}}
+        sort:
+          type: object
+          description: Key or list of keys to sort the result
+          example: {"value":1}
+        offset:
+          type: int
+          description: Number of records per page
+          example: 100
+        page:
+          type: int
+          description: Page shown
+          example: 1
+responses:
+  200:
+    description: successful action

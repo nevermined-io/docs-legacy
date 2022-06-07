@@ -1,0 +1,17 @@
+Retire metadata of an asset
+---
+tags:
+  - ddo
+parameters:
+  - name: did
+    in: path
+    description: DID of the asset.
+    required: true
+    type: string
+responses:
+  200:
+    description: successfully deleted
+  404:
+    description: This asset DID is not in MetadataDB
+  500:
+    description: Error

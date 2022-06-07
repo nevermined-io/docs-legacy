@@ -1,0 +1,9 @@
+Retire metadata of all the assets.
+---
+tags:
+  - ddo
+responses:
+  200:
+    description: successfully deleted
+  500:
+    description: Error
