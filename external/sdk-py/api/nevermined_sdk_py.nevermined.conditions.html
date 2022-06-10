@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>nevermined_sdk_py.nevermined.conditions module &#8212; nevermined-sdk-py 0.2.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nevermined_sdk_py.nevermined.keeper module" href="nevermined_sdk_py.nevermined.keeper.html" />
+    <link rel="prev" title="nevermined_sdk_py.nevermined.auth module" href="nevermined_sdk_py.nevermined.auth.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-nevermined_sdk_py.nevermined.conditions">
+<span id="nevermined-sdk-py-nevermined-conditions-module"></span><h1>nevermined_sdk_py.nevermined.conditions module<a class="headerlink" href="#module-nevermined_sdk_py.nevermined.conditions" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="nevermined_sdk_py.nevermined.conditions.Conditions">
+<em class="property">class </em><code class="sig-prename descclassname">nevermined_sdk_py.nevermined.conditions.</code><code class="sig-name descname">Conditions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keeper</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.conditions.Conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Nevermined conditions class.</p>
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.conditions.Conditions.grant_access">
+<code class="sig-name descname">grant_access</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agreement_id</span></em>, <em class="sig-param"><span class="n">did</span></em>, <em class="sig-param"><span class="n">grantee_address</span></em>, <em class="sig-param"><span class="n">account</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.conditions.Conditions.grant_access" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grant access condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>agreement_id</strong> – id of the agreement, hex str</p></li>
+<li><p><strong>did</strong> – DID, str</p></li>
+<li><p><strong>grantee_address</strong> – Address, hex str</p></li>
+<li><p><strong>account</strong> – Account</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.conditions.Conditions.lock_reward">
+<code class="sig-name descname">lock_reward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agreement_id</span></em>, <em class="sig-param"><span class="n">amount</span></em>, <em class="sig-param"><span class="n">account</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.conditions.Conditions.lock_reward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lock reward condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>agreement_id</strong> – id of the agreement, hex str</p></li>
+<li><p><strong>amount</strong> – Amount of tokens, int</p></li>
+<li><p><strong>account</strong> – Account</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.conditions.Conditions.refund_reward">
+<code class="sig-name descname">refund_reward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agreement_id</span></em>, <em class="sig-param"><span class="n">amount</span></em>, <em class="sig-param"><span class="n">account</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.conditions.Conditions.refund_reward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refund reaward condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>agreement_id</strong> – id of the agreement, hex str</p></li>
+<li><p><strong>amount</strong> – Amount of tokens, int</p></li>
+<li><p><strong>account</strong> – Account</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.conditions.Conditions.release_reward">
+<code class="sig-name descname">release_reward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agreement_id</span></em>, <em class="sig-param"><span class="n">amount</span></em>, <em class="sig-param"><span class="n">account</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.conditions.Conditions.release_reward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Release reward condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>agreement_id</strong> – id of the agreement, hex str</p></li>
+<li><p><strong>amount</strong> – Amount of tokens, int</p></li>
+<li><p><strong>account</strong> – Account</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.jpg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">nevermined-sdk-py</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">nevermined_sdk_py</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="nevermined_sdk_py.html">nevermined_sdk_py package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="nevermined_sdk_py.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.agreement_events.html">nevermined_sdk_py.agreement_events package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.assets.html">nevermined_sdk_py.assets package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.data_store.html">nevermined_sdk_py.data_store package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.gateway.html">nevermined_sdk_py.gateway package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="nevermined_sdk_py.nevermined.html">nevermined_sdk_py.nevermined package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.secret_store.html">nevermined_sdk_py.secret_store package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nevermined_sdk_py.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nevermined_sdk_py.html#module-nevermined_sdk_py">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">nevermined_sdk_py</a><ul>
+  <li><a href="nevermined_sdk_py.html">nevermined_sdk_py package</a><ul>
+  <li><a href="nevermined_sdk_py.nevermined.html">nevermined_sdk_py.nevermined package</a><ul>
+      <li>Previous: <a href="nevermined_sdk_py.nevermined.auth.html" title="previous chapter">nevermined_sdk_py.nevermined.auth module</a></li>
+      <li>Next: <a href="nevermined_sdk_py.nevermined.keeper.html" title="next chapter">nevermined_sdk_py.nevermined.keeper module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;nevermined-sdk-py contributors.
+      
+      |
+      <a href="../_sources/api/nevermined_sdk_py.nevermined.conditions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

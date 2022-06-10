@@ -1,0 +1,19 @@
+nevermined\_sdk\_py.gateway package
+===================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   nevermined_sdk_py.gateway.gateway
+   nevermined_sdk_py.gateway.gateway_provider
+
+Module contents
+---------------
+
+.. automodule:: nevermined_sdk_py.gateway
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>nevermined_sdk_py.nevermined.auth module &#8212; nevermined-sdk-py 0.2.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nevermined_sdk_py.nevermined.conditions module" href="nevermined_sdk_py.nevermined.conditions.html" />
+    <link rel="prev" title="nevermined_sdk_py.nevermined.assets module" href="nevermined_sdk_py.nevermined.assets.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-nevermined_sdk_py.nevermined.auth">
+<span id="nevermined-sdk-py-nevermined-auth-module"></span><h1>nevermined_sdk_py.nevermined.auth module<a class="headerlink" href="#module-nevermined_sdk_py.nevermined.auth" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="nevermined_sdk_py.nevermined.auth.Auth">
+<em class="property">class </em><code class="sig-prename descclassname">nevermined_sdk_py.nevermined.auth.</code><code class="sig-name descname">Auth</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keeper</span></em>, <em class="sig-param"><span class="n">storage_path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.auth.Auth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Nevermined auth class.
+Provide basic management of a user auth token. This token can be used to emulate
+sign-in behaviour. The token can be stored and associated with an expiry time.
+This is useful in front-end applications that interact with a 3rd-party wallet
+apps. The advantage of using the auth token is to reduce the number of confirmation
+prompts requiring user action.</p>
+<p>The auth token works with a provider service such as Gateway which also uses this
+ocean module to handle auth tokens.</p>
+<p>Token format is “signature-timestamp”.</p>
+<dl class="py attribute">
+<dt id="nevermined_sdk_py.nevermined.auth.Auth.DEFAULT_EXPIRATION_TIME">
+<code class="sig-name descname">DEFAULT_EXPIRATION_TIME</code><em class="property"> = 2592000</em><a class="headerlink" href="#nevermined_sdk_py.nevermined.auth.Auth.DEFAULT_EXPIRATION_TIME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="nevermined_sdk_py.nevermined.auth.Auth.DEFAULT_MESSAGE">
+<code class="sig-name descname">DEFAULT_MESSAGE</code><em class="property"> = 'Nevermined Protocol Authentication'</em><a class="headerlink" href="#nevermined_sdk_py.nevermined.auth.Auth.DEFAULT_MESSAGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.auth.Auth.check">
+<code class="sig-name descname">check</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.auth.Auth.check" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> – hex str consist of signature and timestamp</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>hex str ethereum address</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.auth.Auth.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">account</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.auth.Auth.get" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>account</strong> – Account instance signing the token</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>hex str the token generated/signed by account</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.auth.Auth.is_stored">
+<code class="sig-name descname">is_stored</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">account</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.auth.Auth.is_stored" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>account</strong> – Account instance</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>bool whether this account has a stored token</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.auth.Auth.is_token_valid">
+<em class="property">static </em><code class="sig-name descname">is_token_valid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.auth.Auth.is_token_valid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.auth.Auth.restore">
+<code class="sig-name descname">restore</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">account</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.auth.Auth.restore" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>account</strong> – Account instance to fetch the saved token</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>hex str the token retreived from storage
+None if no token found for this account</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.auth.Auth.store">
+<code class="sig-name descname">store</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">account</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.auth.Auth.store" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>account</strong> – Account instance signing the token</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>token that was generated and stored for this account</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.jpg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">nevermined-sdk-py</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">nevermined_sdk_py</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="nevermined_sdk_py.html">nevermined_sdk_py package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="nevermined_sdk_py.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.agreement_events.html">nevermined_sdk_py.agreement_events package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.assets.html">nevermined_sdk_py.assets package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.data_store.html">nevermined_sdk_py.data_store package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.gateway.html">nevermined_sdk_py.gateway package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="nevermined_sdk_py.nevermined.html">nevermined_sdk_py.nevermined package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.secret_store.html">nevermined_sdk_py.secret_store package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nevermined_sdk_py.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nevermined_sdk_py.html#module-nevermined_sdk_py">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">nevermined_sdk_py</a><ul>
+  <li><a href="nevermined_sdk_py.html">nevermined_sdk_py package</a><ul>
+  <li><a href="nevermined_sdk_py.nevermined.html">nevermined_sdk_py.nevermined package</a><ul>
+      <li>Previous: <a href="nevermined_sdk_py.nevermined.assets.html" title="previous chapter">nevermined_sdk_py.nevermined.assets module</a></li>
+      <li>Next: <a href="nevermined_sdk_py.nevermined.conditions.html" title="next chapter">nevermined_sdk_py.nevermined.conditions module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;nevermined-sdk-py contributors.
+      
+      |
+      <a href="../_sources/api/nevermined_sdk_py.nevermined.auth.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

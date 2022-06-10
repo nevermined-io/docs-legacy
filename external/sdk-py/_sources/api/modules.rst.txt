@@ -1,0 +1,7 @@
+nevermined_sdk_py
+=================
+
+.. toctree::
+   :maxdepth: 4
+
+   nevermined_sdk_py

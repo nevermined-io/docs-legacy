@@ -1,0 +1,7 @@
+nevermined\_sdk\_py.assets.asset\_executor module
+=================================================
+
+.. automodule:: nevermined_sdk_py.assets.asset_executor
+   :members:
+   :undoc-members:
+   :show-inheritance:

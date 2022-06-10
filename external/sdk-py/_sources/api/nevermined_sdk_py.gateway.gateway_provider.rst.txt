@@ -1,0 +1,7 @@
+nevermined\_sdk\_py.gateway.gateway\_provider module
+====================================================
+
+.. automodule:: nevermined_sdk_py.gateway.gateway_provider
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,29 @@
+nevermined\_sdk\_py.nevermined package
+======================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   nevermined_sdk_py.nevermined.accounts
+   nevermined_sdk_py.nevermined.agreements
+   nevermined_sdk_py.nevermined.assets
+   nevermined_sdk_py.nevermined.auth
+   nevermined_sdk_py.nevermined.conditions
+   nevermined_sdk_py.nevermined.keeper
+   nevermined_sdk_py.nevermined.nevermined
+   nevermined_sdk_py.nevermined.providers
+   nevermined_sdk_py.nevermined.secret_store
+   nevermined_sdk_py.nevermined.services
+   nevermined_sdk_py.nevermined.templates
+   nevermined_sdk_py.nevermined.tokens
+
+Module contents
+---------------
+
+.. automodule:: nevermined_sdk_py.nevermined
+   :members:
+   :undoc-members:
+   :show-inheritance:
