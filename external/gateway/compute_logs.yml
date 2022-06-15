@@ -1,0 +1,35 @@
+Allows to get access to logs associated to a compute execution
+---
+tags:
+  - services
+consumes:
+  - application/json
+parameters:
+  - name: agreement_id
+    in: path
+    description: The ID of the service agreement.
+    required: true
+    type: string
+  - name: execution_id
+    in: path
+    description: The ID of the execution associated to a service agreement.
+    required: true
+    type: string
+  - name: Authorization
+    in: header
+    description: The bearer token.
+    required: true
+    type: string
+responses:
+  200:
+    description: Returns the execution logs
+    example: [
+               { "podName": "configurator", "content": "line1" },
+               { "podName": "configurator", "content": "line2" },
+               { "podName": "configurator", "content": "line3" },
+               { "podName": "transformation", "content": "line1" }
+             ]
+  401:
+    description: Invalid bearer token.
+  500:
+    description: Error

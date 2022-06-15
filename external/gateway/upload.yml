@@ -1,0 +1,25 @@
+Uploads a file to a storage backend (Filecoin, IPFS, Amazon S3, etc).
+This could be disabled by the gateway operator and depends on the backends supported.
+---
+tags:
+  - services
+consumes:
+  - application/json
+parameters:
+  - name: backend
+    in: path
+    description: The storage backend to use. Supported values (filecoin, ipfs, s3, azure, onprem)
+    required: true
+    type: string
+  - name: file
+    type: file
+    description: The file to upload.
+responses:
+  201:
+    description: document successfully uploaded
+  400:
+    description: No file provided in request
+  501:
+    description: Upload not supported
+  500:
+    description: Error

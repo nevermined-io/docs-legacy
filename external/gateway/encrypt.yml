@@ -1,0 +1,34 @@
+Encrypt a Secret using the Secret Store, ECDSA or RSA methods
+---
+tags:
+  - services
+consumes:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    description: Asset urls encryption.
+    schema:
+      type: object
+      required:
+        - message
+        - method
+      properties:
+        message:
+          description: The message to encrypt
+          type: string
+          example: '{"url":"https://keyko.io/","index":0,"checksum":"efb21","contentLength":"45","contentType":"text/csv"}'
+        method:
+          description: The encryption method to use. Options (`SecretStore`, `PSK-ECDSA`, `PSK-RSA`)
+          type: string
+          example: 'PSK-RSA'
+        did:
+          description: Identifier of the asset.
+          type: string
+          example: 'did:nv:08a429b8529856d59867503f8056903a680935a76950bb9649785cc97869a43d'
+responses:
+  200:
+    description: document successfully encrypted.
+  500:
+    description: Error

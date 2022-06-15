@@ -1,0 +1,24 @@
+Call the execution of a workflow.
+---
+tags:
+  - services
+consumes:
+  - application/json
+parameters:
+  - name: agreement_id
+    in: path
+    description: The ID of the service agreement.
+    required: true
+    type: string
+  - name: Authorization
+    in: header
+    description: The bearer token.
+    required: true
+    type: string
+responses:
+  200:
+    description: Call to the compute-api was successful.
+  401:
+    description: Invalid bearer token.
+  500:
+    description: Error

@@ -1,0 +1,48 @@
+Asks to perform the transfer of an NFT on behalf of an nft holder.
+---
+tags:
+  - services
+consumes:
+  - application/json
+parameters:
+  - name: body
+    in: body
+    description: The request object
+    required: true
+    schema:
+      type: "object"
+      required:
+      - "agreementId"
+      - "nftHolder"
+      - "nftReceiver"
+      - "nftAmount"
+      properties:
+        agreementId:
+          type: string
+          example: "0x659a580e03df7896b35b2cde4668d26801a6eb09bb5604483e588a719d1d747a"
+          description: The ID of the NFT Sales service agreement.
+        nftHolder:
+          type: string
+          example: "0xA99D43d86A0758d5632313b8fA3972B6088A21BB"
+          description: The address of the current NFT holder.
+        nftReceiver:
+          type: string
+          example: "0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0"
+          description: The address of the intended NFT receiver.
+        nftAmount:
+          type: integer
+          example: 1
+          description: The amount of NFTs to transfer.
+responses:
+  200:
+    description: The gateway successfuly transfered the NFT
+  400:
+    description: The asset associated with the agreementId does not contain an NFT Sales service.
+  402:
+    description: The nftReceiver has not locked the payment.
+  405:
+    description: The nftHolder has not approved the gateway to perform the NFT transfer.
+  406:
+    description: The nftHolder does not have enough nfts to transfer.
+  500:
+    description: Error
