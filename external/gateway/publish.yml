@@ -1,0 +1,48 @@
+Encrypt document using the SecretStore and keyed by the given documentId.
+
+This can be used by the publisher of an asset to encrypt the urls of the
+asset data files before publishing the asset ddo. The publisher to use this
+service is one that is using a front-end with a wallet app such as MetaMask.
+In such scenario the publisher is not able to encrypt the urls using the
+SecretStore interface and this service becomes necessary.
+---
+tags:
+  - services
+consumes:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    description: Asset urls encryption.
+    schema:
+      type: object
+      required:
+        - documentId
+        - signature
+        - document
+        - publisherAddress:
+      properties:
+        documentId:
+          description: Identifier of the asset to be registered in ocean.
+          type: string
+          example: 'did:nv:08a429b8529856d59867503f8056903a680935a76950bb9649785cc97869a43d'
+        signature:
+          description: Publisher signature of the documentId
+          type: string
+          example: ''
+        document:
+          description: document
+          type: string
+          example: '/some-url'
+        publisherAddress:
+          description: Publisher address.
+          type: string
+          example: '0x00a329c0648769A73afAc7F9381E08FB43dBEA72'
+responses:
+  201:
+    description: document successfully encrypted.
+  500:
+    description: Error
+
+return: the encrypted document (hex str)

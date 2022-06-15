@@ -1,0 +1,55 @@
+Allows to get access to logs associated to a compute execution status
+---
+tags:
+  - services
+consumes:
+  - application/json
+parameters:
+  - name: agreement_id
+    in: path
+    description: The ID of the service agreement.
+    required: true
+    type: string
+  - name: execution_id
+    in: path
+    description: The ID of the execution associated to a service agreement.
+    required: true
+    type: string
+  - name: Authorization
+    in: header
+    description: The bearer token.
+    required: true
+    type: string
+responses:
+  200:
+    description: Returns the execution status
+    example: {
+               "did": "did:nv:7ce18efb179b65a1ca4b1598ad4d1fb4107c4fe51336e2871d3f7ae208873fd4",
+               "finishedAt": "2020-09-18T12:24:50+00:00Z",
+               "pods": [
+                 {
+                   "finishedAt": "2020-09-18T12:24:49+00:00Z",
+                   "podName": "publishing",
+                   "startedAt": "2020-09-18T12:24:44+00:00Z",
+                   "status": "Succeeded"
+                 },
+                 {
+                   "finishedAt": "2020-09-18T12:24:42+00:00Z",
+                   "podName": "transformation",
+                   "startedAt": "2020-09-18T12:24:39+00:00Z",
+                   "status": "Succeeded"
+                 },
+                 {
+                   "finishedAt": "2020-09-18T12:24:38+00:00Z",
+                   "podName": "configurator",
+                   "startedAt": "2020-09-18T12:24:33+00:00Z",
+                   "status": "Succeeded"
+                 }
+               ],
+               "startedAt": "2020-09-18T12:24:33+00:00Z",
+               "status": "Succeeded"
+            }
+  401:
+    description: Invalid bearer token.
+  500:
+    description: Error

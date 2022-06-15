@@ -1,0 +1,26 @@
+Allows to download the files of an asset if you are the owner or provider of the asset.
+---
+tags:
+  - services
+consumes:
+  - application/json
+parameters:
+  - name: index
+    in: path
+    description: Index of the file in the array of files.
+    required: true
+    schema:
+      type: integer
+      minimum: 0
+  - name: Authorization
+    in: header
+    description: The bearer token.
+    required: true
+    type: string
+responses:
+  200:
+    description: Returns the valid file binary.
+  401:
+    description: Invalid bearer token.
+  500:
+    description: Error
