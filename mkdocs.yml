@@ -105,6 +105,7 @@ nav:
       - Overview: architecture/README.md
       - Building Blocks: BuildingBlocks.md
       - Components: architecture/components.md
+      - Catalog: architecture/components/catalog/getting-started.md
       - Repositories: architecture/repos.md
   - Specifications:
       - Overview: Specs.md
