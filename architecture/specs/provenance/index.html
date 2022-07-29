@@ -1,0 +1,2011 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Nevermined, The world's first enterprise-grade unstoppable data sharing ecosystem">
+      
+      
+        <meta name="author" content="Nevermined">
+      
+      
+        <link rel="canonical" href="http://docs.nevermined.io/architecture/specs/provenance/">
+      
+      <link rel="icon" href="../../../assets/nevermined/favicon-nvm.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Provenance - Nevermined Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prov-spec-decentralized-data-provenance" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Nevermined Documentation" class="md-header__button md-logo" aria-label="Nevermined Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/nevermined/favicon-32.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Nevermined Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Provenance
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nevermined-io/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nevermined-io/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Nevermined Documentation" class="md-nav__button md-logo" aria-label="Nevermined Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/nevermined/favicon-32.png" alt="logo">
+
+    </a>
+    Nevermined Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nevermined-io/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nevermined-io/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Architecture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Architecture" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../BuildingBlocks/" class="md-nav__link">
+        Building Blocks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/" class="md-nav__link">
+        Components
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/catalog/getting-started/" class="md-nav__link">
+        Catalog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repos/" class="md-nav__link">
+        Repositories
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Specifications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Specifications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Specifications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Specs/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../access/" class="md-nav__link">
+        Access Control
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        Data In Situ Computation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fl/" class="md-nav__link">
+        Federated Learning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Provenance
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Provenance
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    Concepts
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#specifications" class="md-nav__link">
+    Specifications
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provenance-model" class="md-nav__link">
+    Provenance Model
+  </a>
+  
+    <nav class="md-nav" aria-label="Provenance Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#provenance-types" class="md-nav__link">
+    Provenance Types
+  </a>
+  
+    <nav class="md-nav" aria-label="Provenance Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entities" class="md-nav__link">
+    Entities
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#agents" class="md-nav__link">
+    Agents
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activities" class="md-nav__link">
+    Activities
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provenance-relations" class="md-nav__link">
+    Provenance Relations
+  </a>
+  
+    <nav class="md-nav" aria-label="Provenance Relations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generation-register-a-new-entity-generated-by-an-agent-wasgeneratedby" class="md-nav__link">
+    Generation: Register a new entity generated by an agent (wasGeneratedBy)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#derivation-register-relationship-between-source-and-derived-entities-wasderivedfrom" class="md-nav__link">
+    Derivation: register relationship between source and derived entities (wasDerivedFrom)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#association-wasassociatedwith" class="md-nav__link">
+    Association (wasAssociatedWith)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delegation-actedonbehalfof" class="md-nav__link">
+    Delegation (actedOnBehalfOf)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-used" class="md-nav__link">
+    Usage (used)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activity-register-activities" class="md-nav__link">
+    Activity: Register activities
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scenario" class="md-nav__link">
+    Scenario
+  </a>
+  
+    <nav class="md-nav" aria-label="Scenario">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#actors" class="md-nav__link">
+    Actors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flow" class="md-nav__link">
+    Flow
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    Architecture
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process" class="md-nav__link">
+    Process
+  </a>
+  
+    <nav class="md-nav" aria-label="Process">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#good-manufacturing" class="md-nav__link">
+    Good Manufacturing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handover-to-carrier" class="md-nav__link">
+    Handover to Carrier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handover-to-the-end-recipient" class="md-nav__link">
+    Handover to the end recipient
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registry" class="md-nav__link">
+    Registry
+  </a>
+  
+    <nav class="md-nav" aria-label="Registry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#smart-contract" class="md-nav__link">
+    Smart Contract
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provenance-registry" class="md-nav__link">
+    Provenance Registry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metadata-registry" class="md-nav__link">
+    Metadata Registry
+  </a>
+  
+    <nav class="md-nav" aria-label="Metadata Registry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agents-registry" class="md-nav__link">
+    Agents Registry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entities-registry" class="md-nav__link">
+    Entities Registry
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provenance-metadata-integrity" class="md-nav__link">
+    Provenance metadata integrity
+  </a>
+  
+    <nav class="md-nav" aria-label="Provenance metadata integrity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-compute-the-provenance-checksum" class="md-nav__link">
+    How to compute the provenance checksum
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    Links
+  </a>
+  
+    <nav class="md-nav" aria-label="Links">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resource-open-provenance-model-opm" class="md-nav__link">
+    Resource: Open Provenance Model (OPM)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nft/" class="md-nav__link">
+        NFTs Engine
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../keytransfer/" class="md-nav__link">
+        Data Transfer Proofs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../did/" class="md-nav__link">
+        Decentralized Identifiers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metadata/" class="md-nav__link">
+        Metadata
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../marketplace_api/" class="md-nav__link">
+        Marketplace API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../id_management/" class="md-nav__link">
+        Identity Management
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Integration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Integration" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Integration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contracts/" class="md-nav__link">
+        Smart Contracts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/api-reference-latest/" class="md-nav__link">
+        API Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Assets/" class="md-nav__link">
+        Assets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Accounts/" class="md-nav__link">
+        Accounts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Agreements/" class="md-nav__link">
+        Agreements
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Conditions/" class="md-nav__link">
+        Conditions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Provenance/" class="md-nav__link">
+        Provenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Tokens/" class="md-nav__link">
+        Tokens
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Providers/" class="md-nav__link">
+        Providers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Secret-Store/" class="md-nav__link">
+        Secret Store
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/SDK/" class="md-nav__link">
+        Software Development Kits (SDKs)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/gateway/" class="md-nav__link">
+        Gateway API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/metadata/" class="md-nav__link">
+        Metadata API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/cli/" class="md-nav__link">
+        Command Line Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_8" type="checkbox" id="__nav_4_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_8">
+          Integrations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Integrations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Integrations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/filecoin/filecoin-storage/" class="md-nav__link">
+        Filecoin Storage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/" class="md-nav__link">
+        Blog posts
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Licensing/" class="md-nav__link">
+        Software Licenses
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Social
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Social" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Social
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://discord.gg/GZju2qScKq" class="md-nav__link">
+        Discord
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://twitter.com/nevermined_io" class="md-nav__link">
+        Twitter
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://linkedin.com/company/nevermined" class="md-nav__link">
+        Linkedin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ" class="md-nav__link">
+        Demos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/nevermined-io/docs/edit/master/docs/architecture/specs/provenance/README.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="prov-spec-decentralized-data-provenance">PROV SPEC: Decentralized Data Provenance<a class="headerlink" href="#prov-spec-decentralized-data-provenance" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code>shortname:      PROV
+name:           Decentralized Data Provenance
+type:           Standard
+status:         Valid
+version:        0.2
+editor:         Aitor Argomaniz &lt;aitor@nevermined.io&gt;
+contributors:   
+</code></pre></div>
+<ul>
+<li><a href="#prov-spec-decentralized-data-provenance">PROV SPEC: Decentralized Data Provenance</a><ul>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#concepts">Concepts</a></li>
+<li><a href="#specifications">Specifications</a></li>
+<li><a href="#provenance-model">Provenance Model</a><ul>
+<li><a href="#provenance-types">Provenance Types</a><ul>
+<li><a href="#entities">Entities</a></li>
+<li><a href="#agents">Agents</a></li>
+<li><a href="#activities">Activities</a></li>
+</ul>
+</li>
+<li><a href="#provenance-relations">Provenance Relations</a><ul>
+<li><a href="#generation-register-a-new-entity-generated-by-an-agent-wasgeneratedby">Generation: Register a new entity generated by an agent (wasGeneratedBy)</a></li>
+<li><a href="#derivation-register-relationship-between-source-and-derived-entities-wasderivedfrom">Derivation: register relationship between source and derived entities (wasDerivedFrom)</a></li>
+</ul>
+</li>
+<li><a href="#association-wasassociatedwith">Association (wasAssociatedWith)</a></li>
+<li><a href="#delegation-actedonbehalfof">Delegation (actedOnBehalfOf)</a></li>
+<li><a href="#usage-used">Usage (used)</a></li>
+<li><a href="#activity-register-activities">Activity: Register activities</a></li>
+</ul>
+</li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#scenario">Scenario</a></li>
+<li><a href="#actors">Actors</a></li>
+<li><a href="#flow">Flow</a></li>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#data">Data</a></li>
+<li><a href="#process">Process</a><ul>
+<li><a href="#good-manufacturing">Good Manufacturing</a></li>
+<li><a href="#handover-to-carrier">Handover to Carrier</a></li>
+<li><a href="#handover-to-the-end-recipient">Handover to the end recipient</a></li>
+</ul>
+</li>
+<li><a href="#registry">Registry</a><ul>
+<li><a href="#provenance-registry">Provenance Registry</a></li>
+<li><a href="#metadata-registry">Metadata Registry</a><ul>
+<li><a href="#agents-registry">Agents Registry</a></li>
+<li><a href="#entities-registry">Entities Registry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#provenance-metadata-integrity">Provenance metadata integrity</a><ul>
+<li><a href="#how-to-compute-the-provenance-checksum">How to compute the provenance checksum</a></li>
+</ul>
+</li>
+<li><a href="#links">Links</a>          </li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>This SPEC introduces the concept of asset Data Provenance in Nevermined platform based on  the W3C Provenance
+specification.</p>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
+<p>The intention of this document is to discuss how data provenance can be established in a decentralized system,
+permitting integrity validation of this provenance information.</p>
+<p>The main objectives of this SPEC are:</p>
+<ul>
+<li>Understand what provenance information needs to be tracked</li>
+<li>Specify how the provenance integrity check is stored on-chain</li>
+<li>Identify the actors involved in the publishing and visualization of provenance information</li>
+<li>Detail how to register relationships between source and derived entities</li>
+<li>Detail how to register activities</li>
+<li>Understand how to associate activities with the input and output entities in a workflow</li>
+<li>Validate cryptographically that an entity was generated from a specific input entity in a specific activity</li>
+</ul>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="specifications">Specifications<a class="headerlink" href="#specifications" title="Permanent link">&para;</a></h3>
+<p>Nevermined Data Provenance solution is designed based on the <a href="https://www.w3.org/TR/2013/NOTE-prov-overview-20130430/">W3C Provenance specifications</a>.
+In addition to this, Nevermined uses <a href="https://nevermined-io.github.io/docs/#/architecture/specs/did/README">Decentralized Identifiers</a>
+following the <a href="https://w3c.github.io/did-core/#overall-architecture">W3C DID specification</a>.</p>
+<p>The design of Nevermined using both specifications is critical because it enables the
+construction of a complete and decentralized provenance solution where independent
+parties can collaborate in the common problem of delivering goods without relying
+on a central party, and providing transparency, complete traceability, efficiency
+and a unique source of truth.</p>
+<h3 id="provenance-model">Provenance Model<a class="headerlink" href="#provenance-model" title="Permanent link">&para;</a></h3>
+<p>The W3C PROV specification defines Provenance as:</p>
+<div class="highlight"><pre><span></span><code>Provenance is information about entities, activities, and people involved in producing a piece of data or thing, which
+can be used to form assessments about its quality, reliability or trustworthiness.
+</code></pre></div>
+<p>The W3C PROV data model includes a core set of types and relations commonly found in provenance tracking for more
+specific uses.</p>
+<p>In particular, the data model includes both <code>Type</code> and <code>Relation</code> categories.</p>
+<p><code>Type</code> category contains <code>entity</code>, <code>activity</code> and <code>agent</code> which are core components.
+<code>Relations</code> category defines key relationships between different types of  components, which can be mapped into
+specific PROV model relations.</p>
+<p>
+<figure><img src="images/prov-mapping.jpg" /><figcaption>PROV Mapping</figcaption>
+</figure>
+</p>
+<h4 id="provenance-types">Provenance Types<a class="headerlink" href="#provenance-types" title="Permanent link">&para;</a></h4>
+<p>Provenance information can be modeled as the interaction between Agents and Entities related via the Activities
+between them:</p>
+<h5 id="entities">Entities<a class="headerlink" href="#entities" title="Permanent link">&para;</a></h5>
+<p>In PROV, physical, digital, conceptual, or other kinds of things are called entities. Examples of such entities are
+assets, a web page, a chart, a spellchecker, etc.</p>
+<h5 id="agents">Agents<a class="headerlink" href="#agents" title="Permanent link">&para;</a></h5>
+<p>An agent takes a role in an activity such that the agent can be assigned some degree of responsibility for the
+activity taking place. An agent can be a person, a piece of software, an inanimate object, an organization, or other
+entities that may be ascribed responsibility.</p>
+<h5 id="activities">Activities<a class="headerlink" href="#activities" title="Permanent link">&para;</a></h5>
+<p>Activities are how entities come into existence and how their attributes change to become new entities, often making
+use of previously existing  entities to achieve this. They are dynamic aspects of the world, such as
+actions, processes, etc. For example, if the second version of document D was generated by a translation from the
+first version of the document in another language, then this translation is an activity.</p>
+<p>
+<figure><img src="https://www.w3.org/TR/2013/REC-prov-o-20130430/diagrams/starting-points.svg" /><figcaption>PROV E-R</figcaption>
+</figure>
+</p>
+<h4 id="provenance-relations">Provenance Relations<a class="headerlink" href="#provenance-relations" title="Permanent link">&para;</a></h4>
+<p>Relations between agents and entities are open but there are some common relations that can be used as reference:</p>
+<h5 id="generation-register-a-new-entity-generated-by-an-agent-wasgeneratedby">Generation: Register a new entity generated by an agent (wasGeneratedBy)<a class="headerlink" href="#generation-register-a-new-entity-generated-by-an-agent-wasgeneratedby" title="Permanent link">&para;</a></h5>
+<p><code>Generation</code> is the completion of production of a new entity by an activity.
+This entity did not exist before generation and becomes available for usage after this generation.</p>
+<p><code>Generation</code>, written <code>wasGeneratedBy(id; e, a, t, attrs)</code> in PROV-N (a notation for provenance aimed at human
+consumption), has:</p>
+<ul>
+<li><code>id</code>: an optional identifier for a generation;</li>
+<li><code>entity</code>: an identifier (e) for a created entity. In Nevermined a <strong>DID</strong>;</li>
+<li><code>activity</code>: an optional identifier (a) for the activity that creates
+the entity. In Nevermined a <strong>DID</strong>;</li>
+<li><code>time</code>: an optional "generation time" (t), the time at which the
+entity was completely created;</li>
+<li><code>attributes</code>: an optional set (attrs) of attribute-value pairs
+representing additional information about this generation.</li>
+</ul>
+<p>While each of <code>id</code>, <code>activity</code>, <code>time</code>, and <code>attributes</code> are optional, at least one of them must be present.</p>
+<p><strong>PROV</strong> uses qualified names to identify things for data provenance, which is essentially a shortened representation
+of a URI in the form of <code>prefix:localpart</code>.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>  wasGeneratedBy(did:nv:e1, did:nv:a1, 2019-10-26T21:32:52)
+  wasGeneratedBy(did:nv:e2, did:nv:a1, 2019-10-26T10:00:00)
+</code></pre></div>
+<p>The above example shows the existence of two generations (with
+respective times 2019-10-26T21:32:52 and 2001-10-26T10:00:00), at which
+new entities, identified by <code>did:nv:e1</code> and <code>did:nv:e2</code>, were created
+by an activity, identified by <code>did:nv:a1</code>.</p>
+<h5 id="derivation-register-relationship-between-source-and-derived-entities-wasderivedfrom">Derivation: register relationship between source and derived entities (wasDerivedFrom)<a class="headerlink" href="#derivation-register-relationship-between-source-and-derived-entities-wasderivedfrom" title="Permanent link">&para;</a></h5>
+<p><code>Derivation</code> is a transformation of an entity into another, an update of
+ an entity resulting in a new one, or the construction of a new entity
+ based on a pre-existing entity.</p>
+<p>A <code>derivation</code>, written <code>wasDerivedFrom(id; e2, e1, a, g2, u1, attrs)</code>
+in PROV-N, has:</p>
+<ul>
+<li><code>id</code>: an optional identifier for a derivation;</li>
+<li><code>generatedEntity</code>: the identifier (e2) of the <strong>derived entity</strong>
+generated by the derivation. In Nevermined a <strong>DID</strong>;</li>
+<li><code>usedEntity</code>: the identifier (e1) of the <strong>source entity</strong> used by the
+ derivation. In Nevermined a <strong>DID</strong>;</li>
+<li><code>activity</code>: an optional identifier (a) for the activity using and
+generating the above entities. In Nevermined a <strong>DID</strong>;</li>
+<li><code>generation</code>: an optional identifier (g2) for the generation involving
+ the generated entity (e2) and activity (a). In Nevermined a <strong>DID</strong>;</li>
+<li><code>usage</code>: an optional identifier (u1) for the usage involving the used
+entity (e1) and activity (a). In Nevermined a <strong>DID</strong>;</li>
+<li><code>attributes</code>: an optional set (attrs) of attribute-value pairs
+representing additional information about this derivation.</li>
+</ul>
+<p>The following descriptions are about derivations between <code>did:nv:e1</code> and
+<code>did:nv:e2</code>, but no information is provided as to the identity of the
+activity (and usage and generation) underpinning the derivation.
+In the second line, a type attribute is also provided.</p>
+<div class="highlight"><pre><span></span><code>wasDerivedFrom(did:nv:e2, did:nv:e1)
+wasDerivedFrom(did:nv:e2, did:nv:e1, [ prov:type=&quot;physical transform&quot; ])
+</code></pre></div>
+<p>The following description expresses that activity <code>did:nv:a</code>, using the
+entity <code>did:nv:e1</code> according to usage <code>did:nv:01</code>, derived the entity
+<code>did:nv:e2</code> and generated it according to generation <code>did:nv:02</code>.
+It is followed by descriptions for generation <code>did:nv:02</code> and usage <code>did:nv:01</code>.</p>
+<div class="highlight"><pre><span></span><code>wasDerivedFrom(did:nv:e2, did:nv:e1, did:nv:a, did:nv:02, did:nv:01)
+wasGeneratedBy(did:nv:02; did:nv:e2, did:nv:a, -)
+used(did:nv:01; did:nv:a, did:nv:e1, -)
+</code></pre></div>
+<p>With such a comprehensive description of derivation, a program that analyzes provenance can identify the activity
+underpinning the derivation, it can identify how the preceding entity <code>did:nv:e1</code> was used by the activity
+(e.g. for instance, which argument it was passed, if the activity is the result of a function invocation), and which
+output the derived entity <code>did:nv:e2</code> was obtained from (say, for a function returning multiple results).</p>
+<h4 id="association-wasassociatedwith">Association (wasAssociatedWith)<a class="headerlink" href="#association-wasassociatedwith" title="Permanent link">&para;</a></h4>
+<p><code>Association</code> is an assignment of responsibility to an agent for an activity, indicating that the agent had a role in the activity.</p>
+<p>An association, written <code>wasAssociatedWith(id; a, ag, pl, attrs)</code> in PROV-N, has:</p>
+<ul>
+<li><code>id</code>: an optional identifier for the association between an activity and an agent;</li>
+<li><code>activity</code>: an identifier (a) for the activity;</li>
+<li><code>agent</code>: an optional identifier (ag) for the agent associated with the activity;</li>
+<li><code>plan</code>: an optional identifier (pl) for the plan the agent relied on in the context of this activity;</li>
+<li><code>attributes</code>: an optional set (attrs) of attribute-value pairs representing additional information about this association of this activity with this agent.</li>
+</ul>
+<p>The following examples are about the association between one activity <code>did:nv:ac1</code> and
+one agent <code>did:nv:a00</code>. In the second example, a type attribute is also provided.</p>
+<div class="highlight"><pre><span></span><code>wasAssociatedWith(did:nv:ac1, did:nv:a00)
+wasAssociatedWith(did:nv:ac1, did:nv:a00, [ prov:type=&quot;manufacturing&quot; ])
+</code></pre></div>
+<h4 id="delegation-actedonbehalfof">Delegation (actedOnBehalfOf)<a class="headerlink" href="#delegation-actedonbehalfof" title="Permanent link">&para;</a></h4>
+<p><code>Delegation</code> is the assignment of authority and responsibility to an agent
+(by itself or by another agent) to carry out a specific activity as a delegate
+or representative, while the agent it acts on behalf of retains some
+responsibility for the outcome of the delegated work.</p>
+<p>A delegation link, written <code>actedOnBehalfOf(id; ag2, ag1, a, attrs)</code> in PROV-N, has:</p>
+<ul>
+<li><code>id</code>: an optional identifier for the delegation link between delegate and responsible;</li>
+<li><code>delegate</code>: an identifier (ag2) for the agent associated with an activity, acting on behalf of the responsible agent;</li>
+<li><code>responsible</code>: an identifier (ag1) for the agent, on behalf of which the delegate agent acted;</li>
+<li><code>activity</code>: an optional identifier (a) of an activity for which the delegation link holds;</li>
+<li><code>attributes</code>: an optional set (attrs) of attribute-value pairs representing additional information about this delegation link.</li>
+</ul>
+<p>In the following example we can see how the agent delegated <code>did:nv:a1</code> acts on
+behalf of the <code>did:nv:a2</code> responsible.</p>
+<div class="highlight"><pre><span></span><code> actedOnBehalfOf(did:nv:a1, did:nv:a2)
+ actedOnBehalfOf(did:nv:a1, did:nv:a2, [ prov:type=&quot;ground transportation&quot; ])
+</code></pre></div>
+<h4 id="usage-used">Usage (used)<a class="headerlink" href="#usage-used" title="Permanent link">&para;</a></h4>
+<p><code>Usage</code> is the beginning of utilizing an entity by an activity.
+Before usage, the activity had not begun to utilize this entity and could not
+have been affected by the entity. (Note: This definition is formulated for a
+given usage; it is permitted for an activity to use the same entity multiple
+ times.)</p>
+<p>Given that a usage is the beginning of utilizing an entity, it is instantaneous.</p>
+<p>Usage, written <code>used(id; a, e, t, attrs)</code> in PROV-N, has:</p>
+<ul>
+<li><code>id</code>: an optional identifier for a usage;</li>
+<li><code>activity</code>: an identifier (a) for the activity that used an entity;</li>
+<li><code>entity</code>: an optional identifier (e) for the entity being used;</li>
+<li><code>time</code>: an optional "usage time" (t), the time at which the entity started to be used;</li>
+<li><code>attributes</code>: an optional set (attrs) of attribute-value pairs representing additional information about this usage.</li>
+</ul>
+<p>In the following example we can see how to associate the activity <code>did:nv:ac1</code>
+with the usage of the entity <code>did:nv:e1</code> in some specific moment.</p>
+<div class="highlight"><pre><span></span><code> usage(did:nv:ac1, did:nv:e1, now())
+ usage(did:nv:ac1, did:nv:e1, now(), [ prov:type=&quot;shipping&quot; ])
+</code></pre></div>
+<h4 id="activity-register-activities">Activity: Register activities<a class="headerlink" href="#activity-register-activities" title="Permanent link">&para;</a></h4>
+<p>An <code>activity</code> is something that occurs over a period of time and acts upon or with entities; it may include consuming,
+processing, transforming, modifying, relocating, using, or generating entities.</p>
+<p>An <code>activity</code>, written <code>activity(id, st, et, [attr1=val1, ...])</code> in  PROV-N, has:</p>
+<ul>
+<li><code>id</code>: an identifier for an activity;</li>
+<li><code>startTime</code>: an optional time (st) for the start of the activity;</li>
+<li><code>endTime</code>: an optional time (et) for the end of the activity;</li>
+<li><code>attributes</code>: an optional set of attribute-value pairs ((attr1, val1), ...) representing additional information
+about this activity.</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>activity(a1, 2011-11-16T16:05:00, 2011-11-16T16:06:00,
+        [ ex:host=&quot;server.example.org&quot;, prov:type=&#39;ex:edit&#39; ])
+</code></pre></div>
+<p>The above example shows the existence of an activity with identifier <code>a1</code>, <code>start time 2011-11-16T16:05:00</code>, and
+<code>end time 2011-11-16T16:06:00</code>,  running on <code>host server.example.org</code>, and of <code>type edit</code>.</p>
+<h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h3>
+<p>Taking into account the relations examples, the scenario where a new asset (entity)
+is created (generation), modified (derivation) and used by a third-party entity
+can be translated into this:</p>
+<div class="highlight"><pre><span></span><code>// Entity X is associated with the activity of goodCreation
+wasAssociatedWith(goodCreation, entityX)
+// Entity Y is associated with the activity of goodModification
+wasAssociatedWith(goodModification, entityY)
+// Entity Z is associated with the activity of goodShipping
+wasAssociatedWith(goodShipping, entityZ)
+// A newAsset was created yesterday via goodCreation activity (Entity X)
+wasGeneratedBy(newAsset goodCreation, yesterday())
+// The newDerivedAsset was created today from the newAsset via goodModification activity (Entity Y)
+wasDerivedFrom(newDerivedAsset, newAsset, goodModification, today())
+// The newDerivedAsset is shipped by Entity Z
+used(goodShipping, newDerivedAsset, now())
+</code></pre></div>
+<h2 id="scenario">Scenario<a class="headerlink" href="#scenario" title="Permanent link">&para;</a></h2>
+<p>For describing the architecture we are gonna use as a reference a supply chain use case. In this scenario a company manufacturing some goods needs to deliver them to the final customer. To do that the goods need to be transported by different shipping companies until the goods are handed over to the final recipient.  </p>
+<h3 id="actors">Actors<a class="headerlink" href="#actors" title="Permanent link">&para;</a></h3>
+<p>As an example to illustrate the architecture we are gonna describe the scenario with the following 4 different actors:</p>
+<ul>
+<li><strong>Acme Co</strong>. International medical company manufacturing different kind of drugs in the their manufacturing center</li>
+<li><strong>Armadillo Shipping</strong>. Courier doing ground and sea transportation of goods.</li>
+<li><strong>Pigeon Carriers</strong>. Company doing air transportation of goods.</li>
+<li><strong>John Doe</strong>. The end recipient of the goods</li>
+</ul>
+<h3 id="flow">Flow<a class="headerlink" href="#flow" title="Permanent link">&para;</a></h3>
+<p>The end to end scenario includes the following steps:</p>
+<ol>
+<li>Acme Co. manufactures the drug at their manufacturing center</li>
+<li>Acme Co. hands off the product for transfer from Acme to ground transport (Armadillo Shipping) to begin the journey</li>
+<li>Armadillo transports the product from the manufacturer to the air freight provider for overseas shipping</li>
+<li>This may or may not go through a distribution center</li>
+<li>Armadillo hands off the freight to the air freight provider ( Pigeon Carriers)</li>
+<li>The air freight provider will take over the shipping and move the freight to their distribution center at the airport to wait for the cargo to be loaded.</li>
+<li>The cargo is loaded into the plane and transferred to the destination</li>
+<li>The air freight provider will hand off the cargo to the end recipient (John Doe)</li>
+</ol>
+<p>
+<figure><img src="images/Nevermined_Provenance_Scenario.png" /><figcaption>Provenance Example Use Case</figcaption>
+</figure>
+</p>
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<h3 id="data">Data<a class="headerlink" href="#data" title="Permanent link">&para;</a></h3>
+<p>Across the complete supply chain scenario described above different parts of data are generated since the good is manufactured until it is delivered to the end recipient. Here some details about that:</p>
+<ul>
+<li>When the good is created, the manufacturer generates some additional information about the physical asset. This could include documents with asset specifications, details of manufacturing, certificates of quality, etc.</li>
+<li>When the good is handed over to the shipping company there are also other pieces of data generated. For example the receipt signed between the agent handing over the goods and the courier. During the transportation process, some additional data could be generated including temperature, humidity, coordinates, etc.</li>
+<li>When the good is delivered to the end user, both parties sign a delivery receipt. This data is also relevant and necessary for further control.</li>
+</ul>
+<p>Taking into account the above details we can distinguish different kind of data generated:</p>
+<ul>
+<li>Files. Including goods specs, receipts, etc. Each agent in the scenario needs to keep track of files or get access to the files created by others.</li>
+<li>Metadata. Describing the goods or the activities related with the goods during the delivery life-cycle.</li>
+</ul>
+<p>Nevermined provides a decentralized ecosystem where all this data can be registered and shared between all the agents participating during the supply chain process. It enables the registering of the files generated by the supply chain flow, making them available between the agents independently on the underlying technology. Also enable the registering of the metadata associated with the complete flow allowing to provide a complete lineage of the whole process. All this information is recorded in a decentralized backbone that works as a source of truth for all the parties.</p>
+<p>Nevermined doesn’t require to replace the existing supply chain software platforms each agent in the system has. It integrates to them and augments their existing capabilities allowing to make available the relevant data generated to the agents participating during the supply process.</p>
+<h3 id="process">Process<a class="headerlink" href="#process" title="Permanent link">&para;</a></h3>
+<p>Taking into account the Scenario described before, the end to end flow can be detailed in the following steps:</p>
+<h4 id="good-manufacturing">Good Manufacturing<a class="headerlink" href="#good-manufacturing" title="Permanent link">&para;</a></h4>
+<p>Acme Corp. (Manufacturer) has created some goods that need to be delivered to John Doe (End Recipient). Acme uses the supply chain management Oracle SCM platform. When the good is created some relevant data (files, certificates, etc.) is created in the SCM platform. As a complement to that, the good created is registered into Nevermined (via SDK integration). This allows to:</p>
+<ul>
+<li>Identify unequivocally the good created within the supply chain network. This associates a unique Decentralized Identifier (DID) to the good and identifies Acme Corp. as the unique manufacturer of the good, providing the genesis of the goods lineage.</li>
+<li>Register some metadata related with the good created, including date of manufacturing, description, conditions, etc. This metadata is hashed and becomes part of the DID created, avoiding further modifications (like date of manufacturing tamper) without breaking the integrity check of the DID.</li>
+<li>Register the data files as part of the metadata. Typically these files will be stored as part of Acme Corp. SCM system. Nevermined provides a gateway that can integrate different backends. These files registered, equally to the metadata are part of the Nevermined integrity check.</li>
+</ul>
+<h4 id="handover-to-carrier">Handover to Carrier<a class="headerlink" href="#handover-to-carrier" title="Permanent link">&para;</a></h4>
+<p>Acme Corp. needs to send the goods manufactured to John Doe. This delivery process needs to involve 2 independent transport companies, Armadillo Shipping that is doing local ground transportation and Pigeon Carriers that is doing air transportation. Pigeon Carriers will deliver the goods to the end recipient.
+During this process the following things happen:
+* Acme Corp. hands over the goods to Armadillo Shipping. During this process there is a digital signature process where Acme Corp. gets the signature from Armadillo of this hand over process. Acme Corp. registers this in the Nevermined Provenance Registry.
+* Armadillo Shipping transports the goods to the airport to hand over to Pigeon Carriers. During the transportation process some data is created including the temperature of the cargo and the coordinates of the complete trip from the Acme factory to the airport. The files with the data generated are uploaded automatically to the Armadillo SCM system. In addition to this the files are registered into Nevermined with a new DID. When Armadillo hands over the goods to Pigeon Carriers, the digital signature accepting the handover is registered in the Provenance Registry.</p>
+<p>The handover between carriers could include multiple steps and companies. Also intermediate storage in delivery centers, goods validation or certification, etc. For sake of simplicity here we only describe a simplistic end to end flow, but in essence a complete scenario involving additional steps could be very similar.</p>
+<h4 id="handover-to-the-end-recipient">Handover to the end recipient<a class="headerlink" href="#handover-to-the-end-recipient" title="Permanent link">&para;</a></h4>
+<p>Pigeon Carriers needs to deliver the goods to John Doe (End Recipient). During this process and very similarly to the above described the following things happens:
+* John Doe sings digitally the delivery receipt. Pigeon Carriers. registers this in the Nevermined Provenance Registry.
+* John Doe, having the DID of the goods can track end to end the complete provenance record of the asset. Also for each intermediate step can retrieve the data assets associated with the goods and created during the delivery process.</p>
+<p>This makes it possible to track end to end the complete cargo flow involving independent agents. The provenance record is immutable and cryptographically secure, providing a transparent and unique source of truth that can be consulted by all the agents involved during and after the completion of the flow. This could allow John Doe to validate that the temperature of the goods were correct during transportation and using the GPS coordinates the cargo never went through unexpected locations.</p>
+<p>
+<figure><img src="images/Nevermined_provenance_architecture.png" /><figcaption>Provenance Architecture</figcaption>
+</figure>
+</p>
+<h3 id="registry">Registry<a class="headerlink" href="#registry" title="Permanent link">&para;</a></h3>
+<h4 id="smart-contract">Smart Contract<a class="headerlink" href="#smart-contract" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>struct DIDRegisterList {
+    mapping(bytes32 =&gt; DIDRegister) didRegisters;
+    bytes32[] didRegisterIds;
+}
+
+struct DIDRegister {
+        address owner;
+        bytes32 lastChecksum;
+        string  url;
+        address lastUpdatedBy;
+        uint256 blockNumberUpdated;
+        address[] providers;
+        address[] delegates;
+    }
+
+struct ProvenanceRegistryList {
+    mapping(bytes32 =&gt; ProvenanceRegistry) provenanceRegistry;
+}
+struct ProvenanceRegistry {
+        bytes32 did;
+        bytes32 relatedDid;
+        bytes32 activityId;
+        address agentId;
+        address agentInvolvedId;
+        uint8   method;
+        address lastUpdatedBy;
+        uint256 blockNumberUpdated;
+}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code># DIDRegister
+
+owner  | lastChecksum | URL                   | lastUpdatedBy   | blockNumber   | providers     | delegates
+-------|--------------|-----------------------|-----------------|---------------|---------------|-------------------
+0x1234 | 00001        | http://nevermined.io  | 2010            | 100           | [0x10]        | []
+0xabab | 12213        | http://nevermined.io  | 2011            | 100           | []            | [0xaa]
+
+
+# ProvenanceRegistry
+
+did    | relatedDid   | activityId        | agentId           | agentInvolvedId    | method    | lastUpdatedBy     | blockNumber   
+-------|--------------|-------------------|-------------------|--------------------|-----------|-------------------|-----------------
+0x1234 | 0x5678       | 0xaabb            | 0xccdd            | 0xccbb             | 0         | 2010              | 100
+0xdddd |              | 0xaabb            | 0xccdd            |                    | 1         | 2011              | 190
+</code></pre></div>
+<h4 id="provenance-registry">Provenance Registry<a class="headerlink" href="#provenance-registry" title="Permanent link">&para;</a></h4>
+<p>The Provenance Registry provides a unique source truth of the provenance information registered in the Nevermined network. It is a generic record where the entities (digital or physical assets) represent their complete life-cycle. When it’s necessary to represent the interaction between independent agents (Acme Corp. hands over a good to Armadillo Shipping), it’s necessary to provide the digital signature of the agents participating in the transaction.</p>
+<p>Using the scenario already described and the W3C PROV specification the complete flow could be described as follows:</p>
+<div class="highlight"><pre><span></span><code>// Acme Corp. manufacture some stuff
+wasAssociatedWith(acmeStuffManufacturing, Acme)
+
+// Armadillo does ground transportation
+wasAssociatedWith(armadilloGroundTransport, Armadillo)
+
+// Pigeon does air transportation
+wasAssociatedWith(pigeonAirTransport, Pigeon)
+
+// Stuff X is created by the action acmeStuffManufacturing
+wasGeneratedBy(stuffX, acmeStuffManufacturing, timestamp)
+
+// Acme hands off the drugs to Armadillo for ground transportation
+actedOnBehalfOf(Armadillo, Acme, [prov:type=&quot;ground transportation&quot; ])
+
+// Armadillo transport the stuff
+used(armadilloGroundTransport, stuffX)
+
+// Armadillo hands off the drugs to Pigeon for air transportation
+actedOnBehalfOf(Pigeon, Armadillo, [prov:type=&quot;air transportation&quot; ])
+
+// Pigeon transport the stuff
+used(pigeonGroundTransport, stuffX)
+
+// Pigeon delivers the stuff to John
+actedOnBehalfOf(John, Pigeon, [prov:type=&quot;delivery&quot; ])
+</code></pre></div>
+<h4 id="metadata-registry">Metadata Registry<a class="headerlink" href="#metadata-registry" title="Permanent link">&para;</a></h4>
+<h5 id="agents-registry">Agents Registry<a class="headerlink" href="#agents-registry" title="Permanent link">&para;</a></h5>
+<p>All the different actors (Agents in PROV terminology) have associated a digital identity allowing their identification and further authorization and authentication in the network. In Nevermined all the different entities can be registered as a DID. In our example:</p>
+<ul>
+<li>Acme Corp - <code>did:nv:acme</code></li>
+<li>Armadillo Shipping - <code>did:nv:armadillo</code></li>
+<li>Pigeon Carriers - <code>did:nv:pigeon</code></li>
+<li>John Doe - <code>did:nv:john</code></li>
+</ul>
+<p>The different agents DIDs can be resolved to DDOs including the user metadata:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;@context&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.w3.org/ns/did/v1&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;did:nv:acme&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;proof&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;created&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-02-08T08:13:41Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;creator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x37BB53e3d293494DE59fBe1FF78500423dcFd43B&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;signatureValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;did:nv:0bc278fee025464f8012b811d1bce8e22094d0984e4e49139df5d5ff7a028bdf&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DDOIntegritySignature&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;checksum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;verifiableCredential&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;@context&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;https://www.w3.org/2018/credentials/v1&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="s2">&quot;https://www.w3.org/2018/credentials/examples/v1&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">],</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1872&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;read&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;update&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;deactivate&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;issuer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x610D9314EDF2ced7681BA1633C33fdb8cF365a12&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;issuanceDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-01T19:73:24Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;credentialSubject&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x37BB53e3d293494DE59fBe1FF78500423dcFd43B&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;proof&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RsaSignature2018&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;created&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-01T19:73:24Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;proofPurpose&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assertionMethod&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;signatureValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ABCJSDAO23...1tzjn4w==&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://localhost:5000/api/v1/metadata/agents/ddo/{did}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;main&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Acme Corp&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;subjectAddress&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x37BB53e3d293494DE59fBe1FF78500423dcFd43B&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;dateCreated&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-02-08T08:13:49Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;datePublished&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-02-08T08:13:49Z&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>The registration of an identity in the network requires the following steps:</p>
+<ol>
+<li>Generates the agent DDO</li>
+<li>Generates the DID using the DDO main metadata</li>
+<li>Register the DDO off-chain in any kind of metadata service using the Nevermined Metadata interface</li>
+<li>Register the DID on-chain calling the Smart Contract <code>DIDRegistry</code> associating the DID with the url where the DDO is resolved</li>
+</ol>
+<p>Using this method, different and totally independent actors of the supply chain scenario can register their digital identity in the network and be discovered/resolvable via the DID on-chain and the agent metadata.</p>
+<h5 id="entities-registry">Entities Registry<a class="headerlink" href="#entities-registry" title="Permanent link">&para;</a></h5>
+<p>In the same way that agents are registered in Nevermined, all the different assets (Entities in PROV terminology) are registered as part of the network and have associated a DID and some metadata in DDO format. This inherits all the benefits of using Decentralized Identifiers, including the integrity validation of metadata associated with an entity.</p>
+<p>In the <a href="../metadata/">Nevermined Metadata specification</a>, a DDO includes some services that are included in the entity/asset registered in the network. Typically this list of services can include:</p>
+<ul>
+<li>Metadata - Information describing the entity. Depending on the type of entity this could be information of a dataset, a physical object, etc. Some attributes here could be description of the entity, owner, date of creation, author, etc.</li>
+<li>Digital Access - For digital entities allowing sharing between agents of the network. This service includes the conditions allowing this transaction to happen.</li>
+<li>Computation - For digital entities with privacy constraints where the agent owner of the digital asset allows to execute a computation where the digital entity is. This could be a Federated Learning job or a classical data pipeline.</li>
+<li>Provenance. It allows to register the activities and metadata related with an entity. The provenance information is associated with the DDO and is part of the integrity signature of the asset. This provenance metadata is complemented with the on-chain provenance registry.</li>
+</ul>
+<h3 id="provenance-metadata-integrity">Provenance metadata integrity<a class="headerlink" href="#provenance-metadata-integrity" title="Permanent link">&para;</a></h3>
+<p>To guarantee the integrity of the provenance information, the complete <code>provenance</code> JSON object inside of the
+<code>Provenance</code> service is serialized and hashed using <code>keccak256</code>.</p>
+<p>This generated checksum will be stored as part of the Provenance service in the <code>checksum</code> attribute.</p>
+<p>Additionally, this checksum can be registered on-chain to prevent the tampering of provenance information. Also this
+checksum can be used as part of the DID computation.</p>
+<h4 id="how-to-compute-the-provenance-checksum">How to compute the provenance checksum<a class="headerlink" href="#how-to-compute-the-provenance-checksum" title="Permanent link">&para;</a></h4>
+<p>To generate the checksum in a way that can be computed and verified multiple times, the JSON object must be serialized
+using the following rules:</p>
+<ul>
+<li>All the \n, \t, \r characters must be removed</li>
+<li>All the whitespaces out of the Json entities names or values must be removed</li>
+<li>The Json document and all the nested objects must be sort alphabetically</li>
+</ul>
+<p>This must generate a compact JSON object of only one line that can be hashed and the verification of the hash can be
+re-calculated.</p>
+<h2 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h2>
+<ul>
+<li>W3C PROV-O - The Provenance Ontology: <a href="https://www.w3.org/TR/2013/NOTE-prov-xml-20130430/">https://www.w3.org/TR/2013/NOTE-prov-xml-20130430/</a></li>
+<li>W3C PROV-DM - The Provenance Data Model: <a href="https://www.w3.org/TR/2013/REC-prov-dm-20130430/">https://www.w3.org/TR/2013/REC-prov-dm-20130430/</a></li>
+<li>W3C PROV-XML: <a href="https://www.w3.org/TR/2013/NOTE-prov-xml-20130430/">https://www.w3.org/TR/2013/NOTE-prov-xml-20130430/</a></li>
+<li>W3C PROV-JSON Serialization: <a href="https://www.w3.org/Submission/prov-json/">https://www.w3.org/Submission/prov-json/</a></li>
+</ul>
+<h4 id="resource-open-provenance-model-opm">Resource: Open Provenance Model (OPM)<a class="headerlink" href="#resource-open-provenance-model-opm" title="Permanent link">&para;</a></h4>
+<p>The Open Provenance Model (<a href="https://openprovenance.org/">OPM</a>) defines a data model that is open from an
+inter-operability viewpoint but also with respect to the community of its contributors, reviewers and users.</p>
+<p>
+<figure><img src="images/opm.jpg" /><figcaption>Open Provenance Model</figcaption>
+</figure>
+</p>
+<p>It has several tools &amp; libraries:</p>
+<ul>
+<li><a href="https://github.com/lucmoreau/ProvToolbox">ProvToolbox</a> - a Java toolbox for handling PROV
+  <a href="https://lucmoreau.github.io/ProvToolbox/">Tutorial</a></li>
+<li><a href="http://pypi.python.org/pypi/prov">Prov Python</a> - a Python implementation of the PROV data model<ul>
+<li><a href="https://trungdong.github.io/prov-python-short-tutorial.html">tutorial</a></li>
+<li><a href="https://nbviewer.jupyter.org/github/trungdong/notebooks/blob/master/PROV%20Tutorial.ipynb">ipynb notebook example</a></li>
+<li><a href="https://prov.readthedocs.io/en/latest/">document</a></li>
+</ul>
+</li>
+<li><a href="https://bitbucket.org/provenance/provjs">ProvJS</a> - a JavaScript implementation of the PROV data model</li>
+<li><a href="https://openprovenance.org/store/">ProvStore</a> - Provenance storage and distribution</li>
+<li><a href="https://openprovenance.org/tools/extract/">ProvExtract</a> - for dealing with PROV embedded in web pages</li>
+<li><a href="https://openprovenance.org/vis/">ProvVis</a> - experimental visualizations of PROV</li>
+<li><a href="https://openprovenance.org/tools/editor/">PROV-N Editor</a> - a text editor with PROV-N syntax highlighted</li>
+</ul>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../fl/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Federated Learning" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Federated Learning
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../nft/" class="md-footer__link md-footer__link--next" aria-label="Next: NFTs Engine" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              NFTs Engine
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 Nevermined
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://nevermined.io" target="_blank" rel="noopener" title="nevermined.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.1-20.4-4.2-41.8-4.2-64 0-22.2 2.1-43.6 4.2-64h185.4c2.1 20.4 3.3 41.8 3.3 64zm151.9-64c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42.9 3.2-64 0-22-1.1-43.4-3.2-64h123.1zm-10.5-32H376.7c-10-63.86-29.8-117.38-55.3-151.558C399.8 29.09 463.4 85.94 493.4 160zm-149.1 0H167.7c6.1-36.4 15.5-68.62 27-94.65 10.5-23.61 22.2-40.74 33.5-51.54C239.4 3.178 248.7 0 256 0c7.3 0 16.6 3.178 27.8 13.81 11.3 10.8 23 27.93 33.5 51.54 11.5 26.03 20.9 58.25 27 94.65zm-325.69 0C48.59 85.94 112.2 29.09 190.6 8.442 165.1 42.62 145.3 96.14 135.3 160H18.61zm112.59 32c-2.1 20.6-4.1 42-4.1 64 0 21.1 2 43.4 4.1 64H8.065C2.8 299.5 0 278.1 0 256s2.8-43.5 8.065-64H131.2zm63.5 254.6c-11.5-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.7-22.2 40.8-33.5 51.6-11.2 10.6-20.5 13.8-28.7 13.8-6.4 0-15.7-3.2-26.9-13.8-11.3-10.8-23-27.9-33.5-51.6zm-4.1 57C112.2 482.9 48.59 426.1 18.61 352H135.3c10 63.9 29.8 117.4 55.3 151.6zm130.8 0c25.5-34.2 45.3-87.7 55.3-151.6h116.7c-30 74.1-93.6 130.9-172 151.6z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/company/nevermined" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://medium.com/nevermined-io" target="_blank" rel="noopener" title="medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M180.5 74.262C80.813 74.262 0 155.633 0 256s80.819 181.738 180.5 181.738S361 356.373 361 256 280.191 74.262 180.5 74.262Zm288.25 10.646c-49.845 0-90.245 76.619-90.245 171.095s40.406 171.1 90.251 171.1 90.251-76.619 90.251-171.1H559c0-94.503-40.4-171.095-90.248-171.095Zm139.506 17.821c-17.526 0-31.735 68.628-31.735 153.274s14.2 153.274 31.735 153.274S640 340.631 640 256c0-84.649-14.215-153.271-31.742-153.271Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/nevermined-io" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/nevermined_io" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/GZju2qScKq" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:info@nevermined.io" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M501.6 4.186a24.105 24.105 0 0 0-25.44-1.063L12.12 267.1C4.184 271.7-.504 280.3.043 289.4c.547 9.125 6.234 17.16 14.66 20.69l153.3 64.38v113.5c0 8.781 4.797 16.84 12.5 21.06C184.1 511 188 512 191.1 512c4.516 0 9.038-1.281 12.99-3.812l111.2-71.46 98.56 41.4a24.044 24.044 0 0 0 9.297 1.875c4.078 0 8.141-1.031 11.78-3.094a23.936 23.936 0 0 0 11.95-17.38l64-432C513.1 18.44 509.1 9.373 501.6 4.186zM369.3 119.2 182.2 328.1 78.23 284.7 369.3 119.2zM215.1 444v-49.36l46.45 19.51L215.1 444zm189.7-22.1-176.6-74.19 224.6-249.5-48 323.69z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1690 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Nevermined, The world's first enterprise-grade unstoppable data sharing ecosystem">
+      
+      
+        <meta name="author" content="Nevermined">
+      
+      
+        <link rel="canonical" href="http://docs.nevermined.io/architecture/specs/did/">
+      
+      <link rel="icon" href="../../../assets/nevermined/favicon-nvm.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Decentralized Identifiers - Nevermined Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#did-spec-decentralized-identifiers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Nevermined Documentation" class="md-header__button md-logo" aria-label="Nevermined Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/nevermined/favicon-32.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Nevermined Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Decentralized Identifiers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nevermined-io/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nevermined-io/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Nevermined Documentation" class="md-nav__button md-logo" aria-label="Nevermined Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/nevermined/favicon-32.png" alt="logo">
+
+    </a>
+    Nevermined Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nevermined-io/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nevermined-io/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Architecture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Architecture" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../BuildingBlocks/" class="md-nav__link">
+        Building Blocks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/" class="md-nav__link">
+        Components
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/catalog/getting-started/" class="md-nav__link">
+        Catalog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repos/" class="md-nav__link">
+        Repositories
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Specifications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Specifications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Specifications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Specs/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../access/" class="md-nav__link">
+        Access Control
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        Data In Situ Computation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fl/" class="md-nav__link">
+        Federated Learning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provenance/" class="md-nav__link">
+        Provenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nft/" class="md-nav__link">
+        NFTs Engine
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../keytransfer/" class="md-nav__link">
+        Data Transfer Proofs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Decentralized Identifiers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Decentralized Identifiers
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#specification" class="md-nav__link">
+    Specification
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proposed-solution" class="md-nav__link">
+    Proposed Solution
+  </a>
+  
+    <nav class="md-nav" aria-label="Proposed Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decentralized-ids-dids" class="md-nav__link">
+    Decentralized IDs (DIDs)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publishing-and-consumption-flow" class="md-nav__link">
+    Publishing and Consumption Flow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#did-documents-ddos" class="md-nav__link">
+    DID Documents (DDOs)
+  </a>
+  
+    <nav class="md-nav" aria-label="DID Documents (DDOs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ddo-services" class="md-nav__link">
+    DDO Services
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddo-meta-information" class="md-nav__link">
+    DDO Meta information
+  </a>
+  
+    <nav class="md-nav" aria-label="DDO Meta information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#versions" class="md-nav__link">
+    Versions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#networks" class="md-nav__link">
+    Networks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrity" class="md-nav__link">
+    Integrity
+  </a>
+  
+    <nav class="md-nav" aria-label="Integrity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-compute-the-integrity-checksum" class="md-nav__link">
+    How to compute the integrity checksum
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#did-document-proof" class="md-nav__link">
+    DID Document Proof
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#length-of-a-did" class="md-nav__link">
+    Length of a DID
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-compute-a-did" class="md-nav__link">
+    How to compute a DID
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registry" class="md-nav__link">
+    Registry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resolver" class="md-nav__link">
+    Resolver
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metadata/" class="md-nav__link">
+        Metadata
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../marketplace_api/" class="md-nav__link">
+        Marketplace API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../id_management/" class="md-nav__link">
+        Identity Management
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Integration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Integration" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Integration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contracts/" class="md-nav__link">
+        Smart Contracts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/api-reference-latest/" class="md-nav__link">
+        API Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Assets/" class="md-nav__link">
+        Assets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Accounts/" class="md-nav__link">
+        Accounts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Agreements/" class="md-nav__link">
+        Agreements
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Conditions/" class="md-nav__link">
+        Conditions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Provenance/" class="md-nav__link">
+        Provenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Tokens/" class="md-nav__link">
+        Tokens
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Providers/" class="md-nav__link">
+        Providers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Secret-Store/" class="md-nav__link">
+        Secret Store
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/SDK/" class="md-nav__link">
+        Software Development Kits (SDKs)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/gateway/" class="md-nav__link">
+        Gateway API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/metadata/" class="md-nav__link">
+        Metadata API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/cli/" class="md-nav__link">
+        Command Line Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_8" type="checkbox" id="__nav_4_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_8">
+          Integrations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Integrations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Integrations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/filecoin/filecoin-storage/" class="md-nav__link">
+        Filecoin Storage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/" class="md-nav__link">
+        Blog posts
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Licensing/" class="md-nav__link">
+        Software Licenses
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Social
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Social" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Social
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://discord.gg/GZju2qScKq" class="md-nav__link">
+        Discord
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://twitter.com/nevermined_io" class="md-nav__link">
+        Twitter
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://linkedin.com/company/nevermined" class="md-nav__link">
+        Linkedin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ" class="md-nav__link">
+        Demos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/nevermined-io/docs/edit/master/docs/architecture/specs/did/README.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="did-spec-decentralized-identifiers">DID SPEC: Decentralized Identifiers<a class="headerlink" href="#did-spec-decentralized-identifiers" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code>shortname:      DID
+name:           Decentralized Identifiers
+type:           Standard
+status:         Valid
+version:        0.3
+editor:         Aitor Argomaniz &lt;aitor@nevermined.io&gt;
+contributors:   
+</code></pre></div>
+<ul>
+<li><a href="#did-spec-decentralized-identifiers">DID SPEC: Decentralized Identifiers</a></li>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#specification">Specification</a></li>
+<li><a href="#proposed-solution">Proposed Solution</a><ul>
+<li><a href="#decentralized-ids-dids">Decentralized IDs (DIDs)</a></li>
+<li><a href="#publishing-and-consumption-flow">Publishing and Consumption Flow</a></li>
+<li><a href="#did-documents-ddos">DID Documents (DDOs)</a><ul>
+<li><a href="#ddo-services">DDO Services</a></li>
+</ul>
+</li>
+<li><a href="#ddo-meta-information">DDO Meta information</a><ul>
+<li><a href="#versions">Versions</a></li>
+<li><a href="#networks">Networks</a></li>
+<li><a href="#example">Example</a></li>
+</ul>
+</li>
+<li><a href="#integrity">Integrity</a><ul>
+<li><a href="#how-to-compute-the-integrity-checksum">How to compute the integrity checksum</a></li>
+<li><a href="#did-document-proof">DID Document Proof</a></li>
+<li><a href="#length-of-a-did">Length of a DID</a></li>
+<li><a href="#how-to-compute-a-did">How to compute a DID</a></li>
+</ul>
+</li>
+<li><a href="#registry">Registry</a></li>
+<li><a href="#resolver">Resolver</a></li>
+</ul>
+</li>
+<li><a href="#references">References</a></li>
+</ul>
+<hr />
+<p>This specification is based on the <a href="https://w3c-ccg.github.io/did-spec/">W3C DID specification</a>, which was at version
+0.11 as of August 2018.</p>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
+<p>The main motivations of this SPEC are:</p>
+<ul>
+<li>Design a solution to extend the current architecture to use <strong>Decentralized Identifiers (DIDs)</strong> and <strong>DID Documents
+(DDOs)</strong></li>
+<li>Understand how to register information on-chain with off-chain integrity associated</li>
+<li>Understand how to resolve DIDs into DDOs</li>
+<li>Design a solution facilitating alignment of on-chain and off-chain information</li>
+<li>Establishing the mechanism to know if the DDO associated with a DID was modified</li>
+<li>Defining the common mechanisms, interfaces and APIs to implemented the designed solution</li>
+<li>Define how Nevermined assets can be modeled with a DID/DDO data model</li>
+<li>Understand how DID hubs are formed, and how they integrate a business and storage layer</li>
+</ul>
+<h2 id="specification">Specification<a class="headerlink" href="#specification" title="Permanent link">&para;</a></h2>
+<p>Requirements are:</p>
+<ul>
+<li>The DID resolving capabilities MUST be exposed in the client libraries, enabling to resolve a DDO directly in a
+totally transparent way</li>
+<li>ASSETS are DATA objects describing RESOURCES under control of a PUBLISHER</li>
+<li>DLT stores on-chain only the essential information about ASSETS</li>
+<li>PROVIDERS store the ASSET metadata off-chain</li>
+<li>DLT doesn't store any ASSET metadata</li>
+<li>Nevermined doesn't store ASSET contents (e.g. files)</li>
+<li>An ASSET is modeled in Nevermined as on-chain information stored in the DLT and metadata stored in METADATA API</li>
+<li>ASSETS on-chain information only can be modified by OWNERS or DELEGATED USERS</li>
+<li>ASSETS can be resolved using a Decentralized ID (DID) included on-chain and off-chain</li>
+<li>A DID Document (DDO) should include the ASSET metadata</li>
+<li>Any kind of object registered in Nevermined MUST have a DID allowing one to uniquely identify that object in the system</li>
+<li>ASSET DDO (and the metadata included as part of the DDO) is associated to the ASSET information stored on-chain using
+a common DID</li>
+<li>A DID can be resolved to get access to a DDO</li>
+<li>ASSET DDOs can be updated without updating the on-chain information</li>
+<li>ASSET information stored in the DLT will include a checksum attribute</li>
+<li>The ASSET on-chain checksum attribute SHOULD include a one-way HASH calculated using the DDO content</li>
+<li>After the DDO resolving, the DDO HASH can be calculated off-chain to validate if the on-chain and off-chain
+information is aligned</li>
+<li>A HASH not matching with the checksum on-chain means the DDO was modified without the on-chain update</li>
+<li>The function to calculate the hash MUST BE standard</li>
+</ul>
+<h2 id="proposed-solution">Proposed Solution<a class="headerlink" href="#proposed-solution" title="Permanent link">&para;</a></h2>
+<h3 id="decentralized-ids-dids">Decentralized IDs (DIDs)<a class="headerlink" href="#decentralized-ids-dids" title="Permanent link">&para;</a></h3>
+<p>A DID is a unique identifier that can be resolved or de-referenced to a standard resource describing the entity
+(a DID Document or DDO).
+If we apply this to Nevermined, the DID would be the unique identifier of an object represented in Nevermined
+(i.e. the Asset ID of an ASSET or the Actor ID of a USER).
+The DDO SHOULD include the METADATA information associated with this object.
+The DDO is stored off-chain in Nevermined.</p>
+<p>In Nevermined, a DID is a string that looks like:</p>
+<div class="highlight"><pre><span></span><code>did:nv:0ebed8226ada17fde24b6bf2b95d27f8f05fcce09139ff5cec31f6d81a7cd2ea
+</code></pre></div>
+<p>which follows <a href="https://w3c-ccg.github.io/did-spec/#the-generic-did-scheme">the generic DID scheme</a>.
+Details about how to compute the DID are given below.</p>
+<h3 id="publishing-and-consumption-flow">Publishing and Consumption Flow<a class="headerlink" href="#publishing-and-consumption-flow" title="Permanent link">&para;</a></h3>
+<p>Here you have the complete flow using as example a new ASSET:</p>
+<p>
+<figure><img src="images/did-flow.png" /><figcaption>DID Resolver</figcaption>
+</figure>
+</p>
+<p>Steps:</p>
+<ol>
+<li>A Data Publisher, using the Smart Contracts, register the new Resource (ie. ASSET) providing the DID and the DID of the
+Provider acting as Public service returning the DDO of the Resource (ASSET)</li>
+<li>The DLT register the Resource using the Service Agreement Smart Contract and after of that register the identity
+using the DidRegistry Smart Contract. In this point, the attribute is raised as a new event</li>
+<li>The Data Publisher publishes the DDO in the Metadata api</li>
+<li>A Data Consumer (it could be a frontend application or a backend software), having a DID and using a client library
+(Python, Javascript, Java, etc) get the <strong>service-ddo</strong> attribute associated to the DID directly from the Smart
+Contracts</li>
+<li>The Data Consumer, using the provider public url, query directly to the provider passing the DID to obtain the DDO</li>
+</ol>
+<h3 id="did-documents-ddos">DID Documents (DDOs)<a class="headerlink" href="#did-documents-ddos" title="Permanent link">&para;</a></h3>
+<p>If a DID is the index key in a key-value pair, then the DID Document is the value to which the index key points.
+The combination of a DID and its associated DID Document forms the root record for a decentralized identifier.</p>
+<p>A DDO document is composed of standard DDO attributes:</p>
+<ul>
+<li><code>@context</code></li>
+<li><code>id</code></li>
+<li><code>created</code></li>
+<li><code>updated</code></li>
+<li><code>publicKey</code></li>
+<li><code>authentication</code></li>
+<li><code>proof</code></li>
+<li><code>verifiableCredential</code></li>
+<li><code>service</code></li>
+</ul>
+<p>Asset metadata can be included as one of the objects inside the <code>"service"</code> array, with type <code>"metadata"</code>.</p>
+<h4 id="ddo-services">DDO Services<a class="headerlink" href="#ddo-services" title="Permanent link">&para;</a></h4>
+<p>Each type of asset (dataset, algorithm, workflow, etc, ..) typically will have associated different kind of services.
+There are 2 type of services that are commonly added to all the assets:</p>
+<ul>
+<li>metadata - describing the asset</li>
+<li>provenance - describing the asset provenance</li>
+</ul>
+<p>Each service include a <code>serviceEndpoint</code> attribute with a URL to the server or document completing that service.
+Optionally, the service can include a <code>immutableServiceEndpoint</code> attribute with a URL to a repository/service where 
+additional information is stored in an immutable way (i.e IPFS, Filecoin, Arweave, etc).</p>
+<p>Each service is distinguished by the <code>DDO.service.type</code> attribute.</p>
+<p>Each service has an <code>attributes</code> section where all the information related to the service is added.
+As mandatory content, the attributes section will have a <code>main</code> sub-section.
+This one is important because it must include all the mandatory information that a service has to provide and <strong>never</strong>
+change because it is used to calculate the integrity checksum of the service.</p>
+<p>A part of the <code>attributes.main</code> sub-section, other optional sub-sections can be added
+(like: <code>attributes.curation</code> or <code>attributes.extra</code>) depending on the service type.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">  </span>
+<span class="w">  </span><span class="p">{</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://service/api/v1/metadata/assets/ddo/did:nv:0ebed8226ada17fde24b6bf2b95d27f8f05fcce09139ff5cec31f6d81a7cd2ea&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;immutableServiceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cid://QmVT3wfySvZJqAvkBCyxoz3EvD3yeLqf3cvAssFDpFFXNm&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">&quot;main&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;additionalInformation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;curation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;provenance&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://service/api/v1/provenance/assets/ddo/did:nv:0ebed8226ada17fde24b6bf2b95d27f8f05fcce09139ff5cec31f6d81a7cd2ea&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">&quot;main&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;additionalInformation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w">  </span>
+<span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;access&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://service/api/v1/access/assets/ddo/did:nv:0ebed8226ada17fde24b6bf2b95d27f8f05fcce09139ff5cec31f6d81a7cd2ea&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">  </span>
+<span class="w">      </span><span class="nt">&quot;main&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;additionalInformation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li>You can find a <a href="https://github.com/nevermined-docs/tree/master/architecture/specs/did/examples/ddo-example.json">complete example of a DDO</a>.</li>
+<li>You can find a complete reference of the asset metadata in <a href="../metadata/">METADATA SPEC</a>.</li>
+<li>You can find a complete <a href="https://w3c-ccg.github.io/did-spec/#real-world-example">real world example of a DDO</a>
+with extended services added, as part of the W3C DID spec.</li>
+</ul>
+<h3 id="ddo-meta-information">DDO Meta information<a class="headerlink" href="#ddo-meta-information" title="Permanent link">&para;</a></h3>
+<p>This section (named <code>meta</code>) provides additional information about the DDO itself including versions, and networks where this DDO is valid.
+It will include 2 main blocks of information:</p>
+<h4 id="versions">Versions<a class="headerlink" href="#versions" title="Permanent link">&para;</a></h4>
+<p>Allows to register the different linear versions of the DDO created. It is an array sorted by version creation including the following information:</p>
+<ul>
+<li>Version Id (<code>_id</code>) - Unique identifier of the version, it could be a DID</li>
+<li>Tag or Version number (<code>tag</code>)</li>
+<li>Created date time - Datetime refereing when it was created without sub-second decimal precision</li>
+<li>Change checksum (<code>checksum</code>) - Optional attribute with a checksum of the metadata change compared with the previous version  </li>
+</ul>
+<h4 id="networks">Networks<a class="headerlink" href="#networks" title="Permanent link">&para;</a></h4>
+<p>Identify in which networks is the DDO valid. It is an unsorted array including the <code>chainId</code> of the network where this DID is available.</p>
+<h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h4>
+<p>Here an example of the <code>meta</code> section of a DDO:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;meta&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;versions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dsadsa&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v0.1&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;createdAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2016-02-08T16:02:20Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;checksum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4329042309a02394032&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ccacd&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;v0.2&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;createdAt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018-02-08T16:02:20Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;checksum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0000010992349&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w">    </span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;networks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;chainId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;chainId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;chainId&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8001</span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="integrity">Integrity<a class="headerlink" href="#integrity" title="Permanent link">&para;</a></h3>
+<p>The Integrity policy for identity and metadata is a sub-specification allowing to validate the
+integrity of the Metadata associated to an on-chain object (initially an ASSET).</p>
+<h4 id="how-to-compute-the-integrity-checksum">How to compute the integrity checksum<a class="headerlink" href="#how-to-compute-the-integrity-checksum" title="Permanent link">&para;</a></h4>
+<p>An ASSET in the system is composed by on-chain information maintained by the DLT and off-chain Metadata information
+(DDO) stored by the PROVIDER.</p>
+<p>Technically a user could update the DDO accessing directly to the off-chain database, modifying attributes
+(e.g. License information, description, etc.) relevant to a previous consumption agreement with an user.</p>
+<p>The motivation of this is to facilitate a mechanism allowing to the CONSUMER of an object, to validate if the DDO was
+modified after a previous agreement.</p>
+<p>This hash composing the <strong>integrity checksum</strong> is calculated in the following way:</p>
+<ul>
+<li>The complete content of the <code>service[index].attributes.main</code> is serialized in a common string</li>
+<li>The string generated is is Hashed using SHA3-256 algorithm  (You might have to convert the string to bytes first.)</li>
+<li>The hash generated as a result of this process is stored in the <code>proof.checksum[index].checksum</code> attribute</li>
+<li>The previous 3 steps are repeated for every individual service include in the <code>service</code> array. The hash generated is
+always stored in the <code>proof.checksum</code> array using as key the <code>index</code> of the service computed</li>
+<li>During the serialization process, the objects to serialize (<code>service[index].attributes.main</code> are prepared using the
+following process:</li>
+<li>The object is sorted alphabetically independently of the existing nested levels</li>
+<li>In the JSON generated, all the characters between entries are removed (<code>\n</code>, <code>\t</code>, <code>\r</code>, whitespaces, etc.)</li>
+<li>As a result must be generated a string of only one line</li>
+<li>After hashing, in the DDO, the checksums should be represented as a hex string beginning with <code>0x</code> and ending with
+64 hex characters (e.g. <code>0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377</code>)</li>
+<li>After generating each individual checksum the complete <code>proof.checksum</code> entry is sorted, serialized and hashed as
+previously described in the other checksums</li>
+<li>The final hash generated as a result of hashing the checksums (DID CHECKSUM or DID HASH) will be the ID part of the
+DID (the string after the prefix <code>did:nv:</code>)</li>
+</ul>
+<p>Because this DID HASH will be stored on-chain and emitted as an event, a validator could use this information to check
+if something changed regarding the initial registration.</p>
+<h4 id="did-document-proof">DID Document Proof<a class="headerlink" href="#did-document-proof" title="Permanent link">&para;</a></h4>
+<p>A proof on a DID Document is cryptographic proof of the integrity of the DID Document. In the DID Specification the
+<code>proof</code> attribute is optional.
+We enforce the usage of the <code>proof</code> attribute to demonstrate the Owner of an Asset is signing the proof of integrity of
+some Asset attributes.
+The information to sign by the owner is the <strong>integrity checksum</strong> defined in the above section.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">Sign</span><span class="p">.</span><span class="nx">signMessage</span><span class="p">(</span><span class="nx">DID</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>The DID Document (DDO) SHOULD include the following <code>proof</code> information:</p>
+<ul>
+<li><code>type</code> - Type of proof, in our case <code>"DDOIntegritySignature"</code></li>
+<li><code>created</code> - Date and time when the proof was created</li>
+<li><code>creator</code> - Address of the user providing the proof</li>
+<li><code>signatureValue</code> - Result of the signature given by the creator</li>
+<li><code>checksum</code> - Checksums of the individual services included in the DDO</li>
+<li><code>inmutableUrl</code> - Url to a copy of the DDO in an inmutable repository like IPFS, Arweave, etc.</li>
+</ul>
+<p>Here is an example <code>proof</code> section to add in the DDO:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;proof&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DDOIntegritySignature&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;created&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2016-02-08T16:02:20Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;creator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;signatureValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xc9eeb2b8106e…6abfdc5d1192641b&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;inmutableUrl&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ipfs://QmPChd2hVbrJ6bfo3WBcTW4iZnpHm8TEzWkLHmLpXhF68A&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;checksum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x999999952b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w">    </span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>Using the <code>proof</code> information, a third-party with access to the DDO could validate the <code>creator</code> signed a specific
+integrity checksum referring to an Asset.</p>
+<h4 id="length-of-a-did">Length of a DID<a class="headerlink" href="#length-of-a-did" title="Permanent link">&para;</a></h4>
+<p>The length of a DID must be compliant with the underlying storage layer and function calls. Given that decentralized
+virtual machines make use of contract languages such as Solidity and WASM, it is advised to fit the DID in structures
+such as <code>bytes32</code>.</p>
+<p>It would be nice to store the <code>did:nv:</code> prefix in those 32 bytes, but that means fewer than 32 bytes would be left for
+storing the rest (25 bytes since "did:nv:" takes 7 bytes if using UTF-8). If the rest is a secure hash, then we need a
+25-byte secure hash, but secure hashes typically have 28, 32 or more bytes, so that won't work.</p>
+<p>Only the hash value <em>needs</em> to be stored, not the <code>did:nv:</code> prefix, because it should be clear from context that the
+value is a Nevermined DID.</p>
+<h4 id="how-to-compute-a-did">How to compute a DID<a class="headerlink" href="#how-to-compute-a-did" title="Permanent link">&para;</a></h4>
+<p>The DID (<code>id</code>) string begins with <code>did:nv:</code> and is followed by a string representation of a bytes32.</p>
+<p>As is described previously, the DID is calculating doing the Hash (SHA3-256) of the <code>DDO.proof.checksum</code> entry</p>
+<h3 id="registry">Registry<a class="headerlink" href="#registry" title="Permanent link">&para;</a></h3>
+<p>To register the different kind of objects can be stored in a <strong>simple</strong> register contract named <strong>DidRegistry</strong>.
+This DidRegistry can act as generic/flexible way to associate Resources (ie. Assets) to the public providers resolving
+the DDO (and Metadata included) of those resources.</p>
+<p>The key of the Identity entity in Nevermined is the <strong>DID</strong>. Each entity will have a unique DID.</p>
+<p>To resolve the DDO associated to a Resource (Asset), associated to this Resource DID we have the DID of the Provider
+giving access to this Resource. The Provider will have associated a mapping (key - value) of attributes.
+One of those can be used to related with the public service returning the DDO of a specific resource.</p>
+<p>Applied to Assets, typically are part of a Service Agreement. The suggested approach to implement this is:</p>
+<ul>
+<li>Associate the Resource (ie. Asset DID) to the Provider DID</li>
+<li>Each Provider will have associated a Public URL where the provider is exposing the DDOs</li>
+</ul>
+<p>Here is a draft <strong>DidRegistry</strong> implementation:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// This piece of code is for reference only!</span>
+<span class="c1">// Doesn&#39;t include any validation, types could be reviewed, enums, etc</span>
+
+<span class="k">contract</span><span class="w"> </span><span class="ni">DidRegistry</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">event</span><span class="w"> </span><span class="nv">DIDAttributeRegistered</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="kt">bytes32</span><span class="w"> </span><span class="nv">indexed</span><span class="w"> </span>did<span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="kt">address</span><span class="w"> </span><span class="nv">indexed</span><span class="w"> </span>owner<span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="kt">bytes32</span><span class="w"> </span><span class="nv">indexed</span><span class="w"> </span>checksum<span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="kt">string</span><span class="w"> </span><span class="nv">value</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="kt">uint</span><span class="w"> </span><span class="nv">updatedAt</span><span class="w"></span>
+<span class="w">    </span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">mapping</span><span class="p">(</span><span class="kt">bytes32</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span>DIDRegister<span class="p">)</span><span class="w"> </span><span class="kt">private</span><span class="w"> </span>didRegister<span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">function</span><span class="w"> </span><span class="nv">registerAttribute</span><span class="p">(</span><span class="kt">bytes32</span><span class="w"> </span><span class="nv">_did</span><span class="p">,</span><span class="w"> </span><span class="kt">bytes32</span><span class="w"> </span><span class="nv">_checksum</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="nv">_value</span><span class="p">)</span><span class="w"> </span><span class="kt">public</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// ....</span>
+
+<span class="w">        </span>emit<span class="w"> </span>DIDAttributeRegistered<span class="p">(</span>_did<span class="p">,</span><span class="w"> </span><span class="k">msg.sender</span><span class="p">,</span><span class="w"> </span>_checksum<span class="p">,</span><span class="w"> </span>_value<span class="p">,</span><span class="w"> </span><span class="k">block.number</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>To register the provider publicly resolving the DDO associated to a DID, we will register an attribute with the public
+hostname of that provider:</p>
+<div class="highlight"><pre><span></span><code>registerAttribute<span class="p">(</span><span class="s2">&quot;21tDAKCERh95uGgKbJNHYp&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;328aabb94534935864312&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;https://myprovider.example.com/ddo&quot;</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<h3 id="resolver">Resolver<a class="headerlink" href="#resolver" title="Permanent link">&para;</a></h3>
+<p>The resolving capabilities will be encapsulated in the Nevermined SDK libraries (JavaScript, Python, etc.), allowing to
+resolve a DDO directly speaking with the Smart Contracts.</p>
+<p>No third-party requests or API need to be integrated. This allows to have a simple a seam-less integration from the
+consumer side.</p>
+<p>This is a generic definition of what could be exposed in the client libraries from an API point of view:</p>
+<div class="highlight"><pre><span></span><code><span class="n">function</span><span class="w"> </span><span class="n">DDO</span><span class="w"> </span><span class="nf">resolve</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">did</span><span class="p">)</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// black magic</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">ddo</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>To resolve a DID to the associated DDO, some information is stored on-chain associated to the DID.
+In the approach recommended in the scope of this SPEC, this is stored as an attribute associated to the
+<code>DidAttributeRegistered</code> event.</p>
+<p>Because the DID and key are indexed parameters of the event, a consumer in any supported web3 language could filter the
+<code>DidAttributeRegistered</code> events filtering by the DID and the key named <strong>"service-ddo"</strong>.</p>
+<p>A DDO pointing to a DID could be resolved hierarchically using the same mechanism.</p>
+<p>This is an example in JavaScript using web3.js:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">contractInstance</span><span class="p">.</span><span class="nx">DidAttributeRegistered</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">did</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;21tDAKCERh95uGgKbJNHYp&#39;</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nx">fromBlock</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">toBlock</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;latest&#39;</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>Here in Python using web3.py:</p>
+<div class="highlight"><pre><span></span><code><span class="n">event</span> <span class="o">=</span> <span class="n">mycontract</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">DidAttributeRegistered</span><span class="o">.</span><span class="n">createFilter</span><span class="p">(</span><span class="n">fromBlock</span><span class="o">=</span><span class="s1">&#39;latest&#39;</span><span class="p">,</span> <span class="n">argument_filters</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;did&#39;</span><span class="p">:</span> <span class="s1">&#39;21tDAKCERh95uGgKbJNHYp&#39;</span><span class="p">})</span>
+</code></pre></div>
+<p>This logic could be encapsulated in the client libraries (<strong>SDK</strong>) in different languages, allowing to the client
+applications to get the attributes enabling to resolve the DDO associated to the DID.</p>
+<p>Using this information a consumer can query directly to the provider able to return the DDO.</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://w3c-ccg.github.io/did-spec/">DID Spec from the W3C Credentials Community Group</a></li>
+</ul>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../keytransfer/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Data Transfer Proofs" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Data Transfer Proofs
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../metadata/" class="md-footer__link md-footer__link--next" aria-label="Next: Metadata" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Metadata
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 Nevermined
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://nevermined.io" target="_blank" rel="noopener" title="nevermined.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.1-20.4-4.2-41.8-4.2-64 0-22.2 2.1-43.6 4.2-64h185.4c2.1 20.4 3.3 41.8 3.3 64zm151.9-64c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42.9 3.2-64 0-22-1.1-43.4-3.2-64h123.1zm-10.5-32H376.7c-10-63.86-29.8-117.38-55.3-151.558C399.8 29.09 463.4 85.94 493.4 160zm-149.1 0H167.7c6.1-36.4 15.5-68.62 27-94.65 10.5-23.61 22.2-40.74 33.5-51.54C239.4 3.178 248.7 0 256 0c7.3 0 16.6 3.178 27.8 13.81 11.3 10.8 23 27.93 33.5 51.54 11.5 26.03 20.9 58.25 27 94.65zm-325.69 0C48.59 85.94 112.2 29.09 190.6 8.442 165.1 42.62 145.3 96.14 135.3 160H18.61zm112.59 32c-2.1 20.6-4.1 42-4.1 64 0 21.1 2 43.4 4.1 64H8.065C2.8 299.5 0 278.1 0 256s2.8-43.5 8.065-64H131.2zm63.5 254.6c-11.5-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.7-22.2 40.8-33.5 51.6-11.2 10.6-20.5 13.8-28.7 13.8-6.4 0-15.7-3.2-26.9-13.8-11.3-10.8-23-27.9-33.5-51.6zm-4.1 57C112.2 482.9 48.59 426.1 18.61 352H135.3c10 63.9 29.8 117.4 55.3 151.6zm130.8 0c25.5-34.2 45.3-87.7 55.3-151.6h116.7c-30 74.1-93.6 130.9-172 151.6z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/company/nevermined" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://medium.com/nevermined-io" target="_blank" rel="noopener" title="medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M180.5 74.262C80.813 74.262 0 155.633 0 256s80.819 181.738 180.5 181.738S361 356.373 361 256 280.191 74.262 180.5 74.262Zm288.25 10.646c-49.845 0-90.245 76.619-90.245 171.095s40.406 171.1 90.251 171.1 90.251-76.619 90.251-171.1H559c0-94.503-40.4-171.095-90.248-171.095Zm139.506 17.821c-17.526 0-31.735 68.628-31.735 153.274s14.2 153.274 31.735 153.274S640 340.631 640 256c0-84.649-14.215-153.271-31.742-153.271Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/nevermined-io" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/nevermined_io" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/GZju2qScKq" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:info@nevermined.io" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M501.6 4.186a24.105 24.105 0 0 0-25.44-1.063L12.12 267.1C4.184 271.7-.504 280.3.043 289.4c.547 9.125 6.234 17.16 14.66 20.69l153.3 64.38v113.5c0 8.781 4.797 16.84 12.5 21.06C184.1 511 188 512 191.1 512c4.516 0 9.038-1.281 12.99-3.812l111.2-71.46 98.56 41.4a24.044 24.044 0 0 0 9.297 1.875c4.078 0 8.141-1.031 11.78-3.094a23.936 23.936 0 0 0 11.95-17.38l64-432C513.1 18.44 509.1 9.373 501.6 4.186zM369.3 119.2 182.2 328.1 78.23 284.7 369.3 119.2zM215.1 444v-49.36l46.45 19.51L215.1 444zm189.7-22.1-176.6-74.19 224.6-249.5-48 323.69z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>

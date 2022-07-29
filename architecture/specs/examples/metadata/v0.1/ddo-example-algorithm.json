@@ -1,0 +1,313 @@
+{
+  "@context": "https://w3id.org/did/v1",
+  "authentication": [{
+    "type": "RsaSignatureAuthentication2018",
+    "publicKey": "did:nv:0ebed8226ada17fde24b6bf2b95d27f8f05fcce09139ff5cec31f6d81a7cd2ea"
+  }],
+  "created": "2019-02-08T08:13:49Z",
+  "id": "did:nv:0bc278fee025464f8012b811d1bce8e22094d0984e4e49139df5d5ff7a028bdf",
+  "proof": {
+    "created": "2019-02-08T08:13:41Z",
+    "creator": "0x37BB53e3d293494DE59fBe1FF78500423dcFd43B",
+    "signatureValue": "did:nv:0bc278fee025464f8012b811d1bce8e22094d0984e4e49139df5d5ff7a028bdf",
+    "type": "DDOIntegritySignature",
+    "checksum": {
+      "0": "0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377",
+      "1": "0x999999952b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3",
+      "2": "f6c642676664b242efb5417d49728fb05a8ca998494156409c66dafcdbbb2a2a",
+      "3": "9f2faa3d43dc5a1b093911125678a77b2d1dbd78746a2ba277f25b9695eb4ebd"
+    }
+  },
+  "publicKey": [{
+    "id": "did:nv:b6e2eb5eff1a093ced9826315d5a4ef6c5b5c8bd3c49890ee284231d7e1d0aaa#keys-1",
+    "type": "RsaVerificationKey2018",
+    "owner": "did:nv:6027c1e7cbae06a91fce0557ee53195284825f56a7100be0c53cbf4391aa26cc",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY...END PUBLIC KEY-----\r\n"
+  }, {
+    "id": "did:nv:b6e2eb5eff1a093ced9826315d5a4ef6c5b5c8bd3c49890ee284231d7e1d0aaa#keys-2",
+    "type": "Ed25519VerificationKey2018",
+    "owner": "did:nv:4c27a254e607cdf91a1206480e7eb8c74856102316c1a462277d4f21c02373b6",
+    "publicKeyBase58": "H3C2AVvLMv6gmMNam3uVAjZpfkcJCwDwnZn6z3wXmqPV"
+  }, {
+    "id": "did:nv:b6e2eb5eff1a093ced9826315d5a4ef6c5b5c8bd3c49890ee284231d7e1d0aaa#keys-3",
+    "type": "RsaPublicKeyExchangeKey2018",
+    "owner": "did:nv:5f6b885202ffb9643874be529302eb00d55e226959f1fbacaeda592c5b5c9484",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY...END PUBLIC KEY-----\r\n"
+  }],
+  "verifiableCredential": [{
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1",
+      "https://www.w3.org/2018/credentials/examples/v1"
+    ],
+    "id": "1872",
+    "type": ["read", "update", "deactivate"],
+    "issuer": "0x610D9314EDF2ced7681BA1633C33fdb8cF365a12",
+    "issuanceDate": "2019-01-01T19:73:24Z",
+    "credentialSubject": {
+      "id": "0x89328493849328493284932"
+    },
+    "proof": {
+      "type": "RsaSignature2018",
+      "created": "2019-01-01T19:73:24Z",
+      "proofPurpose": "assertionMethod",
+      "signatureValue": "ABCJSDAO23...1tzjn4w=="
+    }
+  }],
+  "service": [
+    {
+      "index": 0,
+      "serviceEndpoint": "http://localhost:5000/api/v1/metadata/assets/ddo/{did}",
+      "type": "metadata",
+      "attributes": {
+        "main": {
+          "author": "John Doe",
+          "checksum": "0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377",
+          "dateCreated": "2019-02-08T08:13:49Z",
+          "license": "CC-BY",
+          "name": "Word count script",
+          "price": "0",
+          "files": [
+              {
+                  "index": 0,
+                  "contentType": "text/text",
+                  "checksum": "52b5c93b82dd9e7ecc3d9fdf4755f7f69a544",
+                  "checksumType": "MD5",
+                  "contentLength": "12057507",
+                  "url": "https://raw.githubusercontent.com/keyko-io/nevermined-docs/a46795b19ba61b240ff9dd403d88b069c0b51592/resources/word_count.py"
+              }
+          ],
+          "type": "algorithm",
+          "algorithm": {
+            "language": "python",
+            "format": "py",
+            "version": "0.1",
+            "entrypoint": "python word_count.py*",
+            "requirements": {
+                "container": {
+                    "image": "python",
+                    "tag": "3.8-alpine",
+                    "checksum":"sha256:53ad3a03b2fb240b6c494339821e6638cd44c989bcf26ec4d51a6a52f7518c1d"
+                }
+            }
+          }
+        },
+        "additionalInformation": {
+          "description": "script to calculate word count",
+          "tags": ["word", "count", "python", "workflow", "aggregation"],
+          "copyrightHolder": "John Doe"
+        }
+      }
+    },
+    {
+      "attributes": {
+        "additionalInformation": {
+          "links": []
+        },
+        "main": {
+          "files": [],
+          "service": "provenance"
+        }
+      },
+      "index": 1,
+      "serviceEndpoint": "http://172.15.0.15:5000/api/v1/metadata/assets/ddo/did:nv:3b5607872397a527cd69e41743b07ddbeeb8aa865f3decd1fab4be679e6c6eef",
+      "type": "provenance"
+    },
+    {
+      "attributes": {
+        "additionalInformation": {
+          "links": []
+        },
+        "main": {
+          "files": [],
+          "publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2qIisJyMd6YXJNzs23zKLajtPC7w6aO9mXq+Ukr6d3cVmPCx8XJRTT3IV7PmHb3o4XFc8ZGX5/SSg7tp5/cfAIg9XF13yjssJttaDTa4srhLJvxyjR8cHEJ39GevFTgrtbYzXTZ723ROJP4NEDxtp8a0f5l7W3NTH8v39k3G50QIDAQAB",
+          "service": "PSK-RSA"
+        }
+      },
+      "index": 2,
+      "serviceEndpoint": "http://localhost:8030",
+      "type": "authorization"
+    },
+    {
+      "attributes": {
+        "additionalInformation": {
+          "links": []
+        },
+        "main": {
+          "creator": "0xA99D43d86A0758d5632313b8fA3972B6088A21BB",
+          "datePublished": "2020-09-03T13:31:02Z",
+          "files": [],
+          "name": "dataAssetAccessServiceAgreement",
+          "price": "1"
+        },
+        "serviceAgreementTemplate": {
+          "conditionDependency": {
+            "access": [],
+            "escrowPayment": [
+              "lockPayment",
+              "access"
+            ],
+            "execCompute": [],
+            "lockPayment": []
+          },
+          "conditions": [{
+              "contractName": "LockPaymentCondition",
+              "events": [{
+                "actorType": "publisher",
+                "handler": {
+                  "functionName": "fulfillAccessCondition",
+                  "moduleName": "lockPaymentConditon",
+                  "version": "0.1"
+                },
+                "name": "Fulfilled"
+              }],
+              "functionName": "fulfill",
+              "name": "lockPayment",
+              "parameters": [
+                {
+                  "name": "_did",
+                  "type": "bytes32",
+                  "value": ""
+                },
+                {
+                  "name": "_rewardAddress",
+                  "type": "address",
+                  "value": "0x886dE2b3F8F27eEd43bA2FD4bC2AabDc14E0d9dD"
+                },
+                {
+                  "name": "_tokenAddress",
+                  "type": "address",
+                  "value": "0x0"
+                },
+                {
+                  "name": "_amounts",
+                  "type": "uint256[]",
+                  "value": ["10", "2"]
+                },
+                {
+                  "name": "_receivers",
+                  "type": "address[]",
+                  "value": ["0xa99d43d86a0758d5632313b8fa3972b6088a21bb", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
+                }
+              ],
+              "timelock": 0,
+              "timeout": 0
+            },
+            {
+              "contractName": "AccessCondition",
+              "events": [{
+                  "actorType": "publisher",
+                  "handler": {
+                    "functionName": "fulfillEscrowPaymentCondition",
+                    "moduleName": "access",
+                    "version": "0.1"
+                  },
+                  "name": "Fulfilled"
+                },
+                {
+                  "actorType": "consumer",
+                  "handler": {
+                    "functionName": "fulfillEscrowPaymentCondition",
+                    "moduleName": "access",
+                    "version": "0.1"
+                  },
+                  "name": "TimedOut"
+                }
+              ],
+              "functionName": "fulfill",
+              "name": "access",
+              "parameters": [{
+                  "name": "_did",
+                  "type": "bytes32",
+                  "value": "3b5607872397a527cd69e41743b07ddbeeb8aa865f3decd1fab4be679e6c6eef"
+                },
+                {
+                  "name": "_grantee",
+                  "type": "address",
+                  "value": ""
+                }
+              ],
+              "timelock": 0,
+              "timeout": 0
+            },
+            {
+              "contractName": "EscrowPaymentCondition",
+              "events": [{
+                "actorType": "publisher",
+                "handler": {
+                  "functionName": "verifyRewardTokens",
+                  "moduleName": "escrowPaymentConditon",
+                  "version": "0.1"
+                },
+                "name": "Fulfilled"
+              }],
+              "functionName": "fulfill",
+              "name": "escrowPayment",
+              "parameters": [
+                {
+                  "name": "_did",
+                  "type": "bytes32",
+                  "value": ""
+                },
+                {
+                    "name": "_amounts",
+                    "type": "uint256[]",
+                    "value": ["10", "2"]
+                },
+                {
+                    "name": "_receivers",
+                    "type": "address[]",
+                    "value": ["0xa99d43d86a0758d5632313b8fa3972b6088a21bb", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
+                },
+                {
+                  "name": "_sender",
+                  "type": "address",
+                  "value": ""
+                },
+                {
+                  "name": "_tokenAddress",
+                  "type": "address",
+                  "value": "0x0"
+                },
+                {
+                  "name": "_lockCondition",
+                  "type": "bytes32",
+                  "value": "0xBDB91cF0a8449a2848Ba6194eE45579E81B1A0F9"
+                },
+                {
+                  "name": "_releaseCondition",
+                  "type": "bytes32",
+                  "value": "0xFF3a12191A703939b1466eC1Fc7679AbbFf88545"
+                }
+              ],
+              "timelock": 0,
+              "timeout": 0
+            }
+          ],
+          "contractName": "EscrowAccessSecretStoreTemplate",
+          "events": [{
+            "actorType": "consumer",
+            "handler": {
+              "functionName": "fulfillLockPaymentCondition",
+              "moduleName": "escrowAccessSecretStoreTemplate",
+              "version": "0.1"
+            },
+            "name": "AgreementCreated"
+          }],
+          "fulfillmentOrder": [
+            "lockPayment.fulfill",
+            "access.fulfill",
+            "escrowPayment.fulfill"
+          ]
+        }
+      },
+      "index": 3,
+      "serviceEndpoint": "http://localhost:8030/api/v1/gateway/services/access",
+      "templateId": "0xB4d05b7D929dD241b79e06FF1AeA033159693931",
+      "type": "access"
+    }
+
+
+
+
+  ]
+}

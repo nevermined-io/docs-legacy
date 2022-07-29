@@ -1,0 +1,2061 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Nevermined, The world's first enterprise-grade unstoppable data sharing ecosystem">
+      
+      
+        <meta name="author" content="Nevermined">
+      
+      
+        <link rel="canonical" href="http://docs.nevermined.io/architecture/specs/access/">
+      
+      <link rel="icon" href="../../../assets/nevermined/favicon-nvm.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Access Control - Nevermined Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#access-spec-decentralized-access-control" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Nevermined Documentation" class="md-header__button md-logo" aria-label="Nevermined Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/nevermined/favicon-32.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Nevermined Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Access Control
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nevermined-io/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nevermined-io/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Nevermined Documentation" class="md-nav__button md-logo" aria-label="Nevermined Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/nevermined/favicon-32.png" alt="logo">
+
+    </a>
+    Nevermined Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nevermined-io/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nevermined-io/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Architecture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Architecture" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../BuildingBlocks/" class="md-nav__link">
+        Building Blocks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/" class="md-nav__link">
+        Components
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/catalog/getting-started/" class="md-nav__link">
+        Catalog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repos/" class="md-nav__link">
+        Repositories
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Specifications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Specifications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Specifications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Specs/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Access Control
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Access Control
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actors-and-technical-components" class="md-nav__link">
+    Actors and Technical Components
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#payment" class="md-nav__link">
+    Payment
+  </a>
+  
+    <nav class="md-nav" aria-label="Payment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crypto-currencies" class="md-nav__link">
+    Crypto Currencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewards-distribution" class="md-nav__link">
+    Rewards Distribution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#royalties-in-the-secondary-market" class="md-nav__link">
+    Royalties in the secondary market
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flows" class="md-nav__link">
+    Flows
+  </a>
+  
+    <nav class="md-nav" aria-label="Flows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#publishing-assets" class="md-nav__link">
+    Publishing Assets
+  </a>
+  
+    <nav class="md-nav" aria-label="Publishing Assets">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructing-an-asset-ddo" class="md-nav__link">
+    Constructing an Asset DDO
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-agreement-templates" class="md-nav__link">
+    Service Agreement Templates
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access" class="md-nav__link">
+    Access
+  </a>
+  
+    <nav class="md-nav" aria-label="Access">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#execution-of-the-service-agreement" class="md-nav__link">
+    Execution of the service agreement
+  </a>
+  
+    <nav class="md-nav" aria-label="Execution of the service agreement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lock-payment-condition" class="md-nav__link">
+    Lock Payment Condition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grant-access-condition" class="md-nav__link">
+    Grant Access Condition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#release-payment-condition" class="md-nav__link">
+    Release Payment Condition
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consuming-the-data" class="md-nav__link">
+    Consuming the Data
+  </a>
+  
+    <nav class="md-nav" aria-label="Consuming the Data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#consuming-without-direct-integration-of-secret-store" class="md-nav__link">
+    Consuming without direct integration of Secret Store
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abort-conditions" class="md-nav__link">
+    Abort Conditions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encryption-and-decryption" class="md-nav__link">
+    Encryption and Decryption
+  </a>
+  
+    <nav class="md-nav" aria-label="Encryption and Decryption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#encryption-process" class="md-nav__link">
+    Encryption Process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authorization-types" class="md-nav__link">
+    Authorization Types
+  </a>
+  
+    <nav class="md-nav" aria-label="Authorization Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#using-secret-store" class="md-nav__link">
+    Using Secret Store
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-data-gateway" class="md-nav__link">
+    Using the Data Gateway
+  </a>
+  
+    <nav class="md-nav" aria-label="Using the Data Gateway">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#psk-ecdsa" class="md-nav__link">
+    PSK ECDSA
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#psk-rsa" class="md-nav__link">
+    PSK RSA
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        Data In Situ Computation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fl/" class="md-nav__link">
+        Federated Learning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provenance/" class="md-nav__link">
+        Provenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nft/" class="md-nav__link">
+        NFTs Engine
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../keytransfer/" class="md-nav__link">
+        Data Transfer Proofs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../did/" class="md-nav__link">
+        Decentralized Identifiers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metadata/" class="md-nav__link">
+        Metadata
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../marketplace_api/" class="md-nav__link">
+        Marketplace API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../id_management/" class="md-nav__link">
+        Identity Management
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Integration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Integration" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Integration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contracts/" class="md-nav__link">
+        Smart Contracts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/api-reference-latest/" class="md-nav__link">
+        API Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Assets/" class="md-nav__link">
+        Assets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Accounts/" class="md-nav__link">
+        Accounts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Agreements/" class="md-nav__link">
+        Agreements
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Conditions/" class="md-nav__link">
+        Conditions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Provenance/" class="md-nav__link">
+        Provenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Tokens/" class="md-nav__link">
+        Tokens
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Providers/" class="md-nav__link">
+        Providers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Secret-Store/" class="md-nav__link">
+        Secret Store
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/SDK/" class="md-nav__link">
+        Software Development Kits (SDKs)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/gateway/" class="md-nav__link">
+        Gateway API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/metadata/" class="md-nav__link">
+        Metadata API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/cli/" class="md-nav__link">
+        Command Line Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_8" type="checkbox" id="__nav_4_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_8">
+          Integrations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Integrations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Integrations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/filecoin/filecoin-storage/" class="md-nav__link">
+        Filecoin Storage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/" class="md-nav__link">
+        Blog posts
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Licensing/" class="md-nav__link">
+        Software Licenses
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Social
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Social" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Social
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://discord.gg/GZju2qScKq" class="md-nav__link">
+        Discord
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://twitter.com/nevermined_io" class="md-nav__link">
+        Twitter
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://linkedin.com/company/nevermined" class="md-nav__link">
+        Linkedin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ" class="md-nav__link">
+        Demos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/nevermined-io/docs/edit/master/docs/architecture/specs/access/README.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="access-spec-decentralized-access-control">ACCESS SPEC: Decentralized Access Control<a class="headerlink" href="#access-spec-decentralized-access-control" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code>shortname:      ACCESS
+name:           Decentralized Access Control
+type:           Standard
+status:         Valid
+version:        0.1
+editor:         Aitor Argomaniz &lt;aitor@nevermined.io&gt;
+contributors:   
+</code></pre></div>
+<ul>
+<li><a href="#access-spec-decentralized-access-control">ACCESS SPEC: Decentralized Access Control</a><ul>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#actors-and-technical-components">Actors and Technical Components</a></li>
+<li><a href="#payment">Payment</a><ul>
+<li><a href="#crypto-currencies">Crypto Currencies</a></li>
+<li><a href="#rewards-distribution">Rewards Distribution</a></li>
+<li><a href="#royalties-in-the-secondary-market">Royalties in the secondary market</a></li>
+</ul>
+</li>
+<li><a href="#flows">Flows</a><ul>
+<li><a href="#publishing-assets">Publishing Assets</a><ul>
+<li><a href="#constructing-an-asset-ddo">Constructing an Asset DDO</a></li>
+</ul>
+</li>
+<li><a href="#service-agreement-templates">Service Agreement Templates</a></li>
+</ul>
+</li>
+<li><a href="#access">Access</a><ul>
+<li><a href="#execution-of-the-service-agreement">Execution of the service agreement</a><ul>
+<li><a href="#lock-payment-condition">Lock Payment Condition</a></li>
+<li><a href="#grant-access-condition">Grant Access Condition</a></li>
+<li><a href="#release-payment-condition">Release Payment Condition</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#consuming-the-data">Consuming the Data</a><ul>
+<li><a href="#consuming-without-direct-integration-of-secret-store">Consuming without direct integration of Secret Store</a></li>
+<li><a href="#abort-conditions">Abort Conditions</a></li>
+</ul>
+</li>
+<li><a href="#encryption-and-decryption">Encryption and Decryption</a><ul>
+<li><a href="#encryption-process">Encryption Process</a></li>
+<li><a href="#authorization-types">Authorization Types</a><ul>
+<li><a href="#using-secret-store">Using Secret Store</a></li>
+<li><a href="#using-the-data-gateway">Using the Data Gateway</a><ul>
+<li><a href="#psk-ecdsa">PSK ECDSA</a></li>
+<li><a href="#psk-rsa">PSK RSA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>This SPEC introduces an integration pattern for the use of <strong>Service Execution Agreements (SEAs)</strong> (also called
+"Service Agreements" or "Agreements") as contracts between parties interacting in a transaction.
+This SPEC uses the SEAs as the core element to orchestrate the publish/consume transactions for multiple services.</p>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
+<p>The main motivations of this SPEC are:</p>
+<ul>
+<li>Understand how in an environment where different actors don't trust each other, a decentralized access control can
+work</li>
+<li>Detail the interaction between parties allowing to grant access to assets in a decentralized manner</li>
+<li>Identify the API methods exposed via the different libraries</li>
+</ul>
+<h2 id="actors-and-technical-components">Actors and Technical Components<a class="headerlink" href="#actors-and-technical-components" title="Permanent link">&para;</a></h2>
+<ul>
+<li>PUBLISHERS - Provide access to assets and/or services</li>
+<li>CONSUMERS - Want to get access to assets and/or services</li>
+<li>MARKETPLACES - Store the DDO (including metadata) associated with the assets and/or services</li>
+</ul>
+<p>Note: Below, we write "assets" to mean "assets and/or services."</p>
+<p>The following technical components are involved with the publishing flow or the consumption flow:</p>
+<ul>
+<li><strong>MARKETPLACE</strong> - Exposes a web interface allowing users to publish and purchase assets.
+  It also facilitates the discovery of assets.</li>
+<li><strong>SDK</strong> - Software library encapsulating the Nevermined business logic. It's used to interact with all the
+  components &amp; APIs of the system. It's currently implemented in the following packages:</li>
+<li><a href="https://github.com/nevermined-io/sdk-js">nevermined-sdk-js</a> - JavaScript version of the Nevermined SDK to be
+    integrated with front-end applications.</li>
+<li><a href="https://github.com/nevermined-io/sdk-py">nevermined-sdk-py</a> - Python version of the Nevermined SDK to be
+    integrated with back-end applications. The primary users are data scientists.</li>
+<li><a href="https://github.com/nevermined-io/sdk-java">nevermined-sdk-java</a> - Java version of the Nevermined SDK to be
+    integrated with <a href="https://en.wikipedia.org/wiki/Java_virtual_machine">JVM</a> applications. The primary users are
+    data engineers.</li>
+<li><a href="https://github.com/nevermined-io/contracts">SMART CONTRACTS</a> - Solidity Smart Contracts providing the Service
+  Agreements business logic.</li>
+<li><a href="https://wiki.parity.io/Secret-Store">SECRET STORE</a> - Included as part of the Parity Ethereum client.
+  Allows the PUBLISHER to encrypt the asset URL. Integrates with the SA to authorize (on-chain) the decryption of the
+  asset URL by the CONSUMER.</li>
+<li><a href="https://github.com/nevermined-io/gateway">GATEWAY</a> - Microservice to be executed by PUBLISHERS. It exposes an
+  HTTP REST API permitting access to PUBLISHER assets or additional services such as computation.</li>
+<li><a href="https://github.com/nevermined-io/metadata-api">METADATA-API</a> - Microservice to be executed by MARKETPLACES.
+  Facilitates   creating, updating, deleting and searching the asset metadata registered by the PUBLISHERS.
+  This metadata is included as part of a DDO (see <a href="../did/">DID SPEC</a> and
+  <a href="../metadata/">METADATA SPEC</a>) and also includes the services associated with the asset (consumption,
+  computation, etc.).</li>
+</ul>
+<p>
+<figure><img src="images/software-run-by-actors.png" /><figcaption>Actors running Components</figcaption>
+</figure>
+</p>
+<h2 id="payment">Payment<a class="headerlink" href="#payment" title="Permanent link">&para;</a></h2>
+<h3 id="crypto-currencies">Crypto Currencies<a class="headerlink" href="#crypto-currencies" title="Permanent link">&para;</a></h3>
+<p>Nevermined allows the asset publishers to define the crypto-currencies they accept. This gives the flexibility of decide
+different payments and prices depending on the currency and the service attached to the asset. In Nevermined is possible
+to define multiple services (access, compute, transfer ownership, nft sales, etc). Each service can have different 
+payment options depending on publisher interest.</p>
+<p>This provides a high level of flexibility allowing to get paid using the following options:</p>
+<ul>
+<li>Payment of a service using the Nevermined ERC20 token</li>
+<li>Payment using an external ERC20 token</li>
+<li>Payment using ETH</li>
+<li>The combination of the above for the same service. What means for the same service I can ask 1000 NVM Tokens, 10 xDAI 
+  or 1 ETH. This can be achieved specifying multiple times a service with prices in different currencies.</li>
+</ul>
+<p>All the prices are expressed in the DDOs with the crypto-currency lower level denominator. This is wei for ETH or drops
+for any other ERC20 token.</p>
+<p>This configuration is possible using the <code>_tokenAddress</code> parameter in the <code>LockPayment</code> and <code>EscrowPayment</code>
+conditions. The value options are:</p>
+<ul>
+<li>If the value is <code>0x0</code> means the payment is in ETH</li>
+<li>If the value is empty means the payment is in the Nevermined ERC20 Token</li>
+<li>If the value is an address means the payment is using the ERC20 Token deployed on that address</li>
+</ul>
+<p>In the following example is using a ETH payment:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_tokenAddress&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;address&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="rewards-distribution">Rewards Distribution<a class="headerlink" href="#rewards-distribution" title="Permanent link">&para;</a></h3>
+<p>In combination with the above, Nevermined allows the definition of payment schemes where multiple users can be paid for 
+providing a service associated to an asset. For example, it's typical for a marketplace to get a commission for a sale
+because the infrastructure provided. This can be defined case by case, each marketplace could require different 
+commissions, and can include multiple reward addresses to receive the payment as part of the sales flow. </p>
+<p>This configuration is possible using the <code>_amounts</code> and <code>_receivers</code> parameters in the <code>LockPayment</code> and <code>EscrowPayment</code>
+conditions. </p>
+<p>In the following example, as part of the DDO we define that address starting by <code>0xa99</code> is going to receive a payment of 
+<code>10</code> drops or wei (depending on the token used), and the address starting by <code>0x068</code> a payment of 2. Example:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_amounts&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uint256[]&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;10&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">]</span><span class="w"></span>
+<span class="p">},</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_receivers&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;address[]&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0xa99d43d86a0758d5632313b8fa3972b6088a21bb&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0&quot;</span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="royalties-in-the-secondary-market">Royalties in the secondary market<a class="headerlink" href="#royalties-in-the-secondary-market" title="Permanent link">&para;</a></h3>
+<p>Asset creators can define what are the royalties they want to receive in the secondary market. These royalties must be 
+between 0 and 100 percent. The royalties can not be changed after they are initialized. 
+This protects the buyers of an Asset or NFT to have to pay for a different commission to the one agreed during the 
+purchase of that Asset or NFT.</p>
+<p>In Nevermined the Assets or NFTs can be transferred, what means the owner can be different to the original creator, but
+the original creator can't be modified in the Smart Contracts once the asset is defined.</p>
+<h2 id="flows">Flows<a class="headerlink" href="#flows" title="Permanent link">&para;</a></h2>
+<p>This section describes the asset publishing flow and the asset consuming flow in detail. It should be straightforward to
+ implement those flows by reading it, although the actual implementation may deviate slightly.
+The detailed description is an attempt to account for important edge cases and to create a good reference for the
+authors of particular implementations.</p>
+<p>The intention of the Access flow is to be as lean as possible, allowing data sharing solution with low friction.
+In the below image you can see a high level view of the Nevermined Data Sharing flow:</p>
+<p>
+<figure><img src="images/nevermined-data-sharing-flow.png" /><figcaption>Nevermined Data Sharing flow</figcaption>
+</figure>
+</p>
+<p>The following parameters are used:</p>
+<ul>
+<li><strong>did</strong> - Decentralized Identifier (DID). See <a href="../did/">DID SPEC</a>.</li>
+<li><strong>agreementId</strong> or <strong>serviceAgreementId</strong> - The unique ID referring to a Service Agreement established between a
+  PUBLISHER and a CONSUMER. The CONSUMER (via SDK) is the one creating this unique ID.</li>
+<li><strong>serviceDefinitionId</strong> - Identifies one service in the array of services included in the DDO. It is created by the
+  PUBLISHER (via SDK) upon DDO creation.</li>
+<li><strong>templateId</strong> - Identifies a unique Service Agreement template.</li>
+</ul>
+<h3 id="publishing-assets">Publishing Assets<a class="headerlink" href="#publishing-assets" title="Permanent link">&para;</a></h3>
+<p>When a PUBLISHER uses the Nevermined SDK to publish (register) an asset, here is a summary of what the SDK does:</p>
+<ol>
+<li>Construct a new DDO (JSON object describing the asset).</li>
+<li>Calculate the checksum of all the services (access, provenance, etc) included as part of the DDO</li>
+<li>Calculates an unique DID</li>
+<li>Register using the Smart Contracts the DID, checksum of the DDO and the URL pointing to the METADATA API resolving
+   the DDO</li>
+<li>Store the DDO off-chain in the METADATA API</li>
+</ol>
+<p>Those steps are explained in more detail below.</p>
+<p>The PUBLISHER is able to publish (register) an asset by making a single SDK call.</p>
+<p>where <code>metadata</code> is a dict containing the <a href="../metadata/">METADATA SPEC</a> metadata about the asset.</p>
+<p>We now expand on the publishing (registration) steps in more detail.</p>
+<h4 id="constructing-an-asset-ddo">Constructing an Asset DDO<a class="headerlink" href="#constructing-an-asset-ddo" title="Permanent link">&para;</a></h4>
+<p>An asset DDO is a <a href="https://w3c-ccg.github.io/did-spec/#did-documents">DID Document</a> conforming with
+<a href="https://w3c-ccg.github.io/did-spec/">the Decentralized Identifiers (DIDs) spec</a>.</p>
+<ol>
+<li>Validate the metadata to ensure that it conforms with <a href="../metadata/">METADATA SPEC</a>.
+   (It should be in "local metadata" form at this point.)</li>
+<li>Compute a DID following <a href="../did/">DID SPEC</a>.</li>
+<li>Create an empty DDO and add the following things to it:</li>
+<li>DID</li>
+<li>Public key of the PUBLISHER</li>
+<li>Authentication section (with RSA public key)</li>
+<li>Encrypt the URLs in the <code>attributes.main.files</code> array of the metadata.
+   The PUBLISHER must specify which encryption service/procedure/plugin they wish to use.
+   That encryption service gets recorded in the asset DDO.
+   For details, see the section about <a href="#encryption-and-decryption">Encryption and Decryption</a> below.
+   Note: This step changes the metadata and also the <code>"service"</code> section of the DDO.</li>
+<li>Sign the checksum using the <code>publisher_account</code> (i.e. compute a signature) and add the computed signature to the
+   <code>proof</code> attribute.</li>
+<li>Add the rest of the services to the DDO.
+   Each service in the list contains certain information depending on its type. Here we document two types of services
+   required for purchasing and consuming an asset.</li>
+</ol>
+<p>A service of type "Access" contains:</p>
+<ul>
+<li>Service Definition ID (<code>serviceDefinitionId</code>); this helps PUBLISHER find the service definition of a DDO signed by
+     CONSUMER</li>
+<li>Service Agreement Template ID (<code>templateId</code>); points to an unique instance of a template of a Service Agreement</li>
+<li>Service endpoint (<code>serviceEndpoint</code>); CONSUMERS signing this service send their signatures to this endpoint</li>
+<li>
+<p>A list of condition keys; condition key is the <code>keccak256</code> hash of the following:</p>
+<ul>
+<li>SLA template ID</li>
+<li>controller contract address (obtained from the solidity contract json file matching the contract name in the SLA
+   condition)</li>
+<li>controller contract function fingerprint (referred to as function signature or selector)</li>
+</ul>
+</li>
+<li>
+<p>For each condition, a list is required of its parameter values, a timeout, a set of fields determining what
+     conditions depend on other conditions, and a mapping of events emitted by the condition to the off-chain handlers
+     of these events</p>
+</li>
+<li>Each event is identified by name. Each event handler is a function from a whitelisted module</li>
+<li>Service Agreement contract address and the event mapping in the same format as the condition events, for off-chain
+     listeners</li>
+<li>An integer defining when the agreement is fulfilled in case there are multiple terminal conditions, according to
+     the Service Agreement smart contract</li>
+</ul>
+<p>A service of type "Access" contains 2 different endpoints:</p>
+<ul>
+<li><strong>serviceEndpoint</strong> - A URL to initialize the Service Agreement</li>
+<li>
+<p><strong>consumeEndpoint</strong> - A URL to fetch data decryption keys from</p>
+<p>An example of a complete DDO can be found <a href="/tree/master/architecture/specs/examples/ddo-example.json">here</a>. Please do note that the condition's order in the DID document should reflect the same order in on-chain service agreement.</p>
+</li>
+<li>
+<p>PUBLISHER registers the DID, associating the asset DID to the METADATA API link that resolves the DID to a DDO.
+To do that, the SDK needs to integrate the <code>DIDRegistry</code> contract using the <code>registerAttribute</code> method.</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">registerAttribute</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">_did</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">bytes32</span><span class="w"> </span><span class="nx">_checksum</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">address</span><span class="p">[]</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">_providers</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">string</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">_value</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<p>The parameters to pass are:</p>
+<ul>
+<li><strong>bytes32 _did</strong> - The hash part of the DID, the part just after <code>did:nv:</code></li>
+<li><strong>bytes32 _checksum</strong> - The checksum generated after <a href="../did/#how-to-compute-a-did">compute the DID</a></li>
+<li><strong>address[] _providers</strong> - The list of providers which PUBLISHER delegates URL decryption capabilities and SEA management</li>
+<li><strong>string _value</strong> - The Metadata service endpoint. In the above DDO its: <a href="http://metadata.org/api/v1/metadata/assets/ddo/{did">http://metadata.org/api/v1/metadata/assets/ddo/{did</a>}</li>
+</ul>
+<p>
+<figure><img src="images/publishing-flow.png" /><figcaption>Publishing Flow</figcaption>
+</figure>
+</p>
+<ol>
+<li>The SMART CONTRACT will emit the <code>DIDAttributeRegistered</code> including the <code>did</code>, <code>checksum</code> and <code>url</code> registered.</li>
+</ol>
+<h3 id="service-agreement-templates">Service Agreement Templates<a class="headerlink" href="#service-agreement-templates" title="Permanent link">&para;</a></h3>
+<p>It represents a standard template of a Service Agreement between parties. A template includes standard conditions
+allowing to be used by Nevermined users as reference during the negotiation between parties to establish a formal
+agreement on-chain.</p>
+<p>A Service Agreement Template includes:</p>
+<div class="codehilite"><pre><span></span><code>* A template identifier: `templateId`
+* A list of Conditions
+* Timeouts
+</code></pre></div>
+
+<p>To facilitate the creation of agreements between parties, the templates provide standard agreements ready to be used
+during the creation of Service Agreement instances between parties. Interaction with templates can be done via the
+<code>TemplateStoreManager</code> contract.</p>
+<p>For the Data Sharing use case, Nevermined provides the EscrowAccessSecretStore template.</p>
+<ol>
+<li>The EscrowAccessSecretStore Service Agreement template has the following shape:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">agreement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="nx">id</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">did</span><span class="o">:</span><span class="w"> </span><span class="nx">did</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">templateId</span><span class="o">:</span><span class="w"> </span><span class="nx">templateId</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">conditionIds</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="nx">conditionIdAccess</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">conditionIdLock</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">conditionIdEscrow</span><span class="w"></span>
+<span class="w">    </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nx">timeLocks</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">timeLockAccess</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nx">timeOuts</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">timeOutAccess</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nx">actors</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">actors</span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<ol>
+<li>For the different conditionIds, the CONSUMER needs to generate those and add them to the agreement to be defined on-chain.
+   This requires to generate the hash including the <strong>agreementId</strong> and all the values of the specific condition:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">conditionIdAccess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">accessCondition</span><span class="p">.</span><span class="nx">generateId</span><span class="p">(</span><span class="nx">agreementId</span><span class="p">,</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">accessCondition</span><span class="p">.</span><span class="nx">hashValues</span><span class="p">(</span><span class="nx">did</span><span class="p">,</span><span class="w"> </span><span class="nx">receiver</span><span class="p">))</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">conditionIdLock</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">lockPaymentConditon</span><span class="p">.</span><span class="nx">generateId</span><span class="p">(</span><span class="nx">agreementId</span><span class="p">,</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">lockPaymentConditon</span><span class="p">.</span><span class="nx">hashValues</span><span class="p">(</span><span class="nx">escrowPayment</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span><span class="w"> </span><span class="nx">escrowAmount</span><span class="p">))</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">conditionIdEscrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">escrowPayment</span><span class="p">.</span><span class="nx">generateId</span><span class="p">(</span><span class="nx">agreementId</span><span class="p">,</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">escrowPayment</span><span class="p">.</span><span class="nx">hashValues</span><span class="p">(</span><span class="nx">escrowAmount</span><span class="p">,</span><span class="w"> </span><span class="nx">receiver</span><span class="p">,</span><span class="w"> </span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">conditionIdLock</span><span class="p">,</span><span class="w"> </span><span class="nx">conditionIdAccess</span><span class="p">))</span><span class="w"></span>
+</code></pre></div>
+<ol>
+<li>PUBLISHER publishes the DDO in the METADATA API.</li>
+</ol>
+<h2 id="access">Access<a class="headerlink" href="#access" title="Permanent link">&para;</a></h2>
+<p>Using SDK calls, a CONSUMER can discover, purchase and get access to assets.</p>
+<p>Steps for leveraging SDK:</p>
+<ol>
+<li>
+<p>The CONSUMER uses the search method to find relevant assets related with his query. It returns a list of DDO's.
+   <code>assets = nevermined.assets.search("weather Germany 2019")</code></p>
+</li>
+<li>
+<p>The CONSUMER chooses a service inside a DDO (the CONSUMER selects a <code>serviceDefinitionId</code>).</p>
+</li>
+<li>
+<p>The Service Agreement needs to have an associated unique <code>serviceAgreementId</code> that can be generated/provided by the
+   CONSUMER. In the Smart Contracts, this <code>serviceAgreementId</code> will be stored as a <code>bytes32</code>. This <code>serviceAgreementId</code>
+   is generated randomly and is represented by a 64-character hex string (using the characters 0-9 and a-f).
+   The CONSUMER can generate the <code>serviceAgreementId</code> using any kind of implementation providing enough randomness to
+   generate this ID (64-characters hex string).</p>
+</li>
+<li>
+<p>The CONSUMER signs the service details. The signature contains <code>(templateId, valuesHashList, timeoutValues, agreementId)</code>.
+   The <code>agreementId</code> is provided by the CONSUMER and has to be globally unique.</p>
+</li>
+<li>Each ith item in <code>values_hash_list</code> lists corresponds to the ith condition in conditions list</li>
+<li><code>values_hash_list</code>: a hash of the parameters types and values of each condition</li>
+</ol>
+<p>This signature is used to correlate events and to prevent the PUBLISHER from instantiating multiple Service Agreements from a single request.</p>
+<ol>
+<li>The CONSUMER sends <code>(did, serviceAgreementId, serviceDefinitionId, signature, consumerAddress)</code> to the service endpoint (GATEWAY).
+<code>serviceDefinitionId</code> tells the PUBLISHER where to find the preimage to verify the signature. The DID tells the PUBLISHER which asset to serve under these terms.</li>
+</ol>
+<div class="highlight"><pre><span></span><code>HTTP POST /api/v1/GATEWAY/services/access/initialize
+
+{
+ &quot;did&quot;: &quot;did:nv:08a429b8529856d59867503f8056903a680935a76950bb9649785cc97869a43d&quot;,
+ &quot;serviceAgreementId&quot;: &quot;bb23s87856d59867503f80a690357406857698570b964ac8dcc9d86da4ada010&quot;,
+ &quot;index&quot;: 0,
+ &quot;signature&quot;: &quot;cade376598342cdae231321a0097876aeda656a567a67c6767fd8710129a9dc1&quot;,
+ &quot;consumerAddress&quot;: &quot;0x00a329c0648769A73afAc7F9381E08FB43dBEA72&quot;
+}
+</code></pre></div>
+<p>The execution of this endpoint should return a <code>HTTP 201</code> if everything goes okay. Satisfactory conditions include:</p>
+<ul>
+<li>
+<p>When GATEWAY receives a signature from the service endpoint and verifies the signature.</p>
+</li>
+<li>
+<p>Having the <code>did</code>, GATEWAY fetches the DDO related with this <code>did</code>.</p>
+</li>
+<li>
+<p>GATEWAY records the <code>serviceAgreementId</code> as corresponding to the given <code>did</code>.</p>
+</li>
+<li>
+<p>GATEWAY executes the Service Agreement by calling <code>EscrowAccessSecretStoreTemplate.createAgreement</code>, providing it with the agreementId and all the agreement values</p>
+</li>
+<li>
+<p>GATEWAY starts listening for the <code>publisher</code> events from the events section of the service definition.</p>
+</li>
+<li>
+<p>After receiving the HTTP response confirmation from GATEWAY, the CONSUMER starts listening for the <code>AgreementCreated</code> events specified in the corresponding service definition, filtering them by <code>agreementId</code>.</p>
+</li>
+</ul>
+<h3 id="execution-of-the-service-agreement">Execution of the service agreement<a class="headerlink" href="#execution-of-the-service-agreement" title="Permanent link">&para;</a></h3>
+<p>Consider an asset purchase example. CONSUMER locks the payment. Then PUBLISHER grants access to the document. Then payment is released. Now CONSUMER may decrypt the document.</p>
+<p>In general, there is a broad range of conditions which can be implemented and integrated into the described workflow.</p>
+<h4 id="lock-payment-condition">Lock Payment Condition<a class="headerlink" href="#lock-payment-condition" title="Permanent link">&para;</a></h4>
+<p>Consider a sample of a service definition.</p>
+<div class="highlight"><pre><span></span><code>&quot;serviceAgreementTemplate&quot;: {
+        &quot;contractName&quot;: &quot;EscrowAccessSecretStoreTemplate&quot;,
+        &quot;events&quot;: [{
+            &quot;name&quot;: &quot;AgreementCreated&quot;,
+            &quot;actorType&quot;: &quot;consumer&quot;,
+            &quot;handler&quot;: {
+                &quot;moduleName&quot;: &quot;escrowAccessSecretStoreTemplate&quot;,
+                &quot;functionName&quot;: &quot;fulfillLockPaymentCondition&quot;,
+                &quot;version&quot;: &quot;0.1&quot;
+            }
+        }]
+  }
+</code></pre></div>
+<p>According to this sample, the CONSUMER listens for the <code>AgreementCreated</code> event emitted in the very beginning of
+Service Agreement execution, filtering it by <code>agreementId</code>.</p>
+<p>Note that the structure of <code>serviceAgreementContract.events</code> is identical to <code>conditions.events</code>. SDK needs to offer a
+utility that subscribes the specified callbacks to the events from both lists.</p>
+<p>When the CONSUMER receives this event it means the agreement is in place and can perform the lock reward:</p>
+<div class="highlight"><pre><span></span><code>await token.approve(lockPaymentConditon.address, escrowAmount, { from: sender })
+await lockPaymentConditon.fulfill(agreementId, escrowPayment.address, escrowAmount)
+</code></pre></div>
+<p>If everything goes right, it will emit <code>LockPaymentCondition.Fulfilled</code> and thus will trigger the next condition.</p>
+<h4 id="grant-access-condition">Grant Access Condition<a class="headerlink" href="#grant-access-condition" title="Permanent link">&para;</a></h4>
+<p>PUBLISHER (via GATEWAY) listens for <code>LockPaymentCondition.Fulfilled</code> event filtered by <code>agreementId</code> to confirm the reward was locked by the CONSUMER.</p>
+<div class="highlight"><pre><span></span><code>&quot;conditions&quot;: [{
+  &quot;events&quot;: [{
+        &quot;name&quot;: &quot;Fulfilled&quot;,
+        &quot;actorType&quot;: &quot;publisher&quot;,
+        &quot;handler&quot;: {
+            &quot;moduleName&quot;: &quot;lockPaymentConditon&quot;,
+            &quot;functionName&quot;: &quot;fulfillAccessCondition&quot;,
+            &quot;version&quot;: &quot;0.1&quot;
+        }
+    }]
+}]
+</code></pre></div>
+<p>In this case the PUBLISHER can grant access to the CONSUMER for a specific <code>agreementId</code> and <code>documentId</code> using in this case the <code>AccessCondition.fulfill</code>:</p>
+<div class="highlight"><pre><span></span><code>await accessCondition.fulfill(agreementId, agreement.did, receiver)
+</code></pre></div>
+<p>If everything goes right, the Smart Contract will emit the <code>AccessCondition.Fulfilled</code> event.</p>
+<h4 id="release-payment-condition">Release Payment Condition<a class="headerlink" href="#release-payment-condition" title="Permanent link">&para;</a></h4>
+<p>PUBLISHER (via GATEWAY) listens for <code>AccessCondition.Fulfilled</code> event to transfer tokens to PUBLISHER's account.</p>
+<div class="highlight"><pre><span></span><code>&quot;conditions&quot;: [{
+    &quot;events&quot;: [{
+        &quot;name&quot;: &quot;Fulfilled&quot;,
+        &quot;actorType&quot;: &quot;publisher&quot;,
+        &quot;handler&quot;: {
+            &quot;moduleName&quot;: &quot;access&quot;,
+            &quot;functionName&quot;: &quot;fulfillEscrowPaymentCondition&quot;,
+            &quot;version&quot;: &quot;0.1&quot;
+        }
+    }]
+}]
+</code></pre></div>
+<p>So when the PUBLISHER receives the <code>AccessCondition.Fulfilled</code> he can call the <code>EscrowPayment.fulfill</code> method to receive the reward:</p>
+<div class="highlight"><pre><span></span><code>await escrowPayment.fulfill(agreementId, escrowAmount, receiver, sender, agreement.conditionIds[1], agreement.conditionIds[0])
+</code></pre></div>
+<h2 id="consuming-the-data">Consuming the Data<a class="headerlink" href="#consuming-the-data" title="Permanent link">&para;</a></h2>
+<p>CONSUMER (via SDK) listens for <code>AccessCondition.Fulfilled</code> event to access the document.</p>
+<div class="highlight"><pre><span></span><code>&quot;conditions&quot;: [{
+    &quot;events&quot;: [{
+        &quot;name&quot;: &quot;TimedOut&quot;,
+        &quot;actorType&quot;: &quot;consumer&quot;,
+        &quot;handler&quot;: {
+            &quot;moduleName&quot;: &quot;access&quot;,
+            &quot;functionName&quot;: &quot;fulfillEscrowPaymentCondition&quot;,
+            &quot;version&quot;: &quot;0.1&quot;
+        }
+    }]
+}]
+</code></pre></div>
+<p>The following are steps that have to be performed by the CONSUMER to receive the data.</p>
+<ol>
+<li>
+<p>CONSUMER decrypts the URL using the SDK. This only requires the encryptedUrl existing in the DDO and the DID.
+   A Parity EVM client (local or remote) and SECRET STORE cluster can be used for that.</p>
+</li>
+<li>
+<p>CONSUMER retrieves data by calling the dedicated GATEWAY endpoint (<code>serviceEndpoint</code> in the service definition)
+providing it with Consumer ethereum address, service agreement ID, and decrypted URL.</p>
+</li>
+</ol>
+<p>The consume URL may look like:</p>
+<div class="highlight"><pre><span></span><code>HTTP GET /api/v1/GATEWAY/services/access/consume?consumerAddress=${consumerAddress}&amp;serviceAgreementId={serviceAgreementId}&amp;url={url}`
+</code></pre></div>
+<p>This method will return a HTTP 200 status code if everything was okay and the data file.</p>
+<p>When CONSUMER requests purchased data, GATEWAY gets 3 parameters:</p>
+<ul>
+<li>Consumer ethereum address: <code>consumerAddress</code></li>
+<li>Service Agreement ID: <code>serviceAgreementId</code></li>
+<li>Decrypted URL: <code>url</code>. This URL is only valid if GATEWAY acts as a gateway. CONSUMER cannot download using the URL if it's not done through GATEWAY.</li>
+</ul>
+<p>Using those parameters, GATEWAY does the following things:</p>
+<ul>
+<li>
+<p>Find the <code>did</code> by the given <code>serviceAgreementId</code></p>
+</li>
+<li>
+<p>Verify the given service is allowed to be consumed by the given <code>consumerAddress</code> and <code>did</code> using the <code>checkPermissions</code> method of the <code>SLA</code> Smart Contract.</p>
+</li>
+<li>
+<p>If CONSUMER has permissions to consume, download and provide data for the given DID</p>
+</li>
+</ul>
+<p>
+<figure><img src="images/data-sharing-flow.png" /><figcaption>Consuming Flow</figcaption>
+</figure>
+</p>
+<h3 id="consuming-without-direct-integration-of-secret-store">Consuming without direct integration of Secret Store<a class="headerlink" href="#consuming-without-direct-integration-of-secret-store" title="Permanent link">&para;</a></h3>
+<p>If the CONSUMER (via SDK) can't integrate directly SECRET STORE for decryption (nevermined-sdk-js using Metamask can't
+provide the account password), it's possible to call GATEWAY with an alternative <code>consume</code> method.</p>
+<p>In this scenario, the GATEWAY is in charge of decrypting the content in behalf of the CONSUMER.</p>
+<p>The consume URL may look like:</p>
+<div class="highlight"><pre><span></span><code>HTTP GET /api/v1/gateway/services/access/consume?pubKey=${pubKey}&amp;serviceAgreementId={serviceAgreementId}&amp;signature={signature}&amp;index={index}`
+</code></pre></div>
+<p>This method will return an HTTP 200 status code if everything was okay, plus the URL required to get access to the data.</p>
+<p>When CONSUMER requests purchased data, GATEWAY gets 3 parameters:</p>
+<ul>
+<li>Consumer public key: <code>pubKey</code></li>
+<li>Service Agreement ID: <code>serviceAgreementId</code></li>
+<li>Signature: <code>signature</code>. The signed <code>serviceAgreementId</code> value by the CONSUMER to validate his/her identity</li>
+<li>Index: <code>index</code>. Integer value representing the position of the content to download in the <code>DDO.files</code> array</li>
+</ul>
+<h3 id="abort-conditions">Abort Conditions<a class="headerlink" href="#abort-conditions" title="Permanent link">&para;</a></h3>
+<p>Every condition can be fulfilled or aborted using the configured timeout.
+For example it would allows to the CONSUMER to cancel the payment after locking it but not receiving access to the asset
+ for a long period of time. Mechanisms implemented in the Service Agreement contract ensure there are no race conditions.</p>
+<h2 id="encryption-and-decryption">Encryption and Decryption<a class="headerlink" href="#encryption-and-decryption" title="Permanent link">&para;</a></h2>
+<p>The PUBLISHER can define how they want to encrypt the URLs included in the <code>attributes.main.files</code> array of the metadata.
+This information must be added to the DDO to allow CONSUMERs (via SDK) to understand how to deal with the URLs.
+Below is an example of how to add an encryption service to the <code>service</code> section of a DDO.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;authorization&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SecretStore&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://secretstore.org:12001&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="err">…</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</code></pre></div>
+<p>The encryption service is one object with the following attributes:</p>
+<ul>
+<li>type - Differentiate this kind of service with the word <strong>Authorization</strong></li>
+<li>index - Existing in all the DDO services to differentiate one entry in the <code>services</code> list</li>
+<li>serviceEndpoint (optional) - URL used during the encryption and decryption process.</li>
+<li>attributes.main - List of mandatory attributes specific of the type</li>
+<li>service - The authorization service type. It could be <code>SecretStore</code>, <code>PSK_ECDSA</code> or <code>PSK_RSA</code>.</li>
+</ul>
+<p>The encryption/authorization service is optional. If it's not provided, the usual SECRET STORE cluster defined in the
+SDK configuration will be used.</p>
+<h3 id="encryption-process">Encryption Process<a class="headerlink" href="#encryption-process" title="Permanent link">&para;</a></h3>
+<p>Suppose the <code>attributes.main.files</code> array in the metadata has three URLs:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;files&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/data-file-0.csv&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;checksum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;efb2c764274b745f5fc37f97c6b0e761&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;contentLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4535431&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;resourceId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;access-log2018-02-13-15-17-29-18386C502CAEA932&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/data-file-1.csv&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;checksum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;085340abffh21495345af97c6b0e761&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;contentLength&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12324&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/data-file-2.csv&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</code></pre></div>
+<p>The <code>attributes.main.files</code> array is encrypted as follows.
+First it is converted into a string like so:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[{</span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://example.com/data-file-0.csv&quot;</span><span class="p">,</span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="err">…</span><span class="p">,</span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">}]</span><span class="w"></span>
+</code></pre></div>
+<p>where all spaces are removed (except inside the string values). Also, all newlines, line feeds, and carriage returns
+are removed. That JSON string can then be encrypted.</p>
+<p>After encryption, all <code>"url"</code> keys and values are removed from the <code>attributes.main.files</code> array objects, and a new
+<code>attributes.encryptedFiles</code> key and value are added to the metadata, e.g.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;encryptedFiles&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x2e48ceefcca7abb024f90…f3fec0e1c&quot;</span><span class="w"></span>
+</code></pre></div>
+<p>We now describe the supported encryption procedures.</p>
+<h3 id="authorization-types">Authorization Types<a class="headerlink" href="#authorization-types" title="Permanent link">&para;</a></h3>
+<p>The system supports different implementation for managing the authorization of the encryption/decryption of secrets.
+The authorization type can be found in <code>attributes.main.service</code> attribute. The authorization mechanisms supported are:</p>
+<ul>
+<li><code>SecretStore</code> - Parity Secret Store</li>
+<li><code>PK-ECDSA</code> - ECDSA Pre-Shared Keys</li>
+<li><code>PK-RSA</code> - RSA Pre-Shared Keys</li>
+</ul>
+<h4 id="using-secret-store">Using Secret Store<a class="headerlink" href="#using-secret-store" title="Permanent link">&para;</a></h4>
+<p>The SECRET STORE cluster to use during the encryption and decryption is specified in the <strong>serviceEndpoint</strong> attribute, e.g.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;authorization&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;main&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SecretStore&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://secretstore.org:12001&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="err">…</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</code></pre></div>
+<p>More information about the integration of a SECRET STORE can be found
+<a href="https://wiki.parity.io/Secret-Store">Parity Secret Store page</a>.</p>
+<h4 id="using-the-data-gateway">Using the Data Gateway<a class="headerlink" href="#using-the-data-gateway" title="Permanent link">&para;</a></h4>
+<p>For those clients not able to integrate SECRET STORE directly, GATEWAY will support an encryption endpoint supporting
+the following parameters:</p>
+<div class="highlight"><pre><span></span><code><span class="err">HTTP POST /api/v1/gateway/services/encrypt</span>
+
+<span class="err">{</span>
+<span class="err"> &quot;id&quot;: &quot;did:nv:08a429b8529856d59867503f8056903a680935a76950bb9649785cc97869a43d&quot;,</span>
+<span class="err"> &quot;document&quot;: [</span>
+<span class="err">     {</span>
+<span class="err">         &quot;url&quot;: &quot;234ab87234acbd09543085340abffh21983ddhiiee982143827423421&quot;,</span>
+<span class="err">         &quot;checksum&quot;: &quot;efb2c764274b745f5fc37f97c6b0e761&quot;,</span>
+<span class="err">         &quot;contentLength&quot;: &quot;4535431&quot;,</span>
+<span class="err">         &quot;resourceId&quot;: &quot;access-log2018-02-13-15-17-29-18386C502CAEA932&quot;</span>
+<span class="err">      },</span>
+<span class="err">      {</span>
+<span class="err">          &quot;url&quot;: &quot;234ab87234acbd6894237582309543085340abffh21983ddhiiee982143827423421&quot;,</span>
+<span class="err">          &quot;checksum&quot;: &quot;085340abffh21495345af97c6b0e761&quot;,</span>
+<span class="err">          &quot;contentLength&quot;: &quot;12324&quot;</span>
+<span class="err">      },</span>
+<span class="err">      {</span>
+<span class="err">          &quot;url&quot;:&quot;80684089027358963495379879a543085340abffh21983ddhiiee982143827abcc2&quot;</span>
+<span class="err">      }</span>
+<span class="err">  ]</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>That is, the value of <code>document</code> should be the <code>attributes.main.files</code> array.</p>
+<p>This endpoint will return the content encrypted using the GATEWAY account.</p>
+<p>The GATEWAY will expose the public keys using for encryption in the following endpoint:</p>
+<div class="highlight"><pre><span></span><code>http://0.0.0.0:8030/
+</code></pre></div>
+<p>In the JSON returned there will be the <code>*-public-key</code> entries with the different public keys enabled in the GATEWAY:
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="err">...</span><span class="w"></span>
+<span class="nt">&quot;ecdsa-public-key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xaaaaa&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="nt">&quot;rsa-public-key&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xaaaaa&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="err">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div></p>
+<h5 id="psk-ecdsa">PSK ECDSA<a class="headerlink" href="#psk-ecdsa" title="Permanent link">&para;</a></h5>
+<p>In a DDO definition, can be defined a Pre-Shared ECDSA mechanism using the following configuration:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;authorization&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;main&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PSK-ECDSA&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;publicKey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xaaaa&quot;</span><span class="w"> </span><span class="c1">// ECDSA Public Key of the Gateway</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://mygateway.net/&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="err">…</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</code></pre></div>
+<h5 id="psk-rsa">PSK RSA<a class="headerlink" href="#psk-rsa" title="Permanent link">&para;</a></h5>
+<p>In a DDO definition, can be defined a Pre-Shared RSA mechanism using the following configuration:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;authorization&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;main&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PSK-RSA&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;publicKey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xaaaa&quot;</span><span class="w"> </span><span class="c1">// RSA Public Key of the Gateway</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://mygateway.net/&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="err">…</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
+</code></pre></div>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../../Specs/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Overview
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../compute/" class="md-footer__link md-footer__link--next" aria-label="Next: Data In Situ Computation" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Data In Situ Computation
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 Nevermined
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://nevermined.io" target="_blank" rel="noopener" title="nevermined.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.1-20.4-4.2-41.8-4.2-64 0-22.2 2.1-43.6 4.2-64h185.4c2.1 20.4 3.3 41.8 3.3 64zm151.9-64c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42.9 3.2-64 0-22-1.1-43.4-3.2-64h123.1zm-10.5-32H376.7c-10-63.86-29.8-117.38-55.3-151.558C399.8 29.09 463.4 85.94 493.4 160zm-149.1 0H167.7c6.1-36.4 15.5-68.62 27-94.65 10.5-23.61 22.2-40.74 33.5-51.54C239.4 3.178 248.7 0 256 0c7.3 0 16.6 3.178 27.8 13.81 11.3 10.8 23 27.93 33.5 51.54 11.5 26.03 20.9 58.25 27 94.65zm-325.69 0C48.59 85.94 112.2 29.09 190.6 8.442 165.1 42.62 145.3 96.14 135.3 160H18.61zm112.59 32c-2.1 20.6-4.1 42-4.1 64 0 21.1 2 43.4 4.1 64H8.065C2.8 299.5 0 278.1 0 256s2.8-43.5 8.065-64H131.2zm63.5 254.6c-11.5-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.7-22.2 40.8-33.5 51.6-11.2 10.6-20.5 13.8-28.7 13.8-6.4 0-15.7-3.2-26.9-13.8-11.3-10.8-23-27.9-33.5-51.6zm-4.1 57C112.2 482.9 48.59 426.1 18.61 352H135.3c10 63.9 29.8 117.4 55.3 151.6zm130.8 0c25.5-34.2 45.3-87.7 55.3-151.6h116.7c-30 74.1-93.6 130.9-172 151.6z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/company/nevermined" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://medium.com/nevermined-io" target="_blank" rel="noopener" title="medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M180.5 74.262C80.813 74.262 0 155.633 0 256s80.819 181.738 180.5 181.738S361 356.373 361 256 280.191 74.262 180.5 74.262Zm288.25 10.646c-49.845 0-90.245 76.619-90.245 171.095s40.406 171.1 90.251 171.1 90.251-76.619 90.251-171.1H559c0-94.503-40.4-171.095-90.248-171.095Zm139.506 17.821c-17.526 0-31.735 68.628-31.735 153.274s14.2 153.274 31.735 153.274S640 340.631 640 256c0-84.649-14.215-153.271-31.742-153.271Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/nevermined-io" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/nevermined_io" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/GZju2qScKq" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:info@nevermined.io" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M501.6 4.186a24.105 24.105 0 0 0-25.44-1.063L12.12 267.1C4.184 271.7-.504 280.3.043 289.4c.547 9.125 6.234 17.16 14.66 20.69l153.3 64.38v113.5c0 8.781 4.797 16.84 12.5 21.06C184.1 511 188 512 191.1 512c4.516 0 9.038-1.281 12.99-3.812l111.2-71.46 98.56 41.4a24.044 24.044 0 0 0 9.297 1.875c4.078 0 8.141-1.031 11.78-3.094a23.936 23.936 0 0 0 11.95-17.38l64-432C513.1 18.44 509.1 9.373 501.6 4.186zM369.3 119.2 182.2 328.1 78.23 284.7 369.3 119.2zM215.1 444v-49.36l46.45 19.51L215.1 444zm189.7-22.1-176.6-74.19 224.6-249.5-48 323.69z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>

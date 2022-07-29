@@ -1,0 +1,1887 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Nevermined, The world's first enterprise-grade unstoppable data sharing ecosystem">
+      
+      
+        <meta name="author" content="Nevermined">
+      
+      
+        <link rel="canonical" href="http://docs.nevermined.io/architecture/specs/id_management/">
+      
+      <link rel="icon" href="../../../assets/nevermined/favicon-nvm.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Identity Management - Nevermined Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#identity-management-with-on-chain-access-control" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Nevermined Documentation" class="md-header__button md-logo" aria-label="Nevermined Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/nevermined/favicon-32.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Nevermined Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Identity Management
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nevermined-io/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nevermined-io/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Nevermined Documentation" class="md-nav__button md-logo" aria-label="Nevermined Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/nevermined/favicon-32.png" alt="logo">
+
+    </a>
+    Nevermined Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nevermined-io/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nevermined-io/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Architecture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Architecture" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../BuildingBlocks/" class="md-nav__link">
+        Building Blocks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/" class="md-nav__link">
+        Components
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/catalog/getting-started/" class="md-nav__link">
+        Catalog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repos/" class="md-nav__link">
+        Repositories
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Specifications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Specifications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Specifications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Specs/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../access/" class="md-nav__link">
+        Access Control
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        Data In Situ Computation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fl/" class="md-nav__link">
+        Federated Learning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provenance/" class="md-nav__link">
+        Provenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nft/" class="md-nav__link">
+        NFTs Engine
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../keytransfer/" class="md-nav__link">
+        Data Transfer Proofs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../did/" class="md-nav__link">
+        Decentralized Identifiers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metadata/" class="md-nav__link">
+        Metadata
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../marketplace_api/" class="md-nav__link">
+        Marketplace API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Identity Management
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Identity Management
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    Concepts
+  </a>
+  
+    <nav class="md-nav" aria-label="Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#specifications" class="md-nav__link">
+    Specifications
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actors" class="md-nav__link">
+    Actors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-case" class="md-nav__link">
+    Use Case
+  </a>
+  
+    <nav class="md-nav" aria-label="Use Case">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preconditions" class="md-nav__link">
+    Preconditions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    Architecture
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identity-management" class="md-nav__link">
+    Identity Management
+  </a>
+  
+    <nav class="md-nav" aria-label="Identity Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#verifiable-credentials-associated-with-nevermined-assets" class="md-nav__link">
+    Verifiable Credentials associated with Nevermined assets
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#json-web-tokens-jwt" class="md-nav__link">
+    Json Web Tokens (JWT)
+  </a>
+  
+    <nav class="md-nav" aria-label="Json Web Tokens (JWT)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jwt-structure" class="md-nav__link">
+    JWT Structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jwt-payload" class="md-nav__link">
+    JWT Payload
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identity-gateways" class="md-nav__link">
+    Identity Gateways
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interactions-between-the-actors" class="md-nav__link">
+    Interactions between the actors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gateway-jwt-implementation" class="md-nav__link">
+    Gateway JWT implementation
+  </a>
+  
+    <nav class="md-nav" aria-label="Gateway JWT implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jwt-authorization-grants" class="md-nav__link">
+    JWT Authorization Grants
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-and-revoking-permissions" class="md-nav__link">
+    Adding and Revoking Permissions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#annex" class="md-nav__link">
+    Annex
+  </a>
+  
+    <nav class="md-nav" aria-label="Annex">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#serializing-did-documents" class="md-nav__link">
+    Serializing DID Documents
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples-of-jwt-grant-tokens" class="md-nav__link">
+    Examples of JWT Grant Tokens
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Integration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Integration" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Integration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contracts/" class="md-nav__link">
+        Smart Contracts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/api-reference-latest/" class="md-nav__link">
+        API Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Assets/" class="md-nav__link">
+        Assets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Accounts/" class="md-nav__link">
+        Accounts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Agreements/" class="md-nav__link">
+        Agreements
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Conditions/" class="md-nav__link">
+        Conditions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Provenance/" class="md-nav__link">
+        Provenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Tokens/" class="md-nav__link">
+        Tokens
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Providers/" class="md-nav__link">
+        Providers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Secret-Store/" class="md-nav__link">
+        Secret Store
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/SDK/" class="md-nav__link">
+        Software Development Kits (SDKs)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/gateway/" class="md-nav__link">
+        Gateway API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/metadata/" class="md-nav__link">
+        Metadata API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/cli/" class="md-nav__link">
+        Command Line Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_8" type="checkbox" id="__nav_4_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_8">
+          Integrations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Integrations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Integrations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/filecoin/filecoin-storage/" class="md-nav__link">
+        Filecoin Storage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/" class="md-nav__link">
+        Blog posts
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Licensing/" class="md-nav__link">
+        Software Licenses
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Social
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Social" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Social
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://discord.gg/GZju2qScKq" class="md-nav__link">
+        Discord
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://twitter.com/nevermined_io" class="md-nav__link">
+        Twitter
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://linkedin.com/company/nevermined" class="md-nav__link">
+        Linkedin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ" class="md-nav__link">
+        Demos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/nevermined-io/docs/edit/master/docs/architecture/specs/id_management/README.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="identity-management-with-on-chain-access-control">Identity management with on-chain access control<a class="headerlink" href="#identity-management-with-on-chain-access-control" title="Permanent link">&para;</a></h1>
+<p><div class="highlight"><pre><span></span><code>shortname:      IDM
+name:           Identity management with on-chain access control
+type:           Draft
+status:         Valid
+version:        0.1
+editor:         Aitor Argomaniz &lt;aitor@nevermined.io&gt;
+contributors:
+</code></pre></div>
+- <a href="#identity-management-with-on-chain-access-control">Identity management with on-chain access control</a>
+  - <a href="#introduction">Introduction</a>
+    - <a href="#motivation">Motivation</a>
+  - <a href="#concepts">Concepts</a>
+    - <a href="#specifications">Specifications</a>
+    - <a href="#actors">Actors</a>
+  - <a href="#use-case">Use Case</a>
+    - <a href="#preconditions">Preconditions</a>
+    - <a href="#requirements">Requirements</a>
+  - <a href="#architecture">Architecture</a>
+    - <a href="#identity-management">Identity Management</a>
+      - <a href="#verifiable-credentials-associated-with-nevermined-assets">Verifiable Credentials associated with Nevermined assets</a>
+    - <a href="#json-web-tokens-jwt">Json Web Tokens (JWT)</a>
+      - <a href="#jwt-structure">JWT Structure</a>
+      - <a href="#jwt-payload">JWT Payload</a>
+    - <a href="#identity-gateways">Identity Gateways</a>
+    - <a href="#interactions-between-the-actors">Interactions between the actors</a>
+    - <a href="#gateway-jwt-implementation">Gateway JWT implementation</a>
+      - <a href="#jwt-authorization-grants">JWT Authorization Grants</a>
+    - <a href="#adding-and-revoking-permissions">Adding and Revoking Permissions</a>
+  - <a href="#annex">Annex</a>
+    - <a href="#serializing-did-documents">Serializing DID Documents</a>
+    - <a href="#examples-of-jwt-grant-tokens">Examples of JWT Grant Tokens</a></p>
+<hr />
+<p>This SPEC introduces a pattern for integrating independent Domain Controller
+system to manage the identity authorization with the Nevermined <strong>Service
+Execution Agreements (SEAs)</strong> (also called "Service Agreements" or "Agreements")
+ as contracts between parties interacting in a transaction.</p>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Corporate environments utilize complex identity management and access control
+via Domain Controllers (i.e Active Directory). These solutions allow to
+authenticate and authorize corporate users of a specific domain or network.
+Implementations like Active Directory enable the management of individual or
+group permissions within the organization assigning security policies.
+At the same time, decentralized ecosystems allow the interaction and
+collaboration between different users part of the network using Decentralized
+Ledger Technologies (DLT) as source of truth of the shared network.
+In the data ecosystems where different organizations are members of the same
+network or consortia, it’s a challenge to handle how the identity is managed
+within the organization (centralized) and how these different organizations can
+interact with each other re-using their existing Domain Controllers without
+moving all the existing identity management rules to a new silo or environment
+(centralized or decentralized).</p>
+<p>The intention of this document is to detail how independent organizations can
+integrate their existing corporate Domain Controllers in a Decentralized data
+ecosystem allowing the decentralized access control without replicating the
+existing organization permissions to the decentralized network.</p>
+<h3 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h3>
+<p>The main motivations of the solution described are:</p>
+<ul>
+<li>Understand how in a decentralized environment, different organizations with
+  totally independent (and probably incompatible) Domain controllers can manage
+  the permissions of the their decentralized assets (subjects) without
+  replicating the permission policies in a new solution</li>
+<li>Understand what are the different actors involved and how these actors
+  interact</li>
+<li>Identify the main interfaces required for the interactions</li>
+<li>Identify the credentials generation and management</li>
+<li>Understand how the credentials issued can map to a DLT user identity via keys</li>
+<li>Facilitate the interoperability between actors in the system</li>
+</ul>
+<h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
+<h3 id="specifications">Specifications<a class="headerlink" href="#specifications" title="Permanent link">&para;</a></h3>
+<p>Nevermined Identity Management solution is designed based on the
+<a href="https://www.w3.org/TR/vc-data-model/">Verifiable Credentials</a> &amp;
+<a href="https://w3c.github.io/did-core/">Decentralized Identifiers</a> specifications  as
+building block in the design of the solution. So some of the terms and concepts
+used are based on these specifications.</p>
+<h3 id="actors">Actors<a class="headerlink" href="#actors" title="Permanent link">&para;</a></h3>
+<p>The actors identified in the solution described are:</p>
+<ul>
+<li><strong>Holder</strong> - An actor possessing one or more credentials. This user presents
+  these credentials for identification purposes</li>
+<li><strong>Issuer</strong> - The actors asserting the claims about different organization
+  subjects and creating the credentials for that claims and transmitting to the
+  Holder</li>
+<li><strong>Verifier</strong> - The actors receiving credential presentations from Holders for
+  further verification</li>
+<li><strong>Verifiable data registry</strong> - The actors associated with the organizations
+  managing the internal user and groups permissions</li>
+</ul>
+<p>
+<figure><img src="images/w3c_verifiable_credentials_actors.png" /><figcaption>W3C Actors in Verifiable Credentials</figcaption>
+</figure>
+</p>
+<h2 id="use-case">Use Case<a class="headerlink" href="#use-case" title="Permanent link">&para;</a></h2>
+<h3 id="preconditions">Preconditions<a class="headerlink" href="#preconditions" title="Permanent link">&para;</a></h3>
+<p>The specification and architecture designed is based in some environment
+preconditions. These preconditions need to be taken into account in order to
+adapt the solution designed to the environment where this solution is going to
+be used. The main environment characteristics are:</p>
+<ul>
+<li>Multiple and independent organizations participate in a decentralized data
+  ecosystem</li>
+<li>Each organization have independent Identity Services (like Active Directory)
+  to manage the internal authentication and authorization of their users and
+  groups</li>
+<li>Users belonging to the organizations need to make use of the decentralized
+  ecosystem authenticating via their Identity Services</li>
+<li>Different organizations could use totally independent and different
+  infrastructure and technical solutions</li>
+<li>The rules governing the authorization of users within the organization are
+  kept in the Domain Controllers. It’s not recommended to replicate that
+  information in a different centralized or decentralized repository</li>
+<li>Users belonging to an organization don’t want to add a new mechanism to
+  authenticate. They are already using their single sign-on (SSO) solution
+  within the organization</li>
+<li>DLT networks use credentials for identifying, authenticate and authorize users
+  in a decentralized environment</li>
+<li>Users need to make a friction-less interaction with the decentralized
+  applications connected to the ecosystem without knowing the underlying
+  credentials management (DLT wallets)</li>
+</ul>
+<h3 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h3>
+<p>The main requirements used to designed the solution are:</p>
+<ul>
+<li>Multiple and independent organizations need to manage the access control to
+  the assets registered in a decentralized ecosystem</li>
+<li>A Subject manager or Admin wants to manage the access control to the subjects
+  he/she controls using the Domain Controller solution used in the organization</li>
+<li>The Admin needs to manage the subjects access control via users and groups</li>
+<li>The users of a organization need to operate in the DLT network to interact
+  with the subjects registered in that network</li>
+<li>The users of the decentralized ecosystem are identified in that network via
+  credentials based in the Wallet technologies used in the DLT network</li>
+<li>The users need have a mapping between their organization identity and their
+  decentralized ecosystem identity</li>
+<li>The Users or Holders keep their identity that only belongs to them. They need
+  to present the credentials issued by the organizations they belong to verify
+  their identity.</li>
+<li>The users can belong to one or many groups in one or many different
+  organizations</li>
+<li>A user of the organization A wants to give permissions of a user or group of
+  the organization B for making use of a subject or asset registered in a
+  decentralized environment</li>
+<li>Users managing permissions on these decentralized assets should be able to add
+  and revoke permissions</li>
+<li>The schemas and data existing in the individual deployments of the Identity
+  Services shouldn't be replicated in the decentralized ecosystem. The source of
+   truth are the Identity Services instances</li>
+<li>Information kept about the users and groups in the DLT network must be minimal
+  and never store PI. Ideally only ids and hashes</li>
+<li>The decentralized ecosystem register assets and the conditions for who can
+  interact and what is possible to do with these assets is kept on-chain</li>
+<li>Public information about users like users public keys should be available.
+  User information should be resolvable via decentralized identifiers</li>
+</ul>
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<h3 id="identity-management">Identity Management<a class="headerlink" href="#identity-management" title="Permanent link">&para;</a></h3>
+<p>The proposed solution involves the deployment of a component called
+<strong>Identity Gateway</strong>. Each Domain Controller in the Ecosystem needs to provide
+one Identity Gateway in charge of bridge the internals domain authorization
+policies with the rest of the world. So it’s assumed for each independent Domain
+ Controller available in the network, there should be at least one Identity
+ Gateway resolving for the Domain Controller policies.</p>
+<p>
+<figure><img src="images/identity_management_with_onchain_acl.png" /><figcaption>W3C Actors in Verifiable Credentials</figcaption>
+</figure>
+</p>
+<p>In this scenario each Domain Controller keeps control of the identities of his
+domain. The only actions that are done by the Domain Controllers are:</p>
+<ul>
+<li>They identify users as in part of the domain</li>
+<li>They identify users as part of a group within the domain</li>
+<li>They are network isolated and respond to authorization queries to the
+  associated Identity Gateway</li>
+</ul>
+<h4 id="verifiable-credentials-associated-with-nevermined-assets">Verifiable Credentials associated with Nevermined assets<a class="headerlink" href="#verifiable-credentials-associated-with-nevermined-assets" title="Permanent link">&para;</a></h4>
+<p>In Nevermined an Asset can represent any kind of subject registered in the
+network. Typically assets represent datasets, algorithms, services, etc.
+Any registered asset within Nevermined always has associated a Decentralized
+Identifier (DID) that can be resolved into a DID Object (DDO).</p>
+<p>Typically a DDO includes metadata information describing the asset and the
+services that are offered by that asset to the rest of the network (access,
+  computation, etc.). In addition to this, a DDO can include a portion
+  describing the users and/or groups that can interact with the asset.
+  This is modeled in the DDO in the shape of W3C Verifiable Credentials.</p>
+<p>Here you can see an example of a fragment of a DDO including the credentials of
+an asset for different subjects:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;@context&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://www.w3.org/2018/credentials/v1&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;access&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;issuer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x610D9314EDF2ced7681BA1633C33fdb8cF365a12&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;issuanceDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-01T19:73:24Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;credentialSubject&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x1234&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;User&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x5678&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;User&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Group XXX&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Group&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>In the above verifiable credential fragment we are associating access
+permissions to any holder of the credentials able to authorize the users
+“0x1234” or “0x5678” or as part of the group “Group XXX” of the domain.</p>
+<h3 id="json-web-tokens-jwt">Json Web Tokens (JWT)<a class="headerlink" href="#json-web-tokens-jwt" title="Permanent link">&para;</a></h3>
+<p>JSON Web Tokens (JWT) is a compact URL-safe means of representing claims to be
+transferred between two parties. The claims in a JSON Web Tokens are encoded as
+a JavaScript Object Notation (JSON) object that is used as the payload of a JSON
+ Web Signature (JWS) structure or as the plaintext of a JSON Web Encryption
+ (JWE) structure, enabling the claims to be digitally signed or MACed and/or
+ encrypted.</p>
+<p>JSON Web Token (JWT) is an open standard <a href="https://tools.ietf.org/html/rfc7519">RFC 7519</a>
+that defines a compact and self-contained way for securely transmitting
+information between parties as a JSON Object. This information can be verified
+and trusted because it is digitally signed. JSON Web Tokens can be signed using
+a secret (with HMAC algorithm) or a public/private key pair using RSA.</p>
+<p>In the architecture design we use JWT for encapsulating the messages between the
+ different parties.
+JSON Web Tokens consist of three parts separated by dots (.), which are:</p>
+<ul>
+<li>Header</li>
+<li>Payload</li>
+<li>Signature</li>
+</ul>
+<p>Therefore, a JWT typically looks like the following:
+<div class="highlight"><pre><span></span><code>Xxxxx.yyyyy.zzzzz
+</code></pre></div></p>
+<p>In this architecture document, all the JWT messages sent from a client to a
+server are using the HTTP Authorization header with the Bearer scheme. Example:</p>
+<div class="highlight"><pre><span></span><code><span class="err">HTTP GET /api/v1/gateway/resource</span>
+
+<span class="err">Authorization: Bearer eyJhbGciOiJIUzI1NiIXVCJ9TJV...r7E20RMHrHDcEfxjoYZgeFONFh7HgQ</span>
+</code></pre></div>
+<h4 id="jwt-structure">JWT Structure<a class="headerlink" href="#jwt-structure" title="Permanent link">&para;</a></h4>
+<p>The header contains the metadata for the token and at a minimal contains the
+type of the signature and/or encryption algorithm:</p>
+<ul>
+<li>"typ" - the type of the token, which is JWT</li>
+<li>"alg" - the hashing algorithm such as ES256. We are using ECDSA with SHA256.</li>
+<li>"cty" - Header Parameter defined by JSON Web Signature and JSON Web Encryption
+ is used by this specification to convey structural information about the JWT.</li>
+</ul>
+<p>In our case the header is gonna look like this:
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;typ&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JWT&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;alg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ES256&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cty&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;arbitrary&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div></p>
+<h4 id="jwt-payload">JWT Payload<a class="headerlink" href="#jwt-payload" title="Permanent link">&para;</a></h4>
+<p>The payload contains the claims. Claims are statements about an entity
+(typically, the user) and additional metadata. There are three types of claims:</p>
+<ul>
+<li>Reserved claims: These are a set of predefined claims, which are not mandatory
+  but recommended, thought to provide a set of useful, interoperable claims.</li>
+<li>Public claims: These can be defined at will by those using JWTs. But to avoid
+  collisions they should be defined in the IANA JSON Web Token Registry or be
+  defined as a URI that contains a collision resistant namespace.</li>
+<li>Private claims: These are the custom claims created to share information
+  between parties that agree on using them.</li>
+</ul>
+<p>In our case the payload will have the following attributes:</p>
+<ul>
+<li><code>iss</code> - Issuer. address of the holder</li>
+<li><code>sub</code> - Subject, id of the service agreement</li>
+<li><code>aud</code> - Audience, address of the gateway</li>
+</ul>
+<p>Here an example of the payload:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;iss&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x123456&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;sub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;did:nv:abcde&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;aud&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xffffff&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="identity-gateways">Identity Gateways<a class="headerlink" href="#identity-gateways" title="Permanent link">&para;</a></h3>
+<p>In this architecture the Identity Gateway is in charge of:</p>
+<ul>
+<li>Expose to the network the interface allowing to ask for the details of a
+  Domain Controller.</li>
+<li>Resolve a Domain Controller DID into a DDO describing it. Each Domain
+  Controller should have associated a unique Decentralized Identifier (DID) that
+  resolves into URL where is kept the Decentralized Document (DDO) describing
+  the Domain Controller.</li>
+<li>Verify the identity of a Holder. When a Holder presents a digital identity it
+  authenticates the Holder. Typically this is happening verifying the signature
+  given by the Holder for a specific Subject</li>
+<li>Check the authorization of a Holder over a Subject. When a Holder claims
+  authorization for a Subject it integrates with the Domain Controller for
+  verifying the authorization of that Holder.</li>
+<li>Generates, Signs and Issues credentials</li>
+<li>Can present some emitted credentials on-chain</li>
+</ul>
+<h3 id="interactions-between-the-actors">Interactions between the actors<a class="headerlink" href="#interactions-between-the-actors" title="Permanent link">&para;</a></h3>
+<p>The following flow describes the interaction between actors allowing a Holder to
+ present credentials related to a subject authorized by a Domain Controller.</p>
+<p>
+<figure><img src="images/identity_management_flow.png" /><figcaption>Identity Management Flow</figcaption>
+</figure>
+</p>
+<p>The different steps are:</p>
+<ol>
+<li>The Holder presents a credentials request related to a subject
+  <div class="highlight"><pre><span></span><code><span class="err"> HTTP GET /api/v1/gateway/services/oauth2/token</span>
+
+<span class="err"> Authorization: Bearer eyJhbGciOiJIUzI1NiIXVCJ9TJV...r7E20RMHrHDcEfxjoYZgeFONFh7HgQ</span>
+</code></pre></div></li>
+</ol>
+<p>Where the JWT payload is:
+  <div class="highlight"><pre><span></span><code><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">   </span><span class="nt">&quot;iss&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x123456&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// address of the holder</span><span class="w"></span>
+<span class="w">   </span><span class="nt">&quot;sub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xabcde&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// id of the service agreement</span><span class="w"></span>
+<span class="w">   </span><span class="nt">&quot;aud&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xffffff&quot;</span><span class="w"> </span><span class="c1">// address of the gateway</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
+</code></pre></div></p>
+<ol>
+<li>The Gateway decodes the JWT message, and validates the identity of the Holder
+   checking the signature and the issuer address provided</li>
+<li>The Gateway queries the domain controller checking the access permissions of
+   the Holder for a specific Subject. The identity Gateway could integrate
+   different kinds of backends like Active Directory, LDAP, databases, etc.
+   The verifiable credentials can include user or group types of
+   credentials subjects. The identity gateway must validate if the user just
+   authenticated fulfill any of the following:</li>
+<li>If is a user part of the Domain Controller</li>
+<li>
+<p>If the user is part of any of the credential groups within the Domain</p>
+</li>
+<li>
+<p>If the Domain Controller validates the Holder has access permissions, the
+   Identity Gateway will generate and sign a credential</p>
+</li>
+<li>The credential is issued to the Holder in the JWT format included in the
+   <code>access_token</code> response parameter:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;access_token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIweDEyMzQ1NiIsInN1YiI6ImRpZDpudjphYmNkZSIsImF1ZCI6IjB4ZmZmZmZmIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1MTYyNTAwMjJ9.fiOSfeQwSiDi0ECFuDrHmhx8BHTHMl6MiyiJgJ6BIntjHvcFDFjPwtSYJrhYpeTcBPQ1FO5-fT-n4fQXBF92Vw&quot;</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>Which decoded has the following payload:</p>
+<p><code>json
+   {
+     "iss": "0x123456",
+     "sub": "0xabcde",
+     "aud": "0xffffff",
+     "iat": 1516239022,
+     "exp": 1516250022
+   }</code>
+   In this case it includes the “iat” (when the token was emitted) and “exp”
+  (when the token is expiring).</p>
+<ol>
+<li>The Holder can present the credentials to a Smart Contract or Optionally the
+   Identity Gateway could present the credentials to a Smart Contract on behalf
+   of the Holder.</li>
+</ol>
+<h3 id="gateway-jwt-implementation">Gateway JWT implementation<a class="headerlink" href="#gateway-jwt-implementation" title="Permanent link">&para;</a></h3>
+<p>The gateway implements the <a href="https://tools.ietf.org/html/rfc6749">RFC6749: The OAuth 2.0 Authorization Framework</a> framework using <a href="https://tools.ietf.org/html/rfc7523">JWTs as Authorization Grants</a> and <a href="https://tools.ietf.org/html/draft-ietf-oauth-access-token-jwt-10">JWTs as Access Tokens</a></p>
+<h4 id="jwt-authorization-grants">JWT Authorization Grants<a class="headerlink" href="#jwt-authorization-grants" title="Permanent link">&para;</a></h4>
+<p>The claims that should be contained in a JWT Authorization Grant depend on the action that we want to perform on the gateway. The claims validation follow <a href="https://tools.ietf.org/html/rfc7523#section-3">RFC7523</a>. Overall the claim options look like this:</p>
+<p><strong>Registered name claims</strong></p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;iss&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;essential&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;sub&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;essential&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;aud&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;essential&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;/api/v1/gateway/services/access&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;/api/v1/gateway/services/compute&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;/api/v1/gateway/services/download&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;/api/v1/gateway/services/execute&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;exp&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;essential&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li><code>iss</code>: Is the ethereum address of the consumer</li>
+<li><code>sub</code>: (optional): Is the Service Agreement Id if applicable</li>
+<li><code>aud</code>: Is the path of the endpoint being called</li>
+<li><code>exp</code>: Is the expiration time</li>
+</ul>
+<p><strong>Private name claims</strong></p>
+<p>These claims are specific to Nevermined</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;did&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;essential&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;execution_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;essential&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<ul>
+<li><code>did</code> (optional): Is the DID of the related asset</li>
+<li><code>execution_id</code> (optional): Is the execution id of the related compute job</li>
+</ul>
+<p>To request a JWT access token a client needs to make a request to the token endpoint (<code>/api/v1/services/oauth2/token</code>) by sendinf the following parameters using <code>application/x-www-form-urlencoded</code> format as per <a href="https://tools.ietf.org/html/rfc6749#section-4.1.3">RFC6749</a> with:</p>
+<ul>
+<li><code>grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer</code>: The grant type as per <a href="https://tools.ietf.org/html/rfc7523#section-2.1">RFC7523</a></li>
+<li><code>assertion=&lt;jwt grant token&gt;</code>: The assertion with a single JWT grant token as per <a href="https://tools.ietf.org/html/rfc7523#section-2.1">RFC7523</a></li>
+</ul>
+<p>For examples JWT Grant tokens check <a href="#examples-of-jwt-grant-tokens">Examples of JWT Grant Tokens</a> in the <a href="#annex">Annex</a>.</p>
+<h3 id="adding-and-revoking-permissions">Adding and Revoking Permissions<a class="headerlink" href="#adding-and-revoking-permissions" title="Permanent link">&para;</a></h3>
+<p>The administrator of the Domain typically uses the Domain Controller as a unique
+ source of truth for the access control of users and groups. Because the
+ identity gateway asks the Domain Controller for the belonging of users and
+ groups as part of the domain, any modification of the permissions in the Domain
+  Controller policies will be extended automatically to the new authorization
+  queries responded by the Identity Gateway.</p>
+<p>For the cases where an access token was already given to a user, this will be
+valid during the lifetime of the credentials assigned to the user. During that
+period of time, the credentials will be valid for access to the resources
+granted. Because of that it is recommended to configure the identity gateway to
+not emit credentials with very long expiration time.</p>
+<p>To complement this, the Identity Gateway could integrate a cache system to keep
+track of the credentials granted during their life-cycle, and expose a method
+for revoking credentials immediately. In that scenario if a Domain Account needs
+ to revoke some credentials related to a Holder and a Subject, it should send a
+ request to the Identity Gateway using the following format:</p>
+<div class="highlight"><pre><span></span><code><span class="err"> HTTP DELETE /api/v1/gateway/services/domain/credentials</span>
+
+<span class="err"> Authorization: Bearer eyJhbGciOiJIUzI1NiIXVCJ9TJV...r7E20RMHrHDcEfxjoYZgeFONFh7HgQ</span>
+</code></pre></div>
+<p>Where the JWT payload is:
+<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">   </span><span class="nt">&quot;iss&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x123456&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// address of the domain controller</span><span class="w"></span>
+<span class="w">   </span><span class="nt">&quot;sub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xabcd&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// id of the service agreement</span><span class="w"></span>
+<span class="w">   </span><span class="nt">&quot;aud&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xffffff&quot;</span><span class="w"> </span><span class="c1">// address of the gateway</span><span class="w"></span>
+<span class="w"> </span><span class="p">}</span><span class="w"></span>
+</code></pre></div></p>
+<p>For this request the Identity Gateway needs to authenticate the Domain Account
+via the signature. If all the validations are correct the Identity Gateway needs
+ to send a revoke request to the Smart Contract keeping the authorization
+ permissions on-chain.</p>
+<p>This scenario is valid when the Identity Gateway integrates a DLT network to
+backup the authorization permissions. If the Identity Gateway performs the
+validation for each request, this revocation won’t be necessary because the next
+ authorization request via the Gateway will query the Domain Controller that
+ should have already revoked the authorization permissions.</p>
+<h2 id="annex">Annex<a class="headerlink" href="#annex" title="Permanent link">&para;</a></h2>
+<h3 id="serializing-did-documents">Serializing DID Documents<a class="headerlink" href="#serializing-did-documents" title="Permanent link">&para;</a></h3>
+<p>Having a standard JSON document or subtract, the common operations used to
+serialize fragments of DID Documents is as follows:</p>
+<ul>
+<li>The object is sorted alphabetically by key, of the existing nested levels</li>
+<li>In the JSON generated, all the characters between entries are removed
+  (\n, \t, \r, whitespaces, etc.)</li>
+<li>As a result must be generated a string of only one line</li>
+<li>After serializing a DID Document or a fragment into a string line, typically
+  it’s necessary to hash that line to include as part of a different document or
+   adding it on-chain. The common method used to do that is using the SHA3-256
+   (Keccak-256) algorithm (you might have to convert the string to bytes first.)
+   , making sure that final hash generated is prefixed by <code>0x</code>.</li>
+</ul>
+<h3 id="examples-of-jwt-grant-tokens">Examples of JWT Grant Tokens<a class="headerlink" href="#examples-of-jwt-grant-tokens" title="Permanent link">&para;</a></h3>
+<p><strong><code>/api/v1/gateway/services/access</code></strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// header</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;alg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ES256K&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;typ&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JWT&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// assertion</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;iss&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;aud&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/api/v1/gateway/services/access&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;sub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xf527a6bbc35547f782dda34d64bb9070e743531107994899b1f97d4451aacbe1&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;iat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1607967375</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;exp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1607970975</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;did&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;did:nv:5c19aaf5f7c12ef0a9d898d5a89ca5428f3d0315b0f0a36f5b5d097166e53788&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong><code>/api/v1/gateway/services/compute</code></strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">// header</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;alg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ES256K&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;typ&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JWT&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// assertion</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;iss&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;aud&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/api/v1/gateway/services/compute&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;sub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x3228c55d6e444cdc87bd5425896d5cdfa1e42e0734d04866a6c4386ef4f20144&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;iat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1607968935</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;exp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1607972535</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;execution_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nevermined-compute-82v5j&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong><code>/api/v1/gateway/services/download</code></strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// header</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;alg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ES256K&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;typ&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JWT&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// assertion</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;iss&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;aud&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/api/v1/gateway/services/download&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;iat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1607969122</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;exp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1607972722</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;did&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;did:nv:2379d3e2d03f25b8e5fb2fae6e6adeb45cd7674d20905fc172d84915ff68cc73&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div></p>
+<p><strong><code>/api/v1/gateway/services/execute</code></strong>
+<div class="highlight"><pre><span></span><code><span class="c1">// header</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;alg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ES256K&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;typ&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JWT&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="c1">// assertion</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;iss&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;aud&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/api/v1/gateway/services/execute&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;sub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x715954fd8a9b48968983ae9b9813e169b4be0d861ccb4bbd8489298cda59c6a9&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;iat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1607969247</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;exp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1607972847</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;did&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;did:nv:e689ed382b15e190a5937f5c070843cce249a692ff09931d570e288bd91e5b81&quot;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div></p>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../marketplace_api/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Marketplace API" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Marketplace API
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../../api/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Overview
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 Nevermined
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://nevermined.io" target="_blank" rel="noopener" title="nevermined.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.1-20.4-4.2-41.8-4.2-64 0-22.2 2.1-43.6 4.2-64h185.4c2.1 20.4 3.3 41.8 3.3 64zm151.9-64c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42.9 3.2-64 0-22-1.1-43.4-3.2-64h123.1zm-10.5-32H376.7c-10-63.86-29.8-117.38-55.3-151.558C399.8 29.09 463.4 85.94 493.4 160zm-149.1 0H167.7c6.1-36.4 15.5-68.62 27-94.65 10.5-23.61 22.2-40.74 33.5-51.54C239.4 3.178 248.7 0 256 0c7.3 0 16.6 3.178 27.8 13.81 11.3 10.8 23 27.93 33.5 51.54 11.5 26.03 20.9 58.25 27 94.65zm-325.69 0C48.59 85.94 112.2 29.09 190.6 8.442 165.1 42.62 145.3 96.14 135.3 160H18.61zm112.59 32c-2.1 20.6-4.1 42-4.1 64 0 21.1 2 43.4 4.1 64H8.065C2.8 299.5 0 278.1 0 256s2.8-43.5 8.065-64H131.2zm63.5 254.6c-11.5-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.7-22.2 40.8-33.5 51.6-11.2 10.6-20.5 13.8-28.7 13.8-6.4 0-15.7-3.2-26.9-13.8-11.3-10.8-23-27.9-33.5-51.6zm-4.1 57C112.2 482.9 48.59 426.1 18.61 352H135.3c10 63.9 29.8 117.4 55.3 151.6zm130.8 0c25.5-34.2 45.3-87.7 55.3-151.6h116.7c-30 74.1-93.6 130.9-172 151.6z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/company/nevermined" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://medium.com/nevermined-io" target="_blank" rel="noopener" title="medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M180.5 74.262C80.813 74.262 0 155.633 0 256s80.819 181.738 180.5 181.738S361 356.373 361 256 280.191 74.262 180.5 74.262Zm288.25 10.646c-49.845 0-90.245 76.619-90.245 171.095s40.406 171.1 90.251 171.1 90.251-76.619 90.251-171.1H559c0-94.503-40.4-171.095-90.248-171.095Zm139.506 17.821c-17.526 0-31.735 68.628-31.735 153.274s14.2 153.274 31.735 153.274S640 340.631 640 256c0-84.649-14.215-153.271-31.742-153.271Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/nevermined-io" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/nevermined_io" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/GZju2qScKq" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:info@nevermined.io" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M501.6 4.186a24.105 24.105 0 0 0-25.44-1.063L12.12 267.1C4.184 271.7-.504 280.3.043 289.4c.547 9.125 6.234 17.16 14.66 20.69l153.3 64.38v113.5c0 8.781 4.797 16.84 12.5 21.06C184.1 511 188 512 191.1 512c4.516 0 9.038-1.281 12.99-3.812l111.2-71.46 98.56 41.4a24.044 24.044 0 0 0 9.297 1.875c4.078 0 8.141-1.031 11.78-3.094a23.936 23.936 0 0 0 11.95-17.38l64-432C513.1 18.44 509.1 9.373 501.6 4.186zM369.3 119.2 182.2 328.1 78.23 284.7 369.3 119.2zM215.1 444v-49.36l46.45 19.51L215.1 444zm189.7-22.1-176.6-74.19 224.6-249.5-48 323.69z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>

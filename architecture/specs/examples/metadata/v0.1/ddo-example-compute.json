@@ -1,0 +1,329 @@
+{
+	"@context": "https://w3id.org/did/v1",
+	"authentication": [{
+		"publicKey": "did:nv:d4c7a013002adfe2cedda8ff771c41f571dfe8a6d1a8d28d30933d5a81ad7794",
+		"type": "RsaSignatureAuthentication2018"
+	}],
+	"created": "2020-09-03T13:35:42",
+	"id": "did:nv:d4c7a013002adfe2cedda8ff771c41f571dfe8a6d1a8d28d30933d5a81ad7794",
+	"proof": {
+		"checksum": {
+			"0": "ca56bda3bb55eeae32ff918b32143333930ca71a0bb3f1c4973a7da4e71abe6e",
+			"1": "e4ac07c241b4a113e1ad6ef046b8fdf61c5e2c6e6a1745d352f8f30ffa84d704",
+			"2": "f6c642676664b242efb5417d49728fb05a8ca998494156409c66dafcdbbb2a2a",
+			"4": "55ddd337fc6625b83c57955200e2ad9cc15f8a14676b0b27965acc7a8c420cf5"
+		},
+		"created": "2020-09-03T13:35:42Z",
+		"creator": "0xA99D43d86A0758d5632313b8fA3972B6088A21BB",
+		"signatureValue": "0x9e16ce1055ea63249112ae61eec03ae653541f037d15fb491f938a0fcbd0a5ed686332a9a32dd020088750b01d6ec1a3969e6cccde6c0ceeeb338f44ea0238351b",
+		"type": "DDOIntegritySignature"
+	},
+	"publicKey": [{
+		"id": "0xA99D43d86A0758d5632313b8fA3972B6088A21BB",
+		"owner": "0xA99D43d86A0758d5632313b8fA3972B6088A21BB",
+		"type": "EthereumECDSAKey"
+	}],
+	"service": [{
+			"attributes": {
+				"additionalInformation": {
+					"copyrightHolder": "Met Office",
+					"description": "Weather information of UK including temperature and humidity",
+					"inLanguage": "en",
+					"links": [{
+							"name": "Sample of Asset Data",
+							"type": "sample",
+							"url": "https://foo.com/sample.csv"
+						},
+						{
+							"name": "Data Format Definition",
+							"type": "format",
+							"url": "https://foo.com/sampl2.csv"
+						}
+					],
+					"tags": [
+						"weather",
+						"uk",
+						"2011",
+						"temperature",
+						"humidity"
+					],
+					"workExample": "423432fsd,51.509865,-0.118092,2011-01-01T10:55:11+00:00,7.2,68"
+				},
+				"curation": {
+					"rating": 0,
+					"numVotes": 0,
+					"isListed": true
+				},
+				"main": {
+					"author": "Met Office",
+					"dateCreated": "2020-09-03T13:35:42",
+					"datePublished": "2019-02-08T08:13:49Z",
+					"files": [{
+						"checksum": "efb2c764274b745f5fc37f97c6b0e761",
+						"compression": "zip",
+						"contentLength": "4535431",
+						"contentType": "text/csv",
+						"encoding": "UTF-8",
+						"index": 0
+					}],
+					"license": "CC-BY",
+					"name": "UK Weather information 2011",
+					"price": "1",
+					"type": "dataset"
+				}
+			},
+			"index": 0,
+			"serviceEndpoint": "http://172.15.0.15:5000/api/v1/metadata/assets/ddo/did:nv:d4c7a013002adfe2cedda8ff771c41f571dfe8a6d1a8d28d30933d5a81ad7794",
+			"type": "metadata"
+		},
+		{
+			"attributes": {
+				"additionalInformation": {
+					"links": []
+				},
+				"main": {
+					"files": [],
+					"service": "provenance"
+				}
+			},
+			"index": 1,
+			"serviceEndpoint": "http://172.15.0.15:5000/api/v1/metadata/assets/ddo/did:nv:d4c7a013002adfe2cedda8ff771c41f571dfe8a6d1a8d28d30933d5a81ad7794",
+			"type": "provenance"
+		},
+		{
+			"attributes": {
+				"additionalInformation": {
+					"links": []
+				},
+				"main": {
+					"files": [],
+					"service": "PSK-RSA"
+				}
+			},
+			"index": 2,
+			"serviceEndpoint": "http://localhost:8030",
+			"type": "authorization"
+		},
+		{
+			"attributes": {
+				"additionalInformation": {
+					"links": []
+				},
+				"main": {
+					"creator": "0xA99D43d86A0758d5632313b8fA3972B6088A21BB",
+					"datePublished": "2020-09-03T13:35:42Z",
+					"files": [],
+					"name": "dataAssetComputeServiceAgreement",
+					"price": "1",
+					"provider": {
+						"description": "",
+						"environment": {
+							"cluster": {
+								"type": "Kubernetes",
+								"url": "http://10.0.0.17/xxx"
+							},
+							"supportedContainers": [{
+									"checksum": "sha256:cb57ecfa6ebbefd8ffc7f75c0f00e57a7fa739578a429b6f72a0df19315deadc",
+									"image": "tensorflow/tensorflow",
+									"tag": "latest"
+								},
+								{
+									"checksum": "sha256:cb57ecfa6ebbefd8ffc7f75c0f00e57a7fa739578a429b6f72a0df19315deadc",
+									"image": "tensorflow/tensorflow",
+									"tag": "latest"
+								}
+							],
+							"supportedServers": [{
+									"cpu": "16",
+									"disk": "160gb",
+									"gpu": "0",
+									"maxExecutionTime": 86400,
+									"memory": "128gb",
+									"price": "50",
+									"serverId": "1",
+									"serverType": "xlsize"
+								},
+								{
+									"cpu": "2",
+									"disk": "80gb",
+									"gpu": "0",
+									"maxExecutionTime": 86400,
+									"memory": "8gb",
+									"price": "10",
+									"serverId": "2",
+									"serverType": "medium"
+								}
+							]
+						},
+						"type": "Azure"
+					}
+				},
+				"serviceAgreementTemplate": {
+					"conditionDependency": {
+						"access": [],
+						"escrowPayment": [
+							"lockPayment",
+							"execCompute"
+						],
+						"execCompute": [],
+						"lockPayment": []
+					},
+					"conditions": [{
+							"contractName": "LockPaymentCondition",
+							"events": [{
+								"actorType": "publisher",
+								"handler": {
+									"functionName": "fulfillExecComputeCondition",
+									"moduleName": "lockPaymentConditon",
+									"version": "0.1"
+								},
+								"name": "Fulfilled"
+							}],
+							"functionName": "fulfill",
+							"name": "lockPayment",
+							"parameters": [
+								{
+									"name": "_did",
+									"type": "bytes32",
+									"value": "d4c7a013002adfe2cedda8ff771c41f571dfe8a6d1a8d28d30933d5a81ad7794"
+								},
+								{
+									"name": "_rewardAddress",
+									"type": "address",
+									"value": "0x886dE2b3F8F27eEd43bA2FD4bC2AabDc14E0d9dD"
+								},
+								{
+									"name": "_tokenAddress",
+									"type": "address",
+									"value": "0x0"
+								},
+								{
+									"name": "_amounts",
+									"type": "uint256[]",
+									"value": ["10", "2"]
+								},
+								{
+									"name": "_receivers",
+									"type": "address[]",
+									"value": ["0xa99d43d86a0758d5632313b8fa3972b6088a21bb", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
+								}
+							],
+							"timelock": 0,
+							"timeout": 0
+						},
+						{
+							"contractName": "ComputeExecutionCondition",
+							"events": [{
+									"actorType": "publisher",
+									"handler": {
+										"functionName": "fulfillEscrowPaymentCondition",
+										"moduleName": "access",
+										"version": "0.1"
+									},
+									"name": "Fulfilled"
+								},
+								{
+									"actorType": "consumer",
+									"handler": {
+										"functionName": "fulfillEscrowPaymentCondition",
+										"moduleName": "execCompute",
+										"version": "0.1"
+									},
+									"name": "TimedOut"
+								}
+							],
+							"functionName": "fulfill",
+							"name": "execCompute",
+							"parameters": [{
+									"name": "_did",
+									"type": "bytes32",
+									"value": "d4c7a013002adfe2cedda8ff771c41f571dfe8a6d1a8d28d30933d5a81ad7794"
+								},
+								{
+									"name": "_grantee",
+									"type": "address",
+									"value": ""
+								}
+							],
+							"timelock": 0,
+							"timeout": 0
+						},
+						{
+							"contractName": "EscrowPaymentCondition",
+							"events": [{
+								"actorType": "publisher",
+								"handler": {
+									"functionName": "verifyRewardTokens",
+									"moduleName": "escrowPaymentConditon",
+									"version": "0.1"
+								},
+								"name": "Fulfilled"
+							}],
+							"functionName": "fulfill",
+							"name": "escrowPayment",
+							"parameters": [
+								{
+									"name": "_did",
+									"type": "bytes32",
+									"value": "d4c7a013002adfe2cedda8ff771c41f571dfe8a6d1a8d28d30933d5a81ad7794"
+								},{
+
+									"name": "_amounts",
+									"type": "uint256[]",
+									"value": ["10", "2"]
+								},
+								{
+									"name": "_receivers",
+									"type": "address[]",
+									"value": ["0xa99d43d86a0758d5632313b8fa3972b6088a21bb", "0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0"]
+								},
+								{
+									"name": "_sender",
+									"type": "address",
+									"value": ""
+								},
+								{
+									"name": "_tokenAddress",
+									"type": "address",
+									"value": "0x0"
+								},
+								{
+									"name": "_lockCondition",
+									"type": "bytes32",
+									"value": "0xBDB91cF0a8449a2848Ba6194eE45579E81B1A0F9"
+								},
+								{
+									"name": "_releaseCondition",
+									"type": "bytes32",
+									"value": "0xF673Cd200CEa6FAB788979BD475cC595d5894767"
+								}
+							],
+							"timelock": 0,
+							"timeout": 0
+						}
+					],
+					"contractName": "EscrowComputeExecutionTemplate",
+					"events": [{
+						"actorType": "consumer",
+						"handler": {
+							"functionName": "fulfillLockPaymentCondition",
+							"moduleName": "EscrowComputeExecutionTemplate",
+							"version": "0.1"
+						},
+						"name": "AgreementCreated"
+					}],
+					"fulfillmentOrder": [
+						"lockPayment.fulfill",
+						"execCompute.fulfill",
+						"escrowPayment.fulfill"
+					]
+				}
+			},
+			"index": 4,
+			"serviceEndpoint": "http://localhost:8030/api/v1/gateway/services/execute",
+			"templateId": "0xcD6318Df0dB24E994783bFF2AB73d81F1533c499",
+			"type": "compute"
+		}
+	],
+	"updated": "2020-09-03T13:35:42Z"
+}

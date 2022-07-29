@@ -1,0 +1,2106 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Nevermined, The world's first enterprise-grade unstoppable data sharing ecosystem">
+      
+      
+        <meta name="author" content="Nevermined">
+      
+      
+        <link rel="canonical" href="http://docs.nevermined.io/architecture/specs/compute/">
+      
+      <link rel="icon" href="../../../assets/nevermined/favicon-nvm.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Data In Situ Computation - Nevermined Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#compute-spec-data-in-situ-computation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Nevermined Documentation" class="md-header__button md-logo" aria-label="Nevermined Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/nevermined/favicon-32.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Nevermined Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data In Situ Computation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nevermined-io/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nevermined-io/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Nevermined Documentation" class="md-nav__button md-logo" aria-label="Nevermined Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/nevermined/favicon-32.png" alt="logo">
+
+    </a>
+    Nevermined Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nevermined-io/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nevermined-io/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Architecture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Architecture" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../BuildingBlocks/" class="md-nav__link">
+        Building Blocks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/" class="md-nav__link">
+        Components
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/catalog/getting-started/" class="md-nav__link">
+        Catalog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repos/" class="md-nav__link">
+        Repositories
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Specifications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Specifications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Specifications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Specs/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../access/" class="md-nav__link">
+        Access Control
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Data In Situ Computation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Data In Situ Computation
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#execution-of-remote-compute-services-using-service-agreements" class="md-nav__link">
+    Execution of Remote Compute Services using Service Agreements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#motivation" class="md-nav__link">
+    Motivation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actors" class="md-nav__link">
+    Actors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-components" class="md-nav__link">
+    Technical components
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flow" class="md-nav__link">
+    Flow
+  </a>
+  
+    <nav class="md-nav" aria-label="Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terminology" class="md-nav__link">
+    Terminology
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflows" class="md-nav__link">
+    Workflows
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publishing-an-asset-including-compute-services" class="md-nav__link">
+    Publishing an Asset including Compute Services
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-service-execution-agreement" class="md-nav__link">
+    Setting up the Service Execution Agreement
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up the Service Execution Agreement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#registering-asset" class="md-nav__link">
+    Registering Asset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consuming-asset" class="md-nav__link">
+    Consuming Asset
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execution-phase" class="md-nav__link">
+    Execution phase
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#infrastructure-orchestration" class="md-nav__link">
+    Infrastructure Orchestration
+  </a>
+  
+    <nav class="md-nav" aria-label="Infrastructure Orchestration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#services-provided-by-the-operator" class="md-nav__link">
+    Services Provided by the Operator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orchestration-steps" class="md-nav__link">
+    Orchestration Steps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-operator" class="md-nav__link">
+    Infrastructure Operator
+  </a>
+  
+    <nav class="md-nav" aria-label="Infrastructure Operator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#volumes" class="md-nav__link">
+    Volumes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-isolation" class="md-nav__link">
+    Network isolation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fl/" class="md-nav__link">
+        Federated Learning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provenance/" class="md-nav__link">
+        Provenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nft/" class="md-nav__link">
+        NFTs Engine
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../keytransfer/" class="md-nav__link">
+        Data Transfer Proofs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../did/" class="md-nav__link">
+        Decentralized Identifiers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metadata/" class="md-nav__link">
+        Metadata
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../marketplace_api/" class="md-nav__link">
+        Marketplace API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../id_management/" class="md-nav__link">
+        Identity Management
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Integration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Integration" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Integration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contracts/" class="md-nav__link">
+        Smart Contracts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/api-reference-latest/" class="md-nav__link">
+        API Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Assets/" class="md-nav__link">
+        Assets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Accounts/" class="md-nav__link">
+        Accounts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Agreements/" class="md-nav__link">
+        Agreements
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Conditions/" class="md-nav__link">
+        Conditions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Provenance/" class="md-nav__link">
+        Provenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Tokens/" class="md-nav__link">
+        Tokens
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Providers/" class="md-nav__link">
+        Providers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Secret-Store/" class="md-nav__link">
+        Secret Store
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/SDK/" class="md-nav__link">
+        Software Development Kits (SDKs)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/gateway/" class="md-nav__link">
+        Gateway API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/metadata/" class="md-nav__link">
+        Metadata API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/cli/" class="md-nav__link">
+        Command Line Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_8" type="checkbox" id="__nav_4_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_8">
+          Integrations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Integrations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Integrations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/filecoin/filecoin-storage/" class="md-nav__link">
+        Filecoin Storage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/" class="md-nav__link">
+        Blog posts
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Licensing/" class="md-nav__link">
+        Software Licenses
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Social
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Social" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Social
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://discord.gg/GZju2qScKq" class="md-nav__link">
+        Discord
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://twitter.com/nevermined_io" class="md-nav__link">
+        Twitter
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://linkedin.com/company/nevermined" class="md-nav__link">
+        Linkedin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ" class="md-nav__link">
+        Demos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/nevermined-io/docs/edit/master/docs/architecture/specs/compute/README.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="compute-spec-data-in-situ-computation">COMPUTE SPEC: Data in situ Computation<a class="headerlink" href="#compute-spec-data-in-situ-computation" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code>shortname:      COMPUTE
+name:           Data In Situ Computation
+type:           Standard
+status:         Valid
+version:        0.1
+editor:         Aitor Argomaniz &lt;aitor@nevermined.io&gt;
+contributors:   
+</code></pre></div>
+<ul>
+<li><a href="#compute-spec-data-in-situ-computation">COMPUTE SPEC: Data in situ Computation</a></li>
+<li><a href="#execution-of-remote-compute-services-using-service-agreements">Execution of Remote Compute Services using Service Agreements</a></li>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#actors">Actors</a></li>
+<li><a href="#technical-components">Technical components</a></li>
+<li><a href="#flow">Flow</a><ul>
+<li><a href="#terminology">Terminology</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#workflows">Workflows</a></li>
+<li><a href="#publishing-an-asset-including-compute-services">Publishing an Asset including Compute Services</a></li>
+<li><a href="#setting-up-the-service-execution-agreement">Setting up the Service Execution Agreement</a><ul>
+<li><a href="#registering-asset">Registering Asset</a></li>
+<li><a href="#consuming-asset">Consuming Asset</a></li>
+</ul>
+</li>
+<li><a href="#execution-phase">Execution phase</a></li>
+</ul>
+</li>
+<li><a href="#infrastructure-orchestration">Infrastructure Orchestration</a><ul>
+<li><a href="#services-provided-by-the-operator">Services Provided by the Operator</a></li>
+<li><a href="#orchestration-steps">Orchestration Steps</a></li>
+<li><a href="#infrastructure-operator">Infrastructure Operator</a><ul>
+<li><a href="#volumes">Volumes</a></li>
+</ul>
+</li>
+<li><a href="#network-isolation">Network isolation</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="execution-of-remote-compute-services-using-service-agreements">Execution of Remote Compute Services using Service Agreements<a class="headerlink" href="#execution-of-remote-compute-services-using-service-agreements" title="Permanent link">&para;</a></h2>
+<p>This SPEC introduces the integration pattern for the usage of <strong>Service Execution Agreements (SEA)</strong>
+(also called Service Agreements or Agreements) as contracts between parties interacting in the execution of a
+Compute Service transaction.
+This SPEC using the SEA as core element, orchestrates the publishing/execution of this type of compute services.</p>
+<p>The intention of this SPEC is to describe the flow and integration pattern independently of the infrastructure
+Cloud Compute Service.
+This SPEC MUST be valid for integrating classical infrastructure cloud providers like Amazon EC2 or Azure,
+but also can be used to integrate other compute providers or On-Premise infrastructure.</p>
+<p>It's out of the scope to detail the Service Execution Agreements implementation.</p>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
+<p>The main motivations of this SPEC are:</p>
+<ul>
+<li>Identify the actors involved on the definition and execution of a Nevermined Compute service</li>
+<li>Detail the main characteristics of this interaction</li>
+<li>Specify the pros and cons of this approach</li>
+<li>Identify the API methods exposed via the different libraries</li>
+</ul>
+<h2 id="actors">Actors<a class="headerlink" href="#actors" title="Permanent link">&para;</a></h2>
+<p>The different actors interacting in this flow are:</p>
+<ul>
+<li>PROVIDERS - Give access to the Compute Services</li>
+<li>CONSUMERS - Want to make use of the Compute Services</li>
+<li>MARKETPLACES or DOMAINS - Store the DDO/Metadata related with the Assets/services</li>
+<li>INFRASTRUCTURE - Cloud or on-premise infrastructure services providing computing. Typically Amazon, Azure, etc.</li>
+</ul>
+<h2 id="technical-components">Technical components<a class="headerlink" href="#technical-components" title="Permanent link">&para;</a></h2>
+<p>The following technical components are involved in an end-to-end publishing and consumption flow:</p>
+<ul>
+<li><strong>MARKETPLACE</strong> - Exposes a web interface allowing the users to publish and purchase assets and services associated to
+  these assets. It also facilitates the discovery of assets.</li>
+<li><strong>SDK</strong> - Software library encapsulating the Nevermined business logic. It's used to interact with all the
+  components &amp; APIs of the system. It's currently implemented in the following packages:</li>
+<li><a href="https://github.com/nevermined-io/sdk-js">nevermined-sdk-js</a> - JavaScript version of the Nevermined SDK to be
+    integrated with front-end applications.</li>
+<li><a href="https://github.com/nevermined-io/sdk-py">nevermined-sdk-py</a> - Python version of the Nevermined SDK to be
+    integrated with back-end applications. The primary users are data scientists.</li>
+<li><a href="https://github.com/nevermined-io/sdk-java">nevermined-sdk-java</a> - Java version of the Nevermined SDK to be
+    integrated with <a href="https://en.wikipedia.org/wiki/Java_virtual_machine">JVM</a> applications. The primary users are
+    data engineers.</li>
+<li><a href="https://github.com/nevermined-io/contracts">SMART CONTRACTS</a> - Solidity Smart Contracts providing the Service
+  Agreements business logic.</li>
+<li><a href="https://github.com/nevermined-io/gateway">GATEWAY</a> - Microservice to be executed by PUBLISHERS. It exposes an
+  HTTP REST API permitting access to PUBLISHER assets or additional services such as computation.</li>
+<li><a href="https://github.com/nevermined-io/metadata-api">METADATA-API</a> - Microservice to be executed by MARKETPLACES.
+  Facilitates   creating, updating, deleting and searching the asset metadata registered by the PUBLISHERS.
+  This metadata is included as part of a DDO (see <a href="../did/">DID SPEC</a> and
+  <a href="../metadata/">METADATA SPEC</a>) and also includes the services associated with the asset (consumption,
+  computation, etc.).</li>
+</ul>
+<h2 id="flow">Flow<a class="headerlink" href="#flow" title="Permanent link">&para;</a></h2>
+<p>This section describes the Asset Compute Service flow in detail.
+There are some parameters used in this flow:</p>
+<ul>
+<li><strong>DID</strong> - See <a href="../did/">DID SPEC</a>.</li>
+<li><strong>serviceAgreementId</strong> - Is the unique ID referring to a Service Execution Agreement established between a PUBLISHER
+  and a CONSUMER. The CONSUMER (via SDK) is the one creating this random unique serviceAgreementId.</li>
+<li><strong>serviceDefinitionId</strong> - Identifies one service in the array of services included in the DDO. It is created by the
+  PUBLISHER (via SDK) upon DDO creation and is associated with different services.</li>
+<li><strong>templateId</strong> - Identifies a unique Service Agreement template.</li>
+</ul>
+<h3 id="terminology">Terminology<a class="headerlink" href="#terminology" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Compute Provider - Entity providing a compute service for a price (or for free).</li>
+<li>Compute Service - Service offered by a Compute Provider. It could have different conditions like the type of services,
+  price, etc.</li>
+<li>Workflow - It describes an execution pipeline where you put together input data and an algorithm to process this data
+  and you run using a Compute Service.</li>
+</ul>
+<h3 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A COMPUTE PROVIDER or PROVIDER define the conditions that a Compute service supports. It includes:</li>
+<li>What kind of image (Docker container) can be deployed in the infrastructure</li>
+<li>What are the infrastructure resources available (CPU, memory, storage)  </li>
+<li>What is the price of using the infrastructure resources</li>
+<li>A COMPUTE PROVIDER defines a Compute Service in the scope of the Asset (DID/DDO) of the dataset that can be computed</li>
+<li>A CONSUMER defines the task to execute modeling it in a Workflow (including configuration, input, transformations and
+  output)</li>
+<li>A workflow is a new type of Asset. It can be resolvable and be used across multiple independent compute services</li>
+<li>A CONSUMER purchasing a compute service defines which Workflow (DID) is going to execute</li>
+<li>A CONSUMER can purchase a service given by a PROVIDER and execute multiple times till the timeout expires</li>
+<li>A CONSUMER could purchase a service and execute later, the purchase MUST be totally decoupled of execution</li>
+<li>The previous two points could support to buy once a compute service and execute for example the service every night
+  at 3 am</li>
+</ul>
+<p>
+<figure><img src="images/data-in-situ-computation.png" /><figcaption>Data in situ Computation</figcaption>
+</figure>
+</p>
+<h3 id="workflows">Workflows<a class="headerlink" href="#workflows" title="Permanent link">&para;</a></h3>
+<p>From a high-level point of view, a workflow may be considered a view or representation of a real work.
+A workflow consists of an orchestrated and repeatable pattern of activities transformed into tasks that transform or
+process information.</p>
+<p>In Nevermined, we use the concept of workflow to represent a list of tasks to accomplish with the intention of process
+data.</p>
+<p>From a technical point of view, a workflow is a type of Asset (it takes advantage of all the Nevermined plumbing of
+registering, metadata publishing, resolving, etc.).
+The main objective of a workflow is to describe an execution pipeline. A workflow can be split in sequential stages,
+having each stage an input, transformation (via algorithm) and output.</p>
+<p>In the below example, a workflow is modeled in a JSON document with the following characteristics:</p>
+<ul>
+<li>It has a list of sorted stages by the <code>stages.index</code> parameter to be executed sequentially</li>
+<li>Each stage has a list of minimum requirements, like the image required to support the execution of the algorithm,
+  minimum cpu, memory, etc.</li>
+<li>Each stage has an array of sorted input parameters. Each input parameter may be:</li>
+<li>A DID (example: <code>"id": "did:nv:12345"</code>)</li>
+<li>The output of a previous stage (example: <code>"previousIndexStage": 0</code>)</li>
+<li>Each stage has one transformation entry. It includes the id (DID) of the asset in charge of process the input to
+  generate some output</li>
+<li>Each stage includes an entry with some additional output details. This could be a DID or a specific detail about the
+  expected output.</li>
+</ul>
+<p>
+<figure><img src="images/compute-workflow.png" /><figcaption>Workflow JSON Model</figcaption>
+</figure>
+</p>
+<p>Example of a Workflow:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://service/api/v1/metadata/assets/ddo/did:nv:0ebed8226ada17fde24b6bf2b95d27f8f05fcce09139ff5cec31f6d81a7cd2ea&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;main&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;workflow&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;workflow&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;stages&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;stageType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Filtering&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;serverInstances&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;container&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tensorflow/tensorflow&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;latest&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;checksum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sha256:cb57ecfa6ebbefd8ffc7f75c0f00e57a7fa739578a429b6f72a0df19315deadc&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">}</span><span class="w"></span>
+<span class="w">                        </span><span class="p">},</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;did:nv:12345&quot;</span><span class="w"></span>
+<span class="w">                        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;did:nv:67890&quot;</span><span class="w"></span>
+<span class="w">                        </span><span class="p">}],</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;transformation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;did:nv:abcde&quot;</span><span class="w"></span>
+<span class="w">                        </span><span class="p">},</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;output&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">                    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;stageType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Transformation&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;requirements&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;serverInstances&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;container&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tensorflow/tensorflow&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;latest&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;checksum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sha256:cb57ecfa6ebbefd8ffc7f75c0f00e57a7fa739578a429b6f72a0df19315deadc&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">}</span><span class="w"></span>
+<span class="w">                        </span><span class="p">},</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;input&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;previousStage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">                        </span><span class="p">}],</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;transformation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;did:nv:999999&quot;</span><span class="w"></span>
+<span class="w">                        </span><span class="p">},</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;output&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">          </span><span class="p">}]</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;additional&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;curation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{}</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>A Workflow is a new type of Asset (a part of datasets, algorithms, etc.).<br />
+You can find a complete DDO of type workflow in the <a href="/tree/master/docs/architecture/specs/examples/ddo.workflow.json">ddo.workflow.json example file</a>.</p>
+<p>As a new kind of asset, the workflow details will be persisted inside a DDO as part of the "Metadata" service where
+the <strong>type</strong> is <strong>workflow</strong>.
+An Asset of type workflow, will include in the DDO the following information:</p>
+<ul>
+<li>The Workflow model as part of the <code>DDO.services["metadata"].main.workflow</code> entity</li>
+<li>The rest of the Workflow metadata information (title, author, ect.) as part of the existing Metadata service</li>
+</ul>
+<p>A workflow, as every DDO in Nevermined, can be resolved using the Asset Id (DID).</p>
+<p>By the time being, the workflow definition supports the execution of sequential stages.
+It's not supported yet the execution of parallel stages.</p>
+<h3 id="publishing-an-asset-including-compute-services">Publishing an Asset including Compute Services<a class="headerlink" href="#publishing-an-asset-including-compute-services" title="Permanent link">&para;</a></h3>
+<p>The Compute services are published as part of the asset (dataset) metadata as an additional service offered for that
+specific asset.</p>
+<p>The complete flow of publishing an asset with a compute service attached is:</p>
+<ol>
+<li>PUBLISHER generates a DID. See <a href="../did/#how-to-compute-a-did">How to compute a DID</a>.</li>
+<li>PUBLISHER creates a DDO including the following information:</li>
+<li>DID</li>
+<li>Metadata. It contains the asset name, description, etc. For more details see
+     <a href="../metadata/">METADATA SPEC</a>.</li>
+<li>Public key of the PUBLISHER</li>
+<li>A list of services (Access, etc). For more details see <a href="../access/">ACCESS SPEC</a>.</li>
+</ol>
+<p>Each service in the list contains certain information depending on its type.
+   Here we document the <strong>Compute</strong> service. The <strong>Access</strong> and <strong>Metadata</strong> services where discussed in the scope of
+   the <a href="../access/">ACCESS SPEC</a>.</p>
+<p>A service of type "compute" contains:</p>
+<ul>
+<li>Service Definition ID (<code>serviceDefinitionId</code>); this helps PUBLISHER find the service definition of a DDO signed
+     by CONSUMER</li>
+<li>Service Agreement Template ID (<code>templateId</code>); points to an instance of a Service Agreement Template stored by the
+     Template Store Manager. In this case is a template implementing the Compute end to end flow</li>
+<li>
+<p>Service endpoint (<code>serviceEndpoint</code>); CONSUMERS signing this service send their signatures to this endpoint to
+     request the execution of a workflow</p>
+</li>
+<li>
+<p>A list of condition keys; condition key is the <code>keccak256</code> hash of the following:</p>
+<ul>
+<li>SLA template ID</li>
+<li>controller contract address (obtained from the solidity contract json file matching the contract name in the
+   SLA condition)</li>
+<li>controller contract function fingerprint (referred to as function signature or selector)</li>
+</ul>
+</li>
+<li>
+<p>For each condition, a list is required of its parameter values, a timeout, a set of fields determining what
+     conditions depend on other conditions, and a mapping of events emitted by the condition to the off-chain handlers
+     of these events</p>
+</li>
+<li>Each event is identified by name. Each event handler is a function from a whitelisted module</li>
+<li>Service Agreement contract address and the event mapping in the same format as the condition events, for off-chain
+     listeners</li>
+<li>An integer defining when the agreement is fulfilled in case there are multiple terminal conditions, according to
+     the Service Agreement smart contract</li>
+</ul>
+<p>A service of type "compute" contains one endpoint:
+   - <strong>serviceEndpoint</strong> - A URL to call when the CONSUMER request the execution of a workflow</p>
+<div class="codehilite"><pre><span></span><code>An example of a complete DDO can be found [here](/tree/master/docs/architecture/specs/compute/examples/ddo.workflow.json). Please do note that the condition&#39;s
+order in the DID document should reflect the same order in on-chain service agreement.
+</code></pre></div>
+
+<ol>
+<li>PUBLISHER publishes the DDO in the <a href="https://github.com/nevermined-io/metadata">METADATA-API</a>.
+   This DDO must include at least one service of type "compute".</li>
+</ol>
+<p><a href="/tree/master/docs/architecture/specs/compute/examples/ddo.computing.json">here</a> you have an example of the DDO including a Compute service.
+Below you can find a small fraction of this:</p>
+<p>"container":</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&quot;service&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;compute&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;serviceDefinitionId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;serviceEndpoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://mygateway.org/api/v1/gateway/services/execute&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;templateId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;804932804923850985093485039850349850439583409583404534231321131a&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+
+<span class="w">        </span><span class="nt">&quot;main&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">            </span><span class="nt">&quot;creator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;datePublished&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-04-09T19:02:11Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">86400</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Azure&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;environment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="nt">&quot;cluster&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Kubernetes&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://10.0.0.17/xxx&quot;</span><span class="w"></span>
+<span class="w">                    </span><span class="p">},</span><span class="w"></span>
+<span class="w">                    </span><span class="nt">&quot;supportedContainers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tensorflow/tensorflow&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;latest&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;checksum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sha256:cb57ecfa6ebbefd8ffc7f75c0f00e57a7fa739578a429b6f72a0df19315deadc&quot;</span><span class="w"></span>
+<span class="w">                    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;image&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;tensorflow/tensorflow&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;tag&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;latest&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;checksum&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sha256:cb57ecfa6ebbefd8ffc7f75c0f00e57a7fa739578a429b6f72a0df19315deadc&quot;</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}],</span><span class="w"></span>
+<span class="w">                    </span><span class="nt">&quot;supportedServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;serverId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;serverType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xlsize&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5000000000000000000&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;cpu&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;16&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;gpu&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;memory&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;128gb&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;disk&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;160gb&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;maxExecutionTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">86400</span><span class="w"></span>
+<span class="w">                    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;containerId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;typeContainer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;medium&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000000000000000000&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;cpu&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;gpu&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;memory&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8gb&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;disk&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;80gb&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;maxExecutionTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">86400</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}]</span><span class="w"></span>
+
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"></span>
+
+<span class="w">            </span><span class="nt">&quot;serviceAgreementTemplate&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;contractName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ServiceExecutionTemplate&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;events&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AgreementCreated&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="nt">&quot;actorType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;consumer&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="nt">&quot;handler&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;moduleName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;serviceExecutionTemplate&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;functionName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fulfillLockPaymentCondition&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1&quot;</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="p">}],</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;fulfillmentOrder&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                    </span><span class="s2">&quot;lockPayment.fulfill&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="s2">&quot;serviceExecution.fulfill&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                    </span><span class="s2">&quot;escrowPayment.fulfill&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="p">],</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;conditionDependency&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="nt">&quot;lockPayment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">                    </span><span class="nt">&quot;serviceExecution&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="w">                    </span><span class="nt">&quot;releaseReward&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                        </span><span class="s2">&quot;lockPayment&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="s2">&quot;serviceExecution&quot;</span><span class="w"></span>
+<span class="w">                    </span><span class="p">]</span><span class="w"></span>
+<span class="w">                </span><span class="p">},</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;conditions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lockPayment&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;timelock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;contractName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LockPaymentCondition&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;functionName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fulfill&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_did&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bytes32&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">},</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_rewardAddress&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;address&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">},</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_tokenAddress&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;address&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">},</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_amounts&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uint256[]&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">                            </span><span class="p">},</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_receivers&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;address[]&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                              </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">                            </span><span class="p">}</span><span class="w"></span>
+<span class="w">                        </span><span class="p">],</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;events&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fulfilled&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;actorType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;publisher&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;handler&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;moduleName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lockPaymentConditon&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;functionName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fulfillServiceExecutionCondition&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">}</span><span class="w"></span>
+<span class="w">                        </span><span class="p">}]</span><span class="w"></span>
+<span class="w">                    </span><span class="p">},</span><span class="w"></span>
+<span class="w">                    </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;execCompute&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;timelock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;contractName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ComputeExecutionCondition&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;functionName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fulfill&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_did&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bytes32&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">},</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_grantee&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;address&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">}</span><span class="w"></span>
+<span class="w">                        </span><span class="p">],</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;events&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fulfilled&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;actorType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;publisher&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;handler&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                    </span><span class="nt">&quot;moduleName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;execCompute&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                    </span><span class="nt">&quot;functionName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fulfillServiceExecutionCondition&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1&quot;</span><span class="w"></span>
+<span class="w">                                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                            </span><span class="p">},</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TimedOut&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;actorType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;consumer&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;handler&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                    </span><span class="nt">&quot;moduleName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;execCompute&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                    </span><span class="nt">&quot;functionName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fulfillServiceExecutionCondition&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1&quot;</span><span class="w"></span>
+<span class="w">                                </span><span class="p">}</span><span class="w"></span>
+<span class="w">                            </span><span class="p">}</span><span class="w"></span>
+<span class="w">                        </span><span class="p">]</span><span class="w"></span>
+<span class="w">                    </span><span class="p">},</span><span class="w"></span>
+<span class="w">                    </span><span class="p">{</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;escrowPayment&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;timelock&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;contractName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EscrowPaymentCondition&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;functionName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fulfill&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_did&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bytes32&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">},</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_amounts&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uint256[]&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">                            </span><span class="p">},</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_receivers&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;address[]&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
+<span class="w">                            </span><span class="p">},</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_sender&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;address&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">},</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_tokenAddress&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;address&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">},</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_lockCondition&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bytes32&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">},</span><span class="w"></span>
+<span class="w">                            </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;_releaseCondition&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bytes32&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">}</span><span class="w"></span>
+<span class="w">                        </span><span class="p">],</span><span class="w"></span>
+<span class="w">                        </span><span class="nt">&quot;events&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fulfilled&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;actorType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;publisher&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                            </span><span class="nt">&quot;handler&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;moduleName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;escrowPaymentConditon&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;functionName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;verifyRewardTokens&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                                </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.1&quot;</span><span class="w"></span>
+<span class="w">                            </span><span class="p">}</span><span class="w"></span>
+<span class="w">                        </span><span class="p">}]</span><span class="w"></span>
+<span class="w">                    </span><span class="p">}</span><span class="w"></span>
+<span class="w">                </span><span class="p">]</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}]</span><span class="w"></span>
+</code></pre></div>
+<ol>
+<li>PUBLISHER registers the DID, associating the Asset DID to the METADATA API URL that resolves the DID to a DDO.
+To do that, the SDK integrates the <code>DIDRegistry</code> contract using the <code>registerAttribute</code> method.</li>
+</ol>
+<p>
+<figure><img src="images/computing-setup.png" /><figcaption>Publishing &amp; Executing a Compute Service</figcaption>
+</figure>
+</p>
+<h3 id="setting-up-the-service-execution-agreement">Setting up the Service Execution Agreement<a class="headerlink" href="#setting-up-the-service-execution-agreement" title="Permanent link">&para;</a></h3>
+<h4 id="registering-asset">Registering Asset<a class="headerlink" href="#registering-asset" title="Permanent link">&para;</a></h4>
+<p>Using only one SDK call <code>registerAsset(asset_metadata, services_description, publisher_public_key)</code>,
+the PUBLISHER should be able to register an Asset including a <strong>Compute</strong> service.
+The <code>services_description</code> attribute includes the different services (like compute) associated to this asset.</p>
+<h4 id="consuming-asset">Consuming Asset<a class="headerlink" href="#consuming-asset" title="Permanent link">&para;</a></h4>
+<p>During this phase, through the CONSUMER and the PROVIDER (via GATEWAY) negotiation,
+the Service Execution Agreement (SEA) is created and initialized.</p>
+<p>Using the SDK, a CONSUMER can discover, purchase and use the PROVIDER Compute services.</p>
+<p>The complete flow for setting up the SEA is:</p>
+<ol>
+<li>
+<p>The CONSUMER chooses a service inside a DDO (the CONSUMER selects a <code>serviceDefinitionId</code>).</p>
+</li>
+<li>
+<p>The Service Agreement needs to have an associated unique <code>serviceAgreementId</code> that can be generated/provided by the
+   CONSUMER. In the Smart Contracts, this <code>serviceAgreementId</code> will be stored as a <code>bytes32</code>.
+   This <code>serviceAgreementId</code> is random and is represented by a 64-character hex string (using the characters 0-9 and
+   a-f).
+   The CONSUMER can generate the <code>serviceAgreementId</code> using any kind of implementation providing enough randomness
+   to generate this ID (64-characters hex string).</p>
+</li>
+<li>
+<p>The CONSUMER signs the service details.
+   The signature contains <code>(templateId, conditionTypes, valuesHashList, timeoutValues, serviceAgreementId)</code>.
+   <code>serviceAgreementId</code> is provided by the CONSUMER and has to be globally unique.</p>
+</li>
+<li>Each ith item in <code>values_hash_list</code> and <code>timeoutValues</code> lists corresponds to the ith condition in conditionKeys</li>
+<li><code>values_hash_list</code>: a hash of the parameters types and values of each condition</li>
+<li><code>timeoutValues</code>: list of numbers to specify a timeout value for each condition.</li>
+</ol>
+<p>It is used to correlate events and to prevent the PUBLISHER from instantiating multiple Service Agreements from a single request.</p>
+<ol>
+<li>
+<p>The CONSUMER initializes the SEA on-chain <code>(did, serviceAgreementId, serviceDefinitionId, signature,
+   consumerAddress, workflowId</code>).</p>
+</li>
+<li>
+<p>The CONSUMER locks the payment on-chain through the <code>LockPaymentCondition</code> Smart Contract</p>
+</li>
+<li>
+<p>The PROVIDER via GATEWAY, receives the <code>LockPayment.Fulfilled</code> event where he/she is the provider for this agreement</p>
+</li>
+<li>
+<p>The PROVIDER grants the execution permissions for the computation on-chain calling the
+   <code>executeComputeCondition.Fullfill</code> method  </p>
+</li>
+<li>
+<p>The CONSUMER gets the <code>executeComputeCondition.Fullfilled</code> event. When he/she receives the event,
+   can call the GATEWAY <code>serviceEndpoint</code> url added in the DDO to start the execution of the computation workflow.
+   Typically: <code>HTTP POST /api/v1/gateway/services/exec</code></p>
+</li>
+<li>
+<p>The GATEWAY receives the CONSUMER request, and calls the <code>checkPermissions</code> method to validate if the CONSUMER
+   address is granted to execute the service.
+   If user is granted, the GATEWAY triggers the Execute Algorithm action in the infrastructure</p>
+</li>
+</ol>
+<h3 id="execution-phase">Execution phase<a class="headerlink" href="#execution-phase" title="Permanent link">&para;</a></h3>
+<p>During this phase, if and only if the CONSUMER is granted, the CONSUMER can request the start of the Computation in
+the PUBLISHER infrastructure via GATEWAY.</p>
+<p>The complete flow for the Execution phase is:</p>
+<ol>
+<li>
+<p>The GATEWAY after receiving the <code>execution</code> request from CONSUMER, validates the permissions using the
+   <code>checkPermissions</code> function</p>
+</li>
+<li>
+<p>If the CONSUMER is authorized, the GATEWAY resolves the DID of the Workflow associated with the Service Agreement.
+   The workflow includes the details of the pipeline to execute, including the different stages, inputs and outputs.</p>
+</li>
+<li>
+<p>The GATEWAY starts the communicates with the OPERATOR SERVICE, this register a new
+   execution in the PROVIDER INFRASTRUCTURE (cloud or on-premise). The  sends a "Workflow Registration" HTTP REST
+   request to the Infrastructure Operator (aka OPERATOR SERVICE).
+   This request must include the serviceAgreementId and the Workflow (JSON)</p>
+</li>
+<li>
+<p>The OPERATOR SERVICE receives a "Workflow Registration" request and:</p>
+</li>
+<li>Validates in K8s there is no an existing/running workflow with the same <code>serviceAgreementId</code></li>
+<li>Creates an unique <code>workflowExecutionId</code> identifying a unique execution of the service</li>
+<li>Validates the container flavour defined by the CONSUMER in the Workflow is supported in the compute service (DDO)</li>
+<li>
+<p>Register the workflow in Kubernetes (K8s)</p>
+</li>
+<li>
+<p>All the actions made by the OPERATOR in the infrastructure via K8s MUST include the <code>serviceAgreementId</code> and
+   <code>workflowExecutionId</code> as tags/labels</p>
+</li>
+<li>
+<p>For each stage in the workflow, the OPERATOR orchestrates <a href="#orchestration-steps">Orchestration Steps</a></p>
+</li>
+<li>
+<p>When a new Workflow is created in K8s, the OPERATOR ENGINE fetch the event and execute the following 3 steps:</p>
+</li>
+<li>Configuration - The OPERATOR ENGINE starts the "Configuration Pod". This pod is in charge of prepare the
+   environment connecting the input volumes to a secure container. Also is in charge of resolving all the DID's
+   involved into the real assets and leave everything ready for further execution. After finishing the pod is stopped.</li>
+<li>Executing - The OPERATOR ENGINE starts the "Compute Pod". This pod is in charge of using the data &amp; algorithm
+   existing in the input volumes, execute the algorithm. The pod only can write data to the output volume.
+   After finishing the execution of the algorithm the pod is stopped.</li>
+<li>
+<p>Publishing - The OPERATOR ENGINE starts the "Publishing Pod". This pod is in charge of publishing as a new Asset
+   the result generated to the output volume. The ownership of the asset is transferred to the user triggering the
+   computation workflow (typically the data scientist/engineer). After finishing the pod is stopped.</p>
+</li>
+<li>
+<p>The OPERATOR requests the deletion of all the containers and volumes created in the Kubernetes cluster</p>
+</li>
+<li>
+<p>The OPERATOR retrieves from the INFRASTRUCTURE (if it's available) a receipt demonstrating the execution of
+    the service</p>
+</li>
+<li>
+<p>The CONSUMER receives an event including the DID of the new ASSET created</p>
+</li>
+<li>
+<p>The GATEWAY or any other user may requests the <code>releasePayment</code> through the SMART CONTRACTS.
+    It commits on-chain the HASH of the receipt ticket collected from the INFRASTRUCTURE provider.</p>
+</li>
+</ol>
+<p>
+<figure><img src="images/execution-orchestration.png" /><figcaption>Execution Flow</figcaption>
+</figure>
+</p>
+<h2 id="infrastructure-orchestration">Infrastructure Orchestration<a class="headerlink" href="#infrastructure-orchestration" title="Permanent link">&para;</a></h2>
+<p>To facilitate the infrastructure orchestration the GATEWAY integrates with Kubernetes (aka K8s) via the OPERATOR
+component. The OPERATOR allows to abstract the execution of Docker containers with compute services independently of
+the backend (Amazon, Azure, On-Premise).
+To support that OPERATOR includes the kubernetes driver allowing to wrap the complete execution including:</p>
+<ul>
+<li>Download of the container images</li>
+<li>Setting up the pods</li>
+<li>Creation of volumes</li>
+<li>Starting and stopping the service</li>
+<li>Retrieval of logs</li>
+<li>Registering the new Asset</li>
+<li>Destroy the pods</li>
+</ul>
+<p>The OPERATOR handles 3 types of K8s Pods:</p>
+<ol>
+<li><code>Configuration Pod</code> is in charge of resolve the Workflow resources necessary for the execution of the algorithm.
+   It copies the data and algorithm in volumes</li>
+<li><code>Compute Pod</code> is in charge of run the algorithm. This pod has access in read-only mode to the volumes with the input
+   data and write mode to the output volume</li>
+<li><code>Publishing Pod</code> is in charge of having all the data and logs generated in the output volume to publish this data in
+   Nevermined as a new asset and handover the ownership to the CONSUMER</li>
+</ol>
+<h3 id="services-provided-by-the-operator">Services Provided by the Operator<a class="headerlink" href="#services-provided-by-the-operator" title="Permanent link">&para;</a></h3>
+<p>The services provided by the OPERATOR are:</p>
+<ol>
+<li>Registering a new Workflow execution. Given a <code>serviceAgreementId</code> and a <code>Workflow</code> payload, starts the execution of
+   the Workflow. It returns a <code>workflowExecutionId</code> valid to track the execution of the Workflow.</li>
+<li>Retrieve logs. Given a <code>serviceAgreementId</code> and <code>workflowExecutionId</code> retrieve the logs associated to that execution</li>
+<li>Stop workflow execution. Given a <code>serviceAgreementId</code> and <code>workflowExecutionId</code> stop/delete all the containers
+   associated with them</li>
+</ol>
+<h3 id="orchestration-steps">Orchestration Steps<a class="headerlink" href="#orchestration-steps" title="Permanent link">&para;</a></h3>
+<p>The compute scenario requires a complete orchestration of different stages in order to provide an end to end flow.
+The steps included in this scenario are:</p>
+<ol>
+<li>
+<p>The CONSUMER send a request to the GATEWAY using the <strong>compute/exec</strong> method in order to trigger the Workflow
+   execution</p>
+</li>
+<li>
+<p>The GATEWAY receives this request and check on-chain via SMART CONTRACTS if the CONSUMER has grants to execute the
+   Workflow. If the CONSUMER has grants will continue the Infrastructure Operation integration, if not will return an
+   error message.</p>
+</li>
+<li>
+<p>The GATEWAY calls the Infrastructure Operator (aka OPERATOR SERVICE) giving the Workflow that needs to be executed</p>
+</li>
+<li>
+<p>The OPERATOR SERVICE communicates with the K8s cluster to register the Workflow in Kubernetes</p>
+</li>
+<li>
+<p>The OPERATOR ENGINE is registered to the new Workflow Events. When this happens The OPERATOR via K8s starts a
+   generic <a href="https://github.com/nevermined-io/pod-configuration">Configuration Pod</a>.
+   The responsibilities of the configuration pod are:</p>
+</li>
+<li>Parses the Workflow document</li>
+<li>Resolves the DID resources necessary to run the Workflow</li>
+<li>Pulls the docker image from the Docker registry</li>
+<li>Plugs the different data inputs as volumes in the Compute Pod</li>
+<li>
+<p>Plugs the output for data and logs as volumes in the Compute Pod</p>
+</li>
+<li>
+<p>After all the above steps the <code>Configuration Pod</code> must be stopped</p>
+</li>
+<li>
+<p>If the <code>Configuration Pod</code> ends successfully the OPERATOR via K8s starts the
+   <a href="https://github.com/nevermined-io/pod-compute">Compute Pod</a> using the flavour specified by the user in the
+   Workflow definition</p>
+</li>
+<li>
+<p>The <code>Compute Pod</code> starts and runs the <code>compute-entrypoint.sh</code> part of the algorithm downloaded by the
+   <code>Configuration Pod</code></p>
+</li>
+<li>
+<p>When the <code>Compute Pod</code> ends or the duration is too long (timeout), the OPERATOR via K8s stop and delete
+   the Compute Pod</p>
+</li>
+<li>
+<p>If the <code>Compute Pod</code> ends, the OPERATOR start a new instance of the
+   <a href="https://github.com/nevermined-io/pod-publish">Publishing Pod</a>. The responsibilities of the Publishing Pod are:</p>
+</li>
+<li>List of the Log files generated in the Log volume and copy to the output</li>
+<li>List of the Output data generated in the Output volume</li>
+<li>Generate a new Asset Metadata using the information provided by the CONSUMER</li>
+<li>Register a new Asset in Nevermined including the Output &amp; Log data generated</li>
+<li>
+<p>Transfer the ownership of the new Asset created to the CONSUMER    </p>
+</li>
+<li>
+<p>At this point the CONSUMER could get an event of a new created asset where he/she is the owner</p>
+</li>
+</ol>
+<p>
+<figure><img src="images/infrastructure-orchestration.png" /><figcaption>Infrastructure Orchestration</figcaption>
+</figure>
+</p>
+<h3 id="infrastructure-operator">Infrastructure Operator<a class="headerlink" href="#infrastructure-operator" title="Permanent link">&para;</a></h3>
+<p>In this SPEC the PROVIDER of a computation service is in charge of defining the
+requirements to allow the execution of algorithms on top of the data assets.
+It means only the images specified in the DDO by the publisher with a specific DID and checksum
+ will be allowed to be executed in the Runtime environment.</p>
+<p>The OPERATOR SERVICE is in charge of setting up the runtime environment speaking with the infrastructure provider
+via Kubernetes.</p>
+<p>The images defined in the DDO and defined by the PUBLISHER only SHOULD include the minimum libraries specified,
+it will reduce the risk of executing unexpected software via external libraries.
+In addition to this, it's recommended that the images running in the runtime environment don't have network connectivity
+a part of the minimum required to get access to the Assets.</p>
+<h4 id="volumes">Volumes<a class="headerlink" href="#volumes" title="Permanent link">&para;</a></h4>
+<p>The input assets will be added to the runtime environment as <strong>read only</strong> volumes.
+The complete paths to the folders where the volumes are mounted will be given to the algorithm as parameters,
+using the same order of the parameters specified in the Workflow definition.
+The new derived Asset generated as a result of the execution of the algorithm MUST be written in the output volume.
+The pods will be <strong>destroyed</strong> after the execution, so only the data stored in the <strong>output</strong> or <strong>logs</strong> volumes
+should be used.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Permissions</th>
+<th>CLI Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input</td>
+<td>Read</td>
+<td>--input1=/mnt/volume1 --input2=/mnt/volume2</td>
+</tr>
+<tr>
+<td>Output</td>
+<td>Read, Write</td>
+<td>--output=/mnt/output</td>
+</tr>
+<tr>
+<td>Logs</td>
+<td>Read, Write</td>
+<td>--logs=/mnt/logs</td>
+</tr>
+</tbody>
+</table>
+<h3 id="network-isolation">Network isolation<a class="headerlink" href="#network-isolation" title="Permanent link">&para;</a></h3>
+<p>The runtime environment doesn't need to have network connectivity to external networks to be executed.
+To avoid sending the internal information about the data, it's recommended to restrict the output connectivity.</p>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../access/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Access Control" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Access Control
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../fl/" class="md-footer__link md-footer__link--next" aria-label="Next: Federated Learning" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Federated Learning
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 Nevermined
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://nevermined.io" target="_blank" rel="noopener" title="nevermined.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.1-20.4-4.2-41.8-4.2-64 0-22.2 2.1-43.6 4.2-64h185.4c2.1 20.4 3.3 41.8 3.3 64zm151.9-64c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42.9 3.2-64 0-22-1.1-43.4-3.2-64h123.1zm-10.5-32H376.7c-10-63.86-29.8-117.38-55.3-151.558C399.8 29.09 463.4 85.94 493.4 160zm-149.1 0H167.7c6.1-36.4 15.5-68.62 27-94.65 10.5-23.61 22.2-40.74 33.5-51.54C239.4 3.178 248.7 0 256 0c7.3 0 16.6 3.178 27.8 13.81 11.3 10.8 23 27.93 33.5 51.54 11.5 26.03 20.9 58.25 27 94.65zm-325.69 0C48.59 85.94 112.2 29.09 190.6 8.442 165.1 42.62 145.3 96.14 135.3 160H18.61zm112.59 32c-2.1 20.6-4.1 42-4.1 64 0 21.1 2 43.4 4.1 64H8.065C2.8 299.5 0 278.1 0 256s2.8-43.5 8.065-64H131.2zm63.5 254.6c-11.5-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.7-22.2 40.8-33.5 51.6-11.2 10.6-20.5 13.8-28.7 13.8-6.4 0-15.7-3.2-26.9-13.8-11.3-10.8-23-27.9-33.5-51.6zm-4.1 57C112.2 482.9 48.59 426.1 18.61 352H135.3c10 63.9 29.8 117.4 55.3 151.6zm130.8 0c25.5-34.2 45.3-87.7 55.3-151.6h116.7c-30 74.1-93.6 130.9-172 151.6z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/company/nevermined" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://medium.com/nevermined-io" target="_blank" rel="noopener" title="medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M180.5 74.262C80.813 74.262 0 155.633 0 256s80.819 181.738 180.5 181.738S361 356.373 361 256 280.191 74.262 180.5 74.262Zm288.25 10.646c-49.845 0-90.245 76.619-90.245 171.095s40.406 171.1 90.251 171.1 90.251-76.619 90.251-171.1H559c0-94.503-40.4-171.095-90.248-171.095Zm139.506 17.821c-17.526 0-31.735 68.628-31.735 153.274s14.2 153.274 31.735 153.274S640 340.631 640 256c0-84.649-14.215-153.271-31.742-153.271Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/nevermined-io" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/nevermined_io" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/GZju2qScKq" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:info@nevermined.io" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M501.6 4.186a24.105 24.105 0 0 0-25.44-1.063L12.12 267.1C4.184 271.7-.504 280.3.043 289.4c.547 9.125 6.234 17.16 14.66 20.69l153.3 64.38v113.5c0 8.781 4.797 16.84 12.5 21.06C184.1 511 188 512 191.1 512c4.516 0 9.038-1.281 12.99-3.812l111.2-71.46 98.56 41.4a24.044 24.044 0 0 0 9.297 1.875c4.078 0 8.141-1.031 11.78-3.094a23.936 23.936 0 0 0 11.95-17.38l64-432C513.1 18.44 509.1 9.373 501.6 4.186zM369.3 119.2 182.2 328.1 78.23 284.7 369.3 119.2zM215.1 444v-49.36l46.45 19.51L215.1 444zm189.7-22.1-176.6-74.19 224.6-249.5-48 323.69z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>

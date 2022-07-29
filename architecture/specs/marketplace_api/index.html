@@ -1,0 +1,1497 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Nevermined, The world's first enterprise-grade unstoppable data sharing ecosystem">
+      
+      
+        <meta name="author" content="Nevermined">
+      
+      
+        <link rel="canonical" href="http://docs.nevermined.io/architecture/specs/marketplace_api/">
+      
+      <link rel="icon" href="../../../assets/nevermined/favicon-nvm.ico">
+      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Marketplace API - Nevermined Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mkt-api-spec-nevermined-marketplace-api" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Nevermined Documentation" class="md-header__button md-logo" aria-label="Nevermined Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/nevermined/favicon-32.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Nevermined Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Marketplace API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nevermined-io/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nevermined-io/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Nevermined Documentation" class="md-nav__button md-logo" aria-label="Nevermined Documentation" data-md-component="logo">
+      
+  <img src="../../../assets/nevermined/favicon-32.png" alt="logo">
+
+    </a>
+    Nevermined Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nevermined-io/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    nevermined-io/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Architecture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Architecture" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Architecture
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../BuildingBlocks/" class="md-nav__link">
+        Building Blocks
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/" class="md-nav__link">
+        Components
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../components/catalog/getting-started/" class="md-nav__link">
+        Catalog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repos/" class="md-nav__link">
+        Repositories
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Specifications
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Specifications" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Specifications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Specs/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../access/" class="md-nav__link">
+        Access Control
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compute/" class="md-nav__link">
+        Data In Situ Computation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fl/" class="md-nav__link">
+        Federated Learning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../provenance/" class="md-nav__link">
+        Provenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nft/" class="md-nav__link">
+        NFTs Engine
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../keytransfer/" class="md-nav__link">
+        Data Transfer Proofs
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../did/" class="md-nav__link">
+        Decentralized Identifiers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metadata/" class="md-nav__link">
+        Metadata
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Marketplace API
+      </a>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../id_management/" class="md-nav__link">
+        Identity Management
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Integration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Integration" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Integration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contracts/" class="md-nav__link">
+        Smart Contracts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API Reference" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/api-reference-latest/" class="md-nav__link">
+        API Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Assets/" class="md-nav__link">
+        Assets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Accounts/" class="md-nav__link">
+        Accounts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Agreements/" class="md-nav__link">
+        Agreements
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Conditions/" class="md-nav__link">
+        Conditions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Provenance/" class="md-nav__link">
+        Provenance
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Tokens/" class="md-nav__link">
+        Tokens
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Providers/" class="md-nav__link">
+        Providers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/reference/Secret-Store/" class="md-nav__link">
+        Secret Store
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/SDK/" class="md-nav__link">
+        Software Development Kits (SDKs)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/gateway/" class="md-nav__link">
+        Gateway API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/metadata/" class="md-nav__link">
+        Metadata API
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../api/cli/" class="md-nav__link">
+        Command Line Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_8" type="checkbox" id="__nav_4_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_8">
+          Integrations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Integrations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Integrations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/filecoin/filecoin-storage/" class="md-nav__link">
+        Filecoin Storage
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/" class="md-nav__link">
+        Blog posts
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Licensing/" class="md-nav__link">
+        Software Licenses
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7">
+          Social
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Social" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Social
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://discord.gg/GZju2qScKq" class="md-nav__link">
+        Discord
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://twitter.com/nevermined_io" class="md-nav__link">
+        Twitter
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://linkedin.com/company/nevermined" class="md-nav__link">
+        Linkedin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ" class="md-nav__link">
+        Demos
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/nevermined-io/docs/edit/master/docs/architecture/specs/marketplace_api/README.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="mkt-api-spec-nevermined-marketplace-api">MKT-API SPEC: Nevermined Marketplace API<a class="headerlink" href="#mkt-api-spec-nevermined-marketplace-api" title="Permanent link">&para;</a></h1>
+<div class="highlight"><pre><span></span><code>shortname:      MKT-API
+name:           Nevermined Marketplace API
+type:           Standard
+status:         Draft
+version:        0.2
+editor:         Aitor Argomaniz &lt;aitor@nevermined.io&gt;
+contributors:   
+</code></pre></div>
+<h1 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#mkt-api-spec-nevermined-marketplace-api">MKT-API SPEC: Nevermined Marketplace API</a></li>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#modules">Modules</a><ul>
+<li><a href="#assets-management">Assets Management</a></li>
+<li><a href="#assets-search">Assets Search</a></li>
+<li><a href="#users-profiles">Users Profiles</a></li>
+<li><a href="#permissions">Permissions</a></li>
+<li><a href="#secondary-market">Secondary Market</a></li>
+<li><a href="#nfts-metadata">NFTs Metadata</a></li>
+<li><a href="#user-generated-contents">User Generated Contents</a></li>
+<li><a href="#nfts-drops">NFTs Drops</a></li>
+<li><a href="#bookmarks">Bookmarks</a></li>
+<li><a href="#marketplace-management">Marketplace Management</a></li>
+<li><a href="#multimedia">Multimedia</a></li>
+<li><a href="#api-access-control">API Access Control</a><ul>
+<li><a href="#authentication">Authentication</a></li>
+<li><a href="#authorization">Authorization</a></li>
+</ul>
+</li>
+<li><a href="#storage">Storage</a></li>
+</ul>
+</li>
+<li><a href="#links">Links</a></li>
+</ul>
+<hr />
+<p>This SPEC introduces a new API that helps to build Marketplace environments on top of the Nevermined core protocol.</p>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
+<p>With this Specification we want to build the foundations of an API that can be used as reference to implement 
+APIs exposing typical Marketplace functionalities.</p>
+<p>Most of the Marketplaces (decentralized or not) expose some common functionalities around the assets they manage and 
+their users. The intention of this API is to normalize a common set of this functionalities, allowing to build 
+implementations providing this common functionalities.</p>
+<p>With that objective in mind, the specification of this API should detail the following capabilities:</p>
+<ul>
+<li>Assets Management - Creation, Update, Deleting, etc. This is based in the existing <a href="../metadata/">Metadata Spec</a></li>
+<li>Assets Search - Allowing the search and filtering of assets</li>
+<li>Users Profile - Allowing to create, update and delete users</li>
+<li>Secondary Market - Registering the negotiation of parties during a secondary market purchase</li>
+<li>NFTs Metadata - Recording the metadata associated to a NFT</li>
+<li>NFTs Drops - Management of NFT drops</li>
+<li>User Reviews - Allowing users to comment and rate marketplace contents</li>
+<li>Drops - Managing of NFT drops</li>
+<li>Bookmarks - Allowing users to save bookmarks about different assets</li>
+</ul>
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h2>
+<h2 id="modules">Modules<a class="headerlink" href="#modules" title="Permanent link">&para;</a></h2>
+<p>The API will provide the following functionalities.</p>
+<h3 id="assets-management">Assets Management<a class="headerlink" href="#assets-management" title="Permanent link">&para;</a></h3>
+<p>The Assets in a Nevermined ecosystem are represented via DDOs that are resolved via a Decentralized Identifier (DID). While the DIDs are 
+unique identifiers stored on-chain, the metadata of an asset is represented by a DDO recorded in an external data storage (centralized or decentralized).
+This DDO includes all the additional information describing an asset and the services attached to that asset (access, computation, etc.).</p>
+<p>This module of the API allows the management of the assets information. The main functionalities provided are the following:</p>
+<ul>
+<li>Create a DDO of a new asset - <code>POST /api/v1/metadata/assets/ddo</code></li>
+<li>Get the DDO of a particular asset - <code>GET /api/v1/metadata/assets/ddo/{did}</code></li>
+<li>Update DDO of an existing asset - <code>PUT ​/api​/v1​/metadata​/assets​/ddo​/{did}</code></li>
+<li>Delete an existing asset - <code>DELETE ​/api​/v1​/metadata​/assets​/ddo​/{did}</code></li>
+</ul>
+<p>The Creation, Update and Deletion of assets is authorized and <strong>only the asset owner and/or the application admin</strong> is allowed to do that action.</p>
+<p>For more information about DID and/or DDO's please refer to the <a href="../did/">DID SPEC: Decentralized Identifiers</a> and 
+<a href="../metadata/">META SPEC: Metadata Ontology</a>.</p>
+<h3 id="assets-search">Assets Search<a class="headerlink" href="#assets-search" title="Permanent link">&para;</a></h3>
+<p>This module complements the previous one and provides search functionalities on top of the existing assets metadata. All the actions listed
+here don't require user authorization:</p>
+<ul>
+<li>Get all asset IDs - <code>GET ​/api​/v1​/metadata​/assets</code></li>
+<li>Get DDO of all assets - <code>GET ​/api​/v1​/metadata​/assets​/ddo</code></li>
+<li>Get a list of DDOs that match with the given text - <code>GET ​/api​/v1​/metadata​/assets​/ddo​/query</code></li>
+<li>Get a list of DDOs that match with the executed query - <code>POST ​/api​/v1​/metadata​/assets​/ddo​/query</code></li>
+</ul>
+<h3 id="users-profiles">Users Profiles<a class="headerlink" href="#users-profiles" title="Permanent link">&para;</a></h3>
+<p>This module of the API allows the management of user profiles. The main functionalities provided are the following:</p>
+<ul>
+<li>Create a user profile - <code>POST /api/v1/metadata/profiles</code></li>
+<li>Get the metadata of a user profile - <code>GET /api/v1/metadata/profiles/{userId}</code></li>
+<li>Get the metadata of a user profile given an address - <code>GET /api/v1/metadata/profiles/address/{publicAddress}</code></li>
+<li>Update the user profile - <code>PUT /api/v1/metadata/profiles/{userId}</code></li>
+<li>Disable the user profile - <code>DELETE /api/v1/metadata/profiles/{userId}</code></li>
+</ul>
+<p>The Creation, Update and Deletion of profiles is authorized and <strong>only the profile owner and/or the application admin</strong> is allowed to do that action.</p>
+<p>The model of this API is the following:</p>
+<ul>
+<li><code>userId</code> - Unique identifier of the user</li>
+<li><code>isListed</code> - Flag identifying if the user is listed in the marketplace. Possible values: <code>true</code> or <code>false</code></li>
+<li><code>state</code> - State of the user in the marketplace. Possible options: <code>disabled</code>, <code>unconfirmed</code>, <code>confirmed</code></li>
+<li><code>addresses</code> - The list of the addressed owned by the user. Addresses can't be shared between different users.</li>
+<li><code>nickname</code> - The nickname of the user</li>
+<li><code>name</code> - The name of the user (optional)</li>
+<li><code>email</code> - The email of the user (optional)</li>
+<li><code>url</code> - The url of the user (optional)</li>
+<li><code>creationDate</code> - When the user information was created</li>
+<li><code>updateDate</code> - When was the last time the user information was updated</li>
+<li><code>additionalInformation</code> - List of additional key-value attributes with additional information</li>
+</ul>
+<p>Here an example of the the permissions document:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;userId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jifdwqejidqwa9okdasodkaso&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;isListed&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;confirmed&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;addresses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;0x37BB53e3d293494DE59fBe1FF78500423dcFd43B&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;nickname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;john.doe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;john.doe@example.com&quot;</span><span class="p">,</span><span class="w">    </span>
+<span class="w">    </span><span class="nt">&quot;creationDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-01T19:73:24Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;updateDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-01T19:73:24Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;additionalInformation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;profilePicture&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://example.com/avatar.jpg&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;linkedinProfile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;http://linkedin.com&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h3>
+<p>This module of the API allows the management of user permissions in the marketplace via the usage of verifiable credentials. 
+The main functionalities provided are the following:</p>
+<ul>
+<li>Create a permissions entry - <code>POST /api/v1/permissions</code></li>
+<li>Get the information about a permissions entry - <code>GET /api/v1/permissions/{permissionId}</code></li>
+<li>Get all the permissions of a user - <code>GET /api/v1/permissions/user/{userId}</code></li>
+<li>Get all the permissions of a user of a specific type - <code>GET /api/v1/permissions/user/{userId}/{type}</code></li>
+<li>Update the permissions entry - <code>PUT /api/v1/permissions/{permissionId}</code></li>
+<li>Disable a permissions entry - <code>DELETE /api/v1/permissions/{permissionId}</code></li>
+</ul>
+<p>The Creation, Read, Update and Deletion of permissions is authorized and <strong>only the application admin</strong> is allowed to do that action.</p>
+<p>The model of this API is the following:</p>
+<ul>
+<li><code>id</code> - Unique identifier for the permissions entry</li>
+<li><code>userId</code> - Unique identifier of the user</li>
+<li><code>type</code> - The list of permissions owned hold by the user</li>
+<li><code>issuer</code> - The account providing the permissions</li>
+<li><code>holder</code> - The public address holding the permissions</li>
+<li><code>issuanceDate</code> - When the permissions entry was created</li>
+</ul>
+<p>Here an example of the the permissions document:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;permissionId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;98it403-295-43954-3s&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;userId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jifdwqejidqwa9okdasodkaso&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;read&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;update&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;delete&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;issuer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x610D9314EDF2ced7681BA1633C33fdb8cF365a12&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;holder&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x37BB53e3d293494DE59fBe1FF78500423dcFd43B&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;issuanceDate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019-01-01T19:73:24Z&quot;</span><span class="w">   </span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>For example when we want to provide a whitelisting functionality allowing to <code>mint</code> only to certain users, a specific <code>type</code> attribute could be created
+in the user who will hold the minting permissions. Having that a client application could check if a specific user has <code>mint</code> permissions running the following query:</p>
+<div class="highlight"><pre><span></span><code>HTTP GET /api/v1/permissions/user/jifdwqejidqwa9okdasodkaso/mint
+</code></pre></div>
+<h3 id="secondary-market">Secondary Market<a class="headerlink" href="#secondary-market" title="Permanent link">&para;</a></h3>
+<p>This module of the API allows the management of the Secondary Market transactions. The main functionalities provided are the following:</p>
+<ul>
+<li>Publish an asset in the secondary market - <code>POST /api/v1/agreement/secondary-market</code></li>
+<li>Get details of an asset in the secondary market - <code>GET /api/v1/agreement/secondary-market/{id}</code></li>
+<li>Update the details of an asset in the secondary market - <code>PUT /api/v1/agreement/secondary-market/{id}</code></li>
+<li>Unpublish an asset in the secondary market - <code>DELETE /api/v1/agreement/secondary-market/{id}</code></li>
+<li>Get a list of secondary market assets that match with the executed query - <code>POST ​/api​/v1​/agreement/secondary-market​/query</code></li>
+</ul>
+<p>The Creation, Update and Deletion of assets in the secondary market is authorized and <strong>only the asset owner or the application admin</strong> is allowed to do that action.</p>
+<p>The model of this API is the following:</p>
+<ul>
+<li><code>id</code> - Unique identifier for the entry</li>
+<li><code>serviceAgreementId</code> - Service Agreement Id</li>
+<li><code>did</code> - The identifier of the asset</li>
+<li><code>seller</code> - The account selling the asset</li>
+<li><code>buyer</code> - The account buying the asset</li>
+<li><code>createdAt</code> - When the entry was published in the secondary market</li>
+<li><code>price</code> - The price amount of the price in the secondary market</li>
+<li><code>tokenAddress</code> - The token (Native or ERC20) used</li>
+<li><code>dynamicPricingAddress</code> - Contract address if the pricing is defined as dynamic (auctions, etc). If is <code>0x0</code> the price is fixed and uses the <code>price</code> attribute</li>
+</ul>
+<h3 id="nfts-metadata">NFTs Metadata<a class="headerlink" href="#nfts-metadata" title="Permanent link">&para;</a></h3>
+<p>This module of the API allows the creation of metadata attached to a NFT. The main functionalities provided are the following:</p>
+<ul>
+<li>Create NFT Metadata of a new asset - <code>POST /api/v1/metadata/nft</code></li>
+<li>Get the NFT Metadata of an asset - <code>GET /api/v1/metadata/nft/{did}</code></li>
+<li>Update NFT Metadata of an asset - <code>PUT ​/api/v1/metadata/nft/{did}</code></li>
+<li>Delete NFT Metadata - <code>DELETE ​/api/v1/metadata/nft/{did}</code></li>
+</ul>
+<p>The Marketplace API could use regular or inmutable storage for recording the NFT Metadata. If the storage is inmutable (IPFS, Filecoin, etc), the Update and Delete methods
+will return a <code>HTTP 501 Not Implemented</code> error message will be returned.</p>
+<p>The Creation, Update and Deletion of NFTs Metadata is authorized and <strong>only the asset owner</strong> is allowed to do that action.</p>
+<p>The model of this API is the following:</p>
+<ul>
+<li><code>did</code> - The identifier of the asset</li>
+<li><code>image</code> - The URL to the image associated to the NFT</li>
+<li><code>name</code> - Name of the asset</li>
+<li><code>description</code> - Description of the asset</li>
+<li><code>external_url</code> - URL to the asset in a Nevermined ecosystem</li>
+<li><code>animation_url</code> - A URL to a multi-media attachment for the item</li>
+<li><code>youtube_url</code> - A URL to a YouTube video</li>
+<li><code>seller_fee_basis_points</code> - Royalties for selling the NFT through a marketplace out of Nevermined (i.e OpenSea)</li>
+<li><code>fee_recipient</code> - Address of the user receiving the royalties</li>
+</ul>
+<h3 id="user-generated-contents">User Generated Contents<a class="headerlink" href="#user-generated-contents" title="Permanent link">&para;</a></h3>
+<p>This module of the API allows the management of User Generated Contents (UGC) like user reviews. The main functionalities provided are the following:</p>
+<ul>
+<li>Create a user review - <code>POST /api/v1/ugc/reviews</code></li>
+<li>Get a user review - <code>GET /api/v1/ugc/reviews/{id}</code></li>
+<li>Get all the reviews associated to an asset - <code>GET /api/v1/ugc/asset/{did}</code></li>
+<li>Update a review - <code>PUT /api/v1/ugc/reviews/{id}</code></li>
+<li>Unpublish a review - <code>DELETE /api/v1/ugc/reviews/{id}</code></li>
+</ul>
+<p>The Creation, Update and Deletion of reviews is authorized and <strong>only the review owner and/or the application admin</strong> is allowed to do that action.</p>
+<p>The model of this API is the following:</p>
+<ul>
+<li><code>id</code> - The identifier of the ugc content</li>
+<li><code>did</code> - The identifier of the asset</li>
+<li><code>owner</code> - The userId who created the review/rating</li>
+<li><code>status</code> - Status of the UGC. Possible values: "publised", "unpublished", "deleted", "retired"</li>
+<li><code>title</code> - Title of the comment</li>
+<li><code>description</code> - Description given by the user</li>
+<li><code>rate</code> - Number indicating the rating (flexible dependening to the marketplace). Examples: number between 1 and 5, 1 and 10, 0 and 100, etc.</li>
+<li><code>createdAt</code> - When the UGC was created</li>
+<li><code>updatedAt</code> - When the UGC was udpated</li>
+<li><code>moderatedBy</code> - If the content was moderated, who applied that moderation</li>
+</ul>
+<p>By default, only UGC reviews with the state set to "published" should be displayed/</p>
+<h3 id="nfts-drops">NFTs Drops<a class="headerlink" href="#nfts-drops" title="Permanent link">&para;</a></h3>
+<p>This module of the API allows the creation of metadata associated to NFT drops. Drops are an important event in NFT marketplaces where admins AND/OR whitelisted authors
+can identify which NFTs are gonna be minted and when. The main functionalities provided are the following:</p>
+<ul>
+<li>Register a new NFT drop (admin or whitelisted author) - <code>POST /api/v1/metadata/drops</code></li>
+<li>Search for listed drops - <code>GET /api/v1/metadata/drops</code></li>
+<li>Get information about a drop - <code>GET /api/v1/metadata/drop/{did}</code></li>
+<li>Update drop information - <code>PUT ​/api/v1/metadata/drop/{did}</code></li>
+<li>Unlist a drop - <code>DELETE ​/api/v1/metadata/drop/{did}</code></li>
+</ul>
+<p>The Creation, Update and Deletion of a NFT Drop is authorized and <strong>only the asset owner and/or the application admin</strong> is allowed to do that action.</p>
+<h3 id="bookmarks">Bookmarks<a class="headerlink" href="#bookmarks" title="Permanent link">&para;</a></h3>
+<p>This module of the API allows users to bookmark marketplace contents. The main functionalities provided are the following:</p>
+<ul>
+<li>Create a bookmark entry - <code>POST /api/v1/ugc/bookmarks</code></li>
+<li>Get a bookmark entry - <code>GET /api/v1/ugc/bookmarks/{id}</code></li>
+<li>Get all the user bookmarks - <code>GET /api/v1/ugc/bookmarks/user/{userId}</code></li>
+<li>Update an existing bookmark - <code>PUT /api/v1/ugc/bookmarks/{id}</code></li>
+<li>Delete a bookmark - <code>DELETE /api/v1/ugc/bookmarks/{bookmarkId}</code></li>
+</ul>
+<p>The Creation, Update and Deletion of bookmarks is authorized and <strong>only the bookmark owner</strong> is allowed to do that action.</p>
+<p>The model of this API is the following:</p>
+<ul>
+<li><code>id</code> - The identifier of the bookmark</li>
+<li><code>did</code> - The identifier of the asset</li>
+<li><code>userId</code> - The userId who created the bookmark</li>
+<li><code>description</code> - Description given by the user</li>
+<li><code>createdAt</code> - When the UGC was created</li>
+</ul>
+<h3 id="marketplace-management">Marketplace Management<a class="headerlink" href="#marketplace-management" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Unpublish multiple assets</li>
+<li>Disable a user</li>
+<li>Disable user comments</li>
+</ul>
+<h3 id="multimedia">Multimedia<a class="headerlink" href="#multimedia" title="Permanent link">&para;</a></h3>
+<ul>
+<li>URL Check - <code>GET /api/v1/files/check</code></li>
+<li>Upload image - <code>POST /api/v1/files/image</code></li>
+<li>Upload audio - <code>POST /api/v1/files/audio</code></li>
+</ul>
+<p>
+<figure><img src="images/marketplace_api_data_model.png" /><figcaption>Marketplace API Data Model</figcaption>
+</figure>
+</p>
+<h3 id="api-access-control">API Access Control<a class="headerlink" href="#api-access-control" title="Permanent link">&para;</a></h3>
+<p>The API will expose a <code>HTTP REST</code> interface using Json Web Tokens (JWT) for users authorization and authentication.</p>
+<p>The API will use the following <code>JWT</code> attributes:</p>
+<ul>
+<li>Issuer (<code>iss</code>): the user address. For example: <code>0xa99d43d86a0758d5632313b8fa3972b6088a21bb</code></li>
+<li>Subject (<code>sub</code>): the user address or the address of a delegate. For example: <code>0xa99d43d86a0758d5632313b8fa3972b6088a21bb</code></li>
+<li>Issued at (<code>iat</code>): the date time of when the JWT token was issued</li>
+<li>Expiration (<code>exp</code>): the expiration date time of the JWT token</li>
+</ul>
+<p>The API will define a TTL of a maximum of one hour duration.</p>
+<h4 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h4>
+<p>The client of the API will need to authenticate using <code>login</code> method. This method will require the client to provide to authenticate
+the user. When the user is authenticated, the API will release a JWT allowing the user to interact with the different API modules.</p>
+<p>
+<figure><img src="images/marketplace_api_access_control_flow.png" /><figcaption>Marketplace API Access Control Flow</figcaption>
+</figure>
+</p>
+<p>The flow is the following:</p>
+<ol>
+<li>
+<p>The client sends a <code>HTTP GET /login</code> request providing the user address. Example:
+<div class="highlight"><pre><span></span><code>HTTP GET /api/v1/docs/auth/login/0xa99d43d86a0758d5632313b8fa3972b6088a21bb
+</code></pre></div></p>
+</li>
+<li>
+<p>The server will return a unique challenge token to the user</p>
+</li>
+<li>
+<p>The client will sign locally this challenge token using the local key material</p>
+</li>
+<li>
+<p>The client will send a <code>HTTP POST /login</code> request providing the user address and the challenge token signed
+<div class="highlight"><pre><span></span><code>HTTP POST /api/v1/docs/auth/login
+address=0xa99d43d86a0758d5632313b8fa3972b6088a21bb
+signature=90f8bf6a479f320ead074411a4b0e7944ea8c9c15932c5d68a1b539da0b0f8431d8e50e1a5b2b3bd4cfdcfc387a5ff85d7ef5fac429c4e0e4c1bfc36d4a99770b58f42924e126ece
+</code></pre></div></p>
+</li>
+<li>
+<p>If the server can authenticate the user, it will return a JWT token
+<div class="highlight"><pre><span></span><code>  {
+      &quot;token&quot;: &quot;eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzUxMiJ9.eyJzdWIiOiIweDkwZjhiZjZhNDc5ZjMyMGVhZDA3NDQxMWE0YjBlNzk0NGVhOGM5YzEiLCJleHAiOjE0OTY1MDUwNzQsIm5iZiI6MTQ5NjUwMzI3NCwiaXNzIjoiTmV1ZnVuZCIsImF1ZCI6IndlYjMiLCJpYXQiOjE0OTY1MDMyNzR9.AaOPxTqBV4iy6GVlAu8XfbmOsIoezKfYjkqZ0SZ_RW6E7qwW-tUwSq8fq-avJrLtmCzLOD2xO9T5esEiIykP3Z9SAKWrTkdo9RwGcqGfvAySurbVAiFgW4MZ9pf9cHcB6zRks53pPcq6X2yqaVzjw28N6kBRQRc23GrUFnEDK6P_t3Tv&quot;
+  }
+</code></pre></div></p>
+</li>
+<li>
+<p>The user should be able to renew the authentication token passing the <code>Authorization</code> header to the <code>/renew</code> method:
+<div class="highlight"><pre><span></span><code>HTTP POST /api/v1/docs/auth/renew
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzUxMiJ9.eyJzdWIiOiIweDkwZjhiZjZhNDc5ZjMyMGVhZDA3NDQxMWE0YjBlNzk0NGVhOGM5YzEiLCJleHAiOjE0OTY1MDUwNzQsIm5iZiI6MTQ5NjUwMzI3NCwiaXNzIjoiTmV1ZnVuZCIsImF1ZCI6IndlYjMiLCJpYXQiOjE0OTY1MDMyNzR9.AaOPxTqBV4iy6GVlAu8XfbmOsIoezKfYjkqZ0SZ_RW6E7qwW-tUwSq8fq-avJrLtmCzLOD2xO9T5esEiIykP3Z9SAKWrTkdo9RwGcqGfvAySurbVAiFgW4MZ9pf9cHcB6zRks53pPcq6X2yqaVzjw28N6kBRQRc23GrUFnEDK6P_t3Tv
+</code></pre></div></p>
+</li>
+</ol>
+<h4 id="authorization">Authorization<a class="headerlink" href="#authorization" title="Permanent link">&para;</a></h4>
+<p>Once the user is authenticated, the API will be able to authorize or not the user to perform different actions. Every document in the system has a 
+reference to the original public address owning the document. Depending on the module, actions like updating or deleting will require different permissions.</p>
+<p>All the documents stored into the database will have a <code>verifiableCredential</code> entry witht the <code>holder</code> attribute attached to the document. 
+This attribute will allow to validate the owner of the metadata object and perform any authorization action.</p>
+<p>For general permissions, the <code>Permissions</code> module will track what actions (described under the <code>type</code> attribute) are managed by each user.</p>
+<p>The <code>admin</code> permissions can be added and are reserved for users with administrative permissions in the application.</p>
+<h3 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h3>
+<p>The storage of the data can use a standard database and/or an inmutable respository (IPFS, Filecoin, Arweave, ..) as a complement.</p>
+<p>Different storage backends provide a different set of functionalities to the final user. From one side, regular or standard databases provide 
+easy searching functionalities. In the other side, inmutable storage provide a level of trust on things like the assets metadata.</p>
+<p>The usage of different storage backends or a combination of both will depend on the use case and/or the Marketplace API configuration.</p>
+<p>All the documents stored in a regular database or search engine (like Elastic Search) will record the metadata in their current models are they are.
+In the case this document has a mirror copy into a inmutable data store (like IPFS), the document will include a reference to 
+this inmutable content via a full URL. This typically will be stored into the <code>proof.inmutableUrl</code> attribute.</p>
+<p>For example if an Asset DDO has a copy into IPFS, it will include an attribute like this:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;proof&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DDOIntegritySignature&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;created&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2016-02-08T16:02:20Z&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;creator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;signatureValue&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0xc9eeb2b8106e…6abfdc5d1192641b&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;inmutableUrl&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ipfs://QmPChd2hVbrJ6bfo3WBcTW4iZnpHm8TEzWkLHmLpXhF68A&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;checksum&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x52b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3bbc3377&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x999999952b5c93b82dd9e7ecc3d9fdf4755f7f69a54484941897dc517b4adfe3&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w">    </span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h2 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../did/">Decentralized Identifiers SPEC</a></li>
+<li><a href="../metadata/">Metadata SPEC</a></li>
+</ul>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../metadata/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Metadata" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Metadata
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../id_management/" class="md-footer__link md-footer__link--next" aria-label="Next: Identity Management" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Identity Management
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021 Nevermined
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://nevermined.io" target="_blank" rel="noopener" title="nevermined.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M352 256c0 22.2-1.2 43.6-3.3 64H163.3c-2.1-20.4-4.2-41.8-4.2-64 0-22.2 2.1-43.6 4.2-64h185.4c2.1 20.4 3.3 41.8 3.3 64zm151.9-64c5.3 20.5 8.1 41.9 8.1 64s-2.8 43.5-8.1 64H380.8c2.1-20.6 3.2-42.9 3.2-64 0-22-1.1-43.4-3.2-64h123.1zm-10.5-32H376.7c-10-63.86-29.8-117.38-55.3-151.558C399.8 29.09 463.4 85.94 493.4 160zm-149.1 0H167.7c6.1-36.4 15.5-68.62 27-94.65 10.5-23.61 22.2-40.74 33.5-51.54C239.4 3.178 248.7 0 256 0c7.3 0 16.6 3.178 27.8 13.81 11.3 10.8 23 27.93 33.5 51.54 11.5 26.03 20.9 58.25 27 94.65zm-325.69 0C48.59 85.94 112.2 29.09 190.6 8.442 165.1 42.62 145.3 96.14 135.3 160H18.61zm112.59 32c-2.1 20.6-4.1 42-4.1 64 0 21.1 2 43.4 4.1 64H8.065C2.8 299.5 0 278.1 0 256s2.8-43.5 8.065-64H131.2zm63.5 254.6c-11.5-26-20.9-58.2-27-94.6h176.6c-6.1 36.4-15.5 68.6-27 94.6-10.5 23.7-22.2 40.8-33.5 51.6-11.2 10.6-20.5 13.8-28.7 13.8-6.4 0-15.7-3.2-26.9-13.8-11.3-10.8-23-27.9-33.5-51.6zm-4.1 57C112.2 482.9 48.59 426.1 18.61 352H135.3c10 63.9 29.8 117.4 55.3 151.6zm130.8 0c25.5-34.2 45.3-87.7 55.3-151.6h116.7c-30 74.1-93.6 130.9-172 151.6z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://linkedin.com/company/nevermined" target="_blank" rel="noopener" title="linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://medium.com/nevermined-io" target="_blank" rel="noopener" title="medium.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M180.5 74.262C80.813 74.262 0 155.633 0 256s80.819 181.738 180.5 181.738S361 356.373 361 256 280.191 74.262 180.5 74.262Zm288.25 10.646c-49.845 0-90.245 76.619-90.245 171.095s40.406 171.1 90.251 171.1 90.251-76.619 90.251-171.1H559c0-94.503-40.4-171.095-90.248-171.095Zm139.506 17.821c-17.526 0-31.735 68.628-31.735 153.274s14.2 153.274 31.735 153.274S640 340.631 640 256c0-84.649-14.215-153.271-31.742-153.271Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/nevermined-io" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/nevermined_io" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/GZju2qScKq" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485.065 485.065 0 0 0 404.081 32.03a1.816 1.816 0 0 0-1.923.91 337.461 337.461 0 0 0-14.9 30.6 447.848 447.848 0 0 0-134.426 0 309.541 309.541 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.689 483.689 0 0 0-119.688 37.107 1.712 1.712 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.016 2.016 0 0 0 .765 1.375 487.666 487.666 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348.2 348.2 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321.173 321.173 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251.047 251.047 0 0 0 9.109-7.137 1.819 1.819 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.812 1.812 0 0 1 1.924.233 234.533 234.533 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.407 301.407 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391.055 391.055 0 0 0 30.014 48.815 1.864 1.864 0 0 0 2.063.7A486.048 486.048 0 0 0 610.7 405.729a1.882 1.882 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541ZM222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241Zm195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://www.youtube.com/channel/UCaDKPgnEk4ekvQo2vO6FIBQ" target="_blank" rel="noopener" title="www.youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+    </a>
+  
+    
+    
+    <a href="mailto:info@nevermined.io" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M501.6 4.186a24.105 24.105 0 0 0-25.44-1.063L12.12 267.1C4.184 271.7-.504 280.3.043 289.4c.547 9.125 6.234 17.16 14.66 20.69l153.3 64.38v113.5c0 8.781 4.797 16.84 12.5 21.06C184.1 511 188 512 191.1 512c4.516 0 9.038-1.281 12.99-3.812l111.2-71.46 98.56 41.4a24.044 24.044 0 0 0 9.297 1.875c4.078 0 8.141-1.031 11.78-3.094a23.936 23.936 0 0 0 11.95-17.38l64-432C513.1 18.44 509.1 9.373 501.6 4.186zM369.3 119.2 182.2 328.1 78.23 284.7 369.3 119.2zM215.1 444v-49.36l46.45 19.51L215.1 444zm189.7-22.1-176.6-74.19 224.6-249.5-48 323.69z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate"], "search": "../../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>
