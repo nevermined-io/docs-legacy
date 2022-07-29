@@ -1,0 +1,31 @@
+Allows to get access to an asset data file.
+---
+tags:
+  - services
+consumes:
+  - application/json
+parameters:
+  - name: agreement_id
+    in: path
+    description: The ID of the service agreement.
+    required: true
+    type: string
+  - name: index
+    in: path
+    description: Index of the file in the array of files.
+    required: true
+    schema:
+      type: integer
+      minimum: 0
+  - name: Authorization
+    in: header
+    description: The bearer token.
+    required: true
+    type: string
+responses:
+  200:
+    description: Returns the file binary
+  401:
+    description: Invalid bearer token.
+  500:
+    description: Error
