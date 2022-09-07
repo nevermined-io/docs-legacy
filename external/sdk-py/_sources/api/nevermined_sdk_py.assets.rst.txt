@@ -1,0 +1,19 @@
+nevermined\_sdk\_py.assets package
+==================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   nevermined_sdk_py.assets.asset_consumer
+   nevermined_sdk_py.assets.asset_executor
+
+Module contents
+---------------
+
+.. automodule:: nevermined_sdk_py.assets
+   :members:
+   :undoc-members:
+   :show-inheritance:

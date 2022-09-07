@@ -1,0 +1,7 @@
+nevermined\_sdk\_py.nevermined.auth module
+==========================================
+
+.. automodule:: nevermined_sdk_py.nevermined.auth
+   :members:
+   :undoc-members:
+   :show-inheritance:

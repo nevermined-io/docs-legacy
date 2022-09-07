@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>nevermined_sdk_py.nevermined.agreements module &#8212; nevermined-sdk-py 0.2.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nevermined_sdk_py.nevermined.assets module" href="nevermined_sdk_py.nevermined.assets.html" />
+    <link rel="prev" title="nevermined_sdk_py.nevermined.accounts module" href="nevermined_sdk_py.nevermined.accounts.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-nevermined_sdk_py.nevermined.agreements">
+<span id="nevermined-sdk-py-nevermined-agreements-module"></span><h1>nevermined_sdk_py.nevermined.agreements module<a class="headerlink" href="#module-nevermined_sdk_py.nevermined.agreements" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="nevermined_sdk_py.nevermined.agreements.Agreements">
+<em class="property">class </em><code class="sig-prename descclassname">nevermined_sdk_py.nevermined.agreements.</code><code class="sig-name descname">Agreements</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keeper</span></em>, <em class="sig-param"><span class="n">asset_resolver</span></em>, <em class="sig-param"><span class="n">asset_consumer</span></em>, <em class="sig-param"><span class="n">asset_executor</span></em>, <em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.agreements.Agreements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Nevermined agreements class.</p>
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.agreements.Agreements.create">
+<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">did</span></em>, <em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="n">agreement_id</span></em>, <em class="sig-param"><span class="n">service_agreement_signature</span></em>, <em class="sig-param"><span class="n">consumer_address</span></em>, <em class="sig-param"><span class="n">account</span></em>, <em class="sig-param"><span class="n">auto_consume</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.agreements.Agreements.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the service agreement on-chain using keeper’s ServiceAgreement contract.</p>
+<p>The on-chain executeAgreement method requires the following arguments:
+templateId, signature, consumer, hashes, timeouts, serviceAgreementId, did.
+<cite>agreement_message_hash</cite> is necessary to verify the signature.
+The consumer <cite>signature</cite> includes the conditions timeouts and parameters values which
+is usedon-chain to verify that the values actually match the signed hashes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>did</strong> – str representation fo the asset DID. Use this to retrieve the asset DDO.</p></li>
+<li><p><strong>index</strong> – str identifies the specific service in
+the ddo to use in this agreement.</p></li>
+<li><p><strong>agreement_id</strong> – 32 bytes identifier created by the consumer and will be used
+on-chain for the executed agreement.</p></li>
+<li><p><strong>service_agreement_signature</strong> – str the signed agreement message hash which includes
+conditions and their parameters values and other details of the agreement.</p></li>
+<li><p><strong>consumer_address</strong> – ethereum account address of consumer, hex str</p></li>
+<li><p><strong>account</strong> – Account instance creating the agreement. Can be either the
+consumer, publisher or provider</p></li>
+<li><p><strong>auto_consume</strong> – bool</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dict the <cite>executeAgreement</cite> transaction receipt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.agreements.Agreements.create_direct">
+<code class="sig-name descname">create_direct</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">did</span></em>, <em class="sig-param"><span class="n">index</span></em>, <em class="sig-param"><span class="n">agreement_id</span></em>, <em class="sig-param"><span class="n">service_agreement_signature</span></em>, <em class="sig-param"><span class="n">consumer_address</span></em>, <em class="sig-param"><span class="n">account</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.agreements.Agreements.create_direct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute the service agreement on-chain using keeper’s ServiceAgreement contract.</p>
+<p>The on-chain executeAgreement method requires the following arguments:
+templateId, signature, consumer, hashes, timeouts, serviceAgreementId, did.
+<cite>agreement_message_hash</cite> is necessary to verify the signature.
+The consumer <cite>signature</cite> includes the conditions timeouts and parameters values which
+is usedon-chain to verify that the values actually match the signed hashes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>did</strong> – str representation fo the asset DID. Use this to retrieve the asset DDO.</p></li>
+<li><p><strong>index</strong> – str identifies the specific service in
+the ddo to use in this agreement.</p></li>
+<li><p><strong>agreement_id</strong> – 32 bytes identifier created by the consumer and will be used
+on-chain for the executed agreement.</p></li>
+<li><p><strong>service_agreement_signature</strong> – str the signed agreement message hash which includes
+conditions and their parameters values and other details of the agreement.</p></li>
+<li><p><strong>consumer_address</strong> – ethereum account address of consumer, hex str</p></li>
+<li><p><strong>account</strong> – Account instance creating the agreement. Can be either the
+consumer, publisher or provider</p></li>
+<li><p><strong>auto_consume</strong> – bool</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dict the <cite>executeAgreement</cite> transaction receipt</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.agreements.Agreements.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agreement_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.agreements.Agreements.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the agreement data of agreement_id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>agreement_id</strong> – id of the agreement, hex str</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>AgreementValues instance – a namedtuple with the following attributes:</p>
+<p>did,
+owner,
+template_id,
+condition_ids,
+updated_by,
+block_number_updated</p>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.agreements.Agreements.is_access_granted">
+<code class="sig-name descname">is_access_granted</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agreement_id</span></em>, <em class="sig-param"><span class="n">did</span></em>, <em class="sig-param"><span class="n">consumer_address</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.agreements.Agreements.is_access_granted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check permission for the agreement.</p>
+<p>Verify on-chain that the <cite>consumer_address</cite> has permission to access the given asset <cite>did</cite>
+according to the <cite>agreement_id</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>agreement_id</strong> – id of the agreement, hex str</p></li>
+<li><p><strong>did</strong> – DID, str</p></li>
+<li><p><strong>consumer_address</strong> – ethereum account address of consumer, hex str</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>bool True if user has permission</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.agreements.Agreements.new">
+<em class="property">static </em><code class="sig-name descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.agreements.Agreements.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.agreements.Agreements.prepare">
+<code class="sig-name descname">prepare</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">did</span></em>, <em class="sig-param"><span class="n">consumer_account</span></em>, <em class="sig-param"><span class="n">service_index</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.agreements.Agreements.prepare" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>did</strong> – str representation fo the asset DID. Use this to retrieve the asset DDO.</p></li>
+<li><p><strong>consumer_account</strong> – Account instance of the consumer</p></li>
+<li><p><strong>service_index</strong> – int identifies the specific service in
+the ddo to use in this agreement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>tuple (agreement_id: str, signature: hex str)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.agreements.Agreements.sign">
+<code class="sig-name descname">sign</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agreement_id</span></em>, <em class="sig-param"><span class="n">did</span></em>, <em class="sig-param"><span class="n">consumer_account</span></em>, <em class="sig-param"><span class="n">service_index</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.agreements.Agreements.sign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sign a service agreement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>agreement_id</strong> – 32 bytes identifier created by the consumer and will be used
+on-chain for the executed agreement.</p></li>
+<li><p><strong>did</strong> – str representation fo the asset DID. Use this to retrieve the asset DDO.</p></li>
+<li><p><strong>consumer_account</strong> – Account instance of the consumer</p></li>
+<li><p><strong>service_index</strong> – int identifies the specific service in
+the ddo to use in this agreement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>signature</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.agreements.Agreements.status">
+<code class="sig-name descname">status</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">agreement_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.agreements.Agreements.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the status of a service agreement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>agreement_id</strong> – id of the agreement, hex str</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dict with condition status of each of the agreement’s conditions or None if the</p>
+</dd>
+</dl>
+<p>agreement is invalid.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.jpg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">nevermined-sdk-py</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">nevermined_sdk_py</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="nevermined_sdk_py.html">nevermined_sdk_py package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="nevermined_sdk_py.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.agreement_events.html">nevermined_sdk_py.agreement_events package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.assets.html">nevermined_sdk_py.assets package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.data_store.html">nevermined_sdk_py.data_store package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.gateway.html">nevermined_sdk_py.gateway package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="nevermined_sdk_py.nevermined.html">nevermined_sdk_py.nevermined package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.secret_store.html">nevermined_sdk_py.secret_store package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nevermined_sdk_py.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nevermined_sdk_py.html#module-nevermined_sdk_py">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">nevermined_sdk_py</a><ul>
+  <li><a href="nevermined_sdk_py.html">nevermined_sdk_py package</a><ul>
+  <li><a href="nevermined_sdk_py.nevermined.html">nevermined_sdk_py.nevermined package</a><ul>
+      <li>Previous: <a href="nevermined_sdk_py.nevermined.accounts.html" title="previous chapter">nevermined_sdk_py.nevermined.accounts module</a></li>
+      <li>Next: <a href="nevermined_sdk_py.nevermined.assets.html" title="next chapter">nevermined_sdk_py.nevermined.assets module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;nevermined-sdk-py contributors.
+      
+      |
+      <a href="../_sources/api/nevermined_sdk_py.nevermined.agreements.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

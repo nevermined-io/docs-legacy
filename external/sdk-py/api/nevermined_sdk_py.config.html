@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>nevermined_sdk_py.config module &#8212; nevermined-sdk-py 0.2.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nevermined_sdk_py.config_provider module" href="nevermined_sdk_py.config_provider.html" />
+    <link rel="prev" title="nevermined_sdk_py.secret_store.secret_store_provider module" href="nevermined_sdk_py.secret_store.secret_store_provider.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-nevermined_sdk_py.config">
+<span id="nevermined-sdk-py-config-module"></span><h1>nevermined_sdk_py.config module<a class="headerlink" href="#module-nevermined_sdk_py.config" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="nevermined_sdk_py.config.Config">
+<em class="property">class </em><code class="sig-prename descclassname">nevermined_sdk_py.config.</code><code class="sig-name descname">Config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">options_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.config.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">configparser.ConfigParser</span></code></p>
+<p>Class to manage the nevermined-sdk-py configuration.</p>
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.auth_token_expiration">
+<em class="property">property </em><code class="sig-name descname">auth_token_expiration</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.auth_token_expiration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.auth_token_message">
+<em class="property">property </em><code class="sig-name descname">auth_token_message</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.auth_token_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.downloads_path">
+<em class="property">property </em><code class="sig-name descname">downloads_path</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.downloads_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path for the downloads of assets.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.gas_limit">
+<em class="property">property </em><code class="sig-name descname">gas_limit</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.gas_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ethereum gas limit.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.gateway_url">
+<em class="property">property </em><code class="sig-name descname">gateway_url</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.gateway_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>URL of gateway component. (e.g.): <a class="reference external" href="http://mygateway:8030">http://mygateway:8030</a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.keeper_path">
+<em class="property">property </em><code class="sig-name descname">keeper_path</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.keeper_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path where the keeper-contracts artifacts are allocated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.keeper_url">
+<em class="property">property </em><code class="sig-name descname">keeper_url</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.keeper_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>URL of the keeper. (e.g.): <a class="reference external" href="http://mykeeper:8545">http://mykeeper:8545</a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.metadata_url">
+<em class="property">property </em><code class="sig-name descname">metadata_url</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.metadata_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>URL of metadata component. (e.g.): <a class="reference external" href="http://mymetadata:5000">http://mymetadata:5000</a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.parity_address">
+<em class="property">property </em><code class="sig-name descname">parity_address</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.parity_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parity address. (e.g.): 0x00bd138abd70e2f00903268f3db08f2d25677c9e.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.parity_password">
+<em class="property">property </em><code class="sig-name descname">parity_password</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.parity_password" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parity password for your address. (e.g.): Mypass.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.parity_url">
+<em class="property">property </em><code class="sig-name descname">parity_url</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.parity_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>URL of parity client. (e.g.): <a class="reference external" href="http://myparity:8545">http://myparity:8545</a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.secret_store_url">
+<em class="property">property </em><code class="sig-name descname">secret_store_url</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.secret_store_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>URL of the secret store component. (e.g.): <a class="reference external" href="http://mysecretstore:12001">http://mysecretstore:12001</a>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.storage_path">
+<em class="property">property </em><code class="sig-name descname">storage_path</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.storage_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to save the current execution of the service agreements and restart if needed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.config.Config.web3_provider">
+<em class="property">property </em><code class="sig-name descname">web3_provider</code><a class="headerlink" href="#nevermined_sdk_py.config.Config.web3_provider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Web3 provider</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.jpg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">nevermined-sdk-py</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">nevermined_sdk_py</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="nevermined_sdk_py.html">nevermined_sdk_py package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="nevermined_sdk_py.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="nevermined_sdk_py.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">nevermined_sdk_py.config module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.config_provider.html">nevermined_sdk_py.config_provider module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nevermined_sdk_py.html#module-nevermined_sdk_py">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">nevermined_sdk_py</a><ul>
+  <li><a href="nevermined_sdk_py.html">nevermined_sdk_py package</a><ul>
+      <li>Previous: <a href="nevermined_sdk_py.secret_store.secret_store_provider.html" title="previous chapter">nevermined_sdk_py.secret_store.secret_store_provider module</a></li>
+      <li>Next: <a href="nevermined_sdk_py.config_provider.html" title="next chapter">nevermined_sdk_py.config_provider module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;nevermined-sdk-py contributors.
+      
+      |
+      <a href="../_sources/api/nevermined_sdk_py.config.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

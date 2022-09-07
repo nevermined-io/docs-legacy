@@ -1,0 +1,7 @@
+nevermined\_sdk\_py.assets.asset\_consumer module
+=================================================
+
+.. automodule:: nevermined_sdk_py.assets.asset_consumer
+   :members:
+   :undoc-members:
+   :show-inheritance:

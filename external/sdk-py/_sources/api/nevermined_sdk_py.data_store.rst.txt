@@ -1,0 +1,18 @@
+nevermined\_sdk\_py.data\_store package
+=======================================
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   nevermined_sdk_py.data_store.auth_tokens
+
+Module contents
+---------------
+
+.. automodule:: nevermined_sdk_py.data_store
+   :members:
+   :undoc-members:
+   :show-inheritance:

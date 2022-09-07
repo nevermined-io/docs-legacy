@@ -1,0 +1,7 @@
+nevermined\_sdk\_py.config module
+=================================
+
+.. automodule:: nevermined_sdk_py.config
+   :members:
+   :undoc-members:
+   :show-inheritance:

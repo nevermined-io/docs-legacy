@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>nevermined_sdk_py.nevermined.templates module &#8212; nevermined-sdk-py 0.2.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nevermined_sdk_py.nevermined.tokens module" href="nevermined_sdk_py.nevermined.tokens.html" />
+    <link rel="prev" title="nevermined_sdk_py.nevermined.services module" href="nevermined_sdk_py.nevermined.services.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-nevermined_sdk_py.nevermined.templates">
+<span id="nevermined-sdk-py-nevermined-templates-module"></span><h1>nevermined_sdk_py.nevermined.templates module<a class="headerlink" href="#module-nevermined_sdk_py.nevermined.templates" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="nevermined_sdk_py.nevermined.templates.Templates">
+<em class="property">class </em><code class="sig-prename descclassname">nevermined_sdk_py.nevermined.templates.</code><code class="sig-name descname">Templates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keeper</span></em>, <em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.templates.Templates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Nevermined templates class.</p>
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.templates.Templates.approve">
+<code class="sig-name descname">approve</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template_address</span></em>, <em class="sig-param"><span class="n">account</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.templates.Templates.approve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Approve a template already proposed. The account needs to be owner of the templateManager
+contract to be able of approve the template.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_address</strong> – Address of the template contract, str</p></li>
+<li><p><strong>account</strong> – account approving the template, Account</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.templates.Templates.propose">
+<code class="sig-name descname">propose</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template_address</span></em>, <em class="sig-param"><span class="n">account</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.templates.Templates.propose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Propose a new template.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_address</strong> – Address of the template contract, str</p></li>
+<li><p><strong>account</strong> – account proposing the template, Account</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="nevermined_sdk_py.nevermined.templates.Templates.revoke">
+<code class="sig-name descname">revoke</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template_address</span></em>, <em class="sig-param"><span class="n">account</span></em><span class="sig-paren">)</span><a class="headerlink" href="#nevermined_sdk_py.nevermined.templates.Templates.revoke" title="Permalink to this definition">¶</a></dt>
+<dd><p>Revoke a template already approved. The account needs to be owner of the templateManager
+contract to be able of revoke the template.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>template_address</strong> – Address of the template contract, str</p></li>
+<li><p><strong>account</strong> – account revoking the template, Account</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logo.jpg" alt="Logo"/>
+    
+    <h1 class="logo logo-name">nevermined-sdk-py</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">nevermined_sdk_py</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="nevermined_sdk_py.html">nevermined_sdk_py package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="nevermined_sdk_py.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.agreement_events.html">nevermined_sdk_py.agreement_events package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.assets.html">nevermined_sdk_py.assets package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.data_store.html">nevermined_sdk_py.data_store package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.gateway.html">nevermined_sdk_py.gateway package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="nevermined_sdk_py.nevermined.html">nevermined_sdk_py.nevermined package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nevermined_sdk_py.secret_store.html">nevermined_sdk_py.secret_store package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="nevermined_sdk_py.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nevermined_sdk_py.html#module-nevermined_sdk_py">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">nevermined_sdk_py</a><ul>
+  <li><a href="nevermined_sdk_py.html">nevermined_sdk_py package</a><ul>
+  <li><a href="nevermined_sdk_py.nevermined.html">nevermined_sdk_py.nevermined package</a><ul>
+      <li>Previous: <a href="nevermined_sdk_py.nevermined.services.html" title="previous chapter">nevermined_sdk_py.nevermined.services module</a></li>
+      <li>Next: <a href="nevermined_sdk_py.nevermined.tokens.html" title="next chapter">nevermined_sdk_py.nevermined.tokens module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;nevermined-sdk-py contributors.
+      
+      |
+      <a href="../_sources/api/nevermined_sdk_py.nevermined.templates.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

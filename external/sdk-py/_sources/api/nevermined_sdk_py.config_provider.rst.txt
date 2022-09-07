@@ -1,0 +1,7 @@
+nevermined\_sdk\_py.config\_provider module
+===========================================
+
+.. automodule:: nevermined_sdk_py.config_provider
+   :members:
+   :undoc-members:
+   :show-inheritance:

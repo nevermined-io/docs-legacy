@@ -1,0 +1,7 @@
+nevermined\_sdk\_py.nevermined.agreements module
+================================================
+
+.. automodule:: nevermined_sdk_py.nevermined.agreements
+   :members:
+   :undoc-members:
+   :show-inheritance:
