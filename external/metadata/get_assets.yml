@@ -1,0 +1,7 @@
+Get all asset IDs.
+---
+tags:
+  - ddo
+responses:
+  200:
+    description: successful action

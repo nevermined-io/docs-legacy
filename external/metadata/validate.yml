@@ -1,0 +1,18 @@
+Validate metadata content.
+---
+tags:
+  - ddo
+consumes:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    description: Asset metadata.
+    schema:
+      type: object
+responses:
+  200:
+    description: successfully request.
+  500:
+    description: Error

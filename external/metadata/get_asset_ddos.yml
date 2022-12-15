@@ -1,0 +1,7 @@
+Get DDO of all assets.
+---
+tags:
+  - ddo
+responses:
+  200:
+    description: successful action

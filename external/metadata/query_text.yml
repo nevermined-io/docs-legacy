@@ -1,0 +1,28 @@
+Get a list of DDOs that match with the given text.
+---
+tags:
+  - ddo
+parameters:
+  - name: text
+    in: query
+    description: ID of the asset.
+    required: true
+    type: string
+  - name: sort
+    in: query
+    type: object
+    description: Key or list of keys to sort the result
+    example: {"value":1}
+  - name: offset
+    in: query
+    type: int
+    description: Number of records per page
+    example: 100
+  - name: page
+    in: query
+    type: int
+    description: Page showed
+    example: 1
+responses:
+  200:
+    description: successful action

@@ -1,0 +1,59 @@
+Register a Service into MetadataDB
+---
+tags:
+  - service
+consumes:
+  - application/json
+parameters:
+  - in: body
+    name: body
+    required: true
+    description: Payload of a Service Agreement.
+    schema:
+      type: object
+      required:
+        - agreementId
+        - type
+        - index
+        - serviceEndpoint
+        - templateId
+        - attributes
+      properties:
+        agreementId:
+          type: string
+          description: The unique ID of the service agreement.
+          example: "0xD3587931B2657a1f97bFD004A659d7D592318332"
+        type:
+          description: The type of the agreement(nft-sames, nft-access, etc.)
+          example: nft-sales
+          type: string
+        index:
+          description: Index of the service.
+          example: 0
+          type: number
+        serviceEndpoint:
+          description: The service endpoint where the agreement was created.
+          example: "http://localhost:5000/api/v1/metadata/assets/ddo/did:nv:249218ab779e6a16cd3ea1c630e7d97531343a1271cd5c16921e2491a65248c9"
+          type: string
+        templateId:
+              type: string
+              description: The underlying template ID.
+              example: "0xD3587931B2657a1f97bFD004A659d7D592318332"
+        did:
+          type: string
+          description: The DID of the associated asset.
+          example: "did:nv:249218ab779e6a16cd3ea1c630e7d97531343a1271cd5c16921e2491a65248c9"
+        attributes:
+              type: object
+              additionalProperties: true
+              description: Dictionary of additional attribures.
+              example: {"agreementId": "0xD3587931B2657a1f97bFD004A659d7D592318332","type":"nft-sales","serviceEndpoint":"https://metadata.autonomies.mumbai.nevermined.rocks/api/v1/metadata/assets/ddo/did:nv:f1f19c31f7d1f3678cd403615949a4fdff18a62e896701046128b328e517dddd","templateId":"0xE749754EC8CF03b1b9E10B81270B73AF66E40F00","attributes":{"curation":{"rating":0,"numVotes":0,"isListed":true,"main":{"name":"nftSalesAgreement","creator":"0xE749754EC8CF03b1b9E10B81270B73AF66E40F54","datePublished":"2021-12-13T16:11:08Z","timeout":86400},"additionalInformation":{"description":""},"serviceAgreementTemplate":{"contractName":"NFTSalesTemplate","events":[{"name":"AgreementCreated","actorType":"consumer","handler":{"moduleName":"nftSalesTemplate","functionName":"fulfillLockPaymentCondition","version":"0.1"}}],"fulfillmentOrder":["lockPayment.fulfill","transferNFT.fulfill","escrowPayment.fulfill"],"conditionDependency":{"lockPayment":[],"transferNFT":[],"escrowPayment":["lockPayment","transferNFT"]},"conditions":[{"name":"lockPayment","timelock":0,"timeout":0,"contractName":"LockPaymentCondition","functionName":"fulfill","parameters":[{"name":"_did","type":"bytes32","value":"249218ab779e6a16cd3ea1c630e7d97531343a1271cd5c16921e2491a65248c9"},{"name":"_rewardAddress","type":"address","value":"0xE749754EC8CF03b1b9E10B81270B73AF66E40F54"},{"name":"_tokenAddress","type":"address","value":"0x2058A9D7613eEE744279e3856Ef0eAda5FCbaA7e"},{"name":"_amounts","type":"uint256[]","value":["0","0"]},{"name":"_receivers","type":"address[]","value":["0xE749754EC8CF03b1b9E10B81270B73AF66E40F54","0xCCaF6665eb9Eb107c989DeA1Ad9Fd92DB940A504"]}],"events":[{"name":"Fulfilled","actorType":"publisher","handler":{"moduleName":"lockPaymentCondition","functionName":"fulfillTransferNFTCondition","version":"0.1"}}]},{"name":"transferNFT","timelock":0,"timeout":0,"contractName":"TransferNFTCondition","functionName":"fulfill","parameters":[{"name":"_documentId","type":"bytes32","value":"249218ab779e6a16cd3ea1c630e7d97531343a1271cd5c16921e2491a65248c9"},{"name":"_receiver","type":"address","value":""},{"name":"_numberNfts","type":"uint256","value":"1"},{"name":"_nftHolder","type":"address","value":"0xE749754EC8CF03b1b9E10B81270B73AF66E40F54"},{"name":"_conditionId","type":"bytes32","value":""}],"events":[{"name":"Fulfilled","actorType":"publisher","handler":{"moduleName":"transferNFT","functionName":"fulfillEscrowPaymentCondition","version":"0.1"}},{"name":"TimedOut","actorType":"consumer","handler":{"moduleName":"access","functionName":"fulfillEscrowPaymentCondition","version":"0.1"}}]},{"name":"escrowPayment","timelock":0,"timeout":0,"contractName":"EscrowPaymentCondition","functionName":"fulfill","parameters":[{"name":"_did","type":"bytes32","value":"249218ab779e6a16cd3ea1c630e7d97531343a1271cd5c16921e2491a65248c9"},{"name":"_amounts","type":"uint256[]","value":["0","0"]},{"name":"_receivers","type":"address[]","value":["0xE749754EC8CF03b1b9E10B81270B73AF66E40F54","0xCCaF6665eb9Eb107c989DeA1Ad9Fd92DB940A504"]},{"name":"_sender","type":"address","value":""},{"name":"_tokenAddress","type":"address","value":"0x2058A9D7613eEE744279e3856Ef0eAda5FCbaA7e"},{"name":"_lockCondition","type":"bytes32","value":""},{"name":"_releaseCondition","type":"bytes32","value":""}],"events":[{"name":"Fulfilled","actorType":"publisher","handler":{"moduleName":"escrowPaymentCondition","functionName":"verifyRewardTokens","version":"0.1"}}]}]}}}}
+responses:
+  201:
+    description: Asset successfully registered.
+  400:
+    description: One of the required attributes is missing.
+  404:
+    description: Invalid asset data.
+  500:
+    description: Error
